@@ -20,3 +20,4 @@
 *.ipr
 out/
 classes/
+target/

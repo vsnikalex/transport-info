@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Cargo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -22,7 +22,7 @@ public class Cargo {
     private String description;
 
     @Column(name = "weight")
-    private String weight;
+    private int weight;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

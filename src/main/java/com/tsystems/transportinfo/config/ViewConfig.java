@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "com.tsystems")
+@ComponentScan(basePackages = "com.tsystems.transportinfo.controller")
 public class ViewConfig implements WebMvcConfigurer {
 
     @Bean
@@ -27,4 +27,5 @@ public class ViewConfig implements WebMvcConfigurer {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
 }

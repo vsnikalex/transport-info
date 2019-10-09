@@ -13,7 +13,7 @@ public class WebServletConfiguration implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext ctx) throws ServletException {
         AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();
-        webCtx.scan("com.tsystems.transportinfo");
+        webCtx.register(ViewConfig.class, HibernateConfig.class);
         webCtx.setServletContext(ctx);
 
         ServletRegistration.Dynamic servlet = ctx.addServlet("dispatcher", new DispatcherServlet(webCtx));

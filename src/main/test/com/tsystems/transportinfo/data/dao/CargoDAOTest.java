@@ -1,0 +1,49 @@
+package com.tsystems.transportinfo.data.dao;
+
+import com.tsystems.transportinfo.config.HibernateConfig;
+import com.tsystems.transportinfo.data.entity.Cargo;
+import com.tsystems.transportinfo.data.entity.CargoStatus;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.transaction.Transactional;
+
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = { HibernateConfig.class })
+public class CargoDAOTest {
+
+    @Autowired
+    CargoDAO cargoDAO;
+
+    @Autowired
+    SessionFactory sessionFactory;
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testFindById(){
+        Session session = sessionFactory.getCurrentSession();
+
+        Cargo toSend = new Cargo();
+        toSend.setDescription("IKEA Sofa");
+        toSend.setStatus(CargoStatus.SHIPPED);
+        toSend.setWeight(100);
+
+        session.save(toSend);
+        session.flush();
+
+        Cargo got = cargoDAO.getCargo(1L);
+        Assert.assertNotNull(got);
+        Assert.assertEquals("IKEA Sofa", got.getDescription());
+        Assert.assertEquals(CargoStatus.SHIPPED, got.getStatus());
+        Assert.assertEquals(100, got.getWeight());
+    }
+
+}

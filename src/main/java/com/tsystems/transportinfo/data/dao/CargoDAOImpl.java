@@ -1,14 +1,16 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.Cargo;
+import com.tsystems.transportinfo.data.entity.Cargo_;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -20,12 +22,15 @@ public class CargoDAOImpl implements CargoDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Cargo> getAllCargoes() {
+    public List<Cargo> findAllCargoes() {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
+
         CriteriaQuery<Cargo> cq = cb.createQuery(Cargo.class);
         Root<Cargo> root = cq.from(Cargo.class);
+
         cq.select(root);
+
         Query query = session.createQuery(cq);
         return query.getResultList();
     }
@@ -37,7 +42,7 @@ public class CargoDAOImpl implements CargoDAO {
     }
 
     @Override
-    public Cargo getCargo(Long id) {
+    public Cargo findCargo(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(Cargo.class, id);
     }
@@ -45,8 +50,16 @@ public class CargoDAOImpl implements CargoDAO {
     @Override
     public void deleteCargo(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Cargo cargo = session.byId(Cargo.class).load(id);
-        session.delete(cargo);
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaDelete<Cargo> criteriaDelete = cb.createCriteriaDelete(Cargo.class);
+        Root<Cargo> root = criteriaDelete.from(Cargo.class);
+
+        criteriaDelete.where(cb.equal(root.get(Cargo_.id), id));
+
+        Transaction transaction = session.beginTransaction();
+        session.createQuery(criteriaDelete).executeUpdate();
+        transaction.commit();
     }
 
 }

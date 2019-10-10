@@ -27,7 +27,7 @@ public class CargoDAOTest {
 
     @Test
     @Transactional
-    @Rollback(true)
+    @Rollback
     public void testFindById(){
         Session session = sessionFactory.getCurrentSession();
 
@@ -39,7 +39,7 @@ public class CargoDAOTest {
         session.save(toSend);
         session.flush();
 
-        Cargo got = cargoDAO.getCargo(1L);
+        Cargo got = cargoDAO.findCargo(1L);
         Assert.assertNotNull(got);
         Assert.assertEquals("IKEA Sofa", got.getDescription());
         Assert.assertEquals(CargoStatus.SHIPPED, got.getStatus());

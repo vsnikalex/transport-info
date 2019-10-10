@@ -4,7 +4,6 @@ import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public List<Cargo> getCargoes() {
-        return cargoDAO.getAllCargoes();
+        return cargoDAO.findAllCargoes();
     }
 
     @Override
@@ -26,7 +25,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public Cargo getCargo(Long id) {
-        return cargoDAO.getCargo(id);
+        return cargoDAO.findCargo(id);
     }
 
     @Override

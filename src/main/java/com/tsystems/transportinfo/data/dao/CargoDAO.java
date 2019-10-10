@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface CargoDAO {
 
-    public List<Cargo> getAllCargoes();
+    public List<Cargo> findAllCargoes();
 
     public void saveCargo(Cargo cargo);
 
-    public Cargo getCargo(Long id);
+    public Cargo findCargo(Long id);
 
     public void deleteCargo(Long id);
 

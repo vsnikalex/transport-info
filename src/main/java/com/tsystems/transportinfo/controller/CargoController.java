@@ -6,6 +6,7 @@ import com.tsystems.transportinfo.service.CargoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@RequestMapping("/api/cargo")
 public class CargoController {
 
     @Autowired
@@ -21,7 +23,7 @@ public class CargoController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/api/cargo/all")
+    @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
         List<Cargo> cargoes = cargoService.getAllCargoes();
         return cargoes.stream()

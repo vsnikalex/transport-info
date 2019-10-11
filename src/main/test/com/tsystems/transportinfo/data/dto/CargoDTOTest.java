@@ -1,4 +1,4 @@
-package com.tsystems.transportinfo.data.entity;
+package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.junit.BeforeClass;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class CargoTest {
+public class CargoDTOTest {
 
     private static Validator validator;
 
@@ -25,23 +25,23 @@ public class CargoTest {
 
     @Test
     public void descriptionIsNull() {
-        Cargo cargo = new Cargo(null, 100, CargoStatus.SHIPPED);
+        CargoDTO cargo = new CargoDTO(null, 100, CargoStatus.SHIPPED);
 
-        Set<ConstraintViolation<Cargo>> constraintViolations =
+        Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
         assertEquals(2, constraintViolations.size());
 
-        Iterator<ConstraintViolation<Cargo>> iterator = constraintViolations.iterator();
-        assertEquals("may not be null", iterator.next().getMessage());
+        Iterator<ConstraintViolation<CargoDTO>> iterator = constraintViolations.iterator();
         assertEquals("may not be empty", iterator.next().getMessage());
+        assertEquals("may not be null", iterator.next().getMessage());
     }
 
     @Test
     public void overweight() {
-        Cargo cargo = new Cargo("Test", 28_000, CargoStatus.PREPARED);
+        CargoDTO cargo = new CargoDTO("Test", 28_000, CargoStatus.PREPARED);
 
-        Set<ConstraintViolation<Cargo>> constraintViolations =
+        Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
         assertEquals(1, constraintViolations.size());
@@ -53,9 +53,9 @@ public class CargoTest {
 
     @Test
     public void statusIsNull() {
-        Cargo cargo = new Cargo("Test", 100, null);
+        CargoDTO cargo = new CargoDTO("Test", 100, null);
 
-        Set<ConstraintViolation<Cargo>> constraintViolations =
+        Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
         assertEquals(1, constraintViolations.size());
@@ -64,9 +64,9 @@ public class CargoTest {
 
     @Test
     public void cargoIsValid() {
-        Cargo cargo = new Cargo("Test", 13_500, CargoStatus.DELIVERED);
+        CargoDTO cargo = new CargoDTO("Test", 13_500, CargoStatus.DELIVERED);
 
-        Set<ConstraintViolation<Cargo>> constraintViolations =
+        Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
         assertEquals(0, constraintViolations.size());

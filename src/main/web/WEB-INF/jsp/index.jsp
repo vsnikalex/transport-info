@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body onload="RestGet()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">
@@ -268,28 +268,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>999</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                        </tr>
+                    <tbody id="cargoes">
+                        <%-- IS FILLED WITH DATA FROM REST API --%>
                     </tbody>
                 </table>
             </div>
@@ -331,6 +311,9 @@
     <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />"></script>
     <script src="<c:url value="/resources/js/components.min.js" />"></script>
     <script src="<c:url value="/resources/js/docs.js" />"></script>
+
+    <%-- USE REST API --%>
+    <script src="<c:url value="/resources/js/cargoAPI.js" />"></script>
 
 </body>
 

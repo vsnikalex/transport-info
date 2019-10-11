@@ -2,7 +2,7 @@ package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.config.HibernateConfig;
 import com.tsystems.transportinfo.data.entity.Cargo;
-import com.tsystems.transportinfo.data.entity.CargoStatus;
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Assert;

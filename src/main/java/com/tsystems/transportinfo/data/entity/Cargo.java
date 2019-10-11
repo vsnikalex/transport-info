@@ -1,14 +1,11 @@
 package com.tsystems.transportinfo.data.entity;
 
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cargo")
@@ -23,18 +20,12 @@ public class Cargo {
     private Long id;
 
     @Column(name = "description")
-    @NotNull
-    @NotBlank
-    @Size(min = 4, max = 250)
     private String description;
 
     @Column(name = "weight")
-    @NotNull
-    @Range(min = 100, max = 27_000)
     private int weight;
 
     @Column(name = "status")
-    @NotNull
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
@@ -43,4 +34,5 @@ public class Cargo {
         this.weight = weight;
         this.status = status;
     }
+
 }

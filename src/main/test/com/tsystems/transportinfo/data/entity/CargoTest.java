@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.data.entity;
 
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

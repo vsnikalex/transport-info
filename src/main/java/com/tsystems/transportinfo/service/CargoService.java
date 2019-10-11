@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CargoService {
 
-    public List<Cargo> getCargoes();
+    public List<Cargo> getAllCargoes();
 
     public void saveCargo(Cargo cargo);
 

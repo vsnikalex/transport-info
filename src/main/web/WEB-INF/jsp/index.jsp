@@ -265,11 +265,12 @@
                             <th>Description</th>
                             <th>Weight</th>
                             <th>Status</th>
+                            <th>Location</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="cargoes">
-                        <%-- IS FILLED WITH DATA FROM REST API --%>
+                        <%-- Is filled with data from REST API via JS --%>
                     </tbody>
                 </table>
             </div>

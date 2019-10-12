@@ -32,6 +32,7 @@ public class CargoDAOTest {
         Session session = sessionFactory.getCurrentSession();
 
         Cargo toSend = new Cargo();
+        toSend.setLocation("Moscow");
         toSend.setDescription("IKEA Sofa");
         toSend.setStatus(CargoStatus.SHIPPED);
         toSend.setWeight(100);
@@ -41,6 +42,7 @@ public class CargoDAOTest {
 
         Cargo got = cargoDAO.findCargo(1L);
         Assert.assertNotNull(got);
+        Assert.assertEquals("Moscow", got.getLocation());
         Assert.assertEquals("IKEA Sofa", got.getDescription());
         Assert.assertEquals(CargoStatus.SHIPPED, got.getStatus());
         Assert.assertEquals(100, got.getWeight());

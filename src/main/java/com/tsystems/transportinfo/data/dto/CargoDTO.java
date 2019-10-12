@@ -19,6 +19,11 @@ public class CargoDTO {
 
     @NotNull
     @NotBlank
+    @Size(min = 2, max = 50)
+    private String location;
+
+    @NotNull
+    @NotBlank
     @Size(min = 4, max = 250)
     private String description;
 
@@ -29,7 +34,8 @@ public class CargoDTO {
     @NotNull
     private CargoStatus status;
 
-    CargoDTO(String description, int weight, CargoStatus status) {
+    public CargoDTO(String location, String description, int weight, CargoStatus status) {
+        this.location = location;
         this.description = description;
         this.weight = weight;
         this.status = status;

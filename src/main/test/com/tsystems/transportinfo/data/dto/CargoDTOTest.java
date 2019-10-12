@@ -8,7 +8,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -24,22 +23,48 @@ public class CargoDTOTest {
     }
 
     @Test
-    public void descriptionIsNull() {
-        CargoDTO cargo = new CargoDTO(null, 100, CargoStatus.SHIPPED);
+    public void locationIsNull() {
+        CargoDTO cargo = new CargoDTO(null, "Test", 100, CargoStatus.SHIPPED);
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
         assertEquals(2, constraintViolations.size());
 
-        Iterator<ConstraintViolation<CargoDTO>> iterator = constraintViolations.iterator();
-        assertEquals("may not be empty", iterator.next().getMessage());
-        assertEquals("may not be null", iterator.next().getMessage());
+        int emptyParam = (int) constraintViolations.stream()
+                                                    .filter(c -> c.getMessage().equals("may not be empty"))
+                                                    .count();
+        assertEquals(1, emptyParam);
+
+        int nullParam = (int) constraintViolations.stream()
+                                                    .filter(c -> c.getMessage().equals("may not be null"))
+                                                    .count();
+        assertEquals(1, nullParam);
+    }
+
+    @Test
+    public void descriptionIsNull() {
+        CargoDTO cargo = new CargoDTO("TestBurg",null, 100, CargoStatus.SHIPPED);
+
+        Set<ConstraintViolation<CargoDTO>> constraintViolations =
+                validator.validate(cargo);
+
+        assertEquals(2, constraintViolations.size());
+
+        int emptyParam = (int) constraintViolations.stream()
+                .filter(c -> c.getMessage().equals("may not be empty"))
+                .count();
+        assertEquals(1, emptyParam);
+
+        int nullParam = (int) constraintViolations.stream()
+                .filter(c -> c.getMessage().equals("may not be null"))
+                .count();
+        assertEquals(1, nullParam);
     }
 
     @Test
     public void overweight() {
-        CargoDTO cargo = new CargoDTO("Test", 28_000, CargoStatus.PREPARED);
+        CargoDTO cargo = new CargoDTO("TestBurg","Test", 28_000, CargoStatus.PREPARED);
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
@@ -53,7 +78,7 @@ public class CargoDTOTest {
 
     @Test
     public void statusIsNull() {
-        CargoDTO cargo = new CargoDTO("Test", 100, null);
+        CargoDTO cargo = new CargoDTO("TestBurg","Test", 100, null);
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
@@ -64,7 +89,7 @@ public class CargoDTOTest {
 
     @Test
     public void cargoIsValid() {
-        CargoDTO cargo = new CargoDTO("Test", 13_500, CargoStatus.DELIVERED);
+        CargoDTO cargo = new CargoDTO("TestBurg","Test", 13_500, CargoStatus.DELIVERED);
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);

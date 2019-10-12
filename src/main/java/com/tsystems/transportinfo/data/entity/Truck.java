@@ -1,33 +1,30 @@
 package com.tsystems.transportinfo.data.entity;
 
-import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
+import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cargo")
+@Table(name = "truck")
 @Getter
 @Setter
-public class Cargo {
+public class Truck {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @Column
+    private String plate;
 
     @Column
-    private String location;
-
-    @Column
-    private String description;
-
-    @Column
-    private int weight;
+    private int capacity;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private CargoStatus status;
+    private TruckStatus status;
+
+    @Column
+    private String location;
 
     @OneToOne
     @JoinColumn(name="delivery_id", unique = true)

@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 @Setter
 public class CargoDTO {
 
+    @NotNull
     private Long id;
 
     @NotNull

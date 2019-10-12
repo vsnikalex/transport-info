@@ -3,5 +3,6 @@ package com.tsystems.transportinfo.data.entity.enums;
 public enum DriverAction {
     DRIVE,
     HELP,
-    LOAD_UNLOAD
+    LOAD_UNLOAD,
+    REST
 }

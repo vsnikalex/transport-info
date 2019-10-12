@@ -54,8 +54,9 @@
                     </div>
                     <div class="brandnav brandnav-lvl-1" id="DocsMenu">
                         <ul class="nav">
-                            <li class=""><a href="/admin_driver">Drivers</a></li>
                             <li class=""><a href="/admin_truck">Trucks</a></li>
+                            <li class=""><a href="/admin_driver">Drivers</a></li>
+                            <li class=""><a href="/admin_cargo">Cargoes</a></li>
                             <li class=""><a href="/admin_order">Orders</a></li>
                         </ul>
                     </div>

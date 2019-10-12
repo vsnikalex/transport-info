@@ -82,7 +82,7 @@
         <div class="container-fixed">
             <ol class="breadcrumb breadcrumb-small">
                 <li><a href="index.html">Admin Page</a></li>
-                <li class="active">Drivers</li>
+                <li class="active">Trucks</li>
             </ol>
         </div>
     </div>
@@ -95,12 +95,10 @@
                 <thead>
                 <tr>
                     <th><span class="sr-only">Index Spalte</span></th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Worked</th>
+                    <th>Capacity</th>
                     <th>Status</th>
                     <th>Location</th>
-                    <th>Truck</th>
+                    <th>Drivers</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -112,7 +110,6 @@
 
     </div>
 </div>
-
 
 <footer class="brand-footer">
     <div class="container-fixed">
@@ -150,7 +147,7 @@
 <script src="<c:url value="/resources/js/docs.js" />"></script>
 
 <%-- USE REST API --%>
-<script src="<c:url value="/resources/js/driverAPI.js" />"></script>
+<script src="<c:url value="/resources/js/truckAPI.js" />"></script>
 
 </body>
 

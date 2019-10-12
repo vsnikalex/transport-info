@@ -1,6 +1,8 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
+import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.service.DeliveryService;
 import org.modelmapper.ModelMapper;
@@ -23,7 +25,7 @@ public class OrderController {
     ModelMapper modelMapper;
 
     @GetMapping("/all")
-    public List<DeliveryDTO> allDrivers() {
+    public List<DeliveryDTO> allDeliveries() {
         List<Delivery> deliveries = deliveryService.getAllDeliveries();
         return deliveries.stream()
                 .map(this::convertToDto)
@@ -33,7 +35,9 @@ public class OrderController {
     private DeliveryDTO convertToDto(Delivery delivery) {
         DeliveryDTO deliveryDTO = modelMapper.map(delivery, DeliveryDTO.class);
 
-        deliveryDTO.setStartPoint(delivery.getCargo());
+        deliveryDTO.setCargoDTO(modelMapper.map(delivery.getCargo(), CargoDTO.class));
+        deliveryDTO.setTruckDTO(modelMapper.map(delivery.getTruck(), TruckDTO.class));
+        deliveryDTO.setWorkingDrivers(delivery.getTasks());
 
         return deliveryDTO;
     }

@@ -40,7 +40,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fixed">
                 <div class="navbar-expanded">
-                    <div class="navbar-portalname">Manager page</div>
+                    <div class="navbar-portalname">Admin Page</div>
                     <div class="brandnavhead" data-spy="brandnav" data-target="#DocsMenu">
                         <button type="button" class="btn btn-clean navbar-btn brandnav-control-up" data-close="brandnav" data-target="#DocsMenu">
                             <span class="sr-only">Back</span>
@@ -54,9 +54,9 @@
                     </div>
                     <div class="brandnav brandnav-lvl-1" id="DocsMenu">
                         <ul class="nav">
-                            <li class=""><a href="index.html">Drivers</a></li>
-                            <li class=""><a href="basics.html">Trucks</a></li>
-                            <li class=""><a href="basics.html">Orders</a></li>
+                            <li class=""><a href="/admin_driver">Drivers</a></li>
+                            <li class=""><a href="/admin_truck">Trucks</a></li>
+                            <li class=""><a href="/admin_order">Orders</a></li>
                         </ul>
                     </div>
 
@@ -80,7 +80,7 @@
         <div class="breadcrumbbar">
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">
-                    <li><a href="index.html">Manager Page</a></li>
+                    <li><a href="index.html">Admin Page</a></li>
                     <li class="active">Cargoes</li>
                 </ol>
             </div>
@@ -101,7 +101,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="cargoes">
+                    <tbody id="data">
                         <%-- Is filled with data from REST API via JS --%>
                     </tbody>
                 </table>

@@ -58,7 +58,9 @@ public class DriverDTO {
     public void setTruck(List<Task> tasks) {
         // TODO: return TruckDTO
         //  most recent Task -> unfinished Delivery -> Truck
-        this.truckDTO = null;
+        TruckDTO mockedTruck = new TruckDTO();
+        mockedTruck.setPlate("AB12345");
+        this.truckDTO = mockedTruck;
     }
 
 }

@@ -8,7 +8,17 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "admin_cargo";
+    }
+
+    @GetMapping("/admin_cargo")
+    public String adminCargo() {
+        return "admin_cargo";
+    }
+
+    @GetMapping("/admin_driver")
+    public String adminDriver() {
+        return "admin_driver";
     }
 
 }

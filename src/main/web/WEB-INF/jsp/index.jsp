@@ -40,7 +40,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fixed">
                 <div class="navbar-expanded">
-                    <div class="navbar-portalname">HTML Components</div>
+                    <div class="navbar-portalname">Manager page</div>
                     <div class="brandnavhead" data-spy="brandnav" data-target="#DocsMenu">
                         <button type="button" class="btn btn-clean navbar-btn brandnav-control-up" data-close="brandnav" data-target="#DocsMenu">
                             <span class="sr-only">Back</span>
@@ -54,173 +54,9 @@
                     </div>
                     <div class="brandnav brandnav-lvl-1" id="DocsMenu">
                         <ul class="nav">
-
-
-
-
-
-
-                            <li class=""><a href="index.html">Einführung</a></li>
-
-
-
-
-
-
-
-                            <li class=""><a href="basics.html">Grundlagen</a></li>
-
-
-
-
-
-
-
-
-                            <li>
-                                <a href="#" data-open="brandnav">Dokumentation</a>
-                                <div class="brandnav brandnav-lvl-2">
-                                    <div class="brandnav-lvl-2-head">
-                                        <button type="button" class="cancel" data-close="brandnav" data-target="#DocsMenu">
-                                            <span class="icon icon-cancel" aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                    <ul class="nav">
-
-                                        <li class="col-l-3">
-                                            <a href="#" data-open="brandnav">CSS</a>
-                                            <div class="brandnav brandnav-lvl-3">
-                                                <ul class="nav">
-
-
-
-                                                    <li class=""><a href="grid.html">Grid</a></li>
-
-
-
-                                                    <li class=""><a href="type.html">Typografie</a></li>
-
-
-
-                                                    <li class="active"><a href="tables.html">Tabellen</a></li>
-
-
-
-                                                    <li class=""><a href="forms.html">Formulare</a></li>
-
-
-
-                                                    <li class=""><a href="buttons.html">Buttons</a></li>
-
-
-
-                                                    <li class=""><a href="images.html">Bilder</a></li>
-
-
-
-                                                    <li class=""><a href="helper.html">Helfer</a></li>
-
-
-
-                                                    <li class=""><a href="scss.html">SCSS</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li class="col-l-3">
-                                            <a href="#" data-open="brandnav">Komponenten</a>
-                                            <div class="brandnav brandnav-lvl-3">
-                                                <ul class="nav">
-
-
-
-                                                    <li class=""><a href="icons.html">Icons</a></li>
-
-
-
-                                                    <li class=""><a href="badges.html">Badges</a></li>
-
-
-
-                                                    <li class=""><a href="notifications.html">Benachrichtigungen</a></li>
-
-
-
-                                                    <li class=""><a href="content-list.html">Content-Listen</a></li>
-
-
-
-                                                    <li class=""><a href="pager.html">Pager</a></li>
-
-
-
-                                                    <li class=""><a href="pagination.html">Pagination</a></li>
-
-
-
-                                                    <li class=""><a href="breadcrumb.html">Breadcrumb</a></li>
-
-
-
-                                                    <li class=""><a href="accessibility-seo.html">SEO und Accessibility</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li class="col-l-3">
-                                            <a href="#" data-open="brandnav">JavaScript</a>
-                                            <div class="brandnav brandnav-lvl-3">
-                                                <ul class="nav">
-
-
-
-                                                    <li class=""><a href="jsbutton.html">Button</a></li>
-
-
-
-                                                    <li class=""><a href="expandable.html">Expandable</a></li>
-
-
-
-                                                    <li class=""><a href="totop.html">ToTop</a></li>
-
-
-
-                                                    <li class=""><a href="modal.html">Modal</a></li>
-
-
-
-                                                    <li class=""><a href="qtip.html">QTip</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li class="col-l-3">
-                                            <a href="#" data-open="brandnav">Brand</a>
-                                            <div class="brandnav brandnav-lvl-3">
-                                                <ul class="nav">
-
-
-
-                                                    <li class=""><a href="header.html">Header</a></li>
-
-
-
-                                                    <li class=""><a href="footer.html">Footer</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </li>
-
-
-
+                            <li class=""><a href="index.html">Drivers</a></li>
+                            <li class=""><a href="basics.html">Trucks</a></li>
+                            <li class=""><a href="basics.html">Orders</a></li>
                         </ul>
                     </div>
 
@@ -244,8 +80,8 @@
         <div class="breadcrumbbar">
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">
-                    <li><a href="index.html">HTML Components 2.2.4</a></li>
-                    <li class="active">Tabellen</li>
+                    <li><a href="index.html">Manager Page</a></li>
+                    <li class="active">Cargoes</li>
                 </ol>
             </div>
         </div>
@@ -253,10 +89,6 @@
 
     <div class="main">
         <div class="container-fixed">
-            <h1 class="underline">Cargoes</h1>
-            <h2 id="dekorationen">Dekorationen</h2>
-            <h3 id="hover">Hover</h3>
-            <p>Mit der CSS-Klasse <code>.hover</code> wird eine Interaktion mit der Maus sichtbar gemacht. Berührt man eine Zeile mit dem Mauszeiger, wird sie speziell hervorgehoben. Dieser Effekt wirkt sich nur auf Zeilen des <code>&lt;tbody&gt;</code> aus:</p>
             <div class="tc-example">
                 <table class="table table-hover">
                     <thead>

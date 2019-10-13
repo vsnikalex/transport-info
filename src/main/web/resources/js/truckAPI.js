@@ -35,15 +35,12 @@ var RestGet = function() {
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
-                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Add\">" +
-                                "<i class=\"icon icon-attachment\" aria-hidden=\"true\"></i></button>" +
-
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
-                                "<i class=\"icon icon-settings\" aria-hidden=\"true\"></i></button>" +
+                                "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
                                 "onclick='RestDelete(\"" + plate + "\")'>" +
-                                "<i class=\"icon icon-context-menu\" aria-hidden=\"true\"></i></button>" +
+                                "<i class=\"icon icon-cancel\" aria-hidden=\"true\"></i></button>" +
                             "</div>" +
                         "</td>" +
                     "</tr>"

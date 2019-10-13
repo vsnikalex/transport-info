@@ -92,25 +92,31 @@
 
 
         <div class="container-fixed">
+            <h1 class="underline">Cargo</h1>
             <div class="tc-example">
-                <button class="btn btn-default btn-block" onclick="location.href='/admin_cargo_add'">
-                    <i class="icon icon-add" aria-hidden="true"></i>
-                </button>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th><span class="sr-only">Index Spalte</span></th>
-                            <th>Description</th>
-                            <th>Weight</th>
-                            <th>Status</th>
-                            <th>Location</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                        <%-- Is filled with data from REST API via JS --%>
-                    </tbody>
-                </table>
+                <fieldset class="form-fieldset">
+                    <div class="form-input-set">
+                        <label for="text7">Description</label>
+                        <input type="text" class="form-input" name="text7" id="text7" placeholder="Description">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text8">Location</label>
+                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="selectbox" title="Primäroptionen Auswahlliste">Status</label>
+                        <select name="select" id="selectbox" class="form-select">
+                            <option value="opt1" selected>PREPARED</option>
+                            <option value="opt2">SHIPPED</option>
+                            <option value="opt3">DELIVERED</option>
+                        </select>
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text9">Weight</label>
+                        <input type="number" class="form-input" name="text9" id="text9" placeholder="0">
+                    </div>
+                    <button type="button" class="btn btn-default btn-block">Save</button>
+                </fieldset>
             </div>
         </div>
 

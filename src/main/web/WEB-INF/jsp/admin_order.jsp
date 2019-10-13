@@ -89,6 +89,8 @@
 </header>
 
 <div class="main">
+
+
     <div class="container-fixed">
         <div class="tc-example">
             <table class="table table-hover">
@@ -109,8 +111,9 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+
+
 </div>
 
 <footer class="brand-footer">

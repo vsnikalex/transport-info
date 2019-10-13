@@ -82,7 +82,7 @@
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">
                     <li><a href="index.html">Admin Page</a></li>
-                    <li class="active">Cargoes</li>
+                    <li class="active">Trucks</li>
                 </ol>
             </div>
         </div>
@@ -92,25 +92,30 @@
 
 
         <div class="container-fixed">
+            <h1 class="underline">Truck</h1>
             <div class="tc-example">
-                <button class="btn btn-default btn-block" onclick="location.href='/admin_cargo_add'">
-                    <i class="icon icon-add" aria-hidden="true"></i>
-                </button>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th><span class="sr-only">Index Spalte</span></th>
-                            <th>Description</th>
-                            <th>Weight</th>
-                            <th>Status</th>
-                            <th>Location</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                        <%-- Is filled with data from REST API via JS --%>
-                    </tbody>
-                </table>
+                <fieldset class="form-fieldset">
+                    <div class="form-input-set">
+                        <label for="text7">Plate</label>
+                        <input type="text" class="form-input" name="text7" id="text7" placeholder="AB12345">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text9">Capacity</label>
+                        <input type="number" class="form-input" name="text9" id="text9" placeholder="0">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text8">Location</label>
+                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="selectbox" title="Primäroptionen Auswahlliste">Status</label>
+                        <select name="select" id="selectbox" class="form-select">
+                            <option value="opt1" selected>OK</option>
+                            <option value="opt2">DEFECTIVE</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-default btn-block">Save</button>
+                </fieldset>
             </div>
         </div>
 

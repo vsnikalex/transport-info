@@ -82,7 +82,7 @@
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">
                     <li><a href="index.html">Admin Page</a></li>
-                    <li class="active">Cargoes</li>
+                    <li class="active">Drivers</li>
                 </ol>
             </div>
         </div>
@@ -92,25 +92,23 @@
 
 
         <div class="container-fixed">
+            <h1 class="underline">Driver</h1>
             <div class="tc-example">
-                <button class="btn btn-default btn-block" onclick="location.href='/admin_cargo_add'">
-                    <i class="icon icon-add" aria-hidden="true"></i>
-                </button>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th><span class="sr-only">Index Spalte</span></th>
-                            <th>Description</th>
-                            <th>Weight</th>
-                            <th>Status</th>
-                            <th>Location</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                        <%-- Is filled with data from REST API via JS --%>
-                    </tbody>
-                </table>
+                <fieldset class="form-fieldset">
+                    <div class="form-input-set">
+                        <label for="text6">First Name</label>
+                        <input type="text" class="form-input" name="text6" id="text6" placeholder="John">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text7">Last Name</label>
+                        <input type="text" class="form-input" name="text7" id="text7" placeholder="Doe">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="text8">Location</label>
+                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
+                    </div>
+                    <button type="button" class="btn btn-default btn-block">Save</button>
+                </fieldset>
             </div>
         </div>
 

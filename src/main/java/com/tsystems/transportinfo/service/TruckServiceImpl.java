@@ -26,13 +26,13 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
-    public Truck getTruck(Long id) {
-        return truckDAO.findTruck(id);
+    public Truck getTruck(String plate) {
+        return truckDAO.findTruck(plate);
     }
 
     @Override
-    public void deleteTruck(Long id) {
-        truckDAO.deleteTruck(id);
+    public void deleteTruck(String plate) {
+        truckDAO.deleteTruck(plate);
     }
 
 }

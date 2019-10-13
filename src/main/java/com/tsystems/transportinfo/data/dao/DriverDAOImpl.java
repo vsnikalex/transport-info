@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.Driver;
+import com.tsystems.transportinfo.data.entity.Driver_;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -44,6 +46,15 @@ public class DriverDAOImpl implements DriverDAO {
 
     @Override
     public void deleteDriver(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
 
+        CriteriaDelete<Driver> criteriaDelete = cb.createCriteriaDelete(Driver.class);
+        Root<Driver> root = criteriaDelete.from(Driver.class);
+
+        criteriaDelete.where(cb.equal(root.get(Driver_.id), id));
+
+        session.createQuery(criteriaDelete).executeUpdate();
     }
+
 }

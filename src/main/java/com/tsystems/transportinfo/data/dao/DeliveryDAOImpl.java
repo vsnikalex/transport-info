@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.Delivery;
+import com.tsystems.transportinfo.data.entity.Delivery_;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -44,6 +46,15 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
     @Override
     public void deleteDelivery(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
 
+        CriteriaDelete<Delivery> criteriaDelete = cb.createCriteriaDelete(Delivery.class);
+        Root<Delivery> root = criteriaDelete.from(Delivery.class);
+
+        criteriaDelete.where(cb.equal(root.get(Delivery_.id), id));
+
+        session.createQuery(criteriaDelete).executeUpdate();
     }
+
 }

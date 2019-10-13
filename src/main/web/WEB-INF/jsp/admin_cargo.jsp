@@ -99,7 +99,7 @@
                             <th>Weight</th>
                             <th>Status</th>
                             <th>Location</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="data">

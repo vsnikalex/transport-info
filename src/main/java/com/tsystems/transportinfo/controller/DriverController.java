@@ -5,9 +5,7 @@ import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.service.DriverService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +26,11 @@ public class DriverController {
         return drivers.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteDriver(@PathVariable long id) {
+        driverService.deleteDriver(id);
     }
 
     private DriverDTO convertToDto(Driver driver) {

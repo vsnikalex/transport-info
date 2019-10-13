@@ -7,9 +7,7 @@ import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.service.DeliveryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +28,11 @@ public class OrderController {
         return deliveries.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteOrder(@PathVariable long id) {
+        deliveryService.deleteDelivery(id);
     }
 
     private DeliveryDTO convertToDto(Delivery delivery) {

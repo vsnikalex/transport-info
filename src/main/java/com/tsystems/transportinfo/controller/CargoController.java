@@ -5,9 +5,7 @@ import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.service.CargoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +27,11 @@ public class CargoController {
         return cargoes.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCargo(@PathVariable long id) {
+        cargoService.deleteCargo(id);
     }
 
     private CargoDTO convertToDto(Cargo cargo) {

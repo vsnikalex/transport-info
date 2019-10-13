@@ -10,8 +10,8 @@ public interface TruckService {
 
     public void saveTruck(Truck truck);
 
-    public Truck getTruck(Long id);
+    public Truck getTruck(String plate);
 
-    public void deleteTruck(Long id);
+    public void deleteTruck(String plate);
 
 }

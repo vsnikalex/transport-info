@@ -4,7 +4,6 @@ import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.data.entity.Cargo_;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,9 +56,7 @@ public class CargoDAOImpl implements CargoDAO {
 
         criteriaDelete.where(cb.equal(root.get(Cargo_.id), id));
 
-        Transaction transaction = session.beginTransaction();
         session.createQuery(criteriaDelete).executeUpdate();
-        transaction.commit();
     }
 
 }

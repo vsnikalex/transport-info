@@ -10,8 +10,8 @@ public interface TruckDAO {
 
     public void saveTruck(Truck truck);
 
-    public Truck findTruck(Long id);
+    public Truck findTruck(String plate);
 
-    public void deleteTruck(Long id);
+    public void deleteTruck(String plate);
 
 }

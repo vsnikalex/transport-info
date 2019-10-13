@@ -29,8 +29,7 @@ public class Cargo {
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
-    @OneToOne
-    @JoinColumn(name="delivery_id", unique = true)
+    @OneToOne(mappedBy = "cargo")
     private Delivery delivery;
 
 }

@@ -26,8 +26,7 @@ public class Truck {
     @Column
     private String location;
 
-    @OneToOne
-    @JoinColumn(name="delivery_id", unique = true)
+    @OneToOne(mappedBy = "truck")
     private Delivery delivery;
 
 }

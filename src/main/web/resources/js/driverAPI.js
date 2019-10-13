@@ -26,33 +26,33 @@ var RestGet = function() {
                 var id = result[i].id;
 
                 $("#data").append(
-                "<tr>" +
-                    "<td>" + id           +   "</td>" +
-                    "<td>" + result[i].firstName  +   "</td>" +
-                    "<td>" + result[i].lastName       +   "</td>" +
-                    "<td>" + result[i].workedThisMonth       +   "</td>" +
-                    "<td>" + result[i].action     +   "</td>" +
-                    "<td>" + result[i].location     +   "</td>" +
-                    "<td>" + result[i].truckDTO.plate     +   "</td>" +
+                    "<tr>" +
+                        "<td>" + id           +   "</td>" +
+                        "<td>" + result[i].firstName  +   "</td>" +
+                        "<td>" + result[i].lastName       +   "</td>" +
+                        "<td>" + result[i].workedThisMonth       +   "</td>" +
+                        "<td>" + result[i].action     +   "</td>" +
+                        "<td>" + result[i].location     +   "</td>" +
+                        "<td>" + result[i].truckDTO.plate     +   "</td>" +
 
-                    "<td>" +
-                        "<div class=\"btn-sectioned\">" +
-                            "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Add\">" +
-                            "<i class=\"icon icon-attachment\" aria-hidden=\"true\"></i></button>" +
+                        "<td>" +
+                            "<div class=\"btn-sectioned\">" +
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Add\">" +
+                                "<i class=\"icon icon-attachment\" aria-hidden=\"true\"></i></button>" +
 
-                            "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
-                            "<i class=\"icon icon-settings\" aria-hidden=\"true\"></i></button>" +
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
+                                "<i class=\"icon icon-settings\" aria-hidden=\"true\"></i></button>" +
 
-                            "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
-                            "onclick='RestDelete(" + id + ")'>" +
-                            "<i class=\"icon icon-context-menu\" aria-hidden=\"true\"></i></button>" +
-                        "</div>" +
-                    "</td>" +
-                "</tr>"
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
+                                "onclick='RestDelete(" + id + ")'>" +
+                                "<i class=\"icon icon-context-menu\" aria-hidden=\"true\"></i></button>" +
+                            "</div>" +
+                        "</td>" +
+                    "</tr>"
                 );
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR) {
             alert(jqXHR.status + ' ' + jqXHR.responseText);
         }
     });

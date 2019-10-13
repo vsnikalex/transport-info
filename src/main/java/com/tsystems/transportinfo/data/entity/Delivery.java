@@ -23,13 +23,15 @@ public class Delivery {
     @Column
     private String destination;
 
-    @OneToMany(mappedBy = "delivery", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name="cargo_id", unique = true)
+    public Cargo cargo;
 
-    @OneToOne(optional = false, mappedBy="delivery")
+    @OneToOne
+    @JoinColumn(name="truck_plate", unique = true)
     public Truck truck;
 
-    @OneToOne(optional = false, mappedBy="delivery")
-    public Cargo cargo;
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.EAGER)
+    private List<Task> tasks = new ArrayList<>();
 
 }

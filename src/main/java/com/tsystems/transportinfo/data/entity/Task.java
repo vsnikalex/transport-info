@@ -28,7 +28,7 @@ public class Task {
     private LocalDateTime end;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="delivery_id", unique = true)
     private Delivery delivery;
 
 }

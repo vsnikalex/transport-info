@@ -32,12 +32,12 @@ public class CargoDTOTest {
         assertEquals(2, constraintViolations.size());
 
         int emptyParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("may not be empty"))
+                                                    .filter(c -> c.getMessage().equals("must not be empty"))
                                                     .count();
         assertEquals(1, emptyParam);
 
         int nullParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("may not be null"))
+                                                    .filter(c -> c.getMessage().equals("must not be null"))
                                                     .count();
         assertEquals(1, nullParam);
     }
@@ -52,13 +52,13 @@ public class CargoDTOTest {
         assertEquals(2, constraintViolations.size());
 
         int emptyParam = (int) constraintViolations.stream()
-                .filter(c -> c.getMessage().equals("may not be empty"))
-                .count();
+                                                    .filter(c -> c.getMessage().equals("must not be empty"))
+                                                    .count();
         assertEquals(1, emptyParam);
 
         int nullParam = (int) constraintViolations.stream()
-                .filter(c -> c.getMessage().equals("may not be null"))
-                .count();
+                                                    .filter(c -> c.getMessage().equals("must not be null"))
+                                                    .count();
         assertEquals(1, nullParam);
     }
 
@@ -84,7 +84,7 @@ public class CargoDTOTest {
                 validator.validate(cargo);
 
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test

@@ -2,17 +2,15 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class TruckDTO {
@@ -29,8 +27,8 @@ public class TruckDTO {
     private TruckStatus status;
 
     @NotNull
-    @NotBlank
-    @Size(min = 2, max = 10)
+    @NotEmpty
+    @Size(max = 10)
     private String location;
 
     @Min(value = 0)

@@ -36,7 +36,8 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
     @Override
     public void saveDelivery(Delivery delivery) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(delivery);
     }
 
     @Override

@@ -52,3 +52,28 @@ var RestGet = function() {
         }
     });
 }
+
+var RestPost = function() {
+    var JSONObject= {
+        'id': null,
+        'description': 'IKEA Sofa',
+        'location': 'Belgrad',
+        'weight' : '100',
+        'status' : 'PREPARED'
+    };
+
+    $.ajax({
+        type: 'POST',
+        url:  prefix + '/add',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        async: true,
+        success: function(result) {
+            alert(result.body);
+        },
+        error: function(jqXHR) {
+            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        }
+    });
+}

@@ -115,7 +115,7 @@
                         <label for="text9">Weight</label>
                         <input type="number" class="form-input" name="text9" id="text9" placeholder="0">
                     </div>
-                    <button type="button" class="btn btn-default btn-block">Save</button>
+                    <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
                 </fieldset>
             </div>
         </div>

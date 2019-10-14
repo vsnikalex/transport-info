@@ -7,6 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +35,19 @@ public class CargoController {
     @DeleteMapping("/delete/{id}")
     public void deleteCargo(@PathVariable long id) {
         cargoService.deleteCargo(id);
+    }
+
+    @PostMapping("/add")
+    public String saveCargo(@RequestBody CargoDTO cargoDTO) {
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        if (!validator.validate(cargoDTO).isEmpty()) {
+            return "FAIL";
+        }
+
+        return "SUCCESS";
     }
 
     private CargoDTO convertToDto(Cargo cargo) {

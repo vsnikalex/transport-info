@@ -36,7 +36,8 @@ public class DriverDAOImpl implements DriverDAO {
 
     @Override
     public void saveDriver(Driver driver) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(driver);
     }
 
     @Override

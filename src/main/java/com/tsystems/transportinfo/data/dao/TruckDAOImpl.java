@@ -36,7 +36,8 @@ public class TruckDAOImpl implements TruckDAO {
 
     @Override
     public void saveTruck(Truck truck) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(truck);
     }
 
     @Override

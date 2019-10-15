@@ -24,12 +24,12 @@ public class CargoDTO {
     @Size(max = 50, message = "Location name is too long")
     private String location;
 
-    @NotNull(message = "Weight must not be empty")
+    @NotNull(message = "Weight must not be null")
     @Min(value = 100, message = "Cargo is too lightweight")
     @Max(value = 27_000, message = "It is an overweight")
     private int weight;
 
-    @NotNull(message = "Status must not be empty")
+    @NotNull(message = "Status must not be null")
     private CargoStatus status;
 
     public CargoDTO(String location, String description, int weight, CargoStatus status) {

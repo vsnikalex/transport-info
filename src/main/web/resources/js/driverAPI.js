@@ -54,3 +54,30 @@ var RestGet = function() {
         }
     });
 }
+
+var RestPost = function() {
+    var JSONObject= {
+        'id': null,
+        'firstName': $("#first_name").val(),
+        'lastName': $("#last_name").val(),
+        'location': $("#location").val(),
+    };
+
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url:  prefix + '/add',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        cache: false,
+        async: true,
+        success: function(result) {
+            alert(result.msg);
+            window.location = '/admin_driver_add';
+        },
+        error: function(e) {
+            // TODO: highlight error fields with red
+            alert(e.responseText);
+        }
+    });
+}

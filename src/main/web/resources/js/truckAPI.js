@@ -52,3 +52,30 @@ var RestGet = function() {
         }
     });
 }
+
+var RestPost = function() {
+    var JSONObject= {
+        'plate': $("#plate").val(),
+        'capacity': $("#capacity").val(),
+        'status': $("#status").val(),
+        'location': $("#location").val()
+    };
+
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url:  prefix + '/add',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        cache: false,
+        async: true,
+        success: function(result) {
+            alert(result.msg);
+            window.location = '/admin_truck_add';
+        },
+        error: function(e) {
+            // TODO: highlight error fields with red
+            alert(e.responseText);
+        }
+    });
+}

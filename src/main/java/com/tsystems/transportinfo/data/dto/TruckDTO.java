@@ -15,20 +15,20 @@ import javax.validation.constraints.*;
 @Setter
 public class TruckDTO {
 
-    @NotNull
-    @Pattern(regexp = "[A-Z]{2}\\d{5}")
+    // TODO: custom validation, ask service whether id already exists to forbid add
+    @NotEmpty(message = "Plate must not be empty")
+    @Pattern(regexp = "[A-Z]{2}\\d{5}", message = "Plate pattern is XY12345")
     private String plate;
 
-    @NotNull
-    @Min(value = 0)
+    @NotNull(message = "Capacity must not be null")
+    @Min(value = 0, message = "Capacity must be greater than zero")
     private int capacity;
 
-    @NotNull
+    @NotNull(message = "Status must not be null")
     private TruckStatus status;
 
-    @NotNull
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "Location must not be empty")
+    @Size(max = 50, message = "Location name is too long")
     private String location;
 
     @Min(value = 0)

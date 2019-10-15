@@ -31,7 +31,7 @@ public class DeliveryDTO {
 
     @NotNull
     @NotEmpty
-    @Size(max = 10)
+    @Size(max = 50)
     private String destination;
 
     @NotNull

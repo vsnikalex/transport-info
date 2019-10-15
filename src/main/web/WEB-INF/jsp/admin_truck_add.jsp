@@ -96,25 +96,25 @@
             <div class="tc-example">
                 <fieldset class="form-fieldset">
                     <div class="form-input-set">
-                        <label for="text7">Plate</label>
-                        <input type="text" class="form-input" name="text7" id="text7" placeholder="AB12345">
+                        <label for="plate">Plate</label>
+                        <input type="text" class="form-input" name="plate" id="plate" placeholder="AB12345">
                     </div>
                     <div class="form-input-set">
-                        <label for="text9">Capacity</label>
-                        <input type="number" class="form-input" name="text9" id="text9" placeholder="0">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" class="form-input" name="capacity" id="capacity" placeholder="0">
                     </div>
                     <div class="form-input-set">
-                        <label for="text8">Location</label>
-                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
-                    </div>
-                    <div class="form-input-set">
-                        <label for="selectbox" title="Primäroptionen Auswahlliste">Status</label>
-                        <select name="select" id="selectbox" class="form-select">
-                            <option value="opt1" selected>OK</option>
-                            <option value="opt2">DEFECTIVE</option>
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="OK" selected>OK</option>
+                            <option value="DEFECTIVE">DEFECTIVE</option>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-default btn-block">Save</button>
+                    <div class="form-input-set">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-input" name="location" id="location" placeholder="Location">
+                    </div>
+                    <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
                 </fieldset>
             </div>
         </div>
@@ -158,7 +158,7 @@
     <script src="<c:url value="/resources/js/docs.js" />"></script>
 
     <%-- USE REST API --%>
-    <script src="<c:url value="/resources/js/cargoAPI.js" />"></script>
+    <script src="<c:url value="/resources/js/truckAPI.js" />"></script>
 
 </body>
 

@@ -10,7 +10,6 @@ import lombok.Setter;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -22,25 +21,21 @@ public class DriverDTO {
 
     private Long id;
 
-    @NotNull
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "First Name must not be empty")
+    @Size(max = 10, message = "Fist Name is too long")
     private String firstName;
 
-    @NotNull
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "Last Name must not be empty")
+    @Size(max = 10, message = "Last Name is too long")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "Location must not be empty")
+    @Size(max = 50, message = "Location name is too long")
     private String location;
 
     @Min(value = 0)
     private int workedThisMonth;
 
-    @NotNull
     private DriverAction action;
 
     @Valid

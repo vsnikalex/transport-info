@@ -96,18 +96,18 @@
             <div class="tc-example">
                 <fieldset class="form-fieldset">
                     <div class="form-input-set">
-                        <label for="text6">First Name</label>
-                        <input type="text" class="form-input" name="text6" id="text6" placeholder="John">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-input" name="first_name" id="first_name" placeholder="John">
                     </div>
                     <div class="form-input-set">
-                        <label for="text7">Last Name</label>
-                        <input type="text" class="form-input" name="text7" id="text7" placeholder="Doe">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-input" name="last_name" id="last_name" placeholder="Doe">
                     </div>
                     <div class="form-input-set">
-                        <label for="text8">Location</label>
-                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-input" name="location" id="location" placeholder="Location">
                     </div>
-                    <button type="button" class="btn btn-default btn-block">Save</button>
+                    <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
                 </fieldset>
             </div>
         </div>
@@ -151,7 +151,7 @@
     <script src="<c:url value="/resources/js/docs.js" />"></script>
 
     <%-- USE REST API --%>
-    <script src="<c:url value="/resources/js/cargoAPI.js" />"></script>
+    <script src="<c:url value="/resources/js/driverAPI.js" />"></script>
 
 </body>
 

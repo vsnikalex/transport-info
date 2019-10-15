@@ -96,24 +96,24 @@
             <div class="tc-example">
                 <fieldset class="form-fieldset">
                     <div class="form-input-set">
-                        <label for="text7">Description</label>
-                        <input type="text" class="form-input" name="text7" id="text7" placeholder="Description">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-input" name="description" id="description" placeholder="Description">
                     </div>
                     <div class="form-input-set">
-                        <label for="text8">Location</label>
-                        <input type="text" class="form-input" name="text8" id="text8" placeholder="Location">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-input" name="location" id="location" placeholder="Location">
                     </div>
                     <div class="form-input-set">
-                        <label for="selectbox" title="Primäroptionen Auswahlliste">Status</label>
-                        <select name="select" id="selectbox" class="form-select">
-                            <option value="opt1" selected>PREPARED</option>
-                            <option value="opt2">SHIPPED</option>
-                            <option value="opt3">DELIVERED</option>
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="PREPARED" selected>PREPARED</option>
+                            <option value="SHIPPED">SHIPPED</option>
+                            <option value="DELIVERED">DELIVERED</option>
                         </select>
                     </div>
                     <div class="form-input-set">
-                        <label for="text9">Weight</label>
-                        <input type="number" class="form-input" name="text9" id="text9" placeholder="0">
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-input" name="weight" id="weight" placeholder="0">
                     </div>
                     <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
                 </fieldset>

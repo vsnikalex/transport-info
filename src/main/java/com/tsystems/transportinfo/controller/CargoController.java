@@ -5,11 +5,12 @@ import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.service.CargoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,20 +39,29 @@ public class CargoController {
     }
 
     @PostMapping("/add")
-    public String saveCargo(@RequestBody CargoDTO cargoDTO) {
+    public ResponseEntity<String> saveCargo(
+            @RequestBody @Valid CargoDTO cargoDTO, Errors errors) {
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+        if (errors.hasErrors()) {
+            String msg = errors.getAllErrors().stream()
+                                                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                                                .collect(Collectors.joining(","));
 
-        if (!validator.validate(cargoDTO).isEmpty()) {
-            return "FAIL";
+            return ResponseEntity.badRequest().body(msg);
         }
 
-        return "SUCCESS";
+        Cargo cargo = this.convertToEntity(cargoDTO);
+        cargoService.saveCargo(cargo);
+
+        return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
 
     private CargoDTO convertToDto(Cargo cargo) {
         return modelMapper.map(cargo, CargoDTO.class);
+    }
+
+    private Cargo convertToEntity(CargoDTO cargoDTO) {
+        return modelMapper.map(cargoDTO, Cargo.class);
     }
 
 }

@@ -5,7 +5,7 @@ var RestDelete = function(id) {
         type: 'DELETE',
         url:  prefix + '/delete/' + id,
         async: true,
-        success: function(response) {
+        success: function() {
             window.location = '/admin_cargo';
         },
         error: function(jqXHR) {
@@ -56,24 +56,27 @@ var RestGet = function() {
 var RestPost = function() {
     var JSONObject= {
         'id': null,
-        'description': 'IKEA Sofa',
-        'location': 'Belgrad',
-        'weight' : '100',
-        'status' : 'PREPARED'
+        'description': $("#description").val(),
+        'location': $("#location").val(),
+        'status' : $("#status").val(),
+        'weight' : $("#weight").val()
     };
 
     $.ajax({
         type: 'POST',
+        contentType: 'application/json',
         url:  prefix + '/add',
-        contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(JSONObject),
         dataType: 'json',
+        cache: false,
         async: true,
         success: function(result) {
-            alert(result.body);
+            alert(result.msg);
+            window.location = '/admin_cargo_add';
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        error: function(e) {
+            // TODO: highlight error fields with red
+            alert(e.responseText);
         }
     });
 }

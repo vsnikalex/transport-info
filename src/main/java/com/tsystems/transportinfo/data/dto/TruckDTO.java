@@ -27,6 +27,7 @@ public class TruckDTO {
     @NotNull(message = "Status must not be null")
     private TruckStatus status;
 
+    // TODO: replace with Node to use it in maps and routes
     @NotEmpty(message = "Location must not be empty")
     @Size(max = 50, message = "Location name is too long")
     private String locationName;

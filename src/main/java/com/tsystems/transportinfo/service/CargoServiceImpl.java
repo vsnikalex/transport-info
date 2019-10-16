@@ -1,6 +1,6 @@
 package com.tsystems.transportinfo.service;
 
-import com.tsystems.transportinfo.data.dao.CargoDAO;
+import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,27 +12,32 @@ import java.util.List;
 @Transactional
 public class CargoServiceImpl implements CargoService {
 
+    private GenericDAO<Cargo> dao;
+
     @Autowired
-    CargoDAO cargoDAO;
+    public void setDao(GenericDAO<Cargo> daoToSet) {
+        dao = daoToSet;
+        dao.setClazz(Cargo.class);
+    }
 
     @Override
     public List<Cargo> getAllCargoes() {
-        return cargoDAO.findAllCargoes();
+        return dao.findAll();
     }
 
     @Override
     public void saveCargo(Cargo cargo) {
-        cargoDAO.saveCargo(cargo);
+        dao.create(cargo);
     }
 
     @Override
     public Cargo getCargo(Long id) {
-        return cargoDAO.findCargo(id);
+        return dao.findOne(id);
     }
 
     @Override
     public void deleteCargo(Long id) {
-        cargoDAO.deleteCargo(id);
+        dao.deleteById(id);
     }
 
 }

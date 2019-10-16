@@ -23,6 +23,7 @@ public class DeliveryDTO {
     @NotNull
     private boolean done;
 
+    // TODO: replace with Nodes to use it in maps and routes
     @NotNull
     private List<String> route;
 

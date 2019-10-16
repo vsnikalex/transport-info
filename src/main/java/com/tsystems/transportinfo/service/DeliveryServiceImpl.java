@@ -1,6 +1,6 @@
 package com.tsystems.transportinfo.service;
 
-import com.tsystems.transportinfo.data.dao.DeliveryDAO;
+import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,27 +12,32 @@ import java.util.List;
 @Transactional
 public class DeliveryServiceImpl implements DeliveryService {
 
+    private GenericDAO<Delivery> dao;
+
     @Autowired
-    DeliveryDAO deliveryDAO;
+    public void setDao(GenericDAO<Delivery> daoToSet) {
+        dao = daoToSet;
+        dao.setClazz(Delivery.class);
+    }
 
     @Override
     public List<Delivery> getAllDeliveries() {
-        return deliveryDAO.findAllDeliveries();
+        return dao.findAll();
     }
 
     @Override
     public void saveDelivery(Delivery delivery) {
-        deliveryDAO.saveDelivery(delivery);
+        dao.create(delivery);
     }
 
     @Override
     public Delivery getDelivery(Long id) {
-        return deliveryDAO.findDelivery(id);
+        return dao.findOne(id);
     }
 
     @Override
     public void deleteDelivery(Long id) {
-        deliveryDAO.deleteDelivery(id);
+        dao.deleteById(id);
     }
 
 }

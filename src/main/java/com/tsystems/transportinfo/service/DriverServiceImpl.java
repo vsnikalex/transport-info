@@ -1,6 +1,6 @@
 package com.tsystems.transportinfo.service;
 
-import com.tsystems.transportinfo.data.dao.DriverDAO;
+import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.entity.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,27 +12,32 @@ import java.util.List;
 @Transactional
 public class DriverServiceImpl implements DriverService {
 
+    private GenericDAO<Driver> dao;
+
     @Autowired
-    DriverDAO driverDAO;
+    public void setDao(GenericDAO<Driver> daoToSet) {
+        dao = daoToSet;
+        dao.setClazz(Driver.class);
+    }
 
     @Override
     public List<Driver> getAllDrivers() {
-        return driverDAO.findAllDrivers();
+        return dao.findAll();
     }
 
     @Override
     public void saveDriver(Driver driver) {
-        driverDAO.saveDriver(driver);
+        dao.create(driver);
     }
 
     @Override
     public Driver getDriver(Long id) {
-        return driverDAO.findDriver(id);
+        return dao.findOne(id);
     }
 
     @Override
     public void deleteDriver(Long id) {
-        driverDAO.deleteDriver(id);
+        dao.deleteById(id);
     }
 
 }

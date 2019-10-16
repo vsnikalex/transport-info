@@ -30,6 +30,7 @@ public class DriverDTO {
     @Size(max = 10, message = "Last Name is too long")
     private String lastName;
 
+    // TODO: replace with Node to use it in maps and routes
     @NotEmpty(message = "Location must not be empty")
     @Size(max = 50, message = "Location name is too long")
     private String locationName;

@@ -28,17 +28,11 @@ public class CargoDTOTest {
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
-        assertEquals(2, constraintViolations.size());
-
-        int emptyParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("must not be empty"))
-                                                    .count();
-        assertEquals(1, emptyParam);
-
-        int nullParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("must not be null"))
-                                                    .count();
-        assertEquals(1, nullParam);
+        assertEquals(1, constraintViolations.size());
+        assertEquals(
+                "Location must not be empty",
+                constraintViolations.iterator().next().getMessage()
+        );
     }
 
     @Test
@@ -48,17 +42,11 @@ public class CargoDTOTest {
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
                 validator.validate(cargo);
 
-        assertEquals(2, constraintViolations.size());
-
-        int emptyParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("must not be empty"))
-                                                    .count();
-        assertEquals(1, emptyParam);
-
-        int nullParam = (int) constraintViolations.stream()
-                                                    .filter(c -> c.getMessage().equals("must not be null"))
-                                                    .count();
-        assertEquals(1, nullParam);
+        assertEquals(1, constraintViolations.size());
+        assertEquals(
+                "Description must not be empty",
+                constraintViolations.iterator().next().getMessage()
+        );
     }
 
     @Test
@@ -70,7 +58,7 @@ public class CargoDTOTest {
 
         assertEquals(1, constraintViolations.size());
         assertEquals(
-                "must be between 100 and 27000",
+                "Weight must be between 100 and 27000",
                 constraintViolations.iterator().next().getMessage()
         );
     }
@@ -83,7 +71,7 @@ public class CargoDTOTest {
                 validator.validate(cargo);
 
         assertEquals(1, constraintViolations.size());
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("Status must not be null", constraintViolations.iterator().next().getMessage());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Task;
+import de.westnordost.osmapi.map.data.Node;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,7 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @NoArgsConstructor
@@ -25,14 +24,7 @@ public class DeliveryDTO {
     private boolean done;
 
     @NotNull
-    @NotEmpty
-    @Size(max = 10)
-    private String startPoint;
-
-    @NotNull
-    @NotEmpty
-    @Size(max = 50)
-    private String destination;
+    private List<String> route;
 
     @NotNull
     @Min(value = 0)
@@ -46,6 +38,11 @@ public class DeliveryDTO {
 
     @Valid
     private List<DriverDTO> driverDTOList;
+
+    public void setLocationName(List<Node> route) {
+        // TODO: extract route
+        route.forEach(r -> this.route.add(r.getTags().get("name")));
+    }
 
     public void setWorkingDrivers(List<Task> tasks) {
         // TODO: calculate unfinished tasks

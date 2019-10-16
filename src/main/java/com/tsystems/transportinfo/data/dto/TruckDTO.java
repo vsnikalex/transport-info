@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
+import de.westnordost.osmapi.map.data.Node;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ import javax.validation.constraints.*;
 @Setter
 public class TruckDTO {
 
-    // TODO: custom validation, ask service whether id already exists to forbid add
     @NotEmpty(message = "Plate must not be empty")
     @Pattern(regexp = "[A-Z]{2}\\d{5}", message = "Plate pattern is XY12345")
     private String plate;
@@ -29,13 +29,18 @@ public class TruckDTO {
 
     @NotEmpty(message = "Location must not be empty")
     @Size(max = 50, message = "Location name is too long")
-    private String location;
+    private String locationName;
 
     @Min(value = 0)
     private int driversCnt;
 
+    public void setLocationName(Node location) {
+        // TODO: extract location name
+        this.locationName = location.getTags().get("name");
+    }
+
     public void setDriversCnt(Delivery delivery) {
-        // TODO: unfinished delivery -> unfinished tasks (working drivers)
+        // TODO: Delivery -> unfinished Tasks (working drivers)
         this.driversCnt = 2;
     }
 

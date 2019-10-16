@@ -31,4 +31,8 @@ public class Task {
     @JoinColumn(name="driver_id", unique = true)
     private Driver driver;
 
+    @OneToOne
+    @JoinColumn(name="truck_plate", unique = true)
+    public Truck truck;
+
 }

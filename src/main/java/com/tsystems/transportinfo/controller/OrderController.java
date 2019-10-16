@@ -40,7 +40,7 @@ public class OrderController {
 
         deliveryDTO.setCargoDTO(modelMapper.map(delivery.getCargo(), CargoDTO.class));
         deliveryDTO.setTruckDTO(modelMapper.map(delivery.getTruck(), TruckDTO.class));
-        deliveryDTO.setWorkingDrivers(delivery.getTasks());
+//        deliveryDTO.setWorkingDrivers(delivery.getTasks());
 
         return deliveryDTO;
     }

@@ -1,10 +1,11 @@
 package com.tsystems.transportinfo.data.entity;
 
+import com.tsystems.transportinfo.data.entity.converters.NodeListConverter;
 import lombok.Getter;
 import lombok.Setter;
+import org.openstreetmap.osmosis.core.domain.v0_6.Node;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,17 +22,17 @@ public class Delivery {
     private boolean done;
 
     @Column
-    private String destination;
+    @Convert(converter = NodeListConverter.class)
+    private List<Node> route;
 
-    @OneToOne
-    @JoinColumn(name="cargo_id", unique = true)
-    public Cargo cargo;
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
+    public List<Cargo> cargo;
 
     @OneToOne
     @JoinColumn(name="truck_plate", unique = true)
     public Truck truck;
 
-    @OneToMany(mappedBy = "delivery", fetch = FetchType.EAGER)
-    private List<Task> tasks = new ArrayList<>();
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
+    private List<Driver> drivers;
 
 }

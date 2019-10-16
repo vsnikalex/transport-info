@@ -144,6 +144,18 @@
             <version>2.2.6</version>
         </dependency>
 
+        <!-- OpenStreetMap API -->
+        <dependency>
+            <groupId>de.westnordost</groupId>
+            <artifactId>osmapi</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openstreetmap.osmosis</groupId>
+            <artifactId>osmosis-core</artifactId>
+            <version>0.47</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>com.h2database</groupId>

@@ -1,10 +1,11 @@
 package com.tsystems.transportinfo.data.entity;
 
+import com.tsystems.transportinfo.data.entity.converters.NodeConverter;
+import de.westnordost.osmapi.map.data.Node;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,14 @@ public class Driver {
     private String lastName;
 
     @Column
-    private String location;
+    @Convert(converter = NodeConverter.class)
+    private Node location;
 
-    @OneToMany
-    private List<Task> tasks = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="delivery_id", unique = true)
+    private Delivery delivery;
+
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    private List<Task> tasks;
 
 }

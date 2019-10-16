@@ -32,7 +32,7 @@ public class CargoDAOTest {
         Session session = sessionFactory.getCurrentSession();
 
         Cargo toSend = new Cargo();
-        toSend.setLocation("Moscow");
+//        toSend.setLocation("Moscow");
         toSend.setDescription("IKEA Sofa");
         toSend.setStatus(CargoStatus.SHIPPED);
         toSend.setWeight(100);

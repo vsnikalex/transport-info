@@ -2,7 +2,6 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
-import de.westnordost.osmapi.map.data.Node;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,10 +29,9 @@ public class DriverDTO {
     @Size(max = 10, message = "Last Name is too long")
     private String lastName;
 
-    // TODO: replace with Node to use it in maps and routes
     @NotEmpty(message = "Location must not be empty")
     @Size(max = 50, message = "Location name is too long")
-    private String locationName;
+    private String wayID;
 
     @Min(value = 0)
     private int workedThisMonth;
@@ -42,11 +40,6 @@ public class DriverDTO {
 
     @Valid
     private TruckDTO truckDTO;
-
-    public void setLocationName(Node location) {
-        // TODO: extract location name
-        this.locationName = location.getTags().get("name");
-    }
 
     public void setWorkedThisMonth(List<Task> tasks) {
         // TODO: calculate working hours based on start-end LocalDateTime

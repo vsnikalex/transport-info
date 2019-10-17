@@ -151,6 +151,16 @@
             <version>3.4</version>
         </dependency>
         <dependency>
+            <groupId>com.graphhopper</groupId>
+            <artifactId>directions-api-client</artifactId>
+            <version>0.13.0-pre1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphhopper</groupId>
+            <artifactId>directions-api-client-hc</artifactId>
+            <version>0.13.0-pre1</version>
+        </dependency>
+        <dependency>
             <groupId>org.openstreetmap.osmosis</groupId>
             <artifactId>osmosis-core</artifactId>
             <version>0.47</version>

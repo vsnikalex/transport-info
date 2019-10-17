@@ -100,8 +100,12 @@
                         <input type="text" class="form-input" name="description" id="description" placeholder="Description">
                     </div>
                     <div class="form-input-set">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-input" name="location" id="location" placeholder="Location">
+                        <label for="locationID">Location</label>
+                        <input type="number" class="form-input" name="locationID" id="locationID" placeholder="Location ID">
+                    </div>
+                    <div class="form-input-set">
+                        <label for="destinationID">Destination</label>
+                        <input type="number" class="form-input" name="destinationID" id="destinationID" placeholder="Destination ID">
                     </div>
                     <div class="form-input-set">
                         <label for="status">Status</label>

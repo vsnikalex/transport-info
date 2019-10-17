@@ -22,64 +22,12 @@ public class CargoDTOTest {
     private Validator validator;
 
     @Test
-    public void locationIsNull() {
-        CargoDTO cargo = new CargoDTO(null, "Test", 100, CargoStatus.SHIPPED);
-
-        Set<ConstraintViolation<CargoDTO>> constraintViolations =
-                validator.validate(cargo);
-
-        assertEquals(1, constraintViolations.size());
-        assertEquals(
-                "Location must not be empty",
-                constraintViolations.iterator().next().getMessage()
-        );
-    }
-
-    @Test
-    public void descriptionIsNull() {
-        CargoDTO cargo = new CargoDTO("TestBurg",null, 100, CargoStatus.SHIPPED);
-
-        Set<ConstraintViolation<CargoDTO>> constraintViolations =
-                validator.validate(cargo);
-
-        assertEquals(1, constraintViolations.size());
-        assertEquals(
-                "Description must not be empty",
-                constraintViolations.iterator().next().getMessage()
-        );
-    }
-
-    @Test
-    public void overweight() {
-        CargoDTO cargo = new CargoDTO("TestBurg","Test", 28_000, CargoStatus.PREPARED);
-
-        Set<ConstraintViolation<CargoDTO>> constraintViolations =
-                validator.validate(cargo);
-
-        assertEquals(1, constraintViolations.size());
-        assertEquals(
-                "Weight must be between 100 and 27000",
-                constraintViolations.iterator().next().getMessage()
-        );
-    }
-
-    @Test
-    public void statusIsNull() {
-        CargoDTO cargo = new CargoDTO("TestBurg","Test", 100, null);
-
-        Set<ConstraintViolation<CargoDTO>> constraintViolations =
-                validator.validate(cargo);
-
-        assertEquals(1, constraintViolations.size());
-        assertEquals("Status must not be null", constraintViolations.iterator().next().getMessage());
-    }
-
-    @Test
     public void cargoIsValid() {
-        CargoDTO cargo = new CargoDTO("TestBurg","Test", 13_500, CargoStatus.DELIVERED);
+        CargoDTO cargoDTO = new CargoDTO(1L, "IKEA Sofa", 100,
+                                            CargoStatus.SHIPPED, 2663395264L, 4163703133L);
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =
-                validator.validate(cargo);
+                validator.validate(cargoDTO);
 
         assertEquals(0, constraintViolations.size());
     }

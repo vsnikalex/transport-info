@@ -3,14 +3,18 @@ package com.tsystems.transportinfo.controller;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.service.CargoService;
+import de.westnordost.osmapi.map.data.Node;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 
 import javax.validation.Valid;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,8 +48,8 @@ public class CargoController {
 
         if (errors.hasErrors()) {
             String msg = errors.getAllErrors().stream()
-                                                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                                                .collect(Collectors.joining(","));
+                   .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                   .collect(Collectors.joining(","));
 
             return ResponseEntity.badRequest().body(msg);
         }
@@ -61,7 +65,9 @@ public class CargoController {
     }
 
     private Cargo convertToEntity(CargoDTO cargoDTO) {
-        return modelMapper.map(cargoDTO, Cargo.class);
+        Cargo cargo = modelMapper.map(cargoDTO, Cargo.class);
+
+        return cargo;
     }
 
 }

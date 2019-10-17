@@ -31,7 +31,6 @@ var RestGet = function() {
                         "<td>" + result[i].description + "</td>" +
                         "<td>" + result[i].weight + "</td>" +
                         "<td>" + result[i].status + "</td>" +
-                        "<td>" + result[i].location + "</td>" +
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
@@ -55,9 +54,10 @@ var RestGet = function() {
 
 var RestPost = function() {
     var JSONObject= {
-        'id': null,
+        // 'id': null,
         'description': $("#description").val(),
-        'location': $("#location").val(),
+        'locationID': $("#locationID").val(),
+        'destinationID': $("#destinationID").val(),
         'status' : $("#status").val(),
         'weight' : $("#weight").val()
     };

@@ -1,7 +1,6 @@
 package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Task;
-import de.westnordost.osmapi.map.data.Node;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,6 @@ public class DeliveryDTO {
     @NotNull
     private boolean done;
 
-    // TODO: replace with Nodes to use it in maps and routes
     @NotNull
     private List<String> route;
 
@@ -39,11 +37,6 @@ public class DeliveryDTO {
 
     @Valid
     private List<DriverDTO> driverDTOList;
-
-    public void setLocationName(List<Node> route) {
-        // TODO: extract route
-        route.forEach(r -> this.route.add(r.getTags().get("name")));
-    }
 
     public void setWorkingDrivers(List<Task> tasks) {
         // TODO: calculate unfinished tasks

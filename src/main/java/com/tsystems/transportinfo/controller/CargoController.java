@@ -37,6 +37,12 @@ public class CargoController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/{id}")
+    public CargoDTO getCargo(@PathVariable long id) {
+        Cargo cargo = cargoService.getCargo(id);
+        return convertToDto(cargo);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteCargo(@PathVariable long id) {
         cargoService.deleteCargo(id);
@@ -48,14 +54,32 @@ public class CargoController {
 
         if (errors.hasErrors()) {
             String msg = errors.getAllErrors().stream()
-                   .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                   .collect(Collectors.joining(","));
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(","));
 
             return ResponseEntity.badRequest().body(msg);
         }
 
         Cargo cargo = this.convertToEntity(cargoDTO);
         cargoService.saveCargo(cargo);
+
+        return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateCargo(
+            @RequestBody @Valid CargoDTO cargoDTO, Errors errors) {
+
+        if (errors.hasErrors()) {
+            String msg = errors.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(","));
+
+            return ResponseEntity.badRequest().body(msg);
+        }
+
+        Cargo cargo = this.convertToEntity(cargoDTO);
+        cargoService.updateCargo(cargo);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }

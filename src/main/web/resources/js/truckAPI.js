@@ -14,7 +14,7 @@ var RestDelete = function(plate) {
     });
 }
 
-var RestGet = function() {
+var RestGetAll = function() {
     $.ajax({
         type: 'GET',
         url:  prefix + '/all',

@@ -10,6 +10,8 @@ public interface CargoService {
 
     public void saveCargo(Cargo cargo);
 
+    public void updateCargo(Cargo cargo);
+
     public Cargo getCargo(Long id);
 
     public void deleteCargo(Long id);

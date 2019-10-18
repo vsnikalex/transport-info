@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="RestGet()">
+<body onload="IfForUpdate()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">
@@ -92,7 +92,7 @@
 
 
         <div class="container-fixed">
-            <h1 class="underline">Cargo</h1>
+            <h1 class="underline" id="entity_info">Cargo</h1>
             <div class="tc-example">
                 <fieldset class="form-fieldset">
                     <div class="form-input-set">
@@ -125,7 +125,7 @@
                         <label for="weight">Weight</label>
                         <input type="number" class="form-input" name="weight" id="weight" placeholder="0">
                     </div>
-                    <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
+                    <button id="save_button" type="button" class="btn btn-default btn-block">Save</button>
                 </fieldset>
             </div>
         </div>

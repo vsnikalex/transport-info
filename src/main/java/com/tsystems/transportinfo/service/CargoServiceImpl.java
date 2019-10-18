@@ -31,6 +31,11 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
+    public void updateCargo(Cargo cargo) {
+        dao.update(cargo);
+    }
+
+    @Override
     public Cargo getCargo(Long id) {
         return dao.findOne(id);
     }

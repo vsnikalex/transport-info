@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="RestGet()">
+<body onload="RestGetAll()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">

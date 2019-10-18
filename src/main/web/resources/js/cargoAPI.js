@@ -12,9 +12,13 @@ var RestDelete = function(id) {
             alert(jqXHR.status + '\n' + jqXHR.responseText);
         }
     });
-}
+};
 
-var RestGet = function() {
+var ToUpdatePage = function (id) {
+    location.href='/admin_cargo_add?id=' + id;
+};
+
+var RestGetAll = function() {
     $.ajax({
         type: 'GET',
         url:  prefix + '/all',
@@ -35,7 +39,8 @@ var RestGet = function() {
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
-                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
+                                "onclick='ToUpdatePage(" + id + ")'>" +
                                 "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
@@ -51,7 +56,7 @@ var RestGet = function() {
             alert(jqXHR.status + '\n' + jqXHR.responseText);
         }
     });
-}
+};
 
 var RestPost = function() {
     var JSONObject= {
@@ -79,4 +84,55 @@ var RestPost = function() {
             alert(e.responseText);
         }
     });
-}
+};
+
+var RestPut = function(id) {
+    var JSONObject= {
+        'id' : id,
+        'description': $("#description").val(),
+        'locCoords': $("#location").val(),
+        'destCoords': $("#destination").val(),
+        'status' : $("#status").val(),
+        'weight' : $("#weight").val()
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url:  prefix + '/update',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        cache: false,
+        async: true,
+        success: function(result) {
+            alert(result.msg);
+            window.location = '/admin_cargo';
+        },
+        error: function(e) {
+            alert(e.responseText);
+        }
+    });
+};
+
+var IfForUpdate = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('id')) {
+        $.getJSON(prefix + '/' + urlParams.get('id'), function (data) {
+            $("#entity_info").text(data.description + ": " +
+                                            data.location.country + "\u2192" +
+                                            data.destination.country + " " +
+                                            data.status + " " +
+                                            data.weight + "kg");
+            $("#description").val(data.description);
+            $("#weight").val(data.weight);
+
+            $("#save_button").on('click', function () {
+                RestPut(data.id);
+            });
+        });
+    } else {
+        $("#save_button").on('click', function () {
+            RestPost();
+        });
+    }
+};

@@ -1,7 +1,7 @@
 package com.tsystems.transportinfo.data.entity;
 
-import com.tsystems.transportinfo.data.entity.converters.NodeConverter;
-import de.westnordost.osmapi.map.data.Node;
+import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.entity.converters.GeocodingEntryConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,8 +25,8 @@ public class Driver {
     private String lastName;
 
     @Column
-    @Convert(converter = NodeConverter.class)
-    private Node location;
+    @Convert(converter = GeocodingEntryConverter.class)
+    private GHGeocodingEntry location;
 
     @ManyToOne
     @JoinColumn(name="delivery_id", unique = true)

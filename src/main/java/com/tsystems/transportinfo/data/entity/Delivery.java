@@ -1,9 +1,9 @@
 package com.tsystems.transportinfo.data.entity;
 
-import com.tsystems.transportinfo.data.entity.converters.NodeListConverter;
+import com.graphhopper.util.shapes.GHPoint;
+import com.tsystems.transportinfo.data.entity.converters.PointListConverter;
 import lombok.Getter;
 import lombok.Setter;
-import org.openstreetmap.osmosis.core.domain.v0_6.Node;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Delivery {
     private boolean done;
 
     @Column
-    @Convert(converter = NodeListConverter.class)
-    private List<Node> route;
+    @Convert(converter = PointListConverter.class)
+    private List<GHPoint> route;
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     public List<Cargo> cargo;

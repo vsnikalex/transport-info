@@ -1,8 +1,8 @@
 package com.tsystems.transportinfo.data.entity;
 
-import com.tsystems.transportinfo.data.entity.converters.NodeConverter;
+import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.entity.converters.GeocodingEntryConverter;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
-import de.westnordost.osmapi.map.data.Node;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,12 +29,12 @@ public class Cargo {
     private CargoStatus status;
 
     @Column
-    @Convert(converter = NodeConverter.class)
-    private Node location;
+    @Convert(converter = GeocodingEntryConverter.class)
+    private GHGeocodingEntry location;
 
     @Column
-    @Convert(converter = NodeConverter.class)
-    private Node destination;
+    @Convert(converter = GeocodingEntryConverter.class)
+    private GHGeocodingEntry destination;
 
     @ManyToOne
     @JoinColumn(name="delivery_id", unique = true)

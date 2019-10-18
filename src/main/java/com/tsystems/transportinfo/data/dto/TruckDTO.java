@@ -27,8 +27,7 @@ public class TruckDTO {
     private TruckStatus status;
 
     @NotEmpty(message = "Location must not be empty")
-    @Size(max = 50, message = "Location name is too long")
-    private String wayID;
+    private String coords;
 
     @Min(value = 0)
     private int driversCnt;

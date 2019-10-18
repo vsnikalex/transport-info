@@ -23,7 +23,7 @@ public class DeliveryDTO {
     private boolean done;
 
     @NotNull
-    private List<String> route;
+    private List<String> routeCoords;
 
     @NotNull
     @Min(value = 0)

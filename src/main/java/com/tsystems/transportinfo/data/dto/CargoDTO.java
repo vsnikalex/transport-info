@@ -28,10 +28,10 @@ public class CargoDTO {
     @NotNull(message = "Status must not be null")
     private CargoStatus status;
 
-    @NotNull(message = "Location must not be null")
-    private long locationID;
+    @NotEmpty(message = "Start Location must not be empty")
+    private String locCoords;
 
-    @NotNull(message = "Destination must not be null")
-    private long destinationID;
+    @NotEmpty(message = "End Location must not be empty")
+    private String destCoords;
 
 }

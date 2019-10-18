@@ -54,10 +54,9 @@ var RestGet = function() {
 
 var RestPost = function() {
     var JSONObject= {
-        // 'id': null,
         'description': $("#description").val(),
-        'locationID': $("#locationID").val(),
-        'destinationID': $("#destinationID").val(),
+        'locCoords': $("#location").val(),
+        'destCoords': $("#destination").val(),
         'status' : $("#status").val(),
         'weight' : $("#weight").val()
     };

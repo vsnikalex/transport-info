@@ -2,7 +2,7 @@ package com.tsystems.transportinfo.data.entity.converters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.westnordost.osmapi.map.data.Node;
+import com.graphhopper.api.model.GHGeocodingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +10,13 @@ import javax.persistence.AttributeConverter;
 import java.io.IOException;
 
 @Component
-public class NodeConverter implements AttributeConverter<Node, String> {
+public class GeocodingEntryConverter implements AttributeConverter<GHGeocodingEntry, String> {
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @Override
-    public String convertToDatabaseColumn(Node node) {
+    public String convertToDatabaseColumn(GHGeocodingEntry node) {
 
         String customerInfoJson = null;
         try {
@@ -30,11 +30,11 @@ public class NodeConverter implements AttributeConverter<Node, String> {
     }
 
     @Override
-    public Node convertToEntityAttribute(String nodeJSON) {
+    public GHGeocodingEntry convertToEntityAttribute(String nodeJSON) {
 
-        Node node = null;
+        GHGeocodingEntry node = null;
         try {
-            node = objectMapper.readValue(nodeJSON, Node.class);
+            node = objectMapper.readValue(nodeJSON, GHGeocodingEntry.class);
         } catch (final IOException e) {
             // TODO: logging
             System.out.println("JSON reading error");

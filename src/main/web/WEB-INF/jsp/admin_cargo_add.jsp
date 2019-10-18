@@ -100,12 +100,18 @@
                         <input type="text" class="form-input" name="description" id="description" placeholder="Description">
                     </div>
                     <div class="form-input-set">
-                        <label for="locationID">Location</label>
-                        <input type="number" class="form-input" name="locationID" id="locationID" placeholder="Location ID">
+                        <label for="location">Location</label>
+                        <select name="location" id="location" class="form-select">
+                            <option value="48.7525249,18.1450552" selected>SLOVAKIA</option>
+                            <option value="44.0639782,40.4920936">KAVKAZ</option>
+                        </select>
                     </div>
                     <div class="form-input-set">
-                        <label for="destinationID">Destination</label>
-                        <input type="number" class="form-input" name="destinationID" id="destinationID" placeholder="Destination ID">
+                        <label for="destination">Destination</label>
+                        <select name="destination" id="destination" class="form-select">
+                            <option value="44.0639782,40.4920936" selected>KAVKAZ</option>
+                            <option value="48.7525249,18.1450552">SLOVAKIA</option>
+                        </select>
                     </div>
                     <div class="form-input-set">
                         <label for="status">Status</label>

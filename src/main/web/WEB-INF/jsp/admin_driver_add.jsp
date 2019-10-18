@@ -105,7 +105,10 @@
                     </div>
                     <div class="form-input-set">
                         <label for="location">Location</label>
-                        <input type="text" class="form-input" name="location" id="location" placeholder="Location">
+                        <select name="location" id="location" class="form-select">
+                            <option value="48.7525249,18.1450552" selected>SLOVAKIA</option>
+                            <option value="44.0639782,40.4920936">KAVKAZ</option>
+                        </select>
                     </div>
                     <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
                 </fieldset>

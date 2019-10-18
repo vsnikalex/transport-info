@@ -30,7 +30,7 @@ var RestGet = function() {
                         "<td>" + plate           +   "</td>" +
                         "<td>" + result[i].capacity  +   "</td>" +
                         "<td>" + result[i].status       +   "</td>" +
-                        "<td>" + result[i].location       +   "</td>" +
+                        "<td>" + result[i].location.country       +   "</td>" +
                         "<td>" + result[i].driversCnt     +   "</td>" +
 
                         "<td>" +
@@ -58,7 +58,7 @@ var RestPost = function() {
         'plate': $("#plate").val(),
         'capacity': $("#capacity").val(),
         'status': $("#status").val(),
-        'location': $("#location").val()
+        'coords': $("#location").val()
     };
 
     $.ajax({

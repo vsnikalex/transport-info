@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.data.dto;
 
+import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,8 @@ public class TruckDTO {
 
     @Min(value = 0)
     private int driversCnt;
+
+    private GHGeocodingEntry location;
 
     public void setDriversCnt(Delivery delivery) {
         // TODO: Delivery -> unfinished Tasks (working drivers)

@@ -31,6 +31,7 @@ var RestGet = function() {
                         "<td>" + result[i].description + "</td>" +
                         "<td>" + result[i].weight + "</td>" +
                         "<td>" + result[i].status + "</td>" +
+                        "<td>" + result[i].location.country + "</td>" +
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +

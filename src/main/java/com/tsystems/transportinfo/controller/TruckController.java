@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.controller;
 
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Truck;
+import com.tsystems.transportinfo.service.GraphHopperService;
 import com.tsystems.transportinfo.service.TruckService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class TruckController {
 
     @Autowired
     private TruckService truckService;
+
+    @Autowired
+    private GraphHopperService graphHopperService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -65,6 +69,11 @@ public class TruckController {
     }
 
     private Truck convertToEntity(TruckDTO truckDTO) {
-        return modelMapper.map(truckDTO, Truck.class);
+        Truck truck = modelMapper.map(truckDTO, Truck.class);
+
+        String coords = truckDTO.getCoords();
+        truck.setLocation(graphHopperService.coordsToEntry(coords));
+
+        return truck;
     }
 }

@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.data.dto;
 
+import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,8 @@ public class DriverDTO {
 
     @Valid
     private TruckDTO truckDTO;
+
+    private GHGeocodingEntry location;
 
     public void setWorkedThisMonth(List<Task> tasks) {
         // TODO: calculate working hours based on start-end LocalDateTime

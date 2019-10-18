@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.controller;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.service.DriverService;
+import com.tsystems.transportinfo.service.GraphHopperService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -21,6 +22,9 @@ public class DriverController {
 
     @Autowired
     private DriverService driverService;
+
+    @Autowired
+    private GraphHopperService graphHopperService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -67,7 +71,12 @@ public class DriverController {
     }
 
     private Driver convertToEntity(DriverDTO driverDTO) {
-        return modelMapper.map(driverDTO, Driver.class);
+        Driver driver = modelMapper.map(driverDTO, Driver.class);
+
+        String coords = driverDTO.getCoords();
+        driver.setLocation(graphHopperService.coordsToEntry(coords));
+
+        return driver;
     }
 
 }

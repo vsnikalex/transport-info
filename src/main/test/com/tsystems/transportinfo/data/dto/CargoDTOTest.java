@@ -23,7 +23,7 @@ public class CargoDTOTest {
 
     @Test
     public void cargoIsValid() {
-        CargoDTO cargoDTO = new CargoDTO(1L, "IKEA Sofa", 100, CargoStatus.SHIPPED,
+        CargoDTO cargoDTO = new CargoDTO("IKEA Sofa", 100, CargoStatus.SHIPPED,
                                 "48.7525249, 18.1450552", "48.7525249, 18.1450552");
 
         Set<ConstraintViolation<CargoDTO>> constraintViolations =

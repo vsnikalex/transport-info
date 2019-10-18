@@ -32,7 +32,7 @@ var RestGet = function() {
                         "<td>" + result[i].lastName       +   "</td>" +
                         "<td>" + result[i].workedThisMonth       +   "</td>" +
                         "<td>" + result[i].action     +   "</td>" +
-                        "<td>" + result[i].location     +   "</td>" +
+                        "<td>" + result[i].location.country     +   "</td>" +
                         "<td>" + result[i].truckDTO.plate     +   "</td>" +
 
                         "<td>" +
@@ -57,10 +57,9 @@ var RestGet = function() {
 
 var RestPost = function() {
     var JSONObject= {
-        'id': null,
         'firstName': $("#first_name").val(),
         'lastName': $("#last_name").val(),
-        'location': $("#location").val(),
+        'coords': $("#location").val(),
     };
 
     $.ajax({

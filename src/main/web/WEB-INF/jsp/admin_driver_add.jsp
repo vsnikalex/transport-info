@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body onload="IfForUpdate()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">
@@ -92,7 +92,7 @@
 
 
         <div class="container-fixed">
-            <h1 class="underline">Driver</h1>
+            <h1 class="underline" id="entity_info">Driver</h1>
             <div class="tc-example">
                 <fieldset class="form-fieldset">
                     <div class="form-input-set">
@@ -110,7 +110,7 @@
                             <option value="44.0639782,40.4920936">KAVKAZ</option>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-default btn-block" onclick="RestPost()">Save</button>
+                    <button id="save_button" type="button" class="btn btn-default btn-block">Save</button>
                 </fieldset>
             </div>
         </div>

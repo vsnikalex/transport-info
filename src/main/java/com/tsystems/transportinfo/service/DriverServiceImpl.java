@@ -31,6 +31,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public void updateDriver(Driver driver) {
+        dao.update(driver);
+    }
+
+    @Override
     public Driver getDriver(Long id) {
         return dao.findOne(id);
     }

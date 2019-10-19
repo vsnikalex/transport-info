@@ -8,11 +8,15 @@ var RestDelete = function(plate) {
         success: function(response) {
             window.location = '/admin_truck';
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + '\n' + jqXHR.responseText);
+        error: function(e) {
+            alert(e.responseText);
         }
     });
-}
+};
+
+var ToUpdatePage = function (plate) {
+    location.href='/admin_truck_add?plate=' + plate;
+};
 
 var RestGetAll = function() {
     $.ajax({
@@ -35,7 +39,8 @@ var RestGetAll = function() {
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
-                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
+                                "onclick='ToUpdatePage(\"" + plate + "\")'>" +
                                 "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
@@ -47,11 +52,11 @@ var RestGetAll = function() {
                 );
             }
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        error: function(e) {
+            alert(e.responseText);
         }
     });
-}
+};
 
 var RestPost = function() {
     var JSONObject= {
@@ -78,4 +83,54 @@ var RestPost = function() {
             alert(e.responseText);
         }
     });
-}
+};
+
+var RestPut = function() {
+    var JSONObject= {
+        'plate': $("#plate").val(),
+        'capacity': $("#capacity").val(),
+        'status': $("#status").val(),
+        'coords': $("#location").val()
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url:  prefix + '/update',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        cache: false,
+        async: true,
+        success: function(result) {
+            alert(result.msg);
+            window.location = '/admin_truck';
+        },
+        error: function(e) {
+            alert(e.responseText);
+        }
+    });
+};
+
+var IfForUpdate = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('plate')) {
+        $.getJSON(prefix + '/' + urlParams.get('plate'), function (truck) {
+            $("#entity_info").text(
+                truck.plate + ": " +
+                truck.capacity + "kg " +
+                truck.status + " " +
+                truck.location.country
+            );
+            $("#plate").val(truck.plate);
+            $("#capacity").val(truck.capacity);
+
+            $("#save_button").on('click', function () {
+                RestPut();
+            });
+        });
+    } else {
+        $("#save_button").on('click', function () {
+            RestPost();
+        });
+    }
+};

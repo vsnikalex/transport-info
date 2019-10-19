@@ -24,7 +24,7 @@ public class Driver {
     @Column
     private String lastName;
 
-    @Column
+    @Column(columnDefinition="VARCHAR(512)")
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry location;
 

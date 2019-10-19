@@ -8,11 +8,15 @@ var RestDelete = function(id) {
         success: function(response) {
             window.location = '/admin_driver';
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + '\n' + jqXHR.responseText);
+        error: function(e) {
+            alert(e.responseText);
         }
     });
-}
+};
+
+var ToUpdatePage = function (id) {
+    location.href='/admin_driver_add?id=' + id;
+};
 
 var RestGetAll = function() {
     $.ajax({
@@ -37,7 +41,8 @@ var RestGetAll = function() {
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
-                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\">" +
+                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
+                                "onclick='ToUpdatePage(" + id + ")'>" +
                                 "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
@@ -49,11 +54,11 @@ var RestGetAll = function() {
                 );
             }
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        error: function(e) {
+            alert(e.responseText);
         }
     });
-}
+};
 
 var RestPost = function() {
     var JSONObject= {
@@ -79,4 +84,52 @@ var RestPost = function() {
             alert(e.responseText);
         }
     });
-}
+};
+
+var RestPut = function(id) {
+    var JSONObject= {
+        'id' : id,
+        'firstName': $("#first_name").val(),
+        'lastName': $("#last_name").val(),
+        'coords': $("#location").val()
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url:  prefix + '/update',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(JSONObject),
+        dataType: 'json',
+        cache: false,
+        async: true,
+        success: function(result) {
+            alert(result.msg);
+            window.location = '/admin_driver';
+        },
+        error: function(e) {
+            alert(e.responseText);
+        }
+    });
+};
+
+var IfForUpdate = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('id')) {
+        $.getJSON(prefix + '/' + urlParams.get('id'), function (driver) {
+            $("#entity_info").text(
+                driver.firstName + " " + driver.lastName + ": " +
+                driver.location.country
+            );
+            $("#first_name").val(driver.firstName);
+            $("#last_name").val(driver.lastName);
+
+            $("#save_button").on('click', function () {
+                RestPut(driver.id);
+            });
+        });
+    } else {
+        $("#save_button").on('click', function () {
+            RestPost();
+        });
+    }
+};

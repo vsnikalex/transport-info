@@ -37,6 +37,12 @@ public class DriverController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/{id}")
+    public DriverDTO getDriver(@PathVariable long id) {
+        Driver driver = driverService.getDriver(id);
+        return convertToDto(driver);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteDriver(@PathVariable long id) {
         driverService.deleteDriver(id);
@@ -56,6 +62,24 @@ public class DriverController {
 
         Driver driver = this.convertToEntity(driverDTO);
         driverService.saveDriver(driver);
+
+        return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateCargo(
+            @RequestBody @Valid DriverDTO driverDTO, Errors errors) {
+
+        if (errors.hasErrors()) {
+            String msg = errors.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(","));
+
+            return ResponseEntity.badRequest().body(msg);
+        }
+
+        Driver driver = this.convertToEntity(driverDTO);
+        driverService.updateDriver(driver);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }

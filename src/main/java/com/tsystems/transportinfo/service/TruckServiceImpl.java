@@ -31,6 +31,11 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    public void updateTruck(Truck truck) {
+        dao.update(truck);
+    }
+
+    @Override
     public Truck getTruck(String plate) {
         return dao.findOneByStringId(plate);
     }

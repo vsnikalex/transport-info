@@ -28,11 +28,11 @@ public class Cargo {
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
-    @Column
+    @Column(columnDefinition="VARCHAR(512)")
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry location;
 
-    @Column
+    @Column(columnDefinition="VARCHAR(512)")
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry destination;
 

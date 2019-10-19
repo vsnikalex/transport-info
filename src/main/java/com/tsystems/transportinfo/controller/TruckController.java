@@ -37,6 +37,12 @@ public class TruckController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/{plate}")
+    public TruckDTO getTruck(@PathVariable String plate) {
+        Truck truck = truckService.getTruck(plate);
+        return convertToDto(truck);
+    }
+
     @DeleteMapping("/delete/{plate}")
     public void deleteTruck(@PathVariable String plate) {
         truckService.deleteTruck(plate);
@@ -60,6 +66,24 @@ public class TruckController {
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<String> updateCargo(
+            @RequestBody @Valid TruckDTO truckDTO, Errors errors) {
+
+        if (errors.hasErrors()) {
+            String msg = errors.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(","));
+
+            return ResponseEntity.badRequest().body(msg);
+        }
+
+        Truck truck = this.convertToEntity(truckDTO);
+        truckService.updateTruck(truck);
+
+        return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
+    }
+
     private TruckDTO convertToDto(Truck truck) {
         TruckDTO truckDTO = modelMapper.map(truck, TruckDTO.class);
 
@@ -76,4 +100,5 @@ public class TruckController {
 
         return truck;
     }
+
 }

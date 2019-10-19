@@ -117,17 +117,19 @@ var RestPut = function(id) {
 var IfForUpdate = function() {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('id')) {
-        $.getJSON(prefix + '/' + urlParams.get('id'), function (data) {
-            $("#entity_info").text(data.description + ": " +
-                                            data.location.country + "\u2192" +
-                                            data.destination.country + " " +
-                                            data.status + " " +
-                                            data.weight + "kg");
-            $("#description").val(data.description);
-            $("#weight").val(data.weight);
+        $.getJSON(prefix + '/' + urlParams.get('id'), function (cargo) {
+            $("#entity_info").text(
+                cargo.description + ": " +
+                cargo.location.country + "\u2192" +
+                cargo.destination.country + " " +
+                cargo.status + " " +
+                cargo.weight + "kg"
+            );
+            $("#description").val(cargo.description);
+            $("#weight").val(cargo.weight);
 
             $("#save_button").on('click', function () {
-                RestPut(data.id);
+                RestPut(cargo.id);
             });
         });
     } else {

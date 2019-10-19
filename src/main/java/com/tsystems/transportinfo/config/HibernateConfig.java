@@ -86,6 +86,8 @@ public class HibernateConfig {
                 env.getProperty("hibernate.show_sql"));
         hibernateProperties.setProperty("hibernate.format_sql",
                 env.getProperty("hibernate.format_sql"));
+        hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans",
+                env.getProperty("hibernate.enable_lazy_load_no_trans"));
         return hibernateProperties;
     }
 

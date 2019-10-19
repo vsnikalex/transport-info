@@ -29,7 +29,7 @@ public class Delivery {
     public List<Cargo> cargo;
 
     @OneToOne
-    @JoinColumn(name="truck_plate", unique = true)
+    @JoinColumn(name="truck_id", unique = true)
     public Truck truck;
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)

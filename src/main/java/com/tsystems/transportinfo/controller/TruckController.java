@@ -37,15 +37,15 @@ public class TruckController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{plate}")
-    public TruckDTO getTruck(@PathVariable String plate) {
-        Truck truck = truckService.getTruck(plate);
+    @GetMapping("/{id}")
+    public TruckDTO getTruck(@PathVariable long id) {
+        Truck truck = truckService.getTruck(id);
         return convertToDto(truck);
     }
 
-    @DeleteMapping("/delete/{plate}")
-    public void deleteTruck(@PathVariable String plate) {
-        truckService.deleteTruck(plate);
+    @DeleteMapping("/delete/{id}")
+    public void deleteTruck(@PathVariable long id) {
+        truckService.deleteTruck(id);
     }
 
     @PostMapping("/add")

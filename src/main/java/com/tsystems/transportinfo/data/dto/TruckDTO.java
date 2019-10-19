@@ -16,6 +16,8 @@ import javax.validation.constraints.*;
 @Setter
 public class TruckDTO {
 
+    private Long id;
+
     @NotEmpty(message = "Plate must not be empty")
     @Pattern(regexp = "[A-Z]{2}\\d{5}", message = "Plate pattern is XY12345")
     private String plate;

@@ -12,8 +12,8 @@ public interface TruckService {
 
     public void updateTruck(Truck truck);
 
-    public Truck getTruck(String plate);
+    public Truck getTruck(Long id);
 
-    public void deleteTruck(String plate);
+    public void deleteTruck(Long id);
 
 }

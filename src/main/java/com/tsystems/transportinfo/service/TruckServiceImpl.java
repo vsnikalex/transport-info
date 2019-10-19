@@ -36,13 +36,13 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
-    public Truck getTruck(String plate) {
-        return dao.findOneByStringId(plate);
+    public Truck getTruck(Long id) {
+        return dao.findOne(id);
     }
 
     @Override
-    public void deleteTruck(String plate) {
-        dao.deleteByStringId(plate);
+    public void deleteTruck(Long id) {
+        dao.findOne(id);
     }
 
 }

@@ -8,8 +8,6 @@ public interface GenericDAO<T> {
 
     T findOne(Long id);
 
-    T findOneByStringId(String id);
-
     List<T> findAll();
 
     void create(T entity);
@@ -19,7 +17,5 @@ public interface GenericDAO<T> {
     void delete(T entity);
 
     void deleteById(Long id);
-
-    void deleteByStringId(String id);
 
 }

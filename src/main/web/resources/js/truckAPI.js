@@ -1,9 +1,9 @@
 var prefix = '/api/truck';
 
-var RestDelete = function(plate) {
+var RestDelete = function(id) {
     $.ajax({
         type: 'DELETE',
-        url:  prefix + '/delete/' + plate,
+        url:  prefix + '/delete/' + id,
         async: true,
         success: function(response) {
             window.location = '/admin_truck';
@@ -14,8 +14,8 @@ var RestDelete = function(plate) {
     });
 };
 
-var ToUpdatePage = function (plate) {
-    location.href='/admin_truck_add?plate=' + plate;
+var ToUpdatePage = function (id) {
+    location.href='/admin_truck_add?id=' + id;
 };
 
 var RestGetAll = function() {
@@ -27,11 +27,9 @@ var RestGetAll = function() {
         success: function(result) {
             for(var i = 0; i < result.length; i++) {
 
-                var plate = result[i].plate;
-
                 $("#data").append(
                     "<tr>" +
-                        "<td>" + plate           +   "</td>" +
+                        "<td>" + result[i].plate           +   "</td>" +
                         "<td>" + result[i].capacity  +   "</td>" +
                         "<td>" + result[i].status       +   "</td>" +
                         "<td>" + result[i].location.country       +   "</td>" +
@@ -40,11 +38,11 @@ var RestGetAll = function() {
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
-                                "onclick='ToUpdatePage(\"" + plate + "\")'>" +
+                                "onclick='ToUpdatePage(" + result[i].id + ")'>" +
                                 "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
-                                "onclick='RestDelete(\"" + plate + "\")'>" +
+                                "onclick='RestDelete(" + result[i].id + ")'>" +
                                 "<i class=\"icon icon-cancel\" aria-hidden=\"true\"></i></button>" +
                             "</div>" +
                         "</td>" +
@@ -85,8 +83,9 @@ var RestPost = function() {
     });
 };
 
-var RestPut = function() {
+var RestPut = function(id) {
     var JSONObject= {
+        'id' : id,
         'plate': $("#plate").val(),
         'capacity': $("#capacity").val(),
         'status': $("#status").val(),
@@ -113,8 +112,8 @@ var RestPut = function() {
 
 var IfForUpdate = function() {
     var urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('plate')) {
-        $.getJSON(prefix + '/' + urlParams.get('plate'), function (truck) {
+    if (urlParams.has('id')) {
+        $.getJSON(prefix + '/' + urlParams.get('id'), function (truck) {
             $("#entity_info").text(
                 truck.plate + ": " +
                 truck.capacity + "kg " +
@@ -125,7 +124,7 @@ var IfForUpdate = function() {
             $("#capacity").val(truck.capacity);
 
             $("#save_button").on('click', function () {
-                RestPut();
+                RestPut(truck.id);
             });
         });
     } else {

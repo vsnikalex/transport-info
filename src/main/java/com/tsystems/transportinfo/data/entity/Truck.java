@@ -15,6 +15,9 @@ import javax.persistence.*;
 public class Truck {
 
     @Id
+    @GeneratedValue
+    private Long id;
+
     @Column
     private String plate;
 

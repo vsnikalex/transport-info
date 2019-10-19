@@ -25,10 +25,6 @@ public class HibernateDAO<T> implements GenericDAO<T> {
         return getCurrentSession().get(clazz, id);
     }
 
-    public T findOneByStringId(String id){
-        return getCurrentSession().get(clazz, id);
-    }
-
     public List<T> findAll() {
         return getCurrentSession().createQuery("from " + clazz.getName()).list();
     }
@@ -47,11 +43,6 @@ public class HibernateDAO<T> implements GenericDAO<T> {
 
     public void deleteById(Long id) {
         T entity = findOne(id);
-        delete(entity);
-    }
-
-    public void deleteByStringId(String id) {
-        T entity = findOneByStringId(id);
         delete(entity);
     }
 

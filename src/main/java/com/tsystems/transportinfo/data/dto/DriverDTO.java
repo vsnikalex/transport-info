@@ -90,7 +90,7 @@ public class DriverDTO {
     }
 
     public void setTruck(Delivery delivery) {
-        // TODO: Delivery -> Truck
+        // TODO: Delivery -> TruckDTO
 
 //        Truck truckEntity;
 //        if (delivery != null && (truckEntity = delivery.getTruck()) != null) {
@@ -98,8 +98,10 @@ public class DriverDTO {
 //            return;
 //        }
 
+        String plate = (delivery != null && delivery.getTruck() != null) ? delivery.getTruck().getPlate() : "none";
+
         TruckDTO mockedTruck = new TruckDTO();
-        mockedTruck.setPlate("none");
+        mockedTruck.setPlate(plate);
         this.truck = mockedTruck;
     }
 

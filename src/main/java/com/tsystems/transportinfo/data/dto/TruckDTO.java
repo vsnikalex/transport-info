@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.TruckMapper;
+import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,9 +47,11 @@ public class TruckDTO {
 
     private GHGeocodingEntry location;
 
-    public void setDriversCnt() {
-        // TODO: Delivery -> unfinished Tasks (working drivers)
-        this.driversCnt = 2;
+    public void setDriversCnt(Delivery delivery) {
+        // TODO: Delivery -> Drivers
+        int drivers = (delivery != null && delivery.getDrivers() != null) ? delivery.getDrivers().size() : 0;
+
+        this.driversCnt = drivers;
     }
 
 }

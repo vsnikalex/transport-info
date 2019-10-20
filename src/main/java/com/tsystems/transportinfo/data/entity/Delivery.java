@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +30,6 @@ public class Delivery {
     public Truck truck;
 
     @OneToMany(mappedBy = "delivery")
-    private List<Driver> drivers = new ArrayList<>();
+    private List<Driver> drivers;
 
 }

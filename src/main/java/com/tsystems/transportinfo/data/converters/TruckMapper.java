@@ -19,7 +19,7 @@ public class TruckMapper {
     public TruckDTO convertToDto(Truck entity) {
         TruckDTO truckDTO = modelMapper.map(entity, TruckDTO.class);
 
-        truckDTO.setDriversCnt();
+        truckDTO.setDriversCnt(entity.getDelivery());
 
         return truckDTO;
     }

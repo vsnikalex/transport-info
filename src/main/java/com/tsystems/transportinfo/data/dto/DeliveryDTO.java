@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,17 +25,17 @@ public class DeliveryDTO {
     private boolean done;
 
     @NotNull
-    private List<String> routeCoords;
+    private String route;
 
     @NotNull
     @Min(value = 0)
     private int workingDrivers;
 
     @Valid
-    private CargoDTO cargoDTO;
+    private CargoDTO cargo;
 
     @Valid
-    private TruckDTO truckDTO;
+    private TruckDTO truck;
 
     @Valid
     private List<DriverDTO> driverDTOList;

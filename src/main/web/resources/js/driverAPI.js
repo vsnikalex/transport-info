@@ -37,7 +37,7 @@ var RestGetAll = function() {
                         "<td>" + result[i].workedThisMonth       +   "</td>" +
                         "<td>" + result[i].action     +   "</td>" +
                         "<td>" + result[i].location.country     +   "</td>" +
-                        "<td>" + result[i].truckDTO.plate     +   "</td>" +
+                        "<td>" + result[i].truck.plate     +   "</td>" +
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +

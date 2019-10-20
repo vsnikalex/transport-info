@@ -1,10 +1,9 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.data.converters.TruckMapper;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Truck;
-import com.tsystems.transportinfo.service.GraphHopperService;
 import com.tsystems.transportinfo.service.TruckService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +23,20 @@ public class TruckController {
     private TruckService truckService;
 
     @Autowired
-    private GraphHopperService graphHopperService;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private TruckMapper truckMapper;
 
     @GetMapping("/all")
     public List<TruckDTO> allTrucks() {
         List<Truck> trucks = truckService.getAllTrucks();
         return trucks.stream()
-                .map(this::convertToDto)
+                .map(truck -> truckMapper.convertToDto(truck))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public TruckDTO getTruck(@PathVariable long id) {
         Truck truck = truckService.getTruck(id);
-        return convertToDto(truck);
+        return truckMapper.convertToDto(truck);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -60,7 +56,7 @@ public class TruckController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Truck truck = this.convertToEntity(truckDTO);
+        Truck truck = truckMapper.convertToEntity(truckDTO);
         truckService.saveTruck(truck);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
@@ -78,27 +74,10 @@ public class TruckController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Truck truck = this.convertToEntity(truckDTO);
+        Truck truck = truckMapper.convertToEntity(truckDTO);
         truckService.updateTruck(truck);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
-    }
-
-    private TruckDTO convertToDto(Truck truck) {
-        TruckDTO truckDTO = modelMapper.map(truck, TruckDTO.class);
-
-        truckDTO.setDriversCnt(truck.getDelivery());
-
-        return truckDTO;
-    }
-
-    private Truck convertToEntity(TruckDTO truckDTO) {
-        Truck truck = modelMapper.map(truckDTO, Truck.class);
-
-        String coords = truckDTO.getCoords();
-        truck.setLocation(graphHopperService.coordsToEntry(coords));
-
-        return truck;
     }
 
 }

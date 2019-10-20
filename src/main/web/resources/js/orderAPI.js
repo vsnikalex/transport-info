@@ -29,10 +29,10 @@ var RestGetAll = function() {
                     "<tr>" +
                         "<td>" + id           +   "</td>" +
                         "<td>" + result[i].done  +   "</td>" +
-                        "<td>" + result[i].cargoDTO.id  +   "</td>" +
-                        "<td>" + result[i].cargoDTO.location  +   "</td>" +
+                        "<td>" + result[i].cargo.id  +   "</td>" +
+                        "<td>" + result[i].cargo.location  +   "</td>" +
                         "<td>" + result[i].destination       +   "</td>" +
-                        "<td>" + result[i].truckDTO.plate       +   "</td>" +
+                        "<td>" + result[i].truck.plate       +   "</td>" +
                         "<td>" + result[i].workingDrivers       +   "</td>" +
 
                         "<td>" +

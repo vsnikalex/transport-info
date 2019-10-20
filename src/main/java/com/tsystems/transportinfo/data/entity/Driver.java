@@ -1,7 +1,7 @@
 package com.tsystems.transportinfo.data.entity;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.data.entity.converters.GeocodingEntryConverter;
+import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +30,7 @@ public class Driver {
     private GHGeocodingEntry location;
 
     @ManyToOne
-    @JoinColumn(name="delivery_id", unique = true)
+    @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)

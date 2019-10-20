@@ -1,12 +1,16 @@
 package com.tsystems.transportinfo.data.dto;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.converters.TruckMapper;
+import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -18,11 +22,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class DriverDTO {
+
+    @Autowired
+    private TruckMapper truckMapper;
 
     private Long id;
 
@@ -43,7 +51,7 @@ public class DriverDTO {
     private DriverAction action;
 
     @Valid
-    private TruckDTO truckDTO;
+    private TruckDTO truck;
 
     private GHGeocodingEntry location;
 
@@ -81,11 +89,18 @@ public class DriverDTO {
         this.action = (currentAction == null) ? DriverAction.REST : currentAction;
     }
 
-    public void setTruck(List<Task> tasks) {
-        // TODO: most recent task -> Truck
+    public void setTruck(Delivery delivery) {
+        // TODO: Delivery -> Truck
+
+//        Truck truckEntity;
+//        if (delivery != null && (truckEntity = delivery.getTruck()) != null) {
+//            this.truck = truckMapper.convertToDto(truckEntity);
+//            return;
+//        }
+
         TruckDTO mockedTruck = new TruckDTO();
-        mockedTruck.setPlate("AB12345");
-        this.truckDTO = mockedTruck;
+        mockedTruck.setPlate("none");
+        this.truck = mockedTruck;
     }
 
 }

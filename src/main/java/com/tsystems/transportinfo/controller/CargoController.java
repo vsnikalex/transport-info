@@ -1,10 +1,9 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.data.converters.CargoMapper;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.service.CargoService;
-import com.tsystems.transportinfo.service.GraphHopperService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +23,20 @@ public class CargoController {
     private CargoService cargoService;
 
     @Autowired
-    private GraphHopperService graphHopperService;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private CargoMapper cargoMapper;
 
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
         List<Cargo> cargoes = cargoService.getAllCargoes();
         return cargoes.stream()
-                .map(this::convertToDto)
+                .map(cargo -> cargoMapper.convertToDto(cargo))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public CargoDTO getCargo(@PathVariable long id) {
         Cargo cargo = cargoService.getCargo(id);
-        return convertToDto(cargo);
+        return cargoMapper.convertToDto(cargo);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -60,7 +56,7 @@ public class CargoController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Cargo cargo = this.convertToEntity(cargoDTO);
+        Cargo cargo = cargoMapper.convertToEntity(cargoDTO);
         cargoService.saveCargo(cargo);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
@@ -78,25 +74,10 @@ public class CargoController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Cargo cargo = this.convertToEntity(cargoDTO);
+        Cargo cargo = cargoMapper.convertToEntity(cargoDTO);
         cargoService.updateCargo(cargo);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
-    }
-
-    private CargoDTO convertToDto(Cargo cargo) {
-        return modelMapper.map(cargo, CargoDTO.class);
-    }
-
-    private Cargo convertToEntity(CargoDTO cargoDTO) {
-        Cargo cargo = modelMapper.map(cargoDTO, Cargo.class);
-
-        String start = cargoDTO.getLocCoords();
-        cargo.setLocation(graphHopperService.coordsToEntry(start));
-        String end = cargoDTO.getDestCoords();
-        cargo.setDestination(graphHopperService.coordsToEntry(end));
-
-        return cargo;
     }
 
 }

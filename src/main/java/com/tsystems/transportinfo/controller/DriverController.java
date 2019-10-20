@@ -1,10 +1,9 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.data.converters.DriverMapper;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.service.DriverService;
-import com.tsystems.transportinfo.service.GraphHopperService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +23,20 @@ public class DriverController {
     private DriverService driverService;
 
     @Autowired
-    private GraphHopperService graphHopperService;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private DriverMapper driverMapper;
 
     @GetMapping("/all")
     public List<DriverDTO> allDrivers() {
         List<Driver> drivers = driverService.getAllDrivers();
         return drivers.stream()
-                .map(this::convertToDto)
+                .map(driver -> driverMapper.convertToDto(driver))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public DriverDTO getDriver(@PathVariable long id) {
         Driver driver = driverService.getDriver(id);
-        return convertToDto(driver);
+        return driverMapper.convertToDto(driver);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -60,14 +56,14 @@ public class DriverController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Driver driver = this.convertToEntity(driverDTO);
+        Driver driver = driverMapper.convertToEntity(driverDTO);
         driverService.saveDriver(driver);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateCargo(
+    public ResponseEntity<String> updateDriver(
             @RequestBody @Valid DriverDTO driverDTO, Errors errors) {
 
         if (errors.hasErrors()) {
@@ -78,29 +74,10 @@ public class DriverController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Driver driver = this.convertToEntity(driverDTO);
+        Driver driver = driverMapper.convertToEntity(driverDTO);
         driverService.updateDriver(driver);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
-    }
-
-    private DriverDTO convertToDto(Driver driver) {
-        DriverDTO driverDTO = modelMapper.map(driver, DriverDTO.class);
-
-        driverDTO.setWorkedThisMonth(driver.getTasks());
-        driverDTO.setStatus(driver.getTasks());
-        driverDTO.setTruck(driver.getTasks());
-
-        return driverDTO;
-    }
-
-    private Driver convertToEntity(DriverDTO driverDTO) {
-        Driver driver = modelMapper.map(driverDTO, Driver.class);
-
-        String coords = driverDTO.getCoords();
-        driver.setLocation(graphHopperService.coordsToEntry(coords));
-
-        return driver;
     }
 
 }

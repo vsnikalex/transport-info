@@ -38,8 +38,8 @@ public class OrderController {
     private DeliveryDTO convertToDto(Delivery delivery) {
         DeliveryDTO deliveryDTO = modelMapper.map(delivery, DeliveryDTO.class);
 
-        deliveryDTO.setCargoDTO(modelMapper.map(delivery.getCargo(), CargoDTO.class));
-        deliveryDTO.setTruckDTO(modelMapper.map(delivery.getTruck(), TruckDTO.class));
+        deliveryDTO.setCargo(modelMapper.map(delivery.getCargo(), CargoDTO.class));
+        deliveryDTO.setTruck(modelMapper.map(delivery.getTruck(), TruckDTO.class));
 //        deliveryDTO.setWorkingDrivers(delivery.getTasks());
 
         return deliveryDTO;

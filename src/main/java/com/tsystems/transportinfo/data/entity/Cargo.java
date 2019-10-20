@@ -1,7 +1,7 @@
 package com.tsystems.transportinfo.data.entity;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.data.entity.converters.GeocodingEntryConverter;
+import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.Getter;
 import lombok.Setter;

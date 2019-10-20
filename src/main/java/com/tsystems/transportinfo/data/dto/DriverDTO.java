@@ -49,7 +49,7 @@ public class DriverDTO {
 
     public void setWorkedThisMonth(List<Task> tasks) {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monthAgo = LocalDateTime.now().minus(1, ChronoUnit.MONTHS);
+        LocalDateTime monthAgo = now.minus(1, ChronoUnit.MONTHS);
 
         Stream<Task> lastMonth = tasks.stream().filter(t ->  t.getStart().isBefore(now) &&
                                                             (t.getEnd() == null || t.getEnd().isAfter(monthAgo)));
@@ -68,8 +68,17 @@ public class DriverDTO {
     }
 
     public void setStatus(List<Task> tasks) {
-        // TODO: set DriverAction if there is an unfinished task or return REST
-        this.action = DriverAction.REST;
+        DriverAction currentAction = null;
+
+        int n = tasks.size();
+        if (n != 0) {
+            Task last = tasks.get(n-1);
+            if (last.getEnd() == null) {
+                currentAction = last.getAction();
+            }
+        }
+
+        this.action = (currentAction == null) ? DriverAction.REST : currentAction;
     }
 
     public void setTruck(List<Task> tasks) {

@@ -114,7 +114,10 @@ var RestPut = function(id) {
     });
 };
 
-var IfForUpdate = function() {
+var SetUp = function() {
+
+    UploadDepots();
+
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('id')) {
         $.getJSON(prefix + '/' + urlParams.get('id'), function (cargo) {

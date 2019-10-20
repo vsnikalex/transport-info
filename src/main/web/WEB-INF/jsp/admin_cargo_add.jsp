@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="IfForUpdate()">
+<body onload="SetUp()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">
@@ -102,15 +102,13 @@
                     <div class="form-input-set">
                         <label for="location">Location</label>
                         <select name="location" id="location" class="form-select">
-                            <option value="48.7525249,18.1450552" selected>SLOVAKIA</option>
-                            <option value="44.0639782,40.4920936">KAVKAZ</option>
+                            <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>
                     <div class="form-input-set">
                         <label for="destination">Destination</label>
                         <select name="destination" id="destination" class="form-select">
-                            <option value="44.0639782,40.4920936" selected>KAVKAZ</option>
-                            <option value="48.7525249,18.1450552">SLOVAKIA</option>
+                            <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>
                     <div class="form-input-set">
@@ -169,6 +167,7 @@
     <script src="<c:url value="/resources/js/docs.js" />"></script>
 
     <%-- USE REST API --%>
+    <script src="<c:url value="/resources/js/depotAPI.js" />"></script>
     <script src="<c:url value="/resources/js/cargoAPI.js" />"></script>
 
 </body>

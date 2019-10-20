@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="IfForUpdate()">
+<body onload="SetUp()">
 
     <header class="brand-header" id="DocsHeader">
         <div class="brandbar">
@@ -106,8 +106,7 @@
                     <div class="form-input-set">
                         <label for="location">Location</label>
                         <select name="location" id="location" class="form-select">
-                            <option value="48.7525249,18.1450552" selected>SLOVAKIA</option>
-                            <option value="44.0639782,40.4920936">KAVKAZ</option>
+                            <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>
                     <button id="save_button" type="button" class="btn btn-default btn-block">Save</button>
@@ -154,6 +153,7 @@
     <script src="<c:url value="/resources/js/docs.js" />"></script>
 
     <%-- USE REST API --%>
+    <script src="<c:url value="/resources/js/depotAPI.js" />"></script>
     <script src="<c:url value="/resources/js/driverAPI.js" />"></script>
 
 </body>

@@ -107,7 +107,7 @@
                 </tr>
                 </thead>
                 <tbody id="data">
-                <%-- Is filled with data from REST API via JS --%>
+                    <%-- Filled with data from REST API via JS --%>
                 </tbody>
             </table>
         </div>

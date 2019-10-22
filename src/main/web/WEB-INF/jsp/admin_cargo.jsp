@@ -97,7 +97,7 @@
         <div class="container-fixed">
 
             <div id="test_js" class="tc-note tc-note-info">
-                <div id="map" class="map" style="height: 220px"></div>
+                <div id="map" class="map" style="height: 300px"></div>
                 <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
             </div>
 

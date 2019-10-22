@@ -8,7 +8,12 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/admin_truck";
+        return "redirect:/admin_cargo";
+    }
+
+    @GetMapping("/map")
+    public String map() {
+        return "map";
     }
 
     @GetMapping("/admin_truck")

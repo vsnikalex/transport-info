@@ -21,3 +21,6 @@
 out/
 classes/
 target/
+
+# Node.js #
+node_modules/

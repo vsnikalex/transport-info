@@ -20,6 +20,9 @@
     <!-- Custom CSS -->
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
+    <!-- Leaflet CSS -->
+    <link href="<c:url value="/resources/css/leaflet/leaflet.css" />" rel="stylesheet">
+
 </head>
 
 <body onload="RestGetAll()">
@@ -94,8 +97,8 @@
         <div class="container-fixed">
 
             <div id="test_js" class="tc-note tc-note-info">
-                <script src="<c:url value="/resources/js/webpack/print.bundle.js" />"></script>
-                <script src="<c:url value="/resources/js/webpack/app.bundle.js" />"></script>
+                <div id="map" class="map" style="height: 220px"></div>
+                <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
             </div>
 
             <div class="tc-example">

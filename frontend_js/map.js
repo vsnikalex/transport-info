@@ -7,8 +7,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-setupRoutingAPI(map);
-
 function setupRoutingAPI(leaflet_map) {
 
     var defaultKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
@@ -46,3 +44,5 @@ function setupRoutingAPI(leaflet_map) {
             console.error(err.message);
         });
 };
+
+setupRoutingAPI(map);

@@ -11,11 +11,6 @@ public class MainController {
         return "redirect:/admin_cargo";
     }
 
-    @GetMapping("/map")
-    public String map() {
-        return "map";
-    }
-
     @GetMapping("/admin_truck")
     public String adminTruck() {
         return "admin_truck";

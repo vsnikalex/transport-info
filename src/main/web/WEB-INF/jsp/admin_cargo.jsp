@@ -92,6 +92,12 @@
 
 
         <div class="container-fixed">
+
+            <div id="test_js" class="tc-note tc-note-info">
+                <script src="<c:url value="/resources/js/webpack/print.bundle.js" />"></script>
+                <script src="<c:url value="/resources/js/webpack/app.bundle.js" />"></script>
+            </div>
+
             <div class="tc-example">
                 <button class="btn btn-default btn-block" onclick="location.href='/admin_cargo_add'">
                     <i class="icon icon-add" aria-hidden="true"></i>

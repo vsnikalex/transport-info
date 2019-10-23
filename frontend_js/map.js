@@ -1,6 +1,8 @@
 var L = require('leaflet');
 require('graphhopper-js-api-client');
 
+import loadAllDepots from './depot.js';
+
 var map = L.map('map').setView([49.095, 16.523], 5);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,3 +48,5 @@ function setupRoutingAPI(leaflet_map) {
 };
 
 setupRoutingAPI(map);
+
+loadAllDepots(map);

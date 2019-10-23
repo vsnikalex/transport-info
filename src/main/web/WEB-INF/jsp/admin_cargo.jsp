@@ -98,8 +98,8 @@
 
             <div id="test_js" class="tc-note tc-note-info">
                 <div id="map" class="map" style="height: 300px"></div>
-                <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
                 <script src="<c:url value="/resources/js/webpack/depot.bundle.js" />"></script>
+                <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
             </div>
 
             <div class="tc-example">

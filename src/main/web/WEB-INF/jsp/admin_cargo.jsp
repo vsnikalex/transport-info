@@ -96,10 +96,43 @@
 
         <div class="container-fixed">
 
-            <div id="test_js" class="tc-note tc-note-info">
-                <div id="map" class="map" style="height: 300px"></div>
-                <script src="<c:url value="/resources/js/webpack/depot.bundle.js" />"></script>
-                <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
+            <div class="row">
+                <div class="demo-col col-xs-12 col-s-6 col-l-8 text-ellipsis">
+                    <div class="tc-note tc-note-info">
+                        <div id="map" class="map" style="height: 300px"></div>
+                        <script src="<c:url value="/resources/js/webpack/depot.bundle.js" />"></script>
+                        <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
+                    </div>
+                </div>
+                <div class="demo-col col-s-6 col-l-4">
+                    <h2 class="underline">Route info</h2>
+                    <ul class="content-list">
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media-heading">Start point</div>
+                                <div class="media-hint">Slovakia (CORP)</div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media-heading text-ellipsis">End point</div>
+                                <div class="media-hint">Russia (Client)</div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media-heading">Diatance</div>
+                                <div id="est_dist" class="media-hint"></div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media-heading">Estimated time</div>
+                                <div id="est_time" class="media-hint"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="tc-example">

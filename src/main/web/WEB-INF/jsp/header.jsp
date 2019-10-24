@@ -29,10 +29,11 @@
                 </div>
                 <div class="brandnav brandnav-lvl-1" id="DocsMenu">
                     <ul class="nav">
-                        <li class=""><a href="/admin_truck">Trucks</a></li>
-                        <li class=""><a href="/admin_driver">Drivers</a></li>
-                        <li class=""><a href="/admin_cargo">Cargoes</a></li>
-                        <li class=""><a href="/admin_order">Orders</a></li>
+                        <li class=""><a href="<c:url value="/admin_truck"/>">Trucks</a></li>
+                        <li class=""><a href="<c:url value="/admin_driver"/>">Drivers</a></li>
+                        <li class=""><a href="<c:url value="/admin_cargo"/>">Cargoes</a></li>
+                        <li class=""><a href="<c:url value="/admin_order"/>">Orders</a></li>
+                        <li class=""><a href="<c:url value="/admin_delivery_editor"/>">Deliveries</a></li>
                     </ul>
                 </div>
 

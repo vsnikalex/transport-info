@@ -29,7 +29,7 @@ public class Delivery {
     @JoinColumn(name="truck_id", nullable = false)
     public Truck truck;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     private List<Driver> drivers;
 
 }

@@ -18,7 +18,7 @@ public class Truck {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(unique=true)
     private String plate;
 
     @Column

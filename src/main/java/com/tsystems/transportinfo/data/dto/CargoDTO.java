@@ -34,22 +34,22 @@ public class CargoDTO {
     @NotNull(message = "Status must not be null")
     private CargoStatus status;
 
-    @NotEmpty(message = "Start Location must not be empty")
-    private String locCoords;
+    @NotNull(message = "Start Location must not be null")
+    private long locDepotId;
 
-    @NotEmpty(message = "End Location must not be empty")
-    private String destCoords;
+    @NotNull(message = "End Location must not be null")
+    private long destDepotId;
 
     private GHGeocodingEntry location;
     private GHGeocodingEntry destination;
 
     // For validation test
-    public CargoDTO(String description, int weight, CargoStatus status, String locCoords, String destCoords) {
+    CargoDTO(String description, int weight, CargoStatus status, long locDepotId, long destDepotId) {
         this.description = description;
         this.weight = weight;
         this.status = status;
-        this.locCoords = locCoords;
-        this.destCoords = destCoords;
+        this.locDepotId = locDepotId;
+        this.destDepotId = destDepotId;
     }
 
 }

@@ -28,16 +28,16 @@ public class Cargo {
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
-    @Column(columnDefinition="VARCHAR(512)")
-    @Convert(converter = GeocodingEntryConverter.class)
-    private GHGeocodingEntry location;
-
-    @Column(columnDefinition="VARCHAR(512)")
-    @Convert(converter = GeocodingEntryConverter.class)
-    private GHGeocodingEntry destination;
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    private Depot location;
 
     @ManyToOne
-    @JoinColumn(name="delivery_id", unique = true)
+    @JoinColumn(name="destination_id")
+    private Depot destination;
+
+    @ManyToOne
+    @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
 }

@@ -202,20 +202,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
-                    <configuration>
-                        <source>${java-version}</source>
-                        <target>${java-version}</target>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <groupId>com.github.eirslett</groupId>
                     <artifactId>frontend-maven-plugin</artifactId>
                     <version>1.8.0</version>
                     <configuration>
                         <installDirectory>target</installDirectory>
+                        <workingDirectory>${basedir}</workingDirectory>
                     </configuration>
                     <executions>
                         <execution>
@@ -238,12 +230,24 @@
                             </configuration>
                         </execution>
                         <execution>
-                            <id>webpack build</id>
+                            <id>npm run build</id>
                             <goals>
-                                <goal>webpack</goal>
+                                <goal>npm</goal>
                             </goals>
+                            <configuration>
+                                <arguments>run build</arguments>
+                            </configuration>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>${java-version}</source>
+                        <target>${java-version}</target>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

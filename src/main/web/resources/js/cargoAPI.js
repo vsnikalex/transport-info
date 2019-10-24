@@ -8,8 +8,8 @@ var RestDelete = function(id) {
         success: function() {
             window.location = '/admin_cargo';
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + '\n' + jqXHR.responseText);
+        error: function(e) {
+            console.log(e.responseText);
         }
     });
 };
@@ -52,8 +52,8 @@ var RestGetAll = function() {
                 );
             }
         },
-        error: function(jqXHR) {
-            alert(jqXHR.status + '\n' + jqXHR.responseText);
+        error: function(e) {
+            console.log(e.responseText);
         }
     });
 };
@@ -81,7 +81,7 @@ var RestPost = function() {
         },
         error: function(e) {
             // TODO: highlight error fields with red
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -109,7 +109,7 @@ var RestPut = function(id) {
             window.location = '/admin_cargo';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };

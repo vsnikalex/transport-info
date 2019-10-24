@@ -9,7 +9,7 @@ var RestDelete = function(id) {
             window.location = '/admin_driver';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -37,7 +37,7 @@ var RestGetAll = function() {
                         "<td>" + result[i].workedThisMonth       +   "</td>" +
                         "<td>" + result[i].action     +   "</td>" +
                         "<td>" + result[i].location.country     +   "</td>" +
-                        "<td>" + result[i].truck.plate     +   "</td>" +
+                        ((result[i].truck === null) ? "<td>not assigned</td>" : "<td>" + result[i].truck.plate + "</td>") +
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +
@@ -55,7 +55,7 @@ var RestGetAll = function() {
             }
         },
         error: function(e) {
-             alert(e.responseText);
+             console.log(e.responseText);
         }
     });
 };
@@ -81,7 +81,7 @@ var RestPost = function() {
         },
         error: function(e) {
             // TODO: highlight error fields with red
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -107,7 +107,7 @@ var RestPut = function(id) {
             window.location = '/admin_driver';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };

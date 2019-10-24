@@ -1,8 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
-import com.tsystems.transportinfo.data.converters.TruckMapper;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
-import com.tsystems.transportinfo.data.entity.Truck;
 import com.tsystems.transportinfo.service.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,21 +20,14 @@ public class TruckController {
     @Autowired
     private TruckService truckService;
 
-    @Autowired
-    private TruckMapper truckMapper;
-
     @GetMapping("/all")
     public List<TruckDTO> allTrucks() {
-        List<Truck> trucks = truckService.getAllTrucks();
-        return trucks.stream()
-                .map(truck -> truckMapper.convertToDto(truck))
-                .collect(Collectors.toList());
+        return truckService.getAllTrucks();
     }
 
     @GetMapping("/{id}")
     public TruckDTO getTruck(@PathVariable long id) {
-        Truck truck = truckService.getTruck(id);
-        return truckMapper.convertToDto(truck);
+        return truckService.getTruck(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -56,8 +47,7 @@ public class TruckController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Truck truck = truckMapper.convertToEntity(truckDTO);
-        truckService.saveTruck(truck);
+        truckService.saveTruck(truckDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
@@ -74,8 +64,7 @@ public class TruckController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Truck truck = truckMapper.convertToEntity(truckDTO);
-        truckService.updateTruck(truck);
+        truckService.updateTruck(truckDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }

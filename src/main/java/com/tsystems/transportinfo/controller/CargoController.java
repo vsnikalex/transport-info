@@ -1,8 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
-import com.tsystems.transportinfo.data.converters.CargoMapper;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
-import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,21 +20,14 @@ public class CargoController {
     @Autowired
     private CargoService cargoService;
 
-    @Autowired
-    private CargoMapper cargoMapper;
-
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
-        List<Cargo> cargoes = cargoService.getAllCargoes();
-        return cargoes.stream()
-                .map(cargo -> cargoMapper.convertToDto(cargo))
-                .collect(Collectors.toList());
+        return cargoService.getAllCargoes();
     }
 
     @GetMapping("/{id}")
     public CargoDTO getCargo(@PathVariable long id) {
-        Cargo cargo = cargoService.getCargo(id);
-        return cargoMapper.convertToDto(cargo);
+        return cargoService.getCargo(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -56,8 +47,7 @@ public class CargoController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Cargo cargo = cargoMapper.convertToEntity(cargoDTO);
-        cargoService.saveCargo(cargo);
+        cargoService.saveCargo(cargoDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
@@ -74,8 +64,7 @@ public class CargoController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Cargo cargo = cargoMapper.convertToEntity(cargoDTO);
-        cargoService.updateCargo(cargo);
+        cargoService.updateCargo(cargoDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }

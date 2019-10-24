@@ -1,8 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
-import com.tsystems.transportinfo.data.converters.DriverMapper;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
-import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,21 +20,14 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
-    @Autowired
-    private DriverMapper driverMapper;
-
     @GetMapping("/all")
     public List<DriverDTO> allDrivers() {
-        List<Driver> drivers = driverService.getAllDrivers();
-        return drivers.stream()
-                .map(driver -> driverMapper.convertToDto(driver))
-                .collect(Collectors.toList());
+        return driverService.getAllDrivers();
     }
 
     @GetMapping("/{id}")
     public DriverDTO getDriver(@PathVariable long id) {
-        Driver driver = driverService.getDriver(id);
-        return driverMapper.convertToDto(driver);
+        return driverService.getDriver(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -56,8 +47,7 @@ public class DriverController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Driver driver = driverMapper.convertToEntity(driverDTO);
-        driverService.saveDriver(driver);
+        driverService.saveDriver(driverDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }
@@ -74,8 +64,7 @@ public class DriverController {
             return ResponseEntity.badRequest().body(msg);
         }
 
-        Driver driver = driverMapper.convertToEntity(driverDTO);
-        driverService.updateDriver(driver);
+        driverService.updateDriver(driverDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
     }

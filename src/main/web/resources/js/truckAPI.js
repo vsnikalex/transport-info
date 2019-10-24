@@ -9,7 +9,7 @@ var RestDelete = function(id) {
             window.location = '/admin_truck';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -51,7 +51,7 @@ var RestGetAll = function() {
             }
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -78,7 +78,7 @@ var RestPost = function() {
         },
         error: function(e) {
             // TODO: highlight error fields with red
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };
@@ -105,7 +105,7 @@ var RestPut = function(id) {
             window.location = '/admin_truck';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     });
 };

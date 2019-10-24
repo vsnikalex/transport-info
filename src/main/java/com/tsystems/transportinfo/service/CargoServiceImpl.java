@@ -1,12 +1,15 @@
 package com.tsystems.transportinfo.service;
 
 import com.tsystems.transportinfo.data.dao.GenericDAO;
+import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,29 +23,58 @@ public class CargoServiceImpl implements CargoService {
         dao.setClazz(Cargo.class);
     }
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private DepotService depotService;
+
     @Override
-    public List<Cargo> getAllCargoes() {
-        return dao.findAll();
+    public List<CargoDTO> getAllCargoes() {
+        List<Cargo> cargoes = dao.findAll();
+        return cargoes.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void saveCargo(Cargo cargo) {
+    public void saveCargo(CargoDTO cargoDTO) {
+        Cargo cargo = convertToEntity(cargoDTO);
         dao.create(cargo);
     }
 
     @Override
-    public void updateCargo(Cargo cargo) {
+    public void updateCargo(CargoDTO cargoDTO) {
+        Cargo cargo = convertToEntity(cargoDTO);
         dao.update(cargo);
     }
 
     @Override
-    public Cargo getCargo(Long id) {
-        return dao.findOne(id);
+    public CargoDTO getCargo(Long id) {
+        Cargo cargo = dao.findOne(id);
+        return convertToDto(cargo);
     }
 
     @Override
     public void deleteCargo(Long id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public CargoDTO convertToDto(Cargo entity) {
+        return modelMapper.map(entity, CargoDTO.class);
+    }
+
+    @Override
+    public Cargo convertToEntity(CargoDTO dto) {
+        Cargo cargo = modelMapper.map(dto, Cargo.class);
+
+        long start = dto.getLocDepotId();
+        cargo.setLocation(depotService.getDepot(start));
+        long end = dto.getDestDepotId();
+        cargo.setDestination(depotService.getDepot(end));
+
+        return cargo;
     }
 
 }

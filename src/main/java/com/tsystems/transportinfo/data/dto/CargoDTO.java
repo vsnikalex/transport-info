@@ -1,24 +1,19 @@
 package com.tsystems.transportinfo.data.dto;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.data.converters.CargoMapper;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.*;
 
-@Component
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class CargoDTO {
-
-    @Autowired
-    private CargoMapper cargoMapper;
 
     private Long id;
 

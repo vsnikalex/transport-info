@@ -1,19 +1,24 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 
 import java.util.List;
 
 public interface CargoService {
 
-    public List<Cargo> getAllCargoes();
+    public List<CargoDTO> getAllCargoes();
 
-    public void saveCargo(Cargo cargo);
+    public void saveCargo(CargoDTO cargoDTO);
 
-    public void updateCargo(Cargo cargo);
+    public void updateCargo(CargoDTO cargoDTO);
 
-    public Cargo getCargo(Long id);
+    public CargoDTO getCargo(Long id);
 
     public void deleteCargo(Long id);
+
+    public CargoDTO convertToDto(Cargo entity);
+
+    public Cargo convertToEntity(CargoDTO dto);
 
 }

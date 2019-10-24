@@ -8,4 +8,6 @@ public interface DepotService {
 
     public List<Depot> getAllDepots();
 
+    public Depot getDepot(Long id);
+
 }

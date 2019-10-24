@@ -25,4 +25,9 @@ public class DepotServiceImpl implements DepotService {
         return dao.findAll();
     }
 
+    @Override
+    public Depot getDepot(Long id) {
+        return dao.findOne(id);
+    }
+
 }

@@ -2,7 +2,7 @@ package com.tsystems.transportinfo.data.converters;
 
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
-import com.tsystems.transportinfo.service.GraphHopperService;
+import com.tsystems.transportinfo.service.DepotService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class CargoMapper {
     private ModelMapper modelMapper;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private DepotService depotService;
 
     public CargoDTO convertToDto(Cargo entity) {
         return modelMapper.map(entity, CargoDTO.class);
@@ -23,10 +23,10 @@ public class CargoMapper {
     public Cargo convertToEntity(CargoDTO dto) {
         Cargo cargo = modelMapper.map(dto, Cargo.class);
 
-        String start = dto.getLocCoords();
-        cargo.setLocation(graphHopperService.coordsToEntry(start));
-        String end = dto.getDestCoords();
-        cargo.setDestination(graphHopperService.coordsToEntry(end));
+        long start = dto.getLocDepotId();
+        cargo.setLocation(depotService.getDepot(start));
+        long end = dto.getDestDepotId();
+        cargo.setDestination(depotService.getDepot(end));
 
         return cargo;
     }

@@ -69,7 +69,7 @@
     <script src="<c:url value="/resources/js/docs.js" />"></script>
 
     <%-- USE REST API --%>
-    <script src="<c:url value="/resources/js/depotAPI.js" />"></script>
+    <script src="<c:url value="/resources/js/depotAPICoord.js" />"></script>
     <script src="<c:url value="/resources/js/driverAPI.js" />"></script>
 
 </body>

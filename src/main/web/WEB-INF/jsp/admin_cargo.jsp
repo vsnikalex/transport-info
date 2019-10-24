@@ -44,7 +44,6 @@
                 <div class="demo-col col-xs-12 col-s-6 col-l-8 text-ellipsis">
                     <div class="tc-note tc-note-info">
                         <div id="map" class="map" style="height: 300px"></div>
-                        <script src="<c:url value="/resources/js/webpack/depot.bundle.js" />"></script>
                         <script src="<c:url value="/resources/js/webpack/map.bundle.js" />"></script>
                     </div>
                 </div>

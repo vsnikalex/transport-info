@@ -1,13 +1,44 @@
 var L = require('leaflet');
 require('graphhopper-js-api-client');
-
-import loadAllDepots from './depot.js';
+const axios = require('axios');
 
 var map = L.map('map').setView([49.095, 16.523], 5);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
+var markerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+function loadAllDepotsToMap(leaflet_map) {
+    axios.get('api/depot/all')
+        .then(depots => {
+            console.log(depots.data);
+
+            depots.data.forEach(depot => {
+                var loc = depot.location;
+
+                var latLng = L.latLng(
+                    parseFloat(loc.point["lat"]), parseFloat(loc.point["lng"])
+                );
+
+                L.circleMarker(latLng, markerOptions)
+                    .bindPopup(loc.country + ' ' + depot.type)
+                    .addTo(leaflet_map);
+            });
+
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 function setupRoutingAPI(leaflet_map) {
 
@@ -51,8 +82,8 @@ function setupRoutingAPI(leaflet_map) {
         .catch(function(err){
             console.error(err.message);
         });
-};
+}
 
 setupRoutingAPI(map);
 
-loadAllDepots(map);
+loadAllDepotsToMap(map);

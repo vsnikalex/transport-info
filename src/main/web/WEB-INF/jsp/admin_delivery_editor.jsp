@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="SetUp()">
+<body>
 
 <jsp:include page="header.jsp" />
 
@@ -45,13 +45,8 @@
         <div class="row">
 
             <div class="col-l-3 ">
-                <div class="form-input-set">
-                    <label for="selectbox" title="Primäroptionen Auswahlliste">Depot</label>
-                    <select name="select" id="selectbox" class="form-select">
-                        <option value="opt1" selected>Slovakia (CORP)</option>
-                        <option value="opt2">Russia (CLIENT)</option>
-                    </select>
-                </div>
+                <div id="depots"></div>
+                <script src="<c:url value="/resources/js/webpack/depotList.bundle.js" />"></script>
             </div>
 
             <div class="col-l-3 ">

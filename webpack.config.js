@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     entry: {
         map: './frontend_js/map.js',
-        depot: './frontend_js/depot.js'
+        depotList: './frontend_js/depotList.js'
     },
     devtool: 'sourcemaps',
     cache: true,
@@ -15,5 +15,19 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'src/main/web/resources/js/webpack'),
+    },
+    module: {
+        rules: [
+            {
+                test: path.join(__dirname, '.'),
+                exclude: /(node_modules)/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                    }
+                }]
+            }
+        ]
     }
 };

@@ -7,17 +7,19 @@ import java.util.List;
 
 public interface CargoService {
 
-    public List<CargoDTO> getAllCargoes();
+    List<CargoDTO> getByDepotId(Long id);
 
-    public void saveCargo(CargoDTO cargoDTO);
+    List<CargoDTO> getAllCargoes();
 
-    public void updateCargo(CargoDTO cargoDTO);
+    void saveCargo(CargoDTO cargoDTO);
 
-    public CargoDTO getCargo(Long id);
+    void updateCargo(CargoDTO cargoDTO);
 
-    public void deleteCargo(Long id);
+    CargoDTO getCargo(Long id);
 
-    public CargoDTO convertToDto(Cargo entity);
+    void deleteCargo(Long id);
+
+    CargoDTO convertToDto(Cargo entity);
 
     public Cargo convertToEntity(CargoDTO dto);
 

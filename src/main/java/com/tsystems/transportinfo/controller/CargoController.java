@@ -20,6 +20,11 @@ public class CargoController {
     @Autowired
     private CargoService cargoService;
 
+    @GetMapping("/all/{depotId}")
+    public List<CargoDTO> allCargoes(@PathVariable long depotId) {
+        return cargoService.getByDepotId(depotId);
+    }
+
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
         return cargoService.getAllCargoes();

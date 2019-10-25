@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 @Transactional
 public class CargoServiceImpl implements CargoService {
 
+    @Autowired
+    private CargoDAO cargoDAO;
+
     private GenericDAO<Cargo> dao;
 
     @Autowired
@@ -28,6 +32,14 @@ public class CargoServiceImpl implements CargoService {
 
     @Autowired
     private DepotService depotService;
+
+    @Override
+    public List<CargoDTO> getByDepotId(Long id) {
+        List<Cargo> cargoes = cargoDAO.findByDepotId(id);
+        return cargoes.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<CargoDTO> getAllCargoes() {

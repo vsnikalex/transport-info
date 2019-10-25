@@ -46,7 +46,8 @@ public class HibernateDAO<T> implements GenericDAO<T> {
         delete(entity);
     }
 
-    protected Session getCurrentSession() {
+    private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
+
 }

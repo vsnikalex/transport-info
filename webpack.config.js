@@ -4,7 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     entry: {
         map: './frontend_js/map.js',
-        depotList: './frontend_js/depotList.js'
+        DeliveryEditor: './frontend_js/DeliveryEditor.js',
+        Cargoes: './frontend_js/Cargoes.js'
     },
     devtool: 'sourcemaps',
     cache: true,

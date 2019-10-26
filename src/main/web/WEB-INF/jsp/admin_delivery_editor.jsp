@@ -42,47 +42,10 @@
 
     <div class="container-fixed demo-grid grid-debug">
 
+        <div id="delivery_editor"></div>
+        <script src="<c:url value="/resources/js/webpack/DeliveryEditor.bundle.js" />"></script>
+
         <div class="row">
-
-            <div class="col-l-3 ">
-                <div id="depots"></div>
-                <script src="<c:url value="/resources/js/webpack/depotList.bundle.js" />"></script>
-            </div>
-
-            <div class="col-l-3 ">
-                <ul class="content-list">
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-checkbox-set">
-                                <label>
-                                    <input type="checkbox" name="cb0" value="0" class="form-checkbox">Tesla Model X
-                                </label>
-                            </div>
-                            <div class="media-hint">2700kg Russia(CLIENT) PREPARED</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-checkbox-set">
-                                <label>
-                                    <input type="checkbox" name="cb0" value="0" class="form-checkbox">IKEA Sofa
-                                </label>
-                            </div>
-                            <div class="media-hint">100kg Russia(CLIENT) PREPARED</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-checkbox-set">
-                                <label>
-                                    <input type="checkbox" name="cb0" value="0" class="form-checkbox">Tirion Lanister
-                                </label>
-                            </div>
-                            <div class="media-hint">30kg Russia(CLIENT) DRUNK</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
             <div class="col-l-3 ">
                 <ul class="content-list">
                     <li class="media">

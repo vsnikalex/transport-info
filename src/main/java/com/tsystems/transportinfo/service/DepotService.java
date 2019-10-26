@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface DepotService {
 
-    public List<Depot> getAllDepots();
+    List<Depot> getAllDepots();
 
-    public Depot getDepot(Long id);
+    Depot getDepot(Long id);
 
 }

@@ -7,18 +7,18 @@ import java.util.List;
 
 public interface DriverService {
 
-    public List<DriverDTO> getAllDrivers();
+    List<DriverDTO> getAllDrivers();
 
-    public void saveDriver(DriverDTO driverDTO);
+    void saveDriver(DriverDTO driverDTO);
 
-    public void updateDriver(DriverDTO driverDTO);
+    void updateDriver(DriverDTO driverDTO);
 
-    public DriverDTO getDriver(Long id);
+    DriverDTO getDriver(Long id);
 
-    public void deleteDriver(Long id);
+    void deleteDriver(Long id);
 
-    public DriverDTO convertToDto(Driver entity);
+    DriverDTO convertToDto(Driver entity);
 
-    public Driver convertToEntity(DriverDTO dto);
+    Driver convertToEntity(DriverDTO dto);
 
 }

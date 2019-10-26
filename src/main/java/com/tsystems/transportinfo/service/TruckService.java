@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.service;
 
+import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Truck;
 
@@ -7,18 +8,20 @@ import java.util.List;
 
 public interface TruckService {
 
-    public List<TruckDTO> getAllTrucks();
+    List<TruckDTO> getNearestTrucks(GHPoint destination, long maxTravelTime);
 
-    public void saveTruck(TruckDTO truckDTO);
+    List<TruckDTO> getAllTrucks();
 
-    public void updateTruck(TruckDTO truckDTO);
+    void saveTruck(TruckDTO truckDTO);
 
-    public TruckDTO getTruck(Long id);
+    void updateTruck(TruckDTO truckDTO);
 
-    public void deleteTruck(Long id);
+    TruckDTO getTruck(Long id);
 
-    public TruckDTO convertToDto(Truck entity);
+    void deleteTruck(Long id);
 
-    public Truck convertToEntity(TruckDTO dto);
+    TruckDTO convertToDto(Truck entity);
+
+    Truck convertToEntity(TruckDTO dto);
 
 }

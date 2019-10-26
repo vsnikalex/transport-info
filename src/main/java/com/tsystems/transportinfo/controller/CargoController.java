@@ -21,7 +21,7 @@ public class CargoController {
     private CargoService cargoService;
 
     @GetMapping("/all/{depotId}")
-    public List<CargoDTO> allCargoes(@PathVariable long depotId) {
+    public List<CargoDTO> allCargoesInDepot(@PathVariable long depotId) {
         return cargoService.getByDepotId(depotId);
     }
 

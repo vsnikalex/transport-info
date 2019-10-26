@@ -1,6 +1,8 @@
 package com.tsystems.transportinfo.service;
 
+import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
+import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Truck;
 import org.modelmapper.ModelMapper;
@@ -24,10 +26,21 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Autowired
+    private TruckDAO truckDAO;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     private GraphHopperService graphHopperService;
+
+    @Override
+    public List<TruckDTO> getNearestTrucks(GHPoint destination, long maxTravelTime) {
+        List<Truck> trucks = truckDAO.findNearestTrucks(destination, maxTravelTime);
+        return trucks.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<TruckDTO> getAllTrucks() {

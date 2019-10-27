@@ -28,11 +28,9 @@ class Cargoes extends React.Component {
 
     render() {
         if (this.state.cargoes) {
-
             return (
                 <CargoList cargoes={this.state.cargoes} changeWeight={this.props.changeWeight}/>
             )
-
         }
     }
 
@@ -44,9 +42,11 @@ class CargoList extends React.Component{
             <Cargo key={cargo.id} cargo={cargo} changeWeight={this.props.changeWeight}/>
         );
         return (
-            <ul className="content-list">
-                {cargoes}
-            </ul>
+            <div className="col-l-3 ">
+                <ul className="content-list">
+                    {cargoes}
+                </ul>
+            </div>
         )
     }
 }

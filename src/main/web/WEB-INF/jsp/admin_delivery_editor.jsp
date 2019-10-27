@@ -46,30 +46,7 @@
         <script src="<c:url value="/resources/js/webpack/DeliveryEditor.bundle.js" />"></script>
 
         <div class="row">
-            <div class="col-l-3 ">
-                <ul class="content-list">
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-checkbox-set">
-                                <label>
-                                    <input type="checkbox" name="cb0" value="0" class="form-checkbox">Test Testovich
-                                </label>
-                            </div>
-                            <div class="media-hint">Krakow REST</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-checkbox-set">
-                                <label>
-                                    <input type="checkbox" name="cb0" value="0" class="form-checkbox">Jorah Mormont
-                                </label>
-                            </div>
-                            <div class="media-hint">Krakow REST</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+
         </div>
 
     </div>

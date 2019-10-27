@@ -48,8 +48,6 @@ class Lists extends React.Component{
     }
 
     render() {
-        console.log(this.state.orderWeight);
-
         const depots = this.props.depots.map(depot =>
             <Depot key={depot.id} depot={depot} />
         );
@@ -64,12 +62,8 @@ class Lists extends React.Component{
                         </select>
                     </div>
                 </div>
-                <div className="col-l-3 ">
-                    <Cargoes depotId={this.state.selectedDepot} changeWeight={this.changeWeight}/>
-                </div>
-                <div className="col-l-3 ">
-                    <Trucks depotId={this.state.selectedDepot}/>
-                </div>
+                <Cargoes depotId={this.state.selectedDepot} changeWeight={this.changeWeight}/>
+                <Trucks depotId={this.state.selectedDepot} orderWeight={this.state.orderWeight}/>
             </div>
         )
     }

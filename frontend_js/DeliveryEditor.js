@@ -31,17 +31,25 @@ class Lists extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedDepot: 1
+            selectedDepot: 1,
+            orderWeight: 0
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.changeWeight = this.changeWeight.bind(this);
     }
 
     handleChange(event) {
-        this.setState({selectedDepot: event.target.value});
+        this.setState({selectedDepot: event.target.value, orderWeight: 0});
+    }
+
+    changeWeight(newWeight){
+        this.setState({orderWeight: this.state.orderWeight + newWeight});
     }
 
     render() {
+        console.log(this.state.orderWeight);
+
         const depots = this.props.depots.map(depot =>
             <Depot key={depot.id} depot={depot} />
         );
@@ -57,7 +65,7 @@ class Lists extends React.Component{
                     </div>
                 </div>
                 <div className="col-l-3 ">
-                    <Cargoes depotId={this.state.selectedDepot}/>
+                    <Cargoes depotId={this.state.selectedDepot} changeWeight={this.changeWeight}/>
                 </div>
                 <div className="col-l-3 ">
                     <Trucks depotId={this.state.selectedDepot}/>

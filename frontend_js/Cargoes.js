@@ -30,7 +30,7 @@ class Cargoes extends React.Component {
         if (this.state.cargoes) {
 
             return (
-                <CargoList cargoes={this.state.cargoes}/>
+                <CargoList cargoes={this.state.cargoes} changeWeight={this.props.changeWeight}/>
             )
 
         }
@@ -41,7 +41,7 @@ class Cargoes extends React.Component {
 class CargoList extends React.Component{
     render() {
         const cargoes = this.props.cargoes.map(cargo =>
-            <Cargo key={cargo.id} cargo={cargo}/>
+            <Cargo key={cargo.id} cargo={cargo} changeWeight={this.props.changeWeight}/>
         );
         return (
             <ul className="content-list">
@@ -52,13 +52,32 @@ class CargoList extends React.Component{
 }
 
 class Cargo extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            isChecked: false
+        };
+        this.handleChecked = this.handleChecked.bind(this);
+    }
+
+    handleChecked() {
+        if (!this.state.isChecked) {
+            this.props.changeWeight(+1*this.props.cargo.weight);
+        } else {
+            this.props.changeWeight(-1*this.props.cargo.weight);
+        }
+
+        this.setState({isChecked: !this.state.isChecked});
+    }
+
     render() {
         return (
             <li className="media">
                 <div className="media-body">
                     <div className="form-checkbox-set">
                         <label>
-                            <input type="checkbox" name="cb0" value="0" className="form-checkbox"/>
+                            <input type="checkbox" onChange={ this.handleChecked }
+                                   name="cb0" value="0" className="form-checkbox"/>
                             {this.props.cargo.description}
                         </label>
                     </div>

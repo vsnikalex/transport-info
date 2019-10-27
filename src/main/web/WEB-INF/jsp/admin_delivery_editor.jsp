@@ -20,6 +20,9 @@
     <!-- Custom CSS -->
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
+    <!-- Leaflet CSS -->
+    <link href="<c:url value="/resources/css/leaflet/leaflet.css" />" rel="stylesheet">
+
 </head>
 
 <body>
@@ -38,16 +41,22 @@
 
     <div class="container-fixed">
         <h1 class="underline">Delivery</h1>
-    </div>
-
-    <div class="container-fixed demo-grid grid-debug">
-
-        <div id="delivery_editor"></div>
-        <script src="<c:url value="/resources/js/webpack/DeliveryEditor.bundle.js" />"></script>
 
         <div class="row">
-
+            <div class="demo-col col-xs-12 col-s-6 col-l-8 text-ellipsis">
+                <div class="tc-note tc-note-info">
+                    <div id="map" class="map" style="height: 300px"></div>
+                </div>
+            </div>
         </div>
+
+<%--        <div class="container-fixed demo-grid">--%>
+        <div class="tc-example">
+            <div id="delivery_editor"></div>
+        </div>
+
+        <script src="<c:url value="/resources/js/webpack/DeliveryEditorMap.bundle.js" />"></script>
+        <script src="<c:url value="/resources/js/webpack/DeliveryEditor.bundle.js" />"></script>
 
     </div>
 

@@ -56,6 +56,12 @@ class TruckList extends React.Component{
         this.selectTruck = this.selectTruck.bind(this);
     }
 
+    componentDidUpdate(oldProps) {
+        if (this.props.trucks !== oldProps.trucks) {
+             this.setState({selectedTruck: {}});
+        }
+    }
+
     selectTruck(newTruck) {
         this.setState({selectedTruck: newTruck});
     }

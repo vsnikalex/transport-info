@@ -50,40 +50,6 @@
                 <ul class="content-list">
                     <li class="media">
                         <div class="media-body">
-                            <div class="form-radio-set">
-                                <label>
-                                    <input type="radio" name="rb" value="rb1" class="form-radio">YG78923 Loaded: 50%
-                                </label>
-                            </div>
-                            <div class="media-hint">10 000kg Krakow OK</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-radio-set">
-                                <label>
-                                    <input type="radio" name="rb" value="rb1" class="form-radio">QF66478 Loaded: 30%
-                                </label>
-                            </div>
-                            <div class="media-hint">5 000kg Belgrad OK</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="media-body">
-                            <div class="form-radio-set">
-                                <label>
-                                    <input type="radio" name="rb" value="rb1" class="form-radio">NJ12345 Loaded: 30%
-                                </label>
-                            </div>
-                            <div class="media-hint">1000kg Krasnodar OK</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-l-3 ">
-                <ul class="content-list">
-                    <li class="media">
-                        <div class="media-body">
                             <div class="form-checkbox-set">
                                 <label>
                                     <input type="checkbox" name="cb0" value="0" class="form-checkbox">Test Testovich

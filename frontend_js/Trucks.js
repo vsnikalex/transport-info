@@ -1,25 +1,25 @@
 const React = require('react');
 const axios = require('axios');
 
-class Cargoes extends React.Component {
+class Trucks extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            cargoes: []
+            trucks: []
         };
     }
 
     componentDidMount() {
-        axios.get('api/cargo/all/' + this.props.depotId).then(response => {
-            this.setState({cargoes: response.data});
+        axios.get('api/truck/all/' + this.props.depotId).then(response => {
+            this.setState({trucks: response.data});
         });
     }
 
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
 
-            axios.get('api/cargo/all/' + this.props.depotId).then(response => {
+            axios.get('api/truck/all/' + this.props.depotId).then(response => {
                 this.setState({cargoes: response.data});
             });
 

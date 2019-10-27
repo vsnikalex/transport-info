@@ -1,6 +1,5 @@
 package com.tsystems.transportinfo.controller;
 
-import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.service.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ public class TruckController {
     @Autowired
     private TruckService truckService;
 
-    @GetMapping("/all/{destCoords}/{maxTravelTime}")
-    public List<TruckDTO> allNearestTrucks(@PathVariable String destCoords, @PathVariable long maxTravelTime) {
-        return truckService.getNearestTrucks(GHPoint.fromString(destCoords), maxTravelTime);
+    @GetMapping("/all/{depotId}/{maxTravelTime}")
+    public List<TruckDTO> allNearestTrucks(@PathVariable long depotId, @PathVariable long maxTravelTime) {
+        return truckService.getNearestTrucks(depotId, maxTravelTime);
     }
 
     @GetMapping("/all")

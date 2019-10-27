@@ -4,6 +4,7 @@ import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
+import com.tsystems.transportinfo.data.entity.Depot;
 import com.tsystems.transportinfo.data.entity.Truck;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,15 @@ public class TruckServiceImpl implements TruckService {
     @Autowired
     private GraphHopperService graphHopperService;
 
+    @Autowired
+    private DepotService depotService;
+
     @Override
-    public List<TruckDTO> getNearestTrucks(GHPoint destination, long maxTravelTime) {
-        List<Truck> trucks = truckDAO.findNearestTrucks(destination, maxTravelTime);
+    public List<TruckDTO> getNearestTrucks(long depotId, long maxTravelTime) {
+        Depot depot = depotService.getDepot(depotId);
+        GHPoint destPoint = graphHopperService.pointFromEntry(depot.getLocation());
+
+        List<Truck> trucks = truckDAO.findNearestTrucks(destPoint , maxTravelTime);
         return trucks.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

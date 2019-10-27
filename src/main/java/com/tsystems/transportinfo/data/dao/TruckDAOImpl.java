@@ -23,14 +23,20 @@ public class TruckDAOImpl implements TruckDAO {
 
     @Override
     public List<Truck> findNearestTrucks(GHPoint destination, long maxTravelTime) {
+        // Use rough estimate to calculate distance between trucks and destination
+        long maxTravelHours = maxTravelTime / 1000 / 60 / 60;
+        long maxTravelDistanceMeters = maxTravelHours * 60 * 1000;
+
         Session session = sessionFactory.getCurrentSession();
 
         Stream<Truck> trucks = session.createQuery("SELECT t FROM Truck t", Truck.class).stream();
 
         return trucks.filter(t -> {
             GHPoint truckPoint = graphHopperService.pointFromEntry(t.getLocation());
-            long timeOfPath = graphHopperService.timeOfPath(truckPoint, destination);
-            return timeOfPath <= maxTravelTime;
+            double distanceMeters = graphHopperService.distance(
+                                                    truckPoint.getLat(), destination.getLat(),
+                                                    truckPoint.getLon(), destination.getLon(), 0, 0);
+            return distanceMeters < maxTravelDistanceMeters;
         }).collect(Collectors.toList());
     }
 

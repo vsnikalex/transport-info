@@ -58,6 +58,21 @@ class Lists extends React.Component{
                 <div className="col-l-3 ">
                     <Cargoes depotId={this.state.selectedDepot}/>
                 </div>
+                <div className="col-l-3 ">
+                    <ul className="content-list">
+                        <li className="media">
+                            <div className="media-body">
+                                <div className="form-radio-set">
+                                    <label>
+                                        <input type="radio" name="rb" value="rb1" className="form-radio"/>
+                                        YG78923 Loaded: 50%
+                                    </label>
+                                </div>
+                                <div className="media-hint">10 000kg Krakow OK</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         )
     }

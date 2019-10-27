@@ -1,57 +1,57 @@
 const React = require('react');
 const axios = require('axios');
 
-class Cargoes extends React.Component {
+class Drivers extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            cargoes: []
+            drivers: []
         };
     }
 
     componentDidMount() {
-        axios.get('api/cargo/all/' + this.props.depotId).then(response => {
-            this.setState({cargoes: response.data});
+        axios.post('api/driver/city', this.props.city).then(response => {
+            this.setState({drivers: response.data});
         });
     }
 
     componentDidUpdate(oldProps) {
-        if (this.props.depotId !== oldProps.depotId) {
+        if (this.props.city !== oldProps.city) {
 
-            axios.get('api/cargo/all/' + this.props.depotId).then(response => {
-                this.setState({cargoes: response.data});
+            axios.post('api/driver/city', this.props.city).then(response => {
+                this.setState({drivers: response.data});
             });
 
         }
     }
 
     render() {
-        if (this.state.cargoes) {
+        if (this.state.drivers) {
             return (
-                <CargoList cargoes={this.state.cargoes} changeWeight={this.props.changeWeight}/>
+                <DriverList drivers={this.state.drivers} />
             )
         }
     }
 
 }
 
-class CargoList extends React.Component{
+class DriverList extends React.Component{
     render() {
-        const cargoes = this.props.cargoes.map(cargo =>
-            <Cargo key={cargo.id} cargo={cargo} changeWeight={this.props.changeWeight}/>
+        const drivers = this.props.drivers.map(driver =>
+            <Driver key={driver.id} driver={driver} />
         );
         return (
-            <div className="col-l-3 ">
+            <div className="col-l-6">
                 <ul className="content-list">
-                    {cargoes}
+                    {drivers}
                 </ul>
             </div>
         )
     }
 }
 
-class Cargo extends React.Component{
+class Driver extends React.Component{
     constructor() {
         super();
         this.state = {
@@ -62,9 +62,9 @@ class Cargo extends React.Component{
 
     handleChecked() {
         if (!this.state.isChecked) {
-            this.props.changeWeight(+1*this.props.cargo.weight);
+            console.log('CHECKED');
         } else {
-            this.props.changeWeight(-1*this.props.cargo.weight);
+            console.log('UNCHECKED');
         }
 
         this.setState({isChecked: !this.state.isChecked});
@@ -76,16 +76,18 @@ class Cargo extends React.Component{
                 <div className="media-body">
                     <div className="form-checkbox-set">
                         <label>
-                            <input type="checkbox" onChange={this.handleChecked}
+                            <input type="checkbox" onChange={ this.handleChecked }
                                    name="cb0" value="0" className="form-checkbox"/>
-                            {this.props.cargo.description}
+                            {this.props.driver.firstName} {this.props.driver.lastName}
                         </label>
                     </div>
-                    <div className="media-hint">{this.props.cargo.weight}kg {this.props.cargo.status}</div>
+                    <div className="media-hint">
+                        {this.props.driver.location.city} {this.props.driver.status}
+                    </div>
                 </div>
             </li>
         )
     }
 }
 
-export default Cargoes;
+export default Drivers;

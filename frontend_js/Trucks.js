@@ -11,7 +11,8 @@ class Trucks extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('api/truck/all/' + this.props.depotId).then(response => {
+        // Max travel hours is 2 in milliseconds by default
+        axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
             this.setState({trucks: response.data});
         });
     }
@@ -19,18 +20,18 @@ class Trucks extends React.Component {
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
 
-            axios.get('api/truck/all/' + this.props.depotId).then(response => {
-                this.setState({cargoes: response.data});
+            axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
+                this.setState({trucks: response.data});
             });
 
         }
     }
 
     render() {
-        if (this.state.cargoes) {
+        if (this.state.trucks) {
 
             return (
-                <CargoList cargoes={this.state.cargoes}/>
+                <TruckList trucks={this.state.trucks}/>
             )
 
         }
@@ -38,35 +39,39 @@ class Trucks extends React.Component {
 
 }
 
-class CargoList extends React.Component{
+class TruckList extends React.Component{
     render() {
-        const cargoes = this.props.cargoes.map(cargo =>
-            <Cargo key={cargo.id} cargo={cargo}/>
+        const trucks = this.props.trucks.map(truck =>
+            <Truck key={truck.id} truck={truck}/>
         );
         return (
             <ul className="content-list">
-                {cargoes}
+                {trucks}
             </ul>
         )
     }
 }
 
-class Cargo extends React.Component{
+class Truck extends React.Component{
     render() {
         return (
             <li className="media">
                 <div className="media-body">
-                    <div className="form-checkbox-set">
+                    <div className="form-radio-set">
                         <label>
-                            <input type="checkbox" name="cb0" value="0" className="form-checkbox"/>
-                            {this.props.cargo.description}
+                            <input type="radio" name="rb" value="rb1" className="form-radio"/>
+                            {this.props.truck.plate} Loaded: 0%
                         </label>
                     </div>
-                    <div className="media-hint">{this.props.cargo.weight}kg {this.props.cargo.status}</div>
+                    <div className="media-hint">
+                        {this.props.truck.capacity}kg
+                        {this.props.truck.location.city}
+                        {this.props.truck.status}
+                    </div>
                 </div>
             </li>
         )
     }
 }
 
-export default Cargoes;
+export default Trucks;

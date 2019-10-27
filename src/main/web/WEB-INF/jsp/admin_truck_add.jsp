@@ -59,7 +59,6 @@
                         <label for="location">Location</label>
                         <select name="location" id="location" class="form-select">
                             <%-- Filled with data from REST API via JS --%>
-                            <option value="47.68665,13.09848">Austria</option>
                         </select>
                     </div>
                     <button id="save_button" type="button" class="btn btn-default btn-block">Save</button>

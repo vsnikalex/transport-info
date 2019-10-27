@@ -1,5 +1,7 @@
 package com.tsystems.transportinfo.service;
 
+import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
@@ -27,6 +29,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Autowired
+    private DriverDAO driverDAO;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -34,6 +39,14 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private TruckService truckService;
+
+    @Override
+    public List<DriverDTO> getDriversByCity(GHGeocodingEntry city) {
+        List<Driver> drivers = driverDAO.findDriversByCity(city);
+        return drivers.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<DriverDTO> getAllDrivers() {

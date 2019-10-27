@@ -1,11 +1,14 @@
 package com.tsystems.transportinfo.service;
 
+import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.entity.Driver;
 
 import java.util.List;
 
 public interface DriverService {
+
+    List<DriverDTO> getDriversByCity(GHGeocodingEntry city);
 
     List<DriverDTO> getAllDrivers();
 

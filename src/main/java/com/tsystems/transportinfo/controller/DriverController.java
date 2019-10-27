@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class DriverController {
 
     @Autowired
     private DriverService driverService;
+
+    @GetMapping("/city")
+    public List<DriverDTO> driversByCity(@RequestBody GHGeocodingEntry city) {
+        return driverService.getDriversByCity(city);
+    }
 
     @GetMapping("/all")
     public List<DriverDTO> allDrivers() {

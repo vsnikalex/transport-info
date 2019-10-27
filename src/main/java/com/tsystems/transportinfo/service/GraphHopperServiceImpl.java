@@ -22,12 +22,14 @@ public class GraphHopperServiceImpl implements GraphHopperService {
     @Autowired
     private Environment env;
 
+    @Override
     public GHPoint pointFromEntry(GHGeocodingEntry entry) {
         double lat = entry.getPoint().getLat();
         double lng = entry.getPoint().getLng();
         return new GHPoint(lat, lng);
     }
 
+    @Override
     public GHGeocodingEntry coordsToEntry(String coords) {
         GraphHopperGeocoding graphHopperGeocoding = new GraphHopperGeocoding();
         graphHopperGeocoding.setKey(env.getProperty("api.key"));
@@ -39,6 +41,7 @@ public class GraphHopperServiceImpl implements GraphHopperService {
         return response.getHits().iterator().next();
     }
 
+    @Override
     public long timeOfPath(GHPoint startPlace, GHPoint endPlace) {
         GraphHopperWeb gh = new GraphHopperWeb();
         gh.setKey(env.getProperty("api.key"));
@@ -70,6 +73,7 @@ public class GraphHopperServiceImpl implements GraphHopperService {
      * el2 End altitude in meters
      * @returns Distance in Meters
      */
+    @Override
     public double distance(double lat1, double lat2, double lon1,
                     double lon2, double el1, double el2) {
         final int R = 6371; // Radius of the earth
@@ -87,6 +91,13 @@ public class GraphHopperServiceImpl implements GraphHopperService {
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
         return Math.sqrt(distance);
+    }
+
+    @Override
+    public boolean inSameCity(GHGeocodingEntry a, GHGeocodingEntry b) {
+        return a.getCountry().equals(b.getCountry()) &&
+               a.getState().equals(b.getState()) &&
+               a.getCity().equals(b.getCity());
     }
 
 }

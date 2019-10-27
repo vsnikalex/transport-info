@@ -23,7 +23,7 @@ public class TruckDAOImpl implements TruckDAO {
 
     @Override
     public List<Truck> findNearestTrucks(GHPoint destination, long maxTravelTime) {
-        // Use rough estimate to calculate distance between trucks and destination
+        // Use rough estimate to calculate distance between trucks and destination point
         long maxTravelHours = maxTravelTime / 1000 / 60 / 60;
         long maxTravelDistanceMeters = maxTravelHours * 60 * 1000;
 

@@ -2,6 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const axios = require('axios');
 
+import {markDepot} from './deliveryEditorMap';
+import {clearDepots} from "./deliveryEditorMap";
+
 import Cargoes from './Cargoes';
 import Trucks from './Trucks';
 
@@ -31,16 +34,16 @@ class Lists extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedDepot: 1,
+            selectedDepotId: 1,
             orderWeight: 0
         };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.selectDepot = this.selectDepot.bind(this);
         this.changeWeight = this.changeWeight.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({selectedDepot: event.target.value, orderWeight: 0});
+    selectDepot(event) {
+        this.setState({selectedDepotId: event.target.value, orderWeight: 0});
     }
 
     changeWeight(newWeight){
@@ -48,6 +51,12 @@ class Lists extends React.Component{
     }
 
     render() {
+        const getSelectedDepotObj = this.props.depots.find(depot =>
+            depot.id == this.state.selectedDepotId
+        );
+        clearDepots();
+        markDepot(getSelectedDepotObj);
+
         const depots = this.props.depots.map(depot =>
             <Depot key={depot.id} depot={depot} />
         );
@@ -57,13 +66,13 @@ class Lists extends React.Component{
                 <div className="col-l-3 ">
                     <div className="form-input-set">
                         <label htmlFor="selectbox">Depot</label>
-                        <select value={this.state.selectedDepot} onChange={this.handleChange}>
+                        <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
                             {depots}
                         </select>
                     </div>
                 </div>
-                <Cargoes depotId={this.state.selectedDepot} changeWeight={this.changeWeight}/>
-                <Trucks depotId={this.state.selectedDepot} orderWeight={this.state.orderWeight}/>
+                <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
+                <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
             </div>
         )
     }

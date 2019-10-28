@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         map: './frontend_js/map.js',
         DeliveryEditor: './frontend_js/DeliveryEditor.js',
-        DeliveryEditorMap: './frontend_js/deliveryEditorMap.js'
+        deliveryEditorMap: './frontend_js/deliveryEditorMap.js'
     },
     devtool: 'sourcemaps',
     cache: true,

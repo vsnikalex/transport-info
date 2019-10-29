@@ -48,13 +48,13 @@ const cargoDestinationMarkerStyle = {
 export function markCargoDestination(cargo) {
     if (cargo === null) { return; }
 
-    let loc = cargo.destination;
+    let endLoc = cargo.endDepot.location;
 
     let latLng = L.latLng(
-        parseFloat(loc.point["lat"]), parseFloat(loc.point["lng"])
+        parseFloat(endLoc.point["lat"]), parseFloat(endLoc.point["lng"])
     );
 
     L.circleMarker(latLng, cargoDestinationMarkerStyle)
-        .bindPopup(loc.country + ' ' + cargo.destination.type)
+        .bindPopup(endLoc.country + ' ' + cargo.endDepot.type)
         .addTo(cargoLayerGroup);
 }

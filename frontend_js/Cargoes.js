@@ -64,8 +64,8 @@ class Cargo extends React.Component{
 
     handleChecked() {
         if (!this.state.isChecked) {
-            // console.log(this.props.cargo);
-            // markCargoDestination(this.props.cargo);
+            console.log(this.props.cargo);
+            markCargoDestination(this.props.cargo);
 
             this.props.changeWeight(+1*this.props.cargo.weight);
         } else {

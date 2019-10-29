@@ -7,6 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const depotLayerGroup = L.layerGroup().addTo(map);
+const cargoLayerGroup = L.layerGroup().addTo(map);
 
 const depotMarkerStyle = {
     radius: 8,
@@ -35,6 +36,25 @@ export function clearDepots() {
     depotLayerGroup.clearLayers();
 }
 
-export function markTruck(truck) {
+const cargoDestinationMarkerStyle = {
+    radius: 8,
+    fillColor: "#1367ed",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
 
+export function markCargoDestination(cargo) {
+    if (cargo === null) { return; }
+
+    let loc = cargo.destination;
+
+    let latLng = L.latLng(
+        parseFloat(loc.point["lat"]), parseFloat(loc.point["lng"])
+    );
+
+    L.circleMarker(latLng, cargoDestinationMarkerStyle)
+        .bindPopup(loc.country + ' ' + cargo.destination.type)
+        .addTo(cargoLayerGroup);
 }

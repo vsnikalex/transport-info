@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.service;
 
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.entity.Depot;
+import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class DepotServiceImpl implements DepotService {
     }
 
     @Override
+    @Synchronized
     public List<Depot> getAllDepots() {
         return dao.findAll();
     }

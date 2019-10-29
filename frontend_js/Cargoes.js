@@ -1,6 +1,8 @@
 const React = require('react');
 const axios = require('axios');
 
+import {markCargoDestination} from './deliveryEditorMap';
+
 class Cargoes extends React.Component {
 
     constructor(props) {
@@ -62,6 +64,9 @@ class Cargo extends React.Component{
 
     handleChecked() {
         if (!this.state.isChecked) {
+            // console.log(this.props.cargo);
+            // markCargoDestination(this.props.cargo);
+
             this.props.changeWeight(+1*this.props.cargo.weight);
         } else {
             this.props.changeWeight(-1*this.props.cargo.weight);

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class HibernateDAO<T> implements GenericDAO<T> {
         return getCurrentSession().get(clazz, id);
     }
 
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public List<T> findAll() {
         return getCurrentSession().createQuery("from " + clazz.getName()).list();
     }

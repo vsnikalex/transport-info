@@ -27,6 +27,11 @@ window.onload = function() {
     });
 };
 
+function fillInfoTable(estDist, estTime) {
+    document.getElementById("est_dist").innerHTML = estDist + 'km';
+    document.getElementById("est_time").innerHTML = estTime + 'h';
+}
+
 export function clearRoutes() {
     routingLayer.clearLayers();
 }
@@ -39,27 +44,34 @@ export function optimizeRoute() {
     let startCoords = startDepot.getLatLng();
     ghOptimization.addPoint(new GHInput(startCoords.lat, startCoords.lng));
 
-    cargoLayerGroup.getLayers().forEach(destination => {
+    let routePoints = cargoLayerGroup.getLayers();
+    if (routePoints.length === 0) {
+        return new Promise(function (resolve, reject) {
+            fillInfoTable(0, 0);
+            resolve(0.0);
+        })
+    }
+    routePoints.forEach(destination => {
         let destCoords = destination.getLatLng();
         ghOptimization.addPoint(new GHInput(destCoords.lat, destCoords.lng));
     });
 
-    ghOptimization.doTSPRequest()
+    return ghOptimization.doTSPRequest()
         .then(function (response) {
-                let estDist = (response.solution.distance/1000).toFixed(1);
-                let estTime = (response.solution.time/60/60).toFixed(1);
-
-                document.getElementById("est_dist").innerHTML = estDist + 'km';
-                document.getElementById("est_time").innerHTML = estTime + 'h';
-
                 let routes = response.solution.routes[0];
                 routes.points.forEach(line =>
                     routingLayer.addData({
                         "type" : "Feature",
                         "geometry" : line
                     })
-                )
+                );
 
+                let estDist = (response.solution.distance/1000).toFixed(1);
+                let estTime = (response.solution.time/60/60).toFixed(1);
+
+                fillInfoTable(estDist, estTime);
+
+                return estTime;
             }
         ).catch(function(err){
             console.error(err.message);

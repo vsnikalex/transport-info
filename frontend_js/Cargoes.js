@@ -63,11 +63,15 @@ class Cargo extends React.Component{
     handleChecked() {
         if (!this.state.isChecked) {
             markCargoDestination(this.props.cargo);
-            optimizeRoute();
+
+            optimizeRoute().then(time => console.log(time));
+
             this.props.changeWeight(+1*this.props.cargo.weight);
         } else {
             removeCargoMarker(this.props.cargo.id);
-            optimizeRoute();
+
+            optimizeRoute().then(time => console.log(time));
+
             this.props.changeWeight(-1*this.props.cargo.weight);
         }
 

@@ -1,6 +1,6 @@
 package com.tsystems.transportinfo.data.dto;
 
-import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.entity.Depot;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,8 +35,8 @@ public class CargoDTO {
     @NotNull(message = "End Location must not be null")
     private long destDepotId;
 
-    private GHGeocodingEntry location;
-    private GHGeocodingEntry destination;
+    private Depot startDepot;
+    private Depot endDepot;
 
     // For validation test
     CargoDTO(String description, int weight, CargoStatus status, long locDepotId, long destDepotId) {

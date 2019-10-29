@@ -30,7 +30,7 @@ public class CargoDAOImpl implements CargoDAO {
         CriteriaQuery<Cargo> cq = cb.createQuery(Cargo.class);
 
         Root<Cargo> cargo = cq.from(Cargo.class);
-        Join<Cargo, Depot> depot = cargo.join(Cargo_.location);
+        Join<Cargo, Depot> depot = cargo.join(Cargo_.startDepot);
 
         cq.select(cargo).where(cb.equal(depot.get(Depot_.id), id));
 

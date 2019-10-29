@@ -27,12 +27,12 @@ public class Cargo {
     private CargoStatus status;
 
     @ManyToOne
-    @JoinColumn(name="location_id")
-    private Depot location;
+    @JoinColumn(name="startDepot_id")
+    private Depot startDepot;
 
     @ManyToOne
-    @JoinColumn(name="destination_id")
-    private Depot destination;
+    @JoinColumn(name="endDepot_id")
+    private Depot endDepot;
 
     @ManyToOne
     @JoinColumn(name="delivery_id")

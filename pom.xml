@@ -140,7 +140,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>5.3.6.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- OpenStreetMap API -->

@@ -82,9 +82,9 @@ public class CargoServiceImpl implements CargoService {
         Cargo cargo = modelMapper.map(dto, Cargo.class);
 
         long start = dto.getLocDepotId();
-        cargo.setLocation(depotService.getDepot(start));
+        cargo.setStartDepot(depotService.getDepot(start));
         long end = dto.getDestDepotId();
-        cargo.setDestination(depotService.getDepot(end));
+        cargo.setEndDepot(depotService.getDepot(end));
 
         return cargo;
     }

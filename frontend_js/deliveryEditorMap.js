@@ -1,4 +1,5 @@
 const L = require('leaflet');
+require('graphhopper-js-api-client');
 
 const map = L.map('map').setView([48.43, 18.56], 4);
 
@@ -8,6 +9,56 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const depotLayerGroup = L.layerGroup().addTo(map);
 const cargoLayerGroup = L.layerGroup().addTo(map);
+
+const routingLayer = L.geoJSON().addTo(map);
+let ghOptimization;
+
+window.onload = function() {
+    let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
+    let profile = "truck";
+    let host;
+
+    ghOptimization = new GraphHopperOptimization({
+        key: apiKey,
+        host: host,
+        vehicle: profile,
+        elevation: false,
+        optimize: true
+    });
+};
+
+export function clearRoutes() {
+    routingLayer.clearLayers();
+}
+
+export function optimizeRoute() {
+    clearRoutes();
+    ghOptimization.clear();
+
+    let startDepot = depotLayerGroup.getLayers()[0];
+    let startCoords = startDepot.getLatLng();
+    ghOptimization.addPoint(new GHInput(startCoords.lat, startCoords.lng));
+
+    cargoLayerGroup.getLayers().forEach(destination => {
+        let destCoords = destination.getLatLng();
+        ghOptimization.addPoint(new GHInput(destCoords.lat, destCoords.lng));
+    });
+
+    ghOptimization.doTSPRequest()
+        .then(function (response) {
+                let routes = response.solution.routes[0];
+                routes.points.forEach(line =>
+                    routingLayer.addData({
+                        "type" : "Feature",
+                        "geometry" : line
+                    })
+                )
+
+            }
+        ).catch(function(err){
+            console.error(err.message);
+        });
+}
 
 const depotMarkerStyle = {
     radius: 8,

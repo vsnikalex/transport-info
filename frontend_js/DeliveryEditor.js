@@ -2,9 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const axios = require('axios');
 
-import {markDepot} from './deliveryEditorMap';
-import {clearDepots} from "./deliveryEditorMap";
-import {clearCargoes} from "./deliveryEditorMap";
+import {clearRoutes, markDepot, clearCargoes, clearDepots} from './deliveryEditorMap';
 
 import Cargoes from './Cargoes';
 import Trucks from './Trucks';
@@ -35,7 +33,7 @@ class Lists extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedDepotId: 1,
+            selectedDepotId: 0,
             orderWeight: 0
         };
 
@@ -45,6 +43,8 @@ class Lists extends React.Component{
 
     selectDepot(event) {
         clearCargoes();
+        clearDepots();
+        clearRoutes();
 
         this.setState({selectedDepotId: event.target.value, orderWeight: 0});
     }
@@ -54,30 +54,38 @@ class Lists extends React.Component{
     }
 
     render() {
-        const getSelectedDepotObj = this.props.depots.find(depot =>
-            depot.id == this.state.selectedDepotId
-        );
-        clearDepots();
-        markDepot(getSelectedDepotObj);
-
         const depots = this.props.depots.map(depot =>
             <Depot key={depot.id} depot={depot} />
         );
 
-        return (
-            <div className="row">
-                <div className="col-l-3 ">
-                    <div className="form-input-set">
-                        <label htmlFor="selectbox">Depot</label>
-                        <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
-                            {depots}
-                        </select>
+        if (this.state.selectedDepotId == 0) {
+            return (
+                <select onChange={this.selectDepot} defaultValue={0}>
+                    <option value={0} disabled>Choose Depot</option>
+                    {depots}
+                </select>
+            );
+        } else {
+            const getSelectedDepotObj = this.props.depots.find(depot =>
+                depot.id == this.state.selectedDepotId
+            );
+            markDepot(getSelectedDepotObj);
+
+            return (
+                <div className="row">
+                    <div className="col-l-3 ">
+                        <div className="form-input-set">
+                            <label htmlFor="selectbox">Depot</label>
+                            <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
+                                {depots}
+                            </select>
+                        </div>
                     </div>
+                    <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
+                    <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
                 </div>
-                <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
-                <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
-            </div>
-        )
+            );
+        }
     }
 }
 

@@ -55,16 +55,15 @@ function setupRoutingAPI(leaflet_map) {
 
     ghRouting.doRequest()
         .then(function(route){
-            // Add your own result handling here
             console.log(route);
 
-            var estDist = (route.paths[0].distance/1000).toFixed(1);
-            var estTime = (route.paths[0].time/(1000*60*60)).toFixed(1);
+            let estDist = (route.paths[0].distance/1000).toFixed(1);
+            let estTime = (route.paths[0].time/(1000*60*60)).toFixed(1);
 
             document.getElementById("est_dist").innerHTML = estDist + 'km';
             document.getElementById("est_time").innerHTML = estTime + 'h';
 
-            var path = route.paths[0];
+            let path = route.paths[0];
             routingLayer.addData({
                 "type" : "Feature",
                 "geometry" : path.points

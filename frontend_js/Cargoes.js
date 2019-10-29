@@ -2,6 +2,7 @@ const React = require('react');
 const axios = require('axios');
 
 import {markCargoDestination} from './deliveryEditorMap';
+import {removeCargoMarker} from './deliveryEditorMap';
 
 class Cargoes extends React.Component {
 
@@ -20,11 +21,9 @@ class Cargoes extends React.Component {
 
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
-
             axios.get('api/cargo/all/' + this.props.depotId).then(response => {
                 this.setState({cargoes: response.data});
             });
-
         }
     }
 
@@ -64,11 +63,12 @@ class Cargo extends React.Component{
 
     handleChecked() {
         if (!this.state.isChecked) {
-            console.log(this.props.cargo);
             markCargoDestination(this.props.cargo);
 
             this.props.changeWeight(+1*this.props.cargo.weight);
         } else {
+            removeCargoMarker(this.props.cargo.id);
+
             this.props.changeWeight(-1*this.props.cargo.weight);
         }
 

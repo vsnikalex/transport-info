@@ -4,6 +4,7 @@ const axios = require('axios');
 
 import {markDepot} from './deliveryEditorMap';
 import {clearDepots} from "./deliveryEditorMap";
+import {clearCargoes} from "./deliveryEditorMap";
 
 import Cargoes from './Cargoes';
 import Trucks from './Trucks';
@@ -43,6 +44,8 @@ class Lists extends React.Component{
     }
 
     selectDepot(event) {
+        clearCargoes();
+
         this.setState({selectedDepotId: event.target.value, orderWeight: 0});
     }
 

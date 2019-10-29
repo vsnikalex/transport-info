@@ -37,7 +37,7 @@ export function clearDepots() {
 }
 
 const cargoDestinationMarkerStyle = {
-    radius: 8,
+    radius: 6,
     fillColor: "#1367ed",
     color: "#000",
     weight: 1,
@@ -54,7 +54,22 @@ export function markCargoDestination(cargo) {
         parseFloat(endLoc.point["lat"]), parseFloat(endLoc.point["lng"])
     );
 
-    L.circleMarker(latLng, cargoDestinationMarkerStyle)
-        .bindPopup(endLoc.country + ' ' + cargo.endDepot.type)
-        .addTo(cargoLayerGroup);
+    let cargoMarker = L.circleMarker(latLng, cargoDestinationMarkerStyle)
+        .bindPopup(endLoc.country + ' ' + cargo.endDepot.type);
+
+    cargoMarker._id = cargo.id;
+
+    cargoMarker.addTo(cargoLayerGroup);
+}
+
+export function clearCargoes() {
+    cargoLayerGroup.clearLayers();
+}
+
+export function removeCargoMarker(id) {
+    let cargoMarker = cargoLayerGroup.getLayers().find(layer =>
+        layer._id == id
+    );
+
+    cargoLayerGroup.removeLayer(cargoMarker)
 }

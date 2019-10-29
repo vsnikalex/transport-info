@@ -77,7 +77,7 @@ class TruckList extends React.Component{
         }
 
         return (
-            <div className="col-l-6">
+            <div className="col-l-8">
                 <div className="row">
 
                     <div className="col-l-6">

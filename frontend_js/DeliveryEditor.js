@@ -46,6 +46,11 @@ class Lists extends React.Component{
         clearDepots();
         clearRoutes();
 
+        const getSelectedDepotObj = this.props.depots.find(depot =>
+            depot.id == event.target.value
+        );
+        markDepot(getSelectedDepotObj);
+
         this.setState({selectedDepotId: event.target.value, orderWeight: 0});
     }
 
@@ -60,29 +65,35 @@ class Lists extends React.Component{
 
         if (this.state.selectedDepotId == 0) {
             return (
-                <select onChange={this.selectDepot} defaultValue={0}>
-                    <option value={0} disabled>Choose Depot</option>
-                    {depots}
-                </select>
-            );
-        } else {
-            const getSelectedDepotObj = this.props.depots.find(depot =>
-                depot.id == this.state.selectedDepotId
-            );
-            markDepot(getSelectedDepotObj);
-
-            return (
                 <div className="row">
                     <div className="col-l-3 ">
                         <div className="form-input-set">
-                            <label htmlFor="selectbox">Depot</label>
-                            <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
+                            <label htmlFor="selectbox" title="Primäroptionen Auswahlliste">Depot</label>
+                            <select onChange={this.selectDepot} defaultValue={0}>
+                                <option value={0} disabled>Choose Depot</option>
                                 {depots}
                             </select>
                         </div>
                     </div>
-                    <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
-                    <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <div className="row">
+                        <div className="col-l-3 ">
+                            <div className="form-input-set">
+                                <label htmlFor="selectbox" title="Primäroptionen Auswahlliste">Depot</label>
+                                <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
+                                    {depots}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
+                        <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
+                    </div>
                 </div>
             );
         }

@@ -46,6 +46,12 @@ export function optimizeRoute() {
 
     ghOptimization.doTSPRequest()
         .then(function (response) {
+                let estDist = (response.solution.distance/1000).toFixed(1);
+                let estTime = (response.solution.time/60/60).toFixed(1);
+
+                document.getElementById("est_dist").innerHTML = estDist + 'km';
+                document.getElementById("est_time").innerHTML = estTime + 'h';
+
                 let routes = response.solution.routes[0];
                 routes.points.forEach(line =>
                     routingLayer.addData({

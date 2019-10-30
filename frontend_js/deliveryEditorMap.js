@@ -39,9 +39,30 @@ window.onload = function() {
     });
 };
 
-function fillInfoTable(estDist, estTime) {
-    document.getElementById("est_dist").innerHTML = estDist;
-    document.getElementById("est_time").innerHTML = estTime;
+export function clearMapAndTable() {
+    clearDepots();
+    clearCargoes();
+    clearDeliveryRoutes();
+    clearTrucks();
+    clearTruckRoute();
+    clearInfoTable();
+}
+
+function fillDeliveryInfo(estDist, estTime) {
+    document.getElementById("est_dist_delivery").innerHTML = estDist + 'km';
+    document.getElementById("est_time_delivery").innerHTML = estTime + 'h';
+}
+
+function fillTruckInfo(estDist, estTime) {
+    document.getElementById("est_dist_truck").innerHTML = estDist + 'km';
+    document.getElementById("est_time_truck").innerHTML = estTime + 'h';
+}
+
+function clearInfoTable() {
+    document.getElementById("est_dist_delivery").innerHTML = '';
+    document.getElementById("est_time_delivery").innerHTML = '';
+    document.getElementById("est_dist_truck").innerHTML = '';
+    document.getElementById("est_time_truck").innerHTML = '';
 }
 
 export function clearDeliveryRoutes() {
@@ -59,7 +80,7 @@ export function optimizeDeliveryRoute() {
     let routePoints = cargoLayerGroup.getLayers();
     if (routePoints.length === 0) {
         return new Promise(function (resolve, reject) {
-            fillInfoTable(0, 0);
+            fillDeliveryInfo(0, 0);
             resolve(0.0);
         })
     }
@@ -81,7 +102,7 @@ export function optimizeDeliveryRoute() {
                 let estDist = (response.solution.distance/1000).toFixed(1);
                 let estTime = (response.solution.time/60/60).toFixed(1);
 
-                fillInfoTable(estDist, estTime);
+                fillDeliveryInfo(estDist, estTime);
 
                 return estTime;
             }
@@ -114,7 +135,10 @@ export function calculateTruckRoute() {
                     "geometry" : path.points
                 });
 
+                let estDist = (route.paths[0].distance/1000).toFixed(1);
                 let estTime = (route.paths[0].time/(1000*60*60)).toFixed(1);
+
+                fillTruckInfo(estDist, estTime);
 
                 return estTime;
             }

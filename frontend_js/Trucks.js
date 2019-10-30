@@ -64,7 +64,7 @@ class TruckList extends React.Component{
     }
 
     selectTruck(newTruck) {
-        // TODO: render truck route, pass travelTime+truckTransferTime to <Drivers>
+        // TODO: pass travelTime+truckTransferTime to <Drivers>
         clearTrucks();
         markTruck(newTruck);
         calculateTruckRoute().then(time =>

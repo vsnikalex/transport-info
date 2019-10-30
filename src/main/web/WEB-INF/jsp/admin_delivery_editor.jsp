@@ -52,15 +52,51 @@
                 <h2 class="underline">Route info</h2>
                 <ul class="content-list">
                     <li class="media">
-                        <div class="media-body">
-                            <div class="media-heading">Distance (km)</div>
-                            <div id="est_dist" class="media-hint"></div>
+                        <div class="row">
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div class="media-heading">Delivery</div>
+                                </div>
+                            </div>
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div class="media-heading">Truck Transfer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="row">
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div id="est_dist_delivery" class="media-hint"></div>
+                                </div>
+                            </div>
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div id="est_dist_truck" class="media-hint"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="row">
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div id="est_time_delivery" class="media-hint"></div>
+                                </div>
+                            </div>
+                            <div class="col-l-6 demo-col">
+                                <div class="media-body">
+                                    <div id="est_time_truck" class="media-hint"></div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="media">
                         <div class="media-body">
-                            <div class="media-heading">Estimated time (hours)</div>
-                            <div id="est_time" class="media-hint"></div>
+                            <div class="media-heading text-ellipsis">Route</div>
+                            <div class="media-hint">Salzburg - Hallein - Trento - Budapest - Hallein</div>
                         </div>
                     </li>
                 </ul>

@@ -77,9 +77,10 @@ class TruckList extends React.Component{
         );
 
         let drivers;
+        let wh = parseFloat(this.state.truckTransferTime) + parseFloat(this.props.travelTime);
         if (this.state.selectedTruck.location) {
             drivers = <Drivers city={this.state.selectedTruck.location}
-                               workHours={this.state.truckTransferTime + this.props.travelTime}/>
+                               workHours={wh}/>
         }
 
         return (

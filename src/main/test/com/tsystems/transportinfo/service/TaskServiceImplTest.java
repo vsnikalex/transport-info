@@ -20,7 +20,7 @@ public class TaskServiceImplTest {
     @Transactional
     public void calculationIsValid() {
         double hours = taskService
-                        .getFutureWorkedHours(2L, 1574431200);
+                        .getFutureWorkedHours(4L, 1574431200);
 
         System.out.println(hours);
     }

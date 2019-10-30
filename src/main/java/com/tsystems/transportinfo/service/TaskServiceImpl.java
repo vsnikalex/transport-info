@@ -5,6 +5,7 @@ import com.tsystems.transportinfo.data.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Service
+@Transactional
 public class TaskServiceImpl implements TaskService {
 
     @Autowired

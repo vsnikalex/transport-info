@@ -53,7 +53,7 @@
                 <ul class="content-list">
                     <li class="media">
                         <div class="media-body">
-                            <div class="media-heading">Diatance</div>
+                            <div class="media-heading">Distance</div>
                             <div id="est_dist" class="media-hint"></div>
                         </div>
                     </li>

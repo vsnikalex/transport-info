@@ -34,11 +34,13 @@ class Lists extends React.Component{
         super(props);
         this.state = {
             selectedDepotId: 0,
-            orderWeight: 0
+            orderWeight: 0,
+            travelTime: 0
         };
 
         this.selectDepot = this.selectDepot.bind(this);
         this.changeWeight = this.changeWeight.bind(this);
+        this.setTravelTime = this.setTravelTime.bind(this);
     }
 
     selectDepot(event) {
@@ -54,8 +56,14 @@ class Lists extends React.Component{
         this.setState({selectedDepotId: event.target.value, orderWeight: 0});
     }
 
-    changeWeight(newWeight){
-        this.setState({orderWeight: this.state.orderWeight + newWeight});
+    changeWeight(weight){
+        this.setState({orderWeight: this.state.orderWeight + weight});
+    }
+
+    setTravelTime(time){
+        console.log(time);
+
+        this.setState({travelTime: time});
     }
 
     render() {
@@ -91,7 +99,8 @@ class Lists extends React.Component{
                         </div>
                     </div>
                     <div className="row">
-                        <Cargoes depotId={this.state.selectedDepotId} changeWeight={this.changeWeight}/>
+                        <Cargoes depotId={this.state.selectedDepotId}
+                                 changeWeight={this.changeWeight} setTravelTime={this.setTravelTime}/>
                         <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
                     </div>
                 </div>

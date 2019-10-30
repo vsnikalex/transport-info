@@ -21,7 +21,7 @@ public class TruckDAOImplTest {
     @Transactional
     public void searchIsValid() {
         GHPoint point = new GHPoint(47.68664, 13.09849);
-        truckDAO.findNearestTrucks(point,2 * 60 * 60 * 1000L).stream()
+        truckDAO.findAvailableTrucks(point,2 * 60 * 60 * 1000L).stream()
                                         .map(t -> t.getLocation().getCountry() + " " + t.getPlate())
                                         .forEach(System.out::println);
     }

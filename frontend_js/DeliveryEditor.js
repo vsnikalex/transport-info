@@ -62,8 +62,6 @@ class Lists extends React.Component{
     }
 
     setTravelTime(time){
-        console.log(time);
-
         this.setState({travelTime: time});
     }
 

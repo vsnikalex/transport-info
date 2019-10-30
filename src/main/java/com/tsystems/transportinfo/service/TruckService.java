@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TruckService {
 
-    List<TruckDTO> getNearestTrucks(long depotId, long maxTravelTime);
+    List<TruckDTO> getAvailableTrucks(long depotId, long maxTravelTime);
 
     List<TruckDTO> getAllTrucks();
 

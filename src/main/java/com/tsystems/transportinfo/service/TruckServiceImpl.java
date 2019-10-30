@@ -39,11 +39,11 @@ public class TruckServiceImpl implements TruckService {
     private DepotService depotService;
 
     @Override
-    public List<TruckDTO> getNearestTrucks(long depotId, long maxTravelTime) {
+    public List<TruckDTO> getAvailableTrucks(long depotId, long maxTravelTime) {
         Depot depot = depotService.getDepot(depotId);
         GHPoint destPoint = graphHopperService.pointFromEntry(depot.getLocation());
 
-        List<Truck> trucks = truckDAO.findNearestTrucks(destPoint , maxTravelTime);
+        List<Truck> trucks = truckDAO.findAvailableTrucks(destPoint , maxTravelTime);
         return trucks.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

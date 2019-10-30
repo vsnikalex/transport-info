@@ -21,8 +21,8 @@ public class TruckController {
     private TruckService truckService;
 
     @GetMapping("/all/{depotId}/{maxTravelTime}")
-    public List<TruckDTO> allNearestTrucks(@PathVariable long depotId, @PathVariable long maxTravelTime) {
-        return truckService.getNearestTrucks(depotId, maxTravelTime);
+    public List<TruckDTO> allAvailableTrucks(@PathVariable long depotId, @PathVariable long maxTravelTime) {
+        return truckService.getAvailableTrucks(depotId, maxTravelTime);
     }
 
     @GetMapping("/all")

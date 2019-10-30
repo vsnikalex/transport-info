@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dao;
 
 import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.entity.Truck;
+import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import com.tsystems.transportinfo.service.GraphHopperService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,13 +23,12 @@ public class TruckDAOImpl implements TruckDAO {
     private GraphHopperService graphHopperService;
 
     @Override
-    public List<Truck> findNearestTrucks(GHPoint destination, long maxTravelTime) {
+    public List<Truck> findAvailableTrucks(GHPoint destination, long maxTravelTime) {
         // Use rough estimate to calculate distance between trucks and destination point
         long maxTravelHours = maxTravelTime / 1000 / 60 / 60;
         long maxTravelDistanceMeters = maxTravelHours * 60 * 1000;
 
         Session session = sessionFactory.getCurrentSession();
-
         Stream<Truck> trucks = session.createQuery("SELECT t FROM Truck t", Truck.class).stream();
 
         return trucks.filter(t -> {
@@ -36,7 +36,12 @@ public class TruckDAOImpl implements TruckDAO {
             double distanceMeters = graphHopperService.distance(
                                                     truckPoint.getLat(), destination.getLat(),
                                                     truckPoint.getLon(), destination.getLon(), 0, 0);
-            return distanceMeters < maxTravelDistanceMeters;
+
+            boolean distanceIsOk = distanceMeters < maxTravelDistanceMeters;
+            boolean statusIsOk = t.getStatus() == TruckStatus.OK;
+            boolean truckIsFree = t.getDelivery() == null;
+
+            return distanceIsOk && statusIsOk && truckIsFree;
         }).collect(Collectors.toList());
     }
 

@@ -6,5 +6,5 @@ import com.tsystems.transportinfo.data.entity.Truck;
 import java.util.List;
 
 public interface TruckDAO {
-    List<Truck> findNearestTrucks(GHPoint destination, long maxTravelTime);
+    List<Truck> findAvailableTrucks(GHPoint destination, long maxTravelTime);
 }

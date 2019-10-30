@@ -20,8 +20,6 @@ var markerOptions = {
 function loadAllDepotsToMap(leaflet_map) {
     axios.get('api/depot/all')
         .then(depots => {
-            console.log(depots.data);
-
             depots.data.forEach(depot => {
                 var loc = depot.location;
 
@@ -55,8 +53,6 @@ function setupRoutingAPI(leaflet_map) {
 
     ghRouting.doRequest()
         .then(function(route){
-            console.log(route);
-
             let estDist = (route.paths[0].distance/1000).toFixed(1);
             let estTime = (route.paths[0].time/(1000*60*60)).toFixed(1);
 

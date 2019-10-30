@@ -17,7 +17,7 @@ class Trucks extends React.Component {
     }
 
     componentDidMount() {
-        // Max travel hours is 2 in milliseconds (7200000) by default
+        // TODO: Customize max travel hours, which is 2 in milliseconds (7200000) by default
         axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
             this.setState({trucks: response.data});
         });
@@ -64,14 +64,11 @@ class TruckList extends React.Component{
     }
 
     selectTruck(newTruck) {
-        // TODO: pass travelTime+truckTransferTime to <Drivers>
         clearTrucks();
         markTruck(newTruck);
         calculateTruckRoute().then(time =>
-            console.log(time)
+            this.setState({selectedTruck: newTruck, truckTransferTime: time})
         );
-
-        this.setState({selectedTruck: newTruck});
     }
 
     render() {
@@ -81,7 +78,8 @@ class TruckList extends React.Component{
 
         let drivers;
         if (this.state.selectedTruck.location) {
-            drivers = <Drivers city={this.state.selectedTruck.location}/>
+            drivers = <Drivers city={this.state.selectedTruck.location}
+                               workHours={this.state.truckTransferTime + this.props.travelTime}/>
         }
 
         return (

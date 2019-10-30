@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class GraphHopperTest {
+public class GraphHopperServiceImplTest {
 
     @Test
     public void warehouseFoundByCoordinates() {

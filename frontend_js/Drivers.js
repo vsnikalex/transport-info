@@ -6,7 +6,8 @@ class Drivers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            drivers: []
+            drivers: [],
+            workHours: 0
         };
     }
 
@@ -18,18 +19,18 @@ class Drivers extends React.Component {
 
     componentDidUpdate(oldProps) {
         if (this.props.city !== oldProps.city) {
-
             axios.post('api/driver/city', this.props.city).then(response => {
                 this.setState({drivers: response.data});
             });
-
+        } else if (this.props.workHours !== oldProps.workHours) {
+            this.setState({workHours: this.props.workHours});
         }
     }
 
     render() {
         if (this.state.drivers) {
             return (
-                <DriverList drivers={this.state.drivers} />
+                <DriverList drivers={this.state.drivers} workHours={this.state.workHours} />
             )
         }
     }
@@ -39,7 +40,7 @@ class Drivers extends React.Component {
 class DriverList extends React.Component{
     render() {
         const drivers = this.props.drivers.map(driver =>
-            <Driver key={driver.id} driver={driver} />
+            <Driver key={driver.id} driver={driver} workHours={this.props.workHours} />
         );
         return (
             <div className="col-l-6">
@@ -71,6 +72,9 @@ class Driver extends React.Component{
     }
 
     render() {
+        // const hoursRatio = this.props.workHours / this.props.driver.workedThisMonth;
+        // let inputDisabled = hoursRatio > 1;
+
         return (
             <li className="media">
                 <div className="media-body">

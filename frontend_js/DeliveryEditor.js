@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const axios = require('axios');
 
-import {clearRoutes, markDepot, clearCargoes, clearDepots} from './deliveryEditorMap';
+import {clearRoutes, markDepot, clearCargoes, clearDepots, clearTrucks} from './deliveryEditorMap';
 
 import Cargoes from './Cargoes';
 import Trucks from './Trucks';
@@ -47,6 +47,7 @@ class Lists extends React.Component{
         clearCargoes();
         clearDepots();
         clearRoutes();
+        clearTrucks();
 
         const getSelectedDepotObj = this.props.depots.find(depot =>
             depot.id == event.target.value
@@ -101,7 +102,8 @@ class Lists extends React.Component{
                     <div className="row">
                         <Cargoes depotId={this.state.selectedDepotId}
                                  changeWeight={this.changeWeight} setTravelTime={this.setTravelTime}/>
-                        <Trucks depotId={this.state.selectedDepotId} orderWeight={this.state.orderWeight}/>
+                        <Trucks  depotId={this.state.selectedDepotId}
+                                 orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>
                     </div>
                 </div>
             );

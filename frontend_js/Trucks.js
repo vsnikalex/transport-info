@@ -1,6 +1,8 @@
 const React = require('react');
 const axios = require('axios');
 
+import {clearTrucks, markTruck} from './deliveryEditorMap';
+
 import Drivers from "./Drivers";
 
 class Trucks extends React.Component {
@@ -9,12 +11,13 @@ class Trucks extends React.Component {
         super(props);
         this.state = {
             trucks: [],
-            orderWeight: 0
+            orderWeight: 0,
+            travelTime: 0
         };
     }
 
     componentDidMount() {
-        // Max travel hours is 2 in milliseconds by default
+        // Max travel hours is 2 in milliseconds (7200000) by default
         axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
             this.setState({trucks: response.data});
         });
@@ -22,22 +25,21 @@ class Trucks extends React.Component {
 
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
-
             axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
                 this.setState({trucks: response.data, orderWeight: 0});
             });
-
         } else if (this.props.orderWeight !== oldProps.orderWeight) {
-
             this.setState({orderWeight: this.props.orderWeight});
-
+        } else if (this.props.travelTime !== oldProps.travelTime) {
+            this.setState({travelTime: this.props.travelTime});
         }
     }
 
     render() {
         if (this.state.trucks) {
             return (
-                <TruckList trucks={this.state.trucks} orderWeight={this.state.orderWeight}/>
+                <TruckList trucks={this.state.trucks}
+                           orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>
             )
         }
     }
@@ -48,11 +50,10 @@ class TruckList extends React.Component{
     constructor() {
         super();
         this.state = {
-            selectedTruck: {}
+            selectedTruck: {},
+            truckTransferTime: 0
         };
-    }
 
-    componentDidMount() {
         this.selectTruck = this.selectTruck.bind(this);
     }
 
@@ -63,6 +64,10 @@ class TruckList extends React.Component{
     }
 
     selectTruck(newTruck) {
+        // TODO: render trucks, route, pass travelTime+truckTransferTime to <Drivers>
+        clearTrucks();
+        markTruck(newTruck);
+
         this.setState({selectedTruck: newTruck});
     }
 

@@ -9,6 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const depotLayerGroup = L.layerGroup().addTo(map);
 const cargoLayerGroup = L.layerGroup().addTo(map);
+const truckLayerGroup = L.layerGroup().addTo(map);
 
 const routingLayer = L.geoJSON().addTo(map);
 let ghOptimization;
@@ -141,4 +142,31 @@ export function removeCargoMarker(id) {
     );
 
     cargoLayerGroup.removeLayer(cargoMarker)
+}
+
+const truckMarkerStyle = {
+    radius: 6,
+    fillColor: "#38f26a",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+export function markTruck(truck) {
+    if (typeof truck === 'undefined') { return; }
+
+    let loc = truck.location;
+
+    let latLng = L.latLng(
+        parseFloat(loc.point["lat"]), parseFloat(loc.point["lng"])
+    );
+
+    L.circleMarker(latLng, truckMarkerStyle)
+        .bindPopup(loc.city + ' ' + truck.plate)
+        .addTo(truckLayerGroup);
+}
+
+export function clearTrucks() {
+    truckLayerGroup.clearLayers();
 }

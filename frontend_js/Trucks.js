@@ -1,7 +1,7 @@
 const React = require('react');
 const axios = require('axios');
 
-import {clearTrucks, markTruck} from './deliveryEditorMap';
+import {calculateTruckRoute, clearTrucks, markTruck, optimizeDeliveryRoute} from './deliveryEditorMap';
 
 import Drivers from "./Drivers";
 
@@ -64,9 +64,12 @@ class TruckList extends React.Component{
     }
 
     selectTruck(newTruck) {
-        // TODO: render trucks, route, pass travelTime+truckTransferTime to <Drivers>
+        // TODO: render truck route, pass travelTime+truckTransferTime to <Drivers>
         clearTrucks();
         markTruck(newTruck);
+        calculateTruckRoute().then(time =>
+            console.log(time)
+        );
 
         this.setState({selectedTruck: newTruck});
     }

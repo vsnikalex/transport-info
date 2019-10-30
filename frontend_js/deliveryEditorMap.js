@@ -11,8 +11,11 @@ const depotLayerGroup = L.layerGroup().addTo(map);
 const cargoLayerGroup = L.layerGroup().addTo(map);
 const truckLayerGroup = L.layerGroup().addTo(map);
 
-const routingLayer = L.geoJSON().addTo(map);
+const deliveryRoutingLayer = L.geoJSON().addTo(map);
 let ghOptimization;
+
+const truckRoutingLayer = L.geoJSON().addTo(map);
+let ghRouting;
 
 window.onload = function() {
     let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
@@ -26,19 +29,27 @@ window.onload = function() {
         elevation: false,
         optimize: true
     });
+
+    ghRouting = new GraphHopperRouting({
+        key: apiKey,
+        host: host,
+        vehicle: profile,
+        elevation: false,
+        optimize: true
+    });
 };
 
 function fillInfoTable(estDist, estTime) {
-    document.getElementById("est_dist").innerHTML = estDist + 'km';
-    document.getElementById("est_time").innerHTML = estTime + 'h';
+    document.getElementById("est_dist").innerHTML = estDist;
+    document.getElementById("est_time").innerHTML = estTime;
 }
 
-export function clearRoutes() {
-    routingLayer.clearLayers();
+export function clearDeliveryRoutes() {
+    deliveryRoutingLayer.clearLayers();
 }
 
-export function optimizeRoute() {
-    clearRoutes();
+export function optimizeDeliveryRoute() {
+    clearDeliveryRoutes();
     ghOptimization.clear();
 
     let startDepot = depotLayerGroup.getLayers()[0];
@@ -61,7 +72,7 @@ export function optimizeRoute() {
         .then(function (response) {
                 let routes = response.solution.routes[0];
                 routes.points.forEach(line =>
-                    routingLayer.addData({
+                    deliveryRoutingLayer.addData({
                         "type" : "Feature",
                         "geometry" : line
                     })
@@ -71,6 +82,39 @@ export function optimizeRoute() {
                 let estTime = (response.solution.time/60/60).toFixed(1);
 
                 fillInfoTable(estDist, estTime);
+
+                return estTime;
+            }
+        ).catch(function(err){
+            console.error(err.message);
+        });
+}
+
+export function clearTruckRoute() {
+    truckRoutingLayer.clearLayers();
+}
+
+export function calculateTruckRoute() {
+    clearTruckRoute();
+    ghRouting.clearPoints();
+
+    let truck = truckLayerGroup.getLayers()[0];
+    let truckCoords = truck.getLatLng();
+    ghRouting.addPoint(new GHInput(truckCoords.lat, truckCoords.lng));
+
+    let depot = depotLayerGroup.getLayers()[0];
+    let depotCoords = depot.getLatLng();
+    ghRouting.addPoint(new GHInput(depotCoords.lat, depotCoords.lng));
+
+    return ghRouting.doRequest()
+        .then(function (route) {
+                let path = route.paths[0];
+                truckRoutingLayer.addData({
+                    "type" : "Feature",
+                    "geometry" : path.points
+                });
+
+                let estTime = (route.paths[0].time/(1000*60*60)).toFixed(1);
 
                 return estTime;
             }

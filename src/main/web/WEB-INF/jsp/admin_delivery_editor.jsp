@@ -53,13 +53,13 @@
                 <ul class="content-list">
                     <li class="media">
                         <div class="media-body">
-                            <div class="media-heading">Distance</div>
+                            <div class="media-heading">Distance (km)</div>
                             <div id="est_dist" class="media-hint"></div>
                         </div>
                     </li>
                     <li class="media">
                         <div class="media-body">
-                            <div class="media-heading">Estimated time</div>
+                            <div class="media-heading">Estimated time (hours)</div>
                             <div id="est_time" class="media-hint"></div>
                         </div>
                     </li>

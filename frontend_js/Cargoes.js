@@ -1,7 +1,7 @@
 const React = require('react');
 const axios = require('axios');
 
-import {markCargoDestination, removeCargoMarker, optimizeRoute} from './deliveryEditorMap';
+import {markCargoDestination, removeCargoMarker, optimizeDeliveryRoute} from './deliveryEditorMap';
 
 class Cargoes extends React.Component {
 
@@ -66,7 +66,7 @@ class Cargo extends React.Component{
         if (!this.state.isChecked) {
             markCargoDestination(this.props.cargo);
 
-            optimizeRoute().then(time =>
+            optimizeDeliveryRoute().then(time =>
                 this.props.setTravelTime(time)
             );
 
@@ -74,7 +74,7 @@ class Cargo extends React.Component{
         } else {
             removeCargoMarker(this.props.cargo.id);
 
-            optimizeRoute().then(time =>
+            optimizeDeliveryRoute().then(time =>
                 this.props.setTravelTime(time)
             );
 

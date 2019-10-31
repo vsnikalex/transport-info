@@ -48,7 +48,7 @@
                     <div id="map" class="map" style="height: 300px"></div>
                 </div>
             </div>
-            <div class="demo-col col-s-6 col-l-4">
+            <div class="col-s-6 col-l-4">
                 <h2 class="underline">Route info</h2>
                 <ul class="content-list">
                     <li class="media">
@@ -95,8 +95,7 @@
                     </li>
                     <li class="media">
                         <div class="media-body">
-                            <div class="media-heading text-ellipsis">Route</div>
-                            <div class="media-hint">Salzburg - Hallein - Trento - Budapest - Hallein</div>
+                            <div id="est_route" class="media-hint"></div>
                         </div>
                     </li>
                 </ul>

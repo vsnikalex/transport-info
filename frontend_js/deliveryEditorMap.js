@@ -1,5 +1,6 @@
 const L = require('leaflet');
 require('graphhopper-js-api-client');
+const axios = require('axios');
 
 const map = L.map('map').setView([48.43, 18.56], 4);
 
@@ -58,11 +59,28 @@ function fillTruckInfo(estDist, estTime) {
     document.getElementById("est_time_truck").innerHTML = estTime + 'h';
 }
 
+function fillRoute(activities) {
+    let n = activities.length;
+    let route = '';
+    activities.forEach(a => {
+        let coords = a.address.lat + ',' + a.address.lon;
+
+        axios.get('api/depot/' + coords + '/').then(depot => {
+            route += (n === activities.length ? '' : ' &rarr; ') + depot.data.location.city;
+
+            if (--n === 0) {
+                document.getElementById("est_route").innerHTML = route;
+            }
+        });
+    });
+}
+
 function clearInfoTable() {
     document.getElementById("est_dist_delivery").innerHTML = '';
     document.getElementById("est_time_delivery").innerHTML = '';
     document.getElementById("est_dist_truck").innerHTML = '';
     document.getElementById("est_time_truck").innerHTML = '';
+    document.getElementById("est_route").innerHTML = '';
 }
 
 export function clearDeliveryRoutes() {
@@ -101,8 +119,9 @@ export function optimizeDeliveryRoute() {
 
                 let estDist = (response.solution.distance/1000).toFixed(1);
                 let estTime = (response.solution.time/60/60).toFixed(1);
-
                 fillDeliveryInfo(estDist, estTime);
+
+                fillRoute(routes.activities);
 
                 return estTime;
             }

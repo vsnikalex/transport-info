@@ -41,8 +41,8 @@ public class DriverServiceImpl implements DriverService {
     private TruckService truckService;
 
     @Override
-    public List<DriverDTO> getDriversByCity(GHGeocodingEntry city) {
-        List<Driver> drivers = driverDAO.findDriversByCity(city);
+    public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
+        List<Driver> drivers = driverDAO.findAvailableDrivers(city);
         return drivers.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

@@ -54,7 +54,7 @@ class Lists extends React.Component{
         );
         markDepot(getSelectedDepotObj);
 
-        this.setState({selectedDepotId: event.target.value, orderWeight: 0});
+        this.setState({selectedDepotId: event.target.value, orderWeight: 0, travelTime: 0});
     }
 
     changeWeight(weight){

@@ -22,8 +22,8 @@ public class DriverController {
     private DriverService driverService;
 
     @PostMapping("/city")
-    public List<DriverDTO> driversByCity(@RequestBody GHGeocodingEntry city) {
-        return driverService.getDriversByCity(city);
+    public List<DriverDTO> allAvailableDrivers(@RequestBody GHGeocodingEntry city) {
+        return driverService.getAvailableDrivers(city);
     }
 
     @GetMapping("/all")

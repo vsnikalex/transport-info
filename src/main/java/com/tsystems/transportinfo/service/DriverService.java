@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DriverService {
 
-    List<DriverDTO> getDriversByCity(GHGeocodingEntry city);
+    List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city);
 
     List<DriverDTO> getAllDrivers();
 

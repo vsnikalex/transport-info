@@ -63,6 +63,7 @@ class Driver extends React.Component{
     }
 
     estimateDeliveryEndDateTime(workHours) {
+        // TODO: Customize task start datetime, which is now by default
         let now = new Date();
         let estDeliveryDays = parseFloat(workHours) / 8;
         // 86400000 - milliseconds per day, divided  by 1000 for Java using epoch seconds, not milliseconds

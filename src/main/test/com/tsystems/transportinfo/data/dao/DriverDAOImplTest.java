@@ -25,7 +25,7 @@ public class DriverDAOImplTest {
         geocodingEntry.setState("Salzburg");
         geocodingEntry.setCity("Hallein");
 
-        driverDAO.findDriversByCity(geocodingEntry)
+        driverDAO.findAvailableDrivers(geocodingEntry)
                                         .stream()
                                         .map(d -> d.getFirstName() + " " + d.getLastName())
                                         .forEach(System.out::println);

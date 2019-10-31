@@ -26,12 +26,10 @@ class Trucks extends React.Component {
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
             axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
-                this.setState({trucks: response.data, orderWeight: 0});
+                this.setState({trucks: response.data, orderWeight: 0, travelTime: 0});
             });
-        } else if (this.props.orderWeight !== oldProps.orderWeight) {
-            this.setState({orderWeight: this.props.orderWeight});
-        } else if (this.props.travelTime !== oldProps.travelTime) {
-            this.setState({travelTime: this.props.travelTime});
+        } else if (this.props.orderWeight !== oldProps.orderWeight || this.props.travelTime !== oldProps.travelTime) {
+            this.setState({orderWeight: this.props.orderWeight, travelTime: this.props.travelTime});
         }
     }
 

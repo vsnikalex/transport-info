@@ -22,13 +22,17 @@ public class DriverDAOImpl implements DriverDAO {
     private GraphHopperService graphHopperService;
 
     @Override
-    public List<Driver> findDriversByCity(GHGeocodingEntry city) {
+    public List<Driver> findAvailableDrivers(GHGeocodingEntry city) {
         Session session = sessionFactory.getCurrentSession();
 
         Stream<Driver> drivers = session.createQuery("SELECT d FROM Driver d", Driver.class).stream();
 
-        return drivers.filter(d -> graphHopperService.inSameCity(d.getLocation(), city))
-                        .collect(Collectors.toList());
+        return drivers.filter(d -> {
+            boolean driverInSameCity = graphHopperService.inSameCity(d.getLocation(), city);
+            boolean driverIsFree = d.getDelivery() == null;
+
+            return driverInSameCity && driverIsFree;
+        }).collect(Collectors.toList());
     }
 
 }

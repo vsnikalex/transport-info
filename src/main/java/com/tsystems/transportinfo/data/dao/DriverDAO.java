@@ -6,5 +6,5 @@ import com.tsystems.transportinfo.data.entity.Driver;
 import java.util.List;
 
 public interface DriverDAO {
-    List<Driver> findDriversByCity(GHGeocodingEntry city);
+    List<Driver> findAvailableDrivers(GHGeocodingEntry city);
 }

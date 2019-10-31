@@ -43,6 +43,7 @@ class Lists extends React.Component{
             travelTime: 0,
 
             selectedTruckId: 0,
+
             selectedDrivers: new Set(),
 
             validInput: false
@@ -52,6 +53,10 @@ class Lists extends React.Component{
 
         this.addCargo = this.addCargo.bind(this);
         this.removeCargo = this.removeCargo.bind(this);
+
+        this.addDriver = this.addDriver.bind(this);
+        this.removeDriver = this.removeDriver.bind(this);
+        this.deselectAllDrivers = this.deselectAllDrivers.bind(this);
     }
 
     selectDepot(event) {
@@ -63,7 +68,8 @@ class Lists extends React.Component{
         markDepot(getSelectedDepotObj);
 
         this.setState({selectedDepotId: event.target.value,
-                       selectedCargoes: new Set(), orderWeight: 0, travelTime: 0});
+                       selectedCargoes: new Set(), orderWeight: 0, travelTime: 0,
+                       selectedDrivers: new Set()});
     }
 
     addCargo(cargo, time) {
@@ -97,6 +103,37 @@ class Lists extends React.Component{
             orderWeight: this.state.orderWeight - cargo.weight,
             travelTime: time
         });
+    }
+
+    addDriver(driver) {
+        let isSet = this.state.selectedDrivers instanceof Set;
+        let set;
+        if (isSet) {
+            set = this.state.selectedDrivers;
+            set.add(driver.id);
+        } else {
+            set = new Set();
+            set.add(driver.id);
+        }
+
+        console.log('selected drivers: [' + Array.from(set).join(' ') + ']');
+
+        this.setState({selectedDrivers: set});
+    }
+
+    removeDriver(driver) {
+        let set = this.state.selectedDrivers;
+        set.delete(driver.id);
+
+        console.log('selected drivers: [' + Array.from(set).join(' ') + ']');
+
+        this.setState({selectedDrivers: set});
+    }
+
+    deselectAllDrivers() {
+        console.log('deselect all drivers');
+
+        this.setState({selectedDrivers: new Set()});
     }
 
     render() {
@@ -135,6 +172,8 @@ class Lists extends React.Component{
                         <Cargoes depotId={this.state.selectedDepotId}
                                  addCargo={this.addCargo} removeCargo={this.removeCargo}/>
                         <Trucks  depotId={this.state.selectedDepotId}
+                                 addDriver={this.addDriver} removeDriver={this.removeDriver}
+                                 deselectAllDrivers={this.deselectAllDrivers}
                                  orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>
                     </div>
                 </div>

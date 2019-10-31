@@ -2,7 +2,6 @@ const React = require('react');
 const axios = require('axios');
 
 class Drivers extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +18,11 @@ class Drivers extends React.Component {
 
     componentDidUpdate(oldProps) {
         if (this.props.city !== oldProps.city) {
+
+            if (this.props.city.city !== oldProps.city.city) {
+                this.props.deselectAllDrivers();
+            }
+
             axios.post('api/driver/city', this.props.city).then(response => {
                 this.setState({drivers: response.data});
             });
@@ -30,7 +34,8 @@ class Drivers extends React.Component {
     render() {
         if (this.state.drivers) {
             return (
-                <DriverList drivers={this.state.drivers} workHours={this.state.workHours} />
+                <DriverList drivers={this.state.drivers} workHours={this.state.workHours}
+                            addDriver={this.props.addDriver} removeDriver={this.props.removeDriver}/>
             )
         }
     }
@@ -40,8 +45,10 @@ class Drivers extends React.Component {
 class DriverList extends React.Component{
     render() {
         const drivers = this.props.drivers.map(driver =>
-            <Driver key={driver.id} driver={driver} workHours={this.props.workHours} />
+            <Driver key={driver.id} driver={driver} workHours={this.props.workHours}
+                    addDriver={this.props.addDriver} removeDriver={this.props.removeDriver}/>
         );
+
         return (
             <div className="col-l-6">
                 <ul className="content-list">
@@ -90,9 +97,9 @@ class Driver extends React.Component{
 
     handleChecked() {
         if (!this.state.isChecked) {
-            console.log('CHECKED');
+            this.props.addDriver(this.props.driver);
         } else {
-            console.log('UNCHECKED');
+            this.props.removeDriver(this.props.driver);
         }
 
         this.setState({isChecked: !this.state.isChecked});

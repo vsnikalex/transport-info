@@ -37,13 +37,21 @@ class Lists extends React.Component{
         super(props);
         this.state = {
             selectedDepotId: 0,
+
+            selectedCargoes: new Set(),
             orderWeight: 0,
-            travelTime: 0
+            travelTime: 0,
+
+            selectedTruckId: 0,
+            selectedDrivers: new Set(),
+
+            validInput: false
         };
 
         this.selectDepot = this.selectDepot.bind(this);
-        this.changeWeight = this.changeWeight.bind(this);
-        this.setTravelTime = this.setTravelTime.bind(this);
+
+        this.addCargo = this.addCargo.bind(this);
+        this.removeCargo = this.removeCargo.bind(this);
     }
 
     selectDepot(event) {
@@ -54,15 +62,41 @@ class Lists extends React.Component{
         );
         markDepot(getSelectedDepotObj);
 
-        this.setState({selectedDepotId: event.target.value, orderWeight: 0, travelTime: 0});
+        this.setState({selectedDepotId: event.target.value,
+                       selectedCargoes: new Set(), orderWeight: 0, travelTime: 0});
     }
 
-    changeWeight(weight){
-        this.setState({orderWeight: this.state.orderWeight + weight});
+    addCargo(cargo, time) {
+        let isSet = this.state.selectedCargoes instanceof Set;
+        let set;
+        if (isSet) {
+            set = this.state.selectedCargoes;
+            set.add(cargo.id);
+        } else {
+            set = new Set();
+            set.add(cargo.id);
+        }
+
+        console.log('selected cargoes: [' + Array.from(set).join(' ') + ']');
+
+        this.setState({
+            selectedCargoes: set,
+            orderWeight: this.state.orderWeight + cargo.weight,
+            travelTime: time
+        });
     }
 
-    setTravelTime(time){
-        this.setState({travelTime: time});
+    removeCargo(cargo, time) {
+        let set = this.state.selectedCargoes;
+        set.delete(cargo.id);
+
+        console.log('selected cargoes: [' + Array.from(set).join(' ') + ']');
+
+        this.setState({
+            selectedCargoes: set,
+            orderWeight: this.state.orderWeight - cargo.weight,
+            travelTime: time
+        });
     }
 
     render() {
@@ -99,7 +133,7 @@ class Lists extends React.Component{
                     </div>
                     <div className="row">
                         <Cargoes depotId={this.state.selectedDepotId}
-                                 changeWeight={this.changeWeight} setTravelTime={this.setTravelTime}/>
+                                 addCargo={this.addCargo} removeCargo={this.removeCargo}/>
                         <Trucks  depotId={this.state.selectedDepotId}
                                  orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>
                     </div>

@@ -30,7 +30,7 @@ class Cargoes extends React.Component {
         if (this.state.cargoes) {
             return (
                 <CargoList cargoes={this.state.cargoes}
-                           changeWeight={this.props.changeWeight} setTravelTime={this.props.setTravelTime}/>
+                           addCargo={this.props.addCargo} removeCargo={this.props.removeCargo}/>
             )
         }
     }
@@ -41,7 +41,7 @@ class CargoList extends React.Component{
     render() {
         const cargoes = this.props.cargoes.map(cargo =>
             <Cargo key={cargo.id} cargo={cargo}
-                   changeWeight={this.props.changeWeight} setTravelTime={this.props.setTravelTime}/>
+                   addCargo={this.props.addCargo} removeCargo={this.props.removeCargo}/>
         );
         return (
             <div className="col-l-4 ">
@@ -66,19 +66,15 @@ class Cargo extends React.Component{
         if (!this.state.isChecked) {
             markCargoDestination(this.props.cargo);
 
-            optimizeDeliveryRoute().then(time =>
-                this.props.setTravelTime(time)
-            );
-
-            this.props.changeWeight(+1*this.props.cargo.weight);
+            optimizeDeliveryRoute().then(time => {
+                this.props.addCargo(this.props.cargo, time);
+            });
         } else {
             removeCargoMarker(this.props.cargo.id);
 
-            optimizeDeliveryRoute().then(time =>
-                this.props.setTravelTime(time)
-            );
-
-            this.props.changeWeight(-1*this.props.cargo.weight);
+            optimizeDeliveryRoute().then(time => {
+                this.props.removeCargo(this.props.cargo, time);
+            });
         }
 
         this.setState({isChecked: !this.state.isChecked});

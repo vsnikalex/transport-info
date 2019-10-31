@@ -40,14 +40,16 @@ class Lists extends React.Component{
 
             selectedCargoes: new Set(),
             orderWeight: 0,
+            // TODO: get route from <Cargo>
+            route: {},
             travelTime: 0,
 
-            selectedTruckId: 0,
+            selectedTruck: {},
 
-            selectedDrivers: new Set(),
-
-            validInput: false
+            selectedDrivers: new Set()
         };
+
+        this.checkInput = this.checkInput.bind(this);
 
         this.selectDepot = this.selectDepot.bind(this);
 
@@ -61,6 +63,13 @@ class Lists extends React.Component{
         this.deselectAllDrivers = this.deselectAllDrivers.bind(this);
     }
 
+    checkInput() {
+        let truckOk = this.state.selectedTruckId != 0;
+        let overload = (this.state.orderWeight / this.state.selectedTruck.capacity) < 1;
+        let driversOk = this.state.selectedDrivers.length > 0;
+        return (truckOk && !overload) && (driversOk);
+    }
+
     selectDepot(event) {
         clearMapAndTable();
 
@@ -70,7 +79,8 @@ class Lists extends React.Component{
         markDepot(getSelectedDepotObj);
 
         this.setState({selectedDepotId: event.target.value,
-                       selectedCargoes: new Set(), orderWeight: 0, travelTime: 0,
+                       selectedCargoes: new Set(), orderWeight: 0,
+                       route: {}, travelTime: 0,
                        selectedTruckId: 0,
                        selectedDrivers: new Set()});
     }
@@ -109,9 +119,7 @@ class Lists extends React.Component{
     }
 
     selectTruck(truck) {
-        console.log('selected truck: ' + truck.id);
-
-        this.setState({selectedTruckId: truck.id});
+        this.setState({selectedTruck: truck});
     }
 
     addDriver(driver) {
@@ -168,13 +176,18 @@ class Lists extends React.Component{
             return (
                 <div>
                     <div className="row">
-                        <div className="col-l-3 ">
+                        <div className="col-l-3">
                             <div className="form-input-set">
                                 <label htmlFor="selectbox" title="Primäroptionen Auswahlliste">Depot</label>
                                 <select value={this.state.selectedDepotId} onChange={this.selectDepot}>
                                     {depots}
                                 </select>
                             </div>
+                        </div>
+                        <div className="col-l-6"></div>
+                        <div className="col-l-3">
+                            <button type="button" className="btn btn-positive">Submit</button>
+                            <button type="button" className="btn btn-default" disabled={true}>Submit</button>
                         </div>
                     </div>
                     <div className="row">

@@ -116,14 +116,14 @@ class Truck extends React.Component{
 
     render() {
         const weightRatio = this.props.orderWeight / this.props.truck.capacity;
-        let inputDisabled = weightRatio > 1;
+        let overweight = weightRatio > 1;
 
         return (
             <li className="media">
                 <div className="media-body">
                     <div className="form-radio-set">
                         <label>
-                            <input type="radio" disabled={inputDisabled} onChange={this.handleChecked}
+                            <input type="radio" disabled={overweight} onChange={this.handleChecked}
                                    name="rb" value="rb1" className="form-radio"/>
                             {this.props.truck.plate} Loaded: {weightRatio}
                         </label>

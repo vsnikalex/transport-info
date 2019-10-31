@@ -81,7 +81,20 @@ class Driver extends React.Component{
         let endDateTime = this.estimateDeliveryEndDateTime(this.props.workHours);
 
         axios.get('api/task/hours/' + this.props.driver.id + '/' + endDateTime).then(response => {
-            this.setState({willBeWorkedWithoutDelivery: response.data});
+            const willBeWorkedAfterDelivery = parseFloat(response.data)
+                + parseFloat(this.props.workHours);
+
+            let overwork = willBeWorkedAfterDelivery > 176;
+            if (overwork) { this.props.removeDriver(this.props.driver); }
+
+            if (overwork) {
+                this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
+                               overwork: true,
+                               isChecked: false});
+            } else {
+                this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
+                    overwork: false});
+            }
         });
     }
 
@@ -90,7 +103,20 @@ class Driver extends React.Component{
             let endDateTime = this.estimateDeliveryEndDateTime(this.props.workHours);
 
             axios.get('api/task/hours/' + this.props.driver.id + '/' + endDateTime).then(response => {
-                this.setState({willBeWorkedWithoutDelivery: response.data});
+                const willBeWorkedAfterDelivery = parseFloat(response.data)
+                    + parseFloat(this.props.workHours);
+
+                let overwork = willBeWorkedAfterDelivery > 176;
+                if (overwork) { this.props.removeDriver(this.props.driver); }
+
+                if (overwork) {
+                    this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
+                        overwork: true,
+                        isChecked: false});
+                } else {
+                    this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
+                        overwork: false});
+                }
             });
         }
     }
@@ -106,22 +132,26 @@ class Driver extends React.Component{
     }
 
     render() {
-        const willBeWorkedAfterDelivery = parseFloat(this.state.willBeWorkedWithoutDelivery)
-                                            + parseFloat(this.props.workHours);
-        let inputDisabled = willBeWorkedAfterDelivery > 176;
+        let checkBox;
+        if (this.state.overwork) {
+            checkBox = <input type="checkbox" disabled={true} checked={false}
+                              name="cb0" value="0" className="form-checkbox"/>;
+        } else {
+            checkBox = <input type="checkbox" onChange={this.handleChecked}
+                              name="cb0" value="0" className="form-checkbox"/>;
+        }
 
         return (
             <li className="media">
                 <div className="media-body">
                     <div className="form-checkbox-set">
                         <label>
-                            <input type="checkbox" disabled={inputDisabled} onChange={ this.handleChecked }
-                                   name="cb0" value="0" className="form-checkbox"/>
+                            {checkBox}
                             {this.props.driver.firstName} {this.props.driver.lastName}
                         </label>
                     </div>
                     <div className="media-hint">
-                        {this.props.driver.location.city} Future Work: {willBeWorkedAfterDelivery}
+                        {this.props.driver.location.city} Future Work: {this.state.willBeWorkedAfterDelivery}
                     </div>
                 </div>
             </li>

@@ -36,7 +36,7 @@ class Trucks extends React.Component {
     render() {
         if (this.state.trucks) {
             return (
-                <TruckList trucks={this.state.trucks}
+                <TruckList trucks={this.state.trucks} selectTruck={this.props.selectTruck}
                            addDriver={this.props.addDriver} removeDriver={this.props.removeDriver}
                            deselectAllDrivers={this.props.deselectAllDrivers}
                            orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>
@@ -66,9 +66,10 @@ class TruckList extends React.Component{
     selectTruck(newTruck) {
         clearTrucks();
         markTruck(newTruck);
-        calculateTruckRoute().then(time =>
+        calculateTruckRoute().then(time => {
+            this.props.selectTruck(newTruck);
             this.setState({selectedTruck: newTruck, truckTransferTime: time})
-        );
+        });
     }
 
     render() {

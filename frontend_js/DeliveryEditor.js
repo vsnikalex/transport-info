@@ -54,6 +54,8 @@ class Lists extends React.Component{
         this.addCargo = this.addCargo.bind(this);
         this.removeCargo = this.removeCargo.bind(this);
 
+        this.selectTruck = this.selectTruck.bind(this);
+
         this.addDriver = this.addDriver.bind(this);
         this.removeDriver = this.removeDriver.bind(this);
         this.deselectAllDrivers = this.deselectAllDrivers.bind(this);
@@ -69,6 +71,7 @@ class Lists extends React.Component{
 
         this.setState({selectedDepotId: event.target.value,
                        selectedCargoes: new Set(), orderWeight: 0, travelTime: 0,
+                       selectedTruckId: 0,
                        selectedDrivers: new Set()});
     }
 
@@ -103,6 +106,12 @@ class Lists extends React.Component{
             orderWeight: this.state.orderWeight - cargo.weight,
             travelTime: time
         });
+    }
+
+    selectTruck(truck) {
+        console.log('selected truck: ' + truck.id);
+
+        this.setState({selectedTruckId: truck.id});
     }
 
     addDriver(driver) {
@@ -171,7 +180,7 @@ class Lists extends React.Component{
                     <div className="row">
                         <Cargoes depotId={this.state.selectedDepotId}
                                  addCargo={this.addCargo} removeCargo={this.removeCargo}/>
-                        <Trucks  depotId={this.state.selectedDepotId}
+                        <Trucks  depotId={this.state.selectedDepotId} selectTruck={this.selectTruck}
                                  addDriver={this.addDriver} removeDriver={this.removeDriver}
                                  deselectAllDrivers={this.deselectAllDrivers}
                                  orderWeight={this.state.orderWeight} travelTime={this.state.travelTime}/>

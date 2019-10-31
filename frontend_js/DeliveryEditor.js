@@ -49,8 +49,6 @@ class Lists extends React.Component{
             selectedDrivers: new Set()
         };
 
-        this.checkInput = this.checkInput.bind(this);
-
         this.selectDepot = this.selectDepot.bind(this);
 
         this.addCargo = this.addCargo.bind(this);
@@ -61,13 +59,8 @@ class Lists extends React.Component{
         this.addDriver = this.addDriver.bind(this);
         this.removeDriver = this.removeDriver.bind(this);
         this.deselectAllDrivers = this.deselectAllDrivers.bind(this);
-    }
 
-    checkInput() {
-        let truckOk = this.state.selectedTruckId != 0;
-        let overload = (this.state.orderWeight / this.state.selectedTruck.capacity) < 1;
-        let driversOk = this.state.selectedDrivers.length > 0;
-        return (truckOk && !overload) && (driversOk);
+        this.sendData = this.sendData.bind(this);
     }
 
     selectDepot(event) {
@@ -82,7 +75,7 @@ class Lists extends React.Component{
                        selectedCargoes: new Set(), orderWeight: 0,
                        route: {}, travelTime: 0,
                        selectedTruckId: 0,
-                       selectedDrivers: new Set()});
+                       selectedDrivers: new Set(), inputIsValid: false});
     }
 
     addCargo(cargo, time) {
@@ -153,7 +146,26 @@ class Lists extends React.Component{
         this.setState({selectedDrivers: new Set()});
     }
 
+    sendData() {
+        // TODO: pass to API
+        console.log('truck id: ' + this.state.selectedTruck.id);
+        console.log('overload: ' + ((this.state.orderWeight / this.state.selectedTruck.capacity) > 1));
+        console.log('drivers: ' + this.state.selectedDrivers.size);
+    }
+
     render() {
+        let truckOk = this.state.selectedTruck.id != 0;
+        let overload = (this.state.orderWeight / this.state.selectedTruck.capacity) > 1;
+        let driversOk = this.state.selectedDrivers.size > 0;
+        let inputIsValid = (truckOk && !overload) && (driversOk);
+
+        let submitButton;
+        if (inputIsValid) {
+            submitButton = <button type="button" className="btn btn-positive" onClick={this.sendData}>Submit</button>;
+        } else {
+            submitButton = <button type="button" className="btn btn-default" disabled={true}>Submit</button>;
+        }
+
         const depots = this.props.depots.map(depot =>
             <Depot key={depot.id} depot={depot} />
         );
@@ -185,10 +197,11 @@ class Lists extends React.Component{
                             </div>
                         </div>
                         <div className="col-l-6"></div>
-                        <div className="col-l-3">
-                            <button type="button" className="btn btn-positive">Submit</button>
-                            <button type="button" className="btn btn-default" disabled={true}>Submit</button>
+                        <div className="col-l-1"></div>
+                        <div className="col-l-1">
+                            {submitButton}
                         </div>
+                        <div className="col-l-1"></div>
                     </div>
                     <div className="row">
                         <Cargoes depotId={this.state.selectedDepotId}

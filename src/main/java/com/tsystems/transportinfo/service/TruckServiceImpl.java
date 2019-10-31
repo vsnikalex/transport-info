@@ -40,7 +40,7 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     public List<TruckDTO> getAvailableTrucks(long depotId, long maxTravelTime) {
-        Depot depot = depotService.getDepot(depotId);
+        Depot depot = depotService.getDepotById(depotId);
         GHPoint destPoint = graphHopperService.pointFromEntry(depot.getLocation());
 
         List<Truck> trucks = truckDAO.findAvailableTrucks(destPoint , maxTravelTime);

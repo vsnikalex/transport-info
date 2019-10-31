@@ -8,6 +8,8 @@ public interface DepotService {
 
     List<Depot> getAllDepots();
 
-    Depot getDepot(Long id);
+    Depot getDepotById(Long id);
+
+    Depot getDepotByCoords(String coords);
 
 }

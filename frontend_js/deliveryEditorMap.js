@@ -193,7 +193,7 @@ export function markCargoDestination(cargo) {
     );
 
     let cargoMarker = L.circleMarker(latLng, cargoDestinationMarkerStyle)
-        .bindPopup(endLoc.country + ' ' + cargo.endDepot.type);
+        .bindPopup(endLoc.country + ':' + endLoc.city + ' "' + endLoc.name + '" ' + cargo.endDepot.type);
 
     cargoMarker._id = cargo.id;
 

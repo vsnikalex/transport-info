@@ -13,14 +13,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/order")
-public class OrderController {
+@RequestMapping("/api/delivery")
+public class DeliveryController {
 
     @Autowired
     private DeliveryService deliveryService;
 
     @Autowired
     ModelMapper modelMapper;
+
+    @PostMapping("/add")
+    public void saveDelivery(@RequestBody DeliveryDTO deliveryDTO) {
+        DeliveryDTO test = deliveryDTO;
+    }
 
     @GetMapping("/all")
     public List<DeliveryDTO> allDeliveries() {
@@ -31,7 +36,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteOrder(@PathVariable long id) {
+    public void deleteDelivery(@PathVariable long id) {
         deliveryService.deleteDelivery(id);
     }
 
@@ -40,7 +45,6 @@ public class OrderController {
 
         deliveryDTO.setCargo(modelMapper.map(delivery.getCargo(), CargoDTO.class));
         deliveryDTO.setTruck(modelMapper.map(delivery.getTruck(), TruckDTO.class));
-//        deliveryDTO.setWorkingDrivers(delivery.getTasks());
 
         return deliveryDTO;
     }

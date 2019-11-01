@@ -148,7 +148,6 @@ class Lists extends React.Component{
     }
 
     sendData() {
-        // TODO: pass to API: cargoes, truck, drivers, activities
         let route = this.state.activities.map(a => a.address.lat + ',' + a.address.lon);
 
         let DeliveryJSON = {
@@ -158,7 +157,8 @@ class Lists extends React.Component{
             'route': Array.from(route)
         };
 
-        console.log(DeliveryJSON);
+        // TODO: process response: Ok or Errors
+        axios.post('api/delivery/add', DeliveryJSON);
     }
 
     render() {

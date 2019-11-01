@@ -20,7 +20,7 @@ public class Delivery {
     private boolean done;
 
     @Column
-    private String route;
+    private String[] route;
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     public List<Cargo> cargo;

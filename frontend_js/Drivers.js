@@ -71,10 +71,12 @@ class Driver extends React.Component{
 
     estimateDeliveryEndDateTime(workHours) {
         // TODO: Customize task start datetime, which is now by default
-        let now = new Date();
+        let now = new Date().getTime();
+        if (isNaN(workHours)) { return now; }
+
         let estDeliveryDays = parseFloat(workHours) / 8;
         // 86400000 - milliseconds per day, divided  by 1000 for Java using epoch seconds, not milliseconds
-        return (now.getTime() + estDeliveryDays * 86400000) / 1000;
+        return (now + estDeliveryDays * 86400000) / 1000;
     }
 
     componentDidMount() {
@@ -85,9 +87,9 @@ class Driver extends React.Component{
                 + parseFloat(this.props.workHours);
 
             let overwork = willBeWorkedAfterDelivery > 176;
-            if (overwork) { this.props.removeDriver(this.props.driver); }
 
             if (overwork) {
+                this.props.removeDriver(this.props.driver);
                 this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
                                overwork: true,
                                isChecked: false});
@@ -107,9 +109,9 @@ class Driver extends React.Component{
                     + parseFloat(this.props.workHours);
 
                 let overwork = willBeWorkedAfterDelivery > 176;
-                if (overwork) { this.props.removeDriver(this.props.driver); }
 
                 if (overwork) {
+                    this.props.removeDriver(this.props.driver);
                     this.setState({willBeWorkedAfterDelivery: willBeWorkedAfterDelivery,
                         overwork: true,
                         isChecked: false});

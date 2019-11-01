@@ -92,7 +92,7 @@ class Lists extends React.Component{
         this.setState({
             selectedCargoes: set,
             orderWeight: this.state.orderWeight + cargo.weight,
-            travelTime: time,
+            travelTime: isNaN(time) ? 0 : time,
             activities: activities
         });
     }
@@ -106,7 +106,7 @@ class Lists extends React.Component{
         this.setState({
             selectedCargoes: set,
             orderWeight: this.state.orderWeight - cargo.weight,
-            travelTime: time,
+            travelTime: isNaN(time) ? 0 : time,
             activities: activities
         });
     }
@@ -147,7 +147,7 @@ class Lists extends React.Component{
     }
 
     sendData() {
-        // TODO: pass to API
+        // TODO: pass to API: cargoes, truck, drivers, activities
         console.log('cargoes: ' + this.state.selectedCargoes.size);
         console.log('truck id: ' + this.state.selectedTruck.id);
         console.log('overload: ' + ((this.state.orderWeight / this.state.selectedTruck.capacity) > 1));

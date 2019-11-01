@@ -148,16 +148,17 @@ class Lists extends React.Component{
     }
 
     sendData() {
-        let route = this.state.activities.map(a => a.address.lat + ',' + a.address.lon);
+        let route = {};
+        let i = 0;
+        this.state.activities.forEach(a => (route[i++] = a.address.lat + ',' + a.address.lon));
 
         let DeliveryJSON = {
             'cargoIDs': Array.from(this.state.selectedCargoes),
             'truckID': this.state.selectedTruckId,
             'driverIDs': Array.from(this.state.selectedDrivers),
-            'route': Array.from(route)
+            'route': JSON.stringify(route)
         };
 
-        // TODO: process response: Ok or Errors
         axios.post('api/delivery/add', DeliveryJSON);
     }
 

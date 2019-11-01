@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.service.GraphHopperService;
 import org.hibernate.Session;
@@ -33,6 +34,26 @@ public class DriverDAOImpl implements DriverDAO {
 
             return driverInSameCity && driverIsFree;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Driver findDriver(long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.get(Driver.class, id);
+    }
+
+    @Override
+    public void updateDriver(Driver driver) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(driver);
+    }
+
+    @Override
+    public void assignToDelivery(long driverId, long deliveryID) {
+        Driver driver = findDriver(driverId);
+        Delivery delivery = new Delivery(deliveryID);
+        driver.setDelivery(delivery);
+        updateDriver(driver);
     }
 
 }

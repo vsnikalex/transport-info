@@ -1,12 +1,16 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.data.dao.CargoDAO;
+import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
+import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
+import com.tsystems.transportinfo.data.entity.Truck;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional
@@ -20,24 +24,42 @@ public class DeliveryServiceImpl implements DeliveryService {
         dao.setClazz(Delivery.class);
     }
 
-    @Override
-    public List<Delivery> getAllDeliveries() {
-        return dao.findAll();
-    }
+    @Autowired
+    private CargoDAO cargoDAO;
+
+    @Autowired
+    private DriverDAO driverDAO;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @Override
-    public void saveDelivery(Delivery delivery) {
+    public void createDelivery(DeliveryDTO deliveryDTO) {
+        Truck truck = new Truck(deliveryDTO.getTruckID());
+
+        Delivery delivery = new Delivery();
+        delivery.setRoute(deliveryDTO.getRoute());
+        delivery.setTruck(truck);
+
         dao.create(delivery);
-    }
 
-    @Override
-    public Delivery getDelivery(Long id) {
-        return dao.findOne(id);
+        for (long cargoID : deliveryDTO.getCargoIDs()) {
+            cargoDAO.assignToDelivery(cargoID, delivery.getId());
+        }
+
+        for (long driverId : deliveryDTO.getDriverIDs()) {
+            driverDAO.assignToDelivery(driverId, delivery.getId());
+        }
     }
 
     @Override
     public void deleteDelivery(Long id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public Delivery convertToEntity(DeliveryDTO dto) {
+        return modelMapper.map(dto, Delivery.class);
     }
 
 }

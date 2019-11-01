@@ -4,12 +4,14 @@ import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "truck")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Truck {
@@ -34,5 +36,9 @@ public class Truck {
 
     @OneToOne(mappedBy = "truck")
     private Delivery delivery;
+
+    public Truck(long id) {
+        this.id = id;
+    }
 
 }

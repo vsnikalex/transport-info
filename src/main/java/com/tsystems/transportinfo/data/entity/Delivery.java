@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "delivery")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Delivery {
@@ -20,7 +22,7 @@ public class Delivery {
     private boolean done;
 
     @Column
-    private String[] route;
+    private String route;
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     public List<Cargo> cargo;
@@ -31,5 +33,9 @@ public class Delivery {
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     private List<Driver> drivers;
+
+    public Delivery(long id) {
+        this.id = id;
+    }
 
 }

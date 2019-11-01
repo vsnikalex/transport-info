@@ -1,17 +1,14 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
-
-import java.util.List;
 
 public interface DeliveryService {
 
-    public List<Delivery> getAllDeliveries();
+    void createDelivery(DeliveryDTO deliveryDTO);
 
-    public void saveDelivery(Delivery delivery);
+    void deleteDelivery(Long id);
 
-    public Delivery getDelivery(Long id);
-
-    public void deleteDelivery(Long id);
+    Delivery convertToEntity(DeliveryDTO dto);
 
 }

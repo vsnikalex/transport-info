@@ -17,9 +17,6 @@ public class DeliveryDTO {
 
     private long[] driverIDs;
 
-    private String[] route;
-
-    private CargoDTO cargo;
-    private TruckDTO truck;
+    private String route;
 
 }

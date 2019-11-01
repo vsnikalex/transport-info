@@ -37,6 +37,7 @@ public class CargoServiceImpl implements CargoService {
     public List<CargoDTO> getByDepotId(Long id) {
         List<Cargo> cargoes = cargoDAO.findByDepotId(id);
         return cargoes.stream()
+                .filter(cargo -> cargo.getDelivery() == null)
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }

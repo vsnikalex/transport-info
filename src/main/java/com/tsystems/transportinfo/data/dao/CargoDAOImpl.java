@@ -1,9 +1,6 @@
 package com.tsystems.transportinfo.data.dao;
 
-import com.tsystems.transportinfo.data.entity.Cargo;
-import com.tsystems.transportinfo.data.entity.Cargo_;
-import com.tsystems.transportinfo.data.entity.Depot;
-import com.tsystems.transportinfo.data.entity.Depot_;
+import com.tsystems.transportinfo.data.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -36,6 +33,26 @@ public class CargoDAOImpl implements CargoDAO {
 
         Query<Cargo> query = session.createQuery(cq);
         return query.getResultList();
+    }
+
+    @Override
+    public Cargo findCargo(long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.get(Cargo.class, id);
+    }
+
+    @Override
+    public void updateCargo(Cargo cargo) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(cargo);
+    }
+
+    @Override
+    public void assignToDelivery(long cargoID, long deliveryID) {
+        Cargo cargo = findCargo(cargoID);
+        Delivery delivery = new Delivery(deliveryID);
+        cargo.setDelivery(delivery);
+        updateCargo(cargo);
     }
 
 }

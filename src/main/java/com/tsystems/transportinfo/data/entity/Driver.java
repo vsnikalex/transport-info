@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.data.entity;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "driver")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Driver {
@@ -34,5 +36,9 @@ public class Driver {
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Task> tasks;
+
+    public Driver(long id) {
+        this.id = id;
+    }
 
 }

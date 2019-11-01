@@ -41,11 +41,6 @@ public class MainController {
         return "admin_cargo_add";
     }
 
-    @GetMapping("/admin_order")
-    public String adminOrder() {
-        return "admin_order";
-    }
-
     @GetMapping("/admin_delivery_editor")
     public String adminDeliveryEditor() {
         return "admin_delivery_editor";

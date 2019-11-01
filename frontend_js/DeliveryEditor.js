@@ -43,7 +43,8 @@ class Lists extends React.Component{
             activities: {},
             travelTime: 0,
 
-            selectedTruck: {},
+            selectedTruckId: 0,
+            selectedTruckCapacity: 0,
 
             selectedDrivers: new Set()
         };
@@ -112,7 +113,7 @@ class Lists extends React.Component{
     }
 
     selectTruck(truck) {
-        this.setState({selectedTruck: truck});
+        this.setState({selectedTruckId: truck.id, selectedTruckCapacity: truck.capacity});
     }
 
     addDriver(driver) {
@@ -148,19 +149,24 @@ class Lists extends React.Component{
 
     sendData() {
         // TODO: pass to API: cargoes, truck, drivers, activities
-        console.log('cargoes: ' + this.state.selectedCargoes.size);
-        console.log('truck id: ' + this.state.selectedTruck.id);
-        console.log('overload: ' + ((this.state.orderWeight / this.state.selectedTruck.capacity) > 1));
-        console.log('drivers: ' + this.state.selectedDrivers.size);
-        console.log('activities: ' + this.state.activities);
+        let route = this.state.activities.map(a => a.address.lat + ',' + a.address.lon);
+
+        let DeliveryJSON = {
+            'cargoIDs': Array.from(this.state.selectedCargoes),
+            'truckID': this.state.selectedTruckId,
+            'driverIDs': Array.from(this.state.selectedDrivers),
+            'route': Array.from(route)
+        };
+
+        console.log(DeliveryJSON);
     }
 
     render() {
         let cargoesOk = this.state.selectedCargoes.size > 0;
-        let truckOk = this.state.selectedTruck.id != 0;
-        let overload = (this.state.orderWeight / this.state.selectedTruck.capacity) > 1;
+        let truckOk = this.state.selectedTruckId != 0;
+        let overweight = (this.state.orderWeight / this.state.selectedTruckCapacity) > 1;
         let driversOk = this.state.selectedDrivers.size > 0;
-        let inputIsValid = cargoesOk && (truckOk && !overload) && (driversOk);
+        let inputIsValid = cargoesOk && (truckOk && !overweight) && (driversOk);
 
         let submitButton;
         if (inputIsValid) {

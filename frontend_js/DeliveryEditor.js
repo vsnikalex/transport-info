@@ -40,8 +40,7 @@ class Lists extends React.Component{
 
             selectedCargoes: new Set(),
             orderWeight: 0,
-            // TODO: get route from <Cargo>
-            route: {},
+            activities: {},
             travelTime: 0,
 
             selectedTruck: {},
@@ -78,10 +77,9 @@ class Lists extends React.Component{
                        selectedDrivers: new Set(), inputIsValid: false});
     }
 
-    addCargo(cargo, time) {
-        let isSet = this.state.selectedCargoes instanceof Set;
+    addCargo(cargo, time, activities) {
         let set;
-        if (isSet) {
+        if (this.state.selectedCargoes instanceof Set) {
             set = this.state.selectedCargoes;
             set.add(cargo.id);
         } else {
@@ -94,11 +92,12 @@ class Lists extends React.Component{
         this.setState({
             selectedCargoes: set,
             orderWeight: this.state.orderWeight + cargo.weight,
-            travelTime: time
+            travelTime: time,
+            activities: activities
         });
     }
 
-    removeCargo(cargo, time) {
+    removeCargo(cargo, time, activities) {
         let set = this.state.selectedCargoes;
         set.delete(cargo.id);
 
@@ -107,7 +106,8 @@ class Lists extends React.Component{
         this.setState({
             selectedCargoes: set,
             orderWeight: this.state.orderWeight - cargo.weight,
-            travelTime: time
+            travelTime: time,
+            activities: activities
         });
     }
 
@@ -148,16 +148,19 @@ class Lists extends React.Component{
 
     sendData() {
         // TODO: pass to API
+        console.log('cargoes: ' + this.state.selectedCargoes.size);
         console.log('truck id: ' + this.state.selectedTruck.id);
         console.log('overload: ' + ((this.state.orderWeight / this.state.selectedTruck.capacity) > 1));
         console.log('drivers: ' + this.state.selectedDrivers.size);
+        console.log('activities: ' + this.state.activities);
     }
 
     render() {
+        let cargoesOk = this.state.selectedCargoes.size > 0;
         let truckOk = this.state.selectedTruck.id != 0;
         let overload = (this.state.orderWeight / this.state.selectedTruck.capacity) > 1;
         let driversOk = this.state.selectedDrivers.size > 0;
-        let inputIsValid = (truckOk && !overload) && (driversOk);
+        let inputIsValid = cargoesOk && (truckOk && !overload) && (driversOk);
 
         let submitButton;
         if (inputIsValid) {

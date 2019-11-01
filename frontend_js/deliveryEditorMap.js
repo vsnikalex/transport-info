@@ -124,7 +124,7 @@ export function optimizeDeliveryRoute() {
 
                 fillRoute(routes.activities);
 
-                return estTime;
+                return [estTime, routes.activities];
             }
         ).catch(function(err){
             console.error(err.message);

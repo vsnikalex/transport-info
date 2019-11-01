@@ -66,14 +66,14 @@ class Cargo extends React.Component{
         if (!this.state.isChecked) {
             markCargoDestination(this.props.cargo);
 
-            optimizeDeliveryRoute().then(time => {
-                this.props.addCargo(this.props.cargo, time);
+            optimizeDeliveryRoute().then(timeAndActivities => {
+                this.props.addCargo(this.props.cargo, timeAndActivities[0], timeAndActivities[1]);
             });
         } else {
             removeCargoMarker(this.props.cargo.id);
 
-            optimizeDeliveryRoute().then(time => {
-                this.props.removeCargo(this.props.cargo, time);
+            optimizeDeliveryRoute().then(timeAndActivities => {
+                this.props.removeCargo(this.props.cargo, timeAndActivities[0], timeAndActivities[1]);
             });
         }
 

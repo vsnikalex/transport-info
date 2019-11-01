@@ -159,7 +159,10 @@ class Lists extends React.Component{
             'route': JSON.stringify(route)
         };
 
-        axios.post('api/delivery/add', DeliveryJSON);
+        axios.post('api/delivery/add', DeliveryJSON).then(response => {
+            alert('SAVED');
+            window.location = '/admin_delivery_editor';
+        });
     }
 
     render() {

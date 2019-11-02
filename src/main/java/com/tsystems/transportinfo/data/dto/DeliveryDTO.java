@@ -35,6 +35,8 @@ public class DeliveryDTO {
         }
     }
 
+    private Long id;
+
     private long[] cargoIDs;
 
     private long truckID;

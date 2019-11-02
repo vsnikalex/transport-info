@@ -41,55 +41,6 @@
             <div id="driver_app"></div>
             <script src="<c:url value="/resources/js/webpack/DriverApp.bundle.js" />"></script>
 
-            <div class="container-fixed demo-grid">
-                <div class="row">
-                    <div class="col-l-4 ">
-
-                        <h2 class="underline">Delivery #36</h2>
-                        <div class="content-list">
-
-                            <a class="content-list-item" data-toggle="button" data-callback="expandSingle">
-                                <span class="badge badge">0</span><span class="badge badge-brand">2</span>
-                                CORP PREPARED
-                            </a>
-                            <div id="exp-single">
-                                <a class="content-list-item">
-                                    <div class="row">
-                                        <div class="col-l-8">
-                                            CARGO #1
-                                        </div>
-                                        <div class="col-l-2">
-                                            <button class="btn btn-default btn-icon">
-                                                <i class="icon icon-upload" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="content-list-item">
-                                    <div class="row">
-                                        <div class="col-l-8">
-                                            CARGO #2
-                                        </div>
-                                        <div class="col-l-2">
-                                            <button class="btn btn-default btn-icon">
-                                                <i class="icon icon-upload" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <a class="content-list-item"><span class="badge badge">0</span><span class="badge badge">2</span>CORP ALL_SHIPPED</a>
-                            <a class="content-list-item"><span class="badge badge-brand">1</span><span class="badge badge">0</span> CLIENT#1 SHIPPED</a>
-                            <a class="content-list-item"><span class="badge badge">1</span><span class="badge badge">0</span> CLIENT#1 ALL_DELIVERED</a>
-                            <a class="content-list-item"><span class="badge badge-brand">1</span><span class="badge badge">0</span> CLIENT#2 SHIPPED</a>
-                            <a class="content-list-item"><span class="badge badge">1</span><span class="badge badge">0</span> CLIENT#2 ALL_DELIVERED</a>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

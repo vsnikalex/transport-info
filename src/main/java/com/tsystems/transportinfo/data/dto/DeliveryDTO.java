@@ -15,6 +15,8 @@ import java.util.Map;
 @Setter
 public class DeliveryDTO {
 
+    @Getter
+    @Setter
     public static class CargoOperations {
         private List<CargoDTO> loadOps;
         private List<CargoDTO> unloadOps;

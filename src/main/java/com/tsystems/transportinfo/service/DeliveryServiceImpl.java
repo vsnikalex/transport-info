@@ -84,7 +84,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         while (iterator.hasNext()) {
             String point = (String) jsonObject.get(iterator.next());
             String pointNorm = graphHopperService.normalize(point);
-            routeMap.put(pointNorm, new DeliveryDTO.CargoOperations());
+            routeMap.putIfAbsent(pointNorm, new DeliveryDTO.CargoOperations());
         }
 
         List<Cargo> cargoes = entity.getCargo();

@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.service;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
+import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
@@ -39,6 +40,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private TruckService truckService;
+
+    @Autowired
+    private DeliveryService deliveryService;
 
     @Override
     public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
@@ -90,7 +94,13 @@ public class DriverServiceImpl implements DriverService {
         if (driverDelivery != null) {
             Truck deliveryTruck = driverDelivery.getTruck();
             TruckDTO truckDTO = truckService.convertToDto(deliveryTruck);
-            driverDTO.setTruck(truckDTO);
+            driverDTO.setTruckDTO(truckDTO);
+
+            // TODO: driverDTO.setDeliveryDTO(deliveryService.convertToDTO(driverDelivery))
+            // must have-1: Map< route_point, Class< List<cargoes_to_load>, List<cargoes_to_unload> >>
+            // must have-2: co-workers List<DriverDTO>
+            DeliveryDTO deliveryDTO = deliveryService.convertToDTO(driverDelivery);
+            driverDTO.setDeliveryDTO(deliveryDTO);
         }
 
         return driverDTO;

@@ -30,6 +30,20 @@ public class GraphHopperServiceImpl implements GraphHopperService {
     }
 
     @Override
+    public String pointStringFromEntry(GHGeocodingEntry entry) {
+        GHPoint point = pointFromEntry(entry);
+        return point.toString();
+    }
+
+    @Override
+    public String normalize(String point) {
+        String[] coords = point.split(",");
+        coords[0] = coords[0].substring(0, coords[0].indexOf(".") + 6);
+        coords[1] = coords[1].substring(0, coords[1].indexOf(".") + 6);
+        return coords[0] + "," + coords[1];
+    }
+
+    @Override
     public GHGeocodingEntry coordsToEntry(String coords) {
         GraphHopperGeocoding graphHopperGeocoding = new GraphHopperGeocoding();
         graphHopperGeocoding.setKey(env.getProperty("api.key"));

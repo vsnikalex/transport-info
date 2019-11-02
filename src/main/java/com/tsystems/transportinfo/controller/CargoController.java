@@ -22,7 +22,7 @@ public class CargoController {
 
     @GetMapping("/all/{depotId}")
     public List<CargoDTO> allCargoesInDepot(@PathVariable long depotId) {
-        return cargoService.getByDepotId(depotId);
+        return cargoService.getAvailableByDepotId(depotId);
     }
 
     @GetMapping("/all")

@@ -11,4 +11,6 @@ public interface DeliveryService {
 
     Delivery convertToEntity(DeliveryDTO dto);
 
+    DeliveryDTO convertToDTO(Delivery entity);
+
 }

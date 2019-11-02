@@ -34,7 +34,7 @@ public class CargoServiceImpl implements CargoService {
     private DepotService depotService;
 
     @Override
-    public List<CargoDTO> getByDepotId(Long id) {
+    public List<CargoDTO> getAvailableByDepotId(Long id) {
         List<Cargo> cargoes = cargoDAO.findByDepotId(id);
         return cargoes.stream()
                 .filter(cargo -> cargo.getDelivery() == null)

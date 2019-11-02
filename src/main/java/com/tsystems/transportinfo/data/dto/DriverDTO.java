@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -42,8 +41,9 @@ public class DriverDTO {
 
     private DriverAction action;
 
-    @Valid
-    private TruckDTO truck;
+    private TruckDTO truckDTO;
+
+    private DeliveryDTO deliveryDTO;
 
     private GHGeocodingEntry location;
 

@@ -5,11 +5,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class DeliveryDTO {
+
+    public static class CargoOperations {
+        private List<CargoDTO> loadOps;
+        private List<CargoDTO> unloadOps;
+
+        public CargoOperations() {
+            this.loadOps = new LinkedList<>();
+            this.unloadOps = new LinkedList<>();
+        }
+
+        public void addLoadOp(CargoDTO cargoDTO) {
+            loadOps.add(cargoDTO);
+        }
+
+        public void addUnloadOp(CargoDTO cargoDTO){
+            unloadOps.add(cargoDTO);
+        }
+    }
 
     private long[] cargoIDs;
 
@@ -18,5 +40,7 @@ public class DeliveryDTO {
     private long[] driverIDs;
 
     private String route;
+
+    private Map<String, CargoOperations> routeWithCargoOperations;
 
 }

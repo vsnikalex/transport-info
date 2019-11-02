@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CargoService {
 
-    List<CargoDTO> getByDepotId(Long id);
+    List<CargoDTO> getAvailableByDepotId(Long id);
 
     List<CargoDTO> getAllCargoes();
 

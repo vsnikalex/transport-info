@@ -7,6 +7,10 @@ public interface GraphHopperService {
 
     GHPoint pointFromEntry(GHGeocodingEntry entry);
 
+    String pointStringFromEntry(GHGeocodingEntry entry);
+
+    String normalize(String point);
+
     GHGeocodingEntry coordsToEntry(String coords);
 
     long timeOfPath(GHPoint startPlace, GHPoint endPlace);

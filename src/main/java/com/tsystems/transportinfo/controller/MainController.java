@@ -46,4 +46,9 @@ public class MainController {
         return "admin_delivery_editor";
     }
 
+    @GetMapping("/driver")
+    public String driverPage() {
+        return "driver";
+    }
+
 }

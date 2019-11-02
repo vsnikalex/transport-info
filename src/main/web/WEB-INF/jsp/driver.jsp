@@ -37,6 +37,10 @@
 
     <div class="container-fixed">
         <div class="main">
+
+            <div id="driver_app"></div>
+            <script src="<c:url value="/resources/js/webpack/DriverApp.bundle.js" />"></script>
+
             <div class="container-fixed demo-grid">
                 <div class="row">
                     <div class="col-l-4 ">
@@ -82,27 +86,6 @@
                             <a class="content-list-item"><span class="badge badge">1</span><span class="badge badge">0</span> CLIENT#2 ALL_DELIVERED</a>
 
                         </div>
-
-                    </div>
-                    <div class="col-l-4 demo-col">
-
-                        <span class="text-nowrap">ADDITIONAL INFO</span>
-
-                    </div>
-                    <div class="col-l-4 demo-col">
-
-
-                        <div>
-                            <label for="selectbox">Driver</label>
-                            <select name="select" id="selectbox">
-                                <option value="opt1" selected>Ryan Gosling</option>
-                                <option value="opt2">Alain Delon</option>
-                                <option value="opt3">Robert De Niro</option>
-                                <option value="opt3">Jason Statham</option>
-                                <option value="opt3">Vin Diesel</option>
-                            </select>
-                        </div>
-
 
                     </div>
                 </div>

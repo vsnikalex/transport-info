@@ -158,9 +158,9 @@ class Point extends React.Component {
         return (
             <div>
                 <Collapsible trigger={
-                    <a className="content-list-item" data-toggle="button">
-                        <span className="badge">{this.props.operations.unloadOps.length}</span>
-                        <span className="badge">{this.props.operations.loadOps.length}</span>
+                    <a className="content-list-item" style={{backgroundColor: "#d9d9d9"}}>
+                        <span className="badge">&#9660;{this.props.operations.unloadOps.length}</span>
+                        <span className="badge">&#9650;{this.props.operations.loadOps.length}</span>
                         {this.state.depot.location.country}: {this.state.depot.location.city}, {this.state.depot.location.name}
                     </a>
                 }>
@@ -194,10 +194,10 @@ class Load extends React.Component {
         if (this.state.isChecked) {
             if (this.props.load.status === 'SHIPPED') {
                 button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
-                style = {backgroundColor: "#00CC00"};
+                style = {backgroundColor: "#009600"};
             } else if (this.props.load.status === 'DELIVERED') {
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#00CC00"};
+                style = {backgroundColor: "#009600"};
             }
         } else {
             button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>ship</button>;
@@ -239,10 +239,10 @@ class Unload extends React.Component {
         if (this.state.isChecked) {
             if (this.props.unload.status === 'PREPARED') {
                 button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
-                style = {backgroundColor: "#e6e6e6"};
+                style = {backgroundColor: "#f7f7f7"};
             } else if (this.props.unload.status === 'DELIVERED') {
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#00CC00"};
+                style = {backgroundColor: "#009600"};
             }
         } else {
             button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>deliver</button>;

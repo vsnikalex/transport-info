@@ -15,6 +15,7 @@ class DriverApp extends React.Component {
 
         this.selectDriver = this.selectDriver.bind(this);
         this.updateLoadOpStatus = this.updateLoadOpStatus.bind(this);
+        this.updateUnloadOpStatus = this.updateUnloadOpStatus.bind(this);
     }
 
     selectDriver(event) {
@@ -40,7 +41,24 @@ class DriverApp extends React.Component {
             }
         }
 
-        console.log('update DriverApp state');
+        this.setState({selectedDriver: driver});
+    }
+
+    updateUnloadOpStatus(coords, id, status) {
+        let driver = this.state.selectedDriver;
+        let operations = driver.deliveryDTO.routeWithCargoOperations;
+
+        let unloadOps = operations[coords].unloadOps;
+        let index = unloadOps.findIndex(cargo => cargo.id == id);
+        unloadOps[index].status = status;
+
+        for (let coords in operations){
+            let i = operations[coords].loadOps.findIndex(cargo => cargo.id == id);
+            if (i !== -1) {
+                operations[coords].loadOps[i].status = status;
+            }
+        }
+
         this.setState({selectedDriver: driver});
     }
 
@@ -55,7 +73,8 @@ class DriverApp extends React.Component {
             <div className="container-fixed demo-grid">
                 <div className="row">
                     <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
-                           updateLoadOpStatus={this.updateLoadOpStatus} />
+                           updateLoadOpStatus={this.updateLoadOpStatus}
+                           updateUnloadOpStatus={this.updateUnloadOpStatus} />
                     <div className="col-l-4 demo-col">
                         ADD INFO
                     </div>
@@ -107,8 +126,6 @@ class Driver extends React.Component {
 
 class Route extends React.Component {
     render() {
-        console.log('render Route');
-
         if (!this.props.deliveryDTO || typeof this.props.deliveryDTO === 'undefined') {
             return (
                 <div className="col-l-4 ">
@@ -123,7 +140,8 @@ class Route extends React.Component {
         for (let coords in routeMap){
             let operations = routeMap[coords];
             points.push(<Point key={coords} coords={coords} operations={operations}
-                               updateLoadOpStatus={this.props.updateLoadOpStatus} />);
+                               updateLoadOpStatus={this.props.updateLoadOpStatus}
+                               updateUnloadOpStatus={this.props.updateUnloadOpStatus} />);
         }
 
         return (
@@ -145,10 +163,15 @@ class Point extends React.Component {
         };
 
         this.updateLoadOpStatus = this.updateLoadOpStatus.bind(this);
+        this.updateUnloadOpStatus = this.updateUnloadOpStatus.bind(this);
     }
 
     updateLoadOpStatus(id, status) {
         this.props.updateLoadOpStatus(this.props.coords, id, status);
+    }
+
+    updateUnloadOpStatus(id, status) {
+        this.props.updateUnloadOpStatus(this.props.coords, id, status);
     }
 
     componentDidMount() {
@@ -158,8 +181,6 @@ class Point extends React.Component {
     }
 
     render() {
-        console.log('render Point');
-
         if (!this.state.depot.location || typeof this.state.depot.location === 'undefined') {
             return null;
         }
@@ -175,7 +196,7 @@ class Point extends React.Component {
         }
 
         const unloads = this.props.operations.unloadOps.map(unload =>
-            <Unload key={unload.id} unload={unload}/>
+            <Unload key={unload.id} unload={unload} updateUnloadOpStatus={this.updateUnloadOpStatus} />
         );
         let unloadsSection;
         if (unloads.length > 0) {
@@ -206,9 +227,6 @@ class Point extends React.Component {
 class Load extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     isChecked: (props.load.status !== 'PREPARED')
-        // };
 
         this.ship = this.ship.bind(this);
     }
@@ -221,13 +239,9 @@ class Load extends React.Component {
             .catch(error => {
                 console.log(error);
             });
-
-        // this.setState({isChecked: !this.state.isChecked});
     }
 
     render() {
-        console.log('render Load');
-
         let button;
         let style;
 
@@ -245,19 +259,6 @@ class Load extends React.Component {
                 style = {backgroundColor: "#009600"};
                 break;
         }
-
-        // if (this.state.isChecked && this.props.load.status !== 'PREPARED') {
-        //     if (this.props.load.status === 'SHIPPED') {
-        //         button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
-        //         style = {backgroundColor: "#009600"};
-        //     } else if (this.props.load.status === 'DELIVERED') {
-        //         button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-        //         style = {backgroundColor: "#009600"};
-        //     }
-        // } else {
-        //     button = <button className="btn btn-default btn-small" onClick={this.ship}>ship</button>;
-        //     style = null;
-        // }
 
         return(
             <a className="content-list-item" style={style}>
@@ -277,9 +278,6 @@ class Load extends React.Component {
 class Unload extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     isChecked: (props.unload.status !== 'SHIPPED')
-        // };
 
         this.deliver = this.deliver.bind(this);
     }
@@ -287,18 +285,14 @@ class Unload extends React.Component {
     deliver() {
         axios.put('api/cargo/update/status/' + this.props.unload.id + '/DELIVERED')
             .then(response => {
-                // this.props.updateLoadOpStatus(this.props.unload.id, 'DELIVERED');
+                this.props.updateUnloadOpStatus(this.props.unload.id, 'DELIVERED');
             })
             .catch(error => {
                 console.log(error);
             });
-
-        // this.setState({isChecked: !this.state.isChecked});
     }
 
     render() {
-        console.log('render Unload');
-
         let button;
         let style;
         switch (this.props.unload.status) {
@@ -316,21 +310,7 @@ class Unload extends React.Component {
                 break;
         }
 
-
-        // if (this.state.isChecked && this.props.unload.status !== 'SHIPPED') {
-        //     if (this.props.unload.status === 'PREPARED') {
-        //         button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
-        //         style = {backgroundColor: "#f7f7f7"};
-        //     } else if (this.props.unload.status === 'DELIVERED') {
-        //         button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-        //         style = {backgroundColor: "#009600"};
-        //     }
-        // } else {
-        //     button = <button className="btn btn-default btn-small" onClick={this.deliver}>deliver</button>;
-        //     style = null;
-        // }
-
-        return(
+        return (
             <a className="content-list-item" style={style}>
                 <div className="row">
                     <div className="col-l-8">

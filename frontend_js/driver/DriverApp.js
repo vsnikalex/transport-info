@@ -155,8 +155,6 @@ class Point extends React.Component {
             unloadsSection = null;
         }
 
-        // for unfinished sections: className="badge badge-brand"
-
         return (
             <div>
                 <Collapsible trigger={
@@ -180,13 +178,12 @@ class Load extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: (this.props.load.status === 'SHIPPED')
+            isChecked: (this.props.load.status !== 'PREPARED')
         };
 
         this.handleChecked = this.handleChecked.bind(this);
     }
 
-    // for loaded cargoes style="background-color: #00CC00", button disabled without script
     handleChecked() {
         this.setState({isChecked: !this.state.isChecked});
     }
@@ -195,8 +192,13 @@ class Load extends React.Component {
         let button;
         let style;
         if (this.state.isChecked) {
-            button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
-            style = {backgroundColor: "#00CC00"};
+            if (this.props.load.status === 'SHIPPED') {
+                button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
+                style = {backgroundColor: "#00CC00"};
+            } else if (this.props.load.status === 'DELIVERED') {
+                button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
+                style = {backgroundColor: "#00CC00"};
+            }
         } else {
             button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>ship</button>;
             style = null;
@@ -221,13 +223,12 @@ class Unload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: (this.props.unload.status === 'DELIVERED')
+            isChecked: (this.props.unload.status !== 'SHIPPED')
         };
 
         this.handleChecked = this.handleChecked.bind(this);
     }
 
-    // for loaded cargoes style="background-color: #00CC00", button disabled without script
     handleChecked() {
         this.setState({isChecked: !this.state.isChecked});
     }
@@ -236,8 +237,13 @@ class Unload extends React.Component {
         let button;
         let style;
         if (this.state.isChecked) {
-            button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-            style = {backgroundColor: "#00CC00"};
+            if (this.props.unload.status === 'PREPARED') {
+                button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
+                style = {backgroundColor: "#e6e6e6"};
+            } else if (this.props.unload.status === 'DELIVERED') {
+                button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
+                style = {backgroundColor: "#00CC00"};
+            }
         } else {
             button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>deliver</button>;
             style = null;

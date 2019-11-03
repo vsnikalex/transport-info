@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.*;
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -45,6 +46,13 @@ public class CargoDAOImpl implements CargoDAO {
     public void updateCargo(Cargo cargo) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.update(cargo);
+    }
+
+    @Override
+    public void updateCargoStatus(long id, CargoStatus status) {
+        Cargo cargo = findCargo(id);
+        cargo.setStatus(status);
+        updateCargo(cargo);
     }
 
     @Override

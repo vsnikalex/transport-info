@@ -4,6 +4,7 @@ import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,11 @@ public class CargoServiceImpl implements CargoService {
     public void updateCargo(CargoDTO cargoDTO) {
         Cargo cargo = convertToEntity(cargoDTO);
         dao.update(cargo);
+    }
+
+    @Override
+    public void updateCargoStatus(long id, CargoStatus status) {
+        cargoDAO.updateCargoStatus(id, status);
     }
 
     @Override

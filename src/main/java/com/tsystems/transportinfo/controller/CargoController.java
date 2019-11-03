@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.controller;
 
 import com.tsystems.transportinfo.data.dto.CargoDTO;
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import com.tsystems.transportinfo.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -72,6 +73,12 @@ public class CargoController {
         cargoService.updateCargo(cargoDTO);
 
         return ResponseEntity.ok().body("{\"msg\":\"SAVED\"}");
+    }
+
+    @PutMapping("/update/status/{id}/{status}")
+    public void updateCargoStatus(
+            @PathVariable long id, @PathVariable CargoStatus status) {
+        cargoService.updateCargoStatus(id, status);
     }
 
 }

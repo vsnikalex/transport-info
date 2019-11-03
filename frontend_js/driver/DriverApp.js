@@ -185,6 +185,14 @@ class Load extends React.Component {
     }
 
     handleChecked() {
+        axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED')
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
         this.setState({isChecked: !this.state.isChecked});
     }
 

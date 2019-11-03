@@ -142,7 +142,8 @@ class Point extends React.Component {
             <div>
                 <Collapsible trigger={
                     <a className="content-list-item" data-toggle="button">
-                        <span className="badge badge">0</span><span className="badge badge-brand">2</span>
+                        <span className="badge">{this.props.operations.unloadOps.length}</span>
+                        <span className="badge">{this.props.operations.loadOps.length}</span>
                         {this.props.coords}
                     </a>
                 }>

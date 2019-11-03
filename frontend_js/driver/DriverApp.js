@@ -117,7 +117,24 @@ class Route extends React.Component {
 }
 
 class Point extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            depot: {}
+        };
+    }
+
+    componentDidMount() {
+        axios.get('api/depot/' + this.props.coords + '/').then(response => {
+            this.setState({depot: response.data});
+        });
+    }
+
     render() {
+        if (!this.state.depot.location || typeof this.state.depot.location === 'undefined') {
+            return null;
+        }
+
         const loads = this.props.operations.loadOps.map(load =>
             <Load key={load.id} load={load}/>
         );
@@ -144,7 +161,7 @@ class Point extends React.Component {
                     <a className="content-list-item" data-toggle="button">
                         <span className="badge">{this.props.operations.unloadOps.length}</span>
                         <span className="badge">{this.props.operations.loadOps.length}</span>
-                        {this.props.coords}
+                        {this.state.depot.location.country}: {this.state.depot.location.city}, {this.state.depot.location.name}
                     </a>
                 }>
                 <div>

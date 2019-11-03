@@ -15,16 +15,34 @@ class DriverApp extends React.Component {
         };
 
         this.selectDriver = this.selectDriver.bind(this);
+        this.updateLoadOpStatus = this.updateLoadOpStatus.bind(this);
     }
 
     selectDriver(event) {
-        console.log('selected driver id: ' + event.target.value);
-
         const driver = this.state.drivers.find(driver =>
             driver.id == event.target.value
         );
 
         this.setState({selectedDriverId: event.target.value, selectedDriver: driver});
+    }
+
+    updateLoadOpStatus(coords, id, status) {
+        let driver = this.state.selectedDriver;
+        let operations = driver.deliveryDTO.routeWithCargoOperations;
+
+        let loadOps = operations[coords].loadOps;
+        let index = loadOps.findIndex(cargo => cargo.id == id);
+        loadOps[index].status = status;
+
+        for (let coords in operations){
+            let i = operations[coords].unloadOps.findIndex(cargo => cargo.id == id);
+            if (i !== -1) {
+                operations[coords].unloadOps[i].status = status;
+            }
+        }
+
+        console.log('update DriverApp state');
+        this.setState({selectedDriver: driver});
     }
 
     componentDidMount() {
@@ -37,7 +55,8 @@ class DriverApp extends React.Component {
         return (
             <div className="container-fixed demo-grid">
                 <div className="row">
-                    <Route deliveryDTO={this.state.selectedDriver.deliveryDTO} />
+                    <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
+                           updateLoadOpStatus={this.updateLoadOpStatus} />
                     <div className="col-l-4 demo-col">
                         ADD INFO
                     </div>
@@ -89,6 +108,8 @@ class Driver extends React.Component {
 
 class Route extends React.Component {
     render() {
+        console.log('render Route');
+
         if (!this.props.deliveryDTO || typeof this.props.deliveryDTO === 'undefined') {
             return (
                 <div className="col-l-4 ">
@@ -102,7 +123,8 @@ class Route extends React.Component {
 
         for (let coords in routeMap){
             let operations = routeMap[coords];
-            points.push(<Point key={coords} coords={coords} operations={operations}/>);
+            points.push(<Point key={coords} coords={coords} operations={operations}
+                               updateLoadOpStatus={this.props.updateLoadOpStatus} />);
         }
 
         return (
@@ -122,6 +144,12 @@ class Point extends React.Component {
         this.state = {
             depot: {}
         };
+
+        this.updateLoadOpStatus = this.updateLoadOpStatus.bind(this);
+    }
+
+    updateLoadOpStatus(id, status) {
+        this.props.updateLoadOpStatus(this.props.coords, id, status);
     }
 
     componentDidMount() {
@@ -131,12 +159,14 @@ class Point extends React.Component {
     }
 
     render() {
+        console.log('render Point');
+
         if (!this.state.depot.location || typeof this.state.depot.location === 'undefined') {
             return null;
         }
 
         const loads = this.props.operations.loadOps.map(load =>
-            <Load key={load.id} load={load}/>
+            <Load key={load.id} load={load} updateLoadOpStatus={this.updateLoadOpStatus} />
         );
         let loadsSection;
         if (loads.length > 0) {
@@ -178,7 +208,7 @@ class Load extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: (this.props.load.status !== 'PREPARED')
+            isChecked: (props.load.status !== 'PREPARED')
         };
 
         this.handleChecked = this.handleChecked.bind(this);
@@ -187,7 +217,8 @@ class Load extends React.Component {
     handleChecked() {
         axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED')
             .then(response => {
-                console.log(response);
+                // TODO: change state in both this and connected Point
+                this.props.updateLoadOpStatus(this.props.load.id, 'SHIPPED');
             })
             .catch(error => {
                 console.log(error);
@@ -197,6 +228,8 @@ class Load extends React.Component {
     }
 
     render() {
+        console.log('render Load');
+
         let button;
         let style;
         if (this.state.isChecked) {
@@ -231,20 +264,30 @@ class Unload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: (this.props.unload.status !== 'SHIPPED')
+            isChecked: (props.unload.status !== 'SHIPPED')
         };
 
         this.handleChecked = this.handleChecked.bind(this);
     }
 
     handleChecked() {
+        axios.put('api/cargo/update/status/' + this.props.unload.id + '/DELIVERED')
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
         this.setState({isChecked: !this.state.isChecked});
     }
 
     render() {
+        console.log('render Unload');
+
         let button;
         let style;
-        if (this.state.isChecked) {
+        if (this.state.isChecked && this.props.unload.status !== 'SHIPPED') {
             if (this.props.unload.status === 'PREPARED') {
                 button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
                 style = {backgroundColor: "#f7f7f7"};

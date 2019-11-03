@@ -5,7 +5,6 @@ const axios = require('axios');
 import Collapsible from 'react-collapsible';
 
 class DriverApp extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -207,24 +206,23 @@ class Point extends React.Component {
 class Load extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isChecked: (props.load.status !== 'PREPARED')
-        };
+        // this.state = {
+        //     isChecked: (props.load.status !== 'PREPARED')
+        // };
 
-        this.handleChecked = this.handleChecked.bind(this);
+        this.ship = this.ship.bind(this);
     }
 
-    handleChecked() {
+    ship() {
         axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED')
             .then(response => {
-                // TODO: change state in both this and connected Point
                 this.props.updateLoadOpStatus(this.props.load.id, 'SHIPPED');
             })
             .catch(error => {
                 console.log(error);
             });
 
-        this.setState({isChecked: !this.state.isChecked});
+        // this.setState({isChecked: !this.state.isChecked});
     }
 
     render() {
@@ -232,18 +230,34 @@ class Load extends React.Component {
 
         let button;
         let style;
-        if (this.state.isChecked) {
-            if (this.props.load.status === 'SHIPPED') {
+
+        switch (this.props.load.status) {
+            case 'PREPARED':
+                button = <button className="btn btn-default btn-small" onClick={this.ship}>ship</button>;
+                style = null;
+                break;
+            case 'SHIPPED':
                 button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
                 style = {backgroundColor: "#009600"};
-            } else if (this.props.load.status === 'DELIVERED') {
+                break;
+            case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
                 style = {backgroundColor: "#009600"};
-            }
-        } else {
-            button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>ship</button>;
-            style = null;
+                break;
         }
+
+        // if (this.state.isChecked && this.props.load.status !== 'PREPARED') {
+        //     if (this.props.load.status === 'SHIPPED') {
+        //         button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
+        //         style = {backgroundColor: "#009600"};
+        //     } else if (this.props.load.status === 'DELIVERED') {
+        //         button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
+        //         style = {backgroundColor: "#009600"};
+        //     }
+        // } else {
+        //     button = <button className="btn btn-default btn-small" onClick={this.ship}>ship</button>;
+        //     style = null;
+        // }
 
         return(
             <a className="content-list-item" style={style}>
@@ -263,23 +277,23 @@ class Load extends React.Component {
 class Unload extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isChecked: (props.unload.status !== 'SHIPPED')
-        };
+        // this.state = {
+        //     isChecked: (props.unload.status !== 'SHIPPED')
+        // };
 
-        this.handleChecked = this.handleChecked.bind(this);
+        this.deliver = this.deliver.bind(this);
     }
 
-    handleChecked() {
+    deliver() {
         axios.put('api/cargo/update/status/' + this.props.unload.id + '/DELIVERED')
             .then(response => {
-                console.log(response);
+                // this.props.updateLoadOpStatus(this.props.unload.id, 'DELIVERED');
             })
             .catch(error => {
                 console.log(error);
             });
 
-        this.setState({isChecked: !this.state.isChecked});
+        // this.setState({isChecked: !this.state.isChecked});
     }
 
     render() {
@@ -287,18 +301,34 @@ class Unload extends React.Component {
 
         let button;
         let style;
-        if (this.state.isChecked && this.props.unload.status !== 'SHIPPED') {
-            if (this.props.unload.status === 'PREPARED') {
+        switch (this.props.unload.status) {
+            case 'PREPARED':
                 button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
                 style = {backgroundColor: "#f7f7f7"};
-            } else if (this.props.unload.status === 'DELIVERED') {
+                break;
+            case 'SHIPPED':
+                button = <button className="btn btn-default btn-small" onClick={this.deliver}>deliver</button>;
+                style = null;
+                break;
+            case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
                 style = {backgroundColor: "#009600"};
-            }
-        } else {
-            button = <button className="btn btn-default btn-small" onClick={this.handleChecked}>deliver</button>;
-            style = null;
+                break;
         }
+
+
+        // if (this.state.isChecked && this.props.unload.status !== 'SHIPPED') {
+        //     if (this.props.unload.status === 'PREPARED') {
+        //         button = <button className="btn btn-default btn-small" disabled={true}>prepared</button>;
+        //         style = {backgroundColor: "#f7f7f7"};
+        //     } else if (this.props.unload.status === 'DELIVERED') {
+        //         button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
+        //         style = {backgroundColor: "#009600"};
+        //     }
+        // } else {
+        //     button = <button className="btn btn-default btn-small" onClick={this.deliver}>deliver</button>;
+        //     style = null;
+        // }
 
         return(
             <a className="content-list-item" style={style}>

@@ -185,9 +185,19 @@ class Point extends React.Component {
             return null;
         }
 
-        const loads = this.props.operations.loadOps.map(load =>
-            <Load key={load.id} load={load} updateLoadOpStatus={this.updateLoadOpStatus} />
-        );
+        let shipped = 0;
+        const loads = this.props.operations.loadOps.map(load => {
+            if (load.status === 'SHIPPED' || load.status === 'DELIVERED') {
+                shipped++;
+            }
+            return <Load key={load.id} load={load} updateLoadOpStatus={this.updateLoadOpStatus}/>;
+        });
+        let loadBadge;
+        if (shipped === this.props.operations.loadOps.length) {
+            loadBadge = "badge";
+        } else {
+            loadBadge = "badge badge-brand";
+        }
         let loadsSection;
         if (loads.length > 0) {
             loadsSection = <div><a className="content-list-item">load:</a>{loads}</div>
@@ -195,9 +205,19 @@ class Point extends React.Component {
             loadsSection = null;
         }
 
-        const unloads = this.props.operations.unloadOps.map(unload =>
-            <Unload key={unload.id} unload={unload} updateUnloadOpStatus={this.updateUnloadOpStatus} />
-        );
+        let delivered = 0;
+        const unloads = this.props.operations.unloadOps.map(unload => {
+            if (unload.status === 'DELIVERED') {
+                delivered++;
+            }
+            return <Unload key={unload.id} unload={unload} updateUnloadOpStatus={this.updateUnloadOpStatus}/>;
+        });
+        let unloadBadge;
+        if (delivered === this.props.operations.unloadOps.length) {
+            unloadBadge = "badge";
+        } else {
+            unloadBadge = "badge badge-brand";
+        }
         let unloadsSection;
         if (unloads.length > 0) {
             unloadsSection = <div><a className="content-list-item">unload:</a>{unloads}</div>
@@ -209,8 +229,8 @@ class Point extends React.Component {
             <div>
                 <Collapsible trigger={
                     <a className="content-list-item" style={{backgroundColor: "#d9d9d9"}}>
-                        <span className="badge">&#9660;{this.props.operations.unloadOps.length}</span>
-                        <span className="badge">&#9650;{this.props.operations.loadOps.length}</span>
+                        <span className={unloadBadge}>&#9660;{this.props.operations.unloadOps.length}</span>
+                        <span className={loadBadge}>&#9650;{this.props.operations.loadOps.length}</span>
                         {this.state.depot.location.country}: {this.state.depot.location.city}, {this.state.depot.location.name}
                     </a>
                 }>

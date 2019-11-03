@@ -106,8 +106,29 @@ class DriverList extends React.Component {
         }
 
         return (
-            <div className="col-l-4 demo-col">
+            <div className="col-l-4">
                 {select}
+
+                <h2 className="underline">
+                    <div className="row">
+                        <div className="col-l-6">Activities</div>
+                        <div className="col-l-6">
+                            <button className="pager pager-block">START / FINISH</button>
+                        </div>
+                    </div>
+                </h2>
+                <div className="content-list">
+                    <a className="content-list-item content-list-item-brand">
+                        <div className="row">
+                            <div className="col-l-6">DRIVER</div>
+                            <div className="col-l-2"></div>
+                            <div className="col-l-3">01:35:22</div>
+                        </div>
+                    </a>
+                    <a className="content-list-item">SECOND DRIVER</a>
+                    <a className="content-list-item">LOAD</a>
+                    <a className="content-list-item">UNLOAD</a>
+                </div>
             </div>
         )
     }
@@ -272,11 +293,11 @@ class Load extends React.Component {
                 break;
             case 'SHIPPED':
                 button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
-                style = {backgroundColor: "#009600"};
+                style = {backgroundColor: "#00aa00"};
                 break;
             case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#009600"};
+                style = {backgroundColor: "#00aa00"};
                 break;
         }
 
@@ -326,7 +347,7 @@ class Unload extends React.Component {
                 break;
             case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#009600"};
+                style = {backgroundColor: "#00aa00"};
                 break;
         }
 

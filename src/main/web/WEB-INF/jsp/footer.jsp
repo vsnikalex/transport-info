@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-l-9 col-m-12 text-l-right text-m-center text-muted">
-                <div class="brand-footer-bar-text">&copy; 2015 Deutsche Telekom AG | Product Design | Creative Direction</div>
+                <div class="brand-footer-bar-text">&copy; 2020 Deutsche Telekom AG | Product Design | Creative Direction</div>
             </div>
         </div>
     </div>

@@ -95,14 +95,16 @@ class DriverApp extends React.Component {
                                 selectedDriverId={this.state.selectedDriverId}
                                 selectDriver={this.selectDriver} />
                 </div>
-                <div className="row">
-                    <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
-                           updateLoadOpStatus={this.updateLoadOpStatus}
-                           updateUnloadOpStatus={this.updateUnloadOpStatus} />
-                    <div className="col-l-4 demo-col">
-                        ADD INFO
+                <div className="tc-example">
+                    <div className="row">
+                        <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
+                               updateLoadOpStatus={this.updateLoadOpStatus}
+                               updateUnloadOpStatus={this.updateUnloadOpStatus} />
+                        <div className="col-l-4">
+                            <h2 className="underline">Add Info</h2>
+                        </div>
+                        {activities}
                     </div>
-                    {activities}
                 </div>
             </div>
         )

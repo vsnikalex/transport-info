@@ -43,11 +43,11 @@ var RestGetAll = function() {
                             "<div class=\"btn-sectioned\">" +
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
                                 "onclick='ToUpdatePage(" + id + ")'>" +
-                                "<i class=\"icon icon-edit\" aria-hidden=\"true\"></i></button>" +
+                                "&#9998;</button>" +
 
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
                                 "onclick='RestDelete(" + id + ")'>" +
-                                "<i class=\"icon icon-cancel\" aria-hidden=\"true\"></i></button>" +
+                                "&#10006;</button>" +
                             "</div>" +
                         "</td>" +
                     "</tr>"

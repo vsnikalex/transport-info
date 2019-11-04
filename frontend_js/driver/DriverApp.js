@@ -143,10 +143,12 @@ class ActivitiesList extends React.Component {
         let driverId = this.props.driverId;
         let truckId = this.props.truckId;
         let updateDriverActivity = this.props.updateDriverActivity;
+        let finishCurrentActivity = this.finishCurrentActivity;
         const acts = ['DRIVE', 'HELP', 'LOAD', 'UNLOAD'];
         const activities = acts.map(function (act) {
-            return <Activity key={act} thisActivity={act} driverActivity={driverActivity}
-                             driverId={driverId} truckId={truckId} updateDriverActivity={updateDriverActivity} />
+            return <Activity key={act} thisActivity={act} driverId={driverId} truckId={truckId}
+                             driverActivity={driverActivity} updateDriverActivity={updateDriverActivity}
+                             finishCurrentActivity={finishCurrentActivity} />
         });
 
         return (
@@ -172,10 +174,18 @@ class Activity extends React.Component {
         super(props);
 
         this.startActivity = this.startActivity.bind(this);
+        this.checkThenStartActivity = this.checkThenStartActivity.bind(this);
     }
 
-    // TODO: checkAndStartActivity for case when this.props.thisActivity !== 'REST"
-    // firstly, stops current task, then starts a new one
+    checkThenStartActivity() {
+        if (this.props.thisActivity !== 'REST') {
+            this.props.finishCurrentActivity();
+            this.startActivity();
+        } else {
+            this.startActivity();
+        }
+    }
+
     startActivity() {
         let now = Math.round(new Date().getTime() / 1000);
         console.log('start activity at ' + now);
@@ -190,7 +200,6 @@ class Activity extends React.Component {
     }
 
     render() {
-        // selected activity: "... content-list-item-brand", timer <div className="col-l-3">01:35:22</div>
         let title;
         switch (this.props.thisActivity) {
             case 'DRIVE':
@@ -215,7 +224,7 @@ class Activity extends React.Component {
         }
 
         return (
-            <a className={aClass} onClick={this.startActivity}>
+            <a className={aClass} onClick={this.checkThenStartActivity}>
                 <div className="row">
                     <div className="col-l-6">{title}</div>
                     <div className="col-l-2"></div>

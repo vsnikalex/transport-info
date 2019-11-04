@@ -110,6 +110,25 @@ class DriverApp extends React.Component {
 }
 
 class ActivitiesList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.finishCurrentActivity = this.finishCurrentActivity.bind(this);
+    }
+
+    finishCurrentActivity() {
+        let now = Math.round(new Date().getTime() / 1000);
+        console.log('finish activity at ' + now);
+        axios.get('api/task/finish/' + this.props.driverId + '/' + now)
+            .then(response => {
+                console.log('activity finished at: ' + response.data);
+                this.props.updateDriverActivity('REST');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         if (!this.props.driverActivity || typeof this.props.driverActivity === 'undefined') {
             return (
@@ -136,7 +155,7 @@ class ActivitiesList extends React.Component {
                     <div className="row">
                         <div className="col-l-6">Activities</div>
                         <div className="col-l-6">
-                            <button className="pager pager-block">FINISH</button>
+                            <button className="pager pager-block" onClick={this.finishCurrentActivity}>FINISH</button>
                         </div>
                     </div>
                 </h2>

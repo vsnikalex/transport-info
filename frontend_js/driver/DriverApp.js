@@ -147,14 +147,16 @@ class Activity extends React.Component {
     }
 
     startActivity() {
-        console.log('start activity: ' + this.props.thisActivity + ' ' + this.props.driverId + ' ' + this.props.truckId);
-        // axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED')
-        //     .then(response => {
-        //         this.props.updateLoadOpStatus(this.props.load.id, 'SHIPPED');
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
+        let now = Math.round(new Date().getTime() / 1000);
+        console.log('start activity at ' + now);
+        axios.get('api/task/start/' + this.props.thisActivity + '/' + now + '/' + this.props.driverId + '/' + this.props.truckId)
+            .then(response => {
+                console.log('activity started at: ' + response.data);
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     render() {

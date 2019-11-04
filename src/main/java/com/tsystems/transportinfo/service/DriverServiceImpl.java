@@ -96,9 +96,7 @@ public class DriverServiceImpl implements DriverService {
             TruckDTO truckDTO = truckService.convertToDto(deliveryTruck);
             driverDTO.setTruckDTO(truckDTO);
 
-            // TODO: driverDTO.setDeliveryDTO(deliveryService.convertToDTO(driverDelivery))
-            // must have-1: Map< route_point, Class< List<cargoes_to_load>, List<cargoes_to_unload> >>
-            // must have-2: co-workers List<DriverDTO>
+            // TODO: add co-workers List<SecuredDriverDTO>
             DeliveryDTO deliveryDTO = deliveryService.convertToDTO(driverDelivery);
             driverDTO.setDeliveryDTO(deliveryDTO);
         }

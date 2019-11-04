@@ -48,16 +48,16 @@ class DriverApp extends React.Component {
         let driver = this.state.selectedDriver;
         let operations = driver.deliveryDTO.routeWithCargoOperations;
 
-        let unloadOps = operations[coords].unloadOps;
-        let index = unloadOps.findIndex(cargo => cargo.id == id);
-        unloadOps[index].status = status;
-
         for (let coords in operations){
             let i = operations[coords].loadOps.findIndex(cargo => cargo.id == id);
             if (i !== -1) {
                 operations[coords].loadOps[i].status = status;
             }
         }
+
+        let unloadOps = operations[coords].unloadOps;
+        let index = unloadOps.findIndex(cargo => cargo.id == id);
+        unloadOps[index].status = status;
 
         this.setState({selectedDriver: driver});
     }
@@ -69,8 +69,24 @@ class DriverApp extends React.Component {
     }
 
     render() {
+        let activities;
+        if (!this.state.selectedDriver.deliveryDTO || typeof this.state.selectedDriver.deliveryDTO === 'undefined') {
+            activities = <div className="col-l-4 ">
+                            <h2 className="underline">Activities Log</h2>
+                        </div>
+        } else {
+            activities = <ActivitiesList driverActivity={this.state.selectedDriver.action}
+                                         driverId={this.state.selectedDriver.id}
+                                         truckId={this.state.selectedDriver.truckDTO.id} />
+        }
+
         return (
             <div className="container-fixed demo-grid">
+                <div className="row">
+                    <DriverList drivers={this.state.drivers}
+                                selectedDriverId={this.state.selectedDriverId}
+                                selectDriver={this.selectDriver} />
+                </div>
                 <div className="row">
                     <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
                            updateLoadOpStatus={this.updateLoadOpStatus}
@@ -78,11 +94,102 @@ class DriverApp extends React.Component {
                     <div className="col-l-4 demo-col">
                         ADD INFO
                     </div>
-                    <DriverList drivers={this.state.drivers}
-                                selectedDriverId={this.state.selectedDriverId}
-                                selectDriver={this.selectDriver} />
+                    {activities}
                 </div>
             </div>
+        )
+    }
+}
+
+class ActivitiesList extends React.Component {
+    render() {
+        if (!this.props.driverActivity || typeof this.props.driverActivity === 'undefined') {
+            return (
+                <div className="col-l-4 ">
+                    <h2 className="underline">Activities Log</h2>
+                </div>
+            )
+        }
+        console.log(this.props.driverActivity);
+
+        let driverActivity = this.props.driverActivity;
+        let driverId = this.props.driverId;
+        let truckId = this.props.truckId;
+        const acts = ['DRIVE', 'HELP', 'LOAD', 'UNLOAD'];
+        const activities = acts.map(function (act) {
+            return <Activity key={act} thisActivity={act} driverActivity={driverActivity}
+                             driverId={driverId} truckId={truckId} />
+        });
+
+        return (
+            <div className="col-l-4">
+                <h2 className="underline">
+                    <div className="row">
+                        <div className="col-l-6">Activities</div>
+                        <div className="col-l-6">
+                            <button className="pager pager-block">FINISH</button>
+                        </div>
+                    </div>
+                </h2>
+                <div className="content-list">
+                    {activities}
+                </div>
+            </div>
+        )
+    }
+}
+
+class Activity extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.startActivity = this.startActivity.bind(this);
+    }
+
+    startActivity() {
+        console.log('start activity: ' + this.props.thisActivity + ' ' + this.props.driverId + ' ' + this.props.truckId);
+        // axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED')
+        //     .then(response => {
+        //         this.props.updateLoadOpStatus(this.props.load.id, 'SHIPPED');
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+    }
+
+    render() {
+        // selected activity: "... content-list-item-brand", timer <div className="col-l-3">01:35:22</div>
+        let title;
+        switch (this.props.thisActivity) {
+            case 'DRIVE':
+                title = 'DRIVER';
+                break;
+            case 'HELP':
+                title = 'SECOND DRIVER';
+                break;
+            case 'LOAD':
+                title = 'LOAD';
+                break;
+            case 'UNLOAD':
+                title = 'UNLOAD';
+                break;
+        }
+
+        let aClass;
+        if (this.props.thisActivity === this.props.driverActivity) {
+            aClass = "content-list-item content-list-item-brand";
+        } else {
+            aClass = "content-list-item";
+        }
+
+        return (
+            <a className={aClass} onClick={this.startActivity}>
+                <div className="row">
+                    <div className="col-l-6">{title}</div>
+                    <div className="col-l-2"></div>
+                    <div className="col-l-3"></div>
+                </div>
+            </a>
         )
     }
 }
@@ -108,27 +215,6 @@ class DriverList extends React.Component {
         return (
             <div className="col-l-4">
                 {select}
-
-                <h2 className="underline">
-                    <div className="row">
-                        <div className="col-l-6">Activities</div>
-                        <div className="col-l-6">
-                            <button className="pager pager-block">START / FINISH</button>
-                        </div>
-                    </div>
-                </h2>
-                <div className="content-list">
-                    <a className="content-list-item content-list-item-brand">
-                        <div className="row">
-                            <div className="col-l-6">DRIVER</div>
-                            <div className="col-l-2"></div>
-                            <div className="col-l-3">01:35:22</div>
-                        </div>
-                    </a>
-                    <a className="content-list-item">SECOND DRIVER</a>
-                    <a className="content-list-item">LOAD</a>
-                    <a className="content-list-item">UNLOAD</a>
-                </div>
             </div>
         )
     }

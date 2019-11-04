@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.*;
+import com.tsystems.transportinfo.data.entity.enums.DriverAction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -11,7 +12,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Repository
 public class TaskDAOImpl implements TaskDAO {
@@ -33,6 +36,33 @@ public class TaskDAOImpl implements TaskDAO {
 
         Query<Task> query = session.createQuery(cq);
         return query.getResultList();
+    }
+
+    @Override
+    public void startTask(DriverAction action, LocalDateTime start, Long driverId, Long truckId) {
+        Task task = new Task();
+        task.setAction(action);
+        task.setStart(start);
+        task.setDriver(new Driver(driverId));
+        task.setTruck(new Truck(truckId));
+
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(task);
+    }
+
+    @Override
+    public void finishCurrentTask(Long driverId, LocalDateTime end) {
+        Session session = sessionFactory.getCurrentSession();
+        Stream<Task> tasks = session.createQuery("SELECT t FROM Task t", Task.class).stream();
+
+        Task task = tasks.filter(t -> t.getDriver().getId() == driverId && (t.getEnd() == null))
+                         .findFirst()
+                         .orElse(null);
+
+        if (task != null) {
+            task.setEnd(end);
+            session.update(task);
+        }
     }
 
 }

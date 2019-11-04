@@ -8,7 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-public class WebServletConfiguration implements WebApplicationInitializer {
+public class WebServletConfig implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext ctx) throws ServletException {

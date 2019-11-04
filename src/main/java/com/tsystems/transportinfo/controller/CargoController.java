@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.controller;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import com.tsystems.transportinfo.service.CargoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/api/cargo")
 public class CargoController {
@@ -28,6 +29,7 @@ public class CargoController {
 
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
+        log.info("Request all Cargoes");
         return cargoService.getAllCargoes();
     }
 

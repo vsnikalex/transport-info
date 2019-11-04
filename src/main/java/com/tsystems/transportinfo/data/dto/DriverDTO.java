@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -51,6 +53,8 @@ public class DriverDTO {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime monthAgo = now.minus(1, ChronoUnit.MONTHS);
 
+        log.info("Calculate working hours from {} to {} for DriverDTO id={}", monthAgo, now, this.getId());
+
         Stream<Task> lastMonth = tasks.stream().filter(t ->  t.getStart().isBefore(now) &&
                                                             (t.getEnd() == null || t.getEnd().isAfter(monthAgo)));
 
@@ -79,6 +83,8 @@ public class DriverDTO {
         }
 
         this.action = (currentAction == null) ? DriverAction.REST : currentAction;
+
+        log.info("Set action {} for DriverDTO id={}", this.getAction(), this.getId());
     }
 
 }

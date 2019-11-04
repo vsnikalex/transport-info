@@ -9,6 +9,7 @@ import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.data.entity.Truck;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 public class DriverServiceImpl implements DriverService {
@@ -46,6 +48,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
+        log.info("Request all available Drivers in {} from DAO", city.getCity());
         List<Driver> drivers = driverDAO.findAvailableDrivers(city);
         return drivers.stream()
                 .map(this::convertToDto)
@@ -54,6 +57,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<DriverDTO> getAllDrivers() {
+        log.info("Request all Drivers from DAO");
         List<Driver> drivers = dao.findAll();
         return drivers.stream()
                 .map(this::convertToDto)
@@ -62,29 +66,35 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public void saveDriver(DriverDTO driverDTO) {
+        log.info("Save Driver");
         Driver driver = convertToEntity(driverDTO);
         dao.create(driver);
     }
 
     @Override
     public void updateDriver(DriverDTO driverDTO) {
+        log.info("Update Driver id={}", driverDTO.getId());
         Driver driver = convertToEntity(driverDTO);
         dao.update(driver);
     }
 
     @Override
     public DriverDTO getDriver(Long id) {
+        log.info("Request Driver id={} from DAO", id);
         Driver driver = dao.findOne(id);
         return convertToDto(driver);
     }
 
     @Override
     public void deleteDriver(Long id) {
+        log.info("Delete Driver id={}", id);
         dao.deleteById(id);
     }
 
     @Override
     public DriverDTO convertToDto(Driver entity) {
+        log.info("Convert Driver id={} entity to DriverDTO", entity.getId());
+
         DriverDTO driverDTO = modelMapper.map(entity, DriverDTO.class);
 
         driverDTO.setWorkedThisMonth(entity.getTasks());
@@ -106,6 +116,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver convertToEntity(DriverDTO dto) {
+        log.info("Convert DriverDTO ({} {}) to Driver entity", dto.getFirstName(), dto.getLastName());
+
         Driver driver = modelMapper.map(dto, Driver.class);
 
         String coords = dto.getCoords();

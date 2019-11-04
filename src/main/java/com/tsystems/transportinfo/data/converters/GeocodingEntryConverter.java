@@ -3,12 +3,14 @@ package com.tsystems.transportinfo.data.converters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.graphhopper.api.model.GHGeocodingEntry;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class GeocodingEntryConverter implements AttributeConverter<GHGeocodingEntry, String> {
 
@@ -22,8 +24,7 @@ public class GeocodingEntryConverter implements AttributeConverter<GHGeocodingEn
         try {
             customerInfoJson = objectMapper.writeValueAsString(node);
         } catch (final JsonProcessingException e) {
-            // TODO: logging
-            System.out.println("JSON writing error");
+            log.error("JSON writing error");
         }
 
         return customerInfoJson;
@@ -36,8 +37,7 @@ public class GeocodingEntryConverter implements AttributeConverter<GHGeocodingEn
         try {
             node = objectMapper.readValue(nodeJSON, GHGeocodingEntry.class);
         } catch (final IOException e) {
-            // TODO: logging
-            System.out.println("JSON reading error");
+            log.error("JSON reading error");
         }
 
         return node;

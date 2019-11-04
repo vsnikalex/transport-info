@@ -9,6 +9,7 @@ import com.graphhopper.api.model.GHGeocodingEntry;
 import com.graphhopper.api.model.GHGeocodingRequest;
 import com.graphhopper.api.model.GHGeocodingResponse;
 import com.graphhopper.util.shapes.GHPoint;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
 public class GraphHopperServiceImpl implements GraphHopperService {
 
@@ -26,11 +28,13 @@ public class GraphHopperServiceImpl implements GraphHopperService {
     public GHPoint pointFromEntry(GHGeocodingEntry entry) {
         double lat = entry.getPoint().getLat();
         double lng = entry.getPoint().getLng();
+        log.info("Convert entry with lat={}, lon={} to GHPoint", lat, lng);
         return new GHPoint(lat, lng);
     }
 
     @Override
     public String pointStringFromEntry(GHGeocodingEntry entry) {
+        log.info("Extract coordinates as String from entry");
         GHPoint point = pointFromEntry(entry);
         return point.toString();
     }
@@ -40,11 +44,14 @@ public class GraphHopperServiceImpl implements GraphHopperService {
         String[] coords = point.split(",");
         coords[0] = coords[0].substring(0, coords[0].indexOf(".") + 6);
         coords[1] = coords[1].substring(0, coords[1].indexOf(".") + 6);
+        log.info("Normalize point coordinates: {},{}", coords[0], coords[1]);
         return coords[0] + "," + coords[1];
     }
 
     @Override
     public GHGeocodingEntry coordsToEntry(String coords) {
+        log.info("Convert coordinates {} to GHGeocodingEntry using GH client", coords);
+
         GraphHopperGeocoding graphHopperGeocoding = new GraphHopperGeocoding();
         graphHopperGeocoding.setKey(env.getProperty("api.key"));
 
@@ -57,6 +64,7 @@ public class GraphHopperServiceImpl implements GraphHopperService {
 
     @Override
     public long timeOfPath(GHPoint startPlace, GHPoint endPlace) {
+        log.info("Calculate distance considering route between {} and {}", startPlace, endPlace);
         GraphHopperWeb gh = new GraphHopperWeb();
         gh.setKey(env.getProperty("api.key"));
 
@@ -90,6 +98,7 @@ public class GraphHopperServiceImpl implements GraphHopperService {
     @Override
     public double distance(double lat1, double lat2, double lon1,
                     double lon2, double el1, double el2) {
+        log.info("Calculate straight distance between {},{} and {},{}", lat1, lon1, lat2, lon2);
         final int R = 6371; // Radius of the earth
 
         double latDistance = Math.toRadians(lat2 - lat1);
@@ -109,6 +118,7 @@ public class GraphHopperServiceImpl implements GraphHopperService {
 
     @Override
     public boolean inSameCity(GHGeocodingEntry a, GHGeocodingEntry b) {
+        log.info("Compare entries");
         return a.getCountry().equals(b.getCountry()) &&
                a.getState().equals(b.getState()) &&
                a.getCity().equals(b.getCity());

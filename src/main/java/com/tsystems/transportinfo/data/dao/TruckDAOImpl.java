@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ public class TruckDAOImpl implements TruckDAO {
     private GraphHopperService graphHopperService;
 
     @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public List<Truck> findAvailableTrucks(GHPoint destination, long maxTravelTime) {
         // Use rough estimate to calculate distance between trucks and destination point
         long maxTravelHours = maxTravelTime / 1000 / 60 / 60;

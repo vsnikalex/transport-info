@@ -7,12 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -45,6 +47,8 @@ public class TruckDTO {
         int drivers = (delivery != null && delivery.getDrivers() != null) ? delivery.getDrivers().size() : 0;
 
         this.driversCnt = drivers;
+
+        log.info("Set amount of Drivers = {} for TruckDTO id={}", this.getDriversCnt(), this.getId());
     }
 
 }

@@ -9,6 +9,7 @@ import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.data.entity.Cargo;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Truck;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @Transactional
 public class DeliveryServiceImpl implements DeliveryService {
@@ -46,6 +48,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public void createDelivery(DeliveryDTO deliveryDTO) {
+        log.info("Request DAO to save delivery with cargo id={}, driver id={}, truck id={}",
+                deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());
+
         Truck truck = new Truck(deliveryDTO.getTruckID());
 
         Delivery delivery = new Delivery();
@@ -65,16 +70,20 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public void deleteDelivery(Long id) {
+        log.info("Request DAO to delete Delivery id={}", id);
         dao.deleteById(id);
     }
 
     @Override
     public Delivery convertToEntity(DeliveryDTO dto) {
+        log.info("Convert DeliveryDTO to Delivery entity");
         return modelMapper.map(dto, Delivery.class);
     }
 
     @Override
     public DeliveryDTO convertToDTO(Delivery entity) {
+        log.info("Convert Delivery entity id={} to DeliveryDTO", entity.getId());
+
         Map<String, DeliveryDTO.CargoOperations> routeMap = new LinkedHashMap<>();
 
         String route = entity.getRoute();

@@ -24,11 +24,13 @@
 
 </head>
 
-<body onload="RestGetAll()">
+<body onload="RestGetAll()" style="display: flex;
+                                    flex-direction: column;
+                                    min-height: 100%;">
 
     <jsp:include page="header.jsp" />
 
-    <div class="main">
+    <div class="main" style="min-height: calc(100vh - 249px);">
         <div class="breadcrumbbar">
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">

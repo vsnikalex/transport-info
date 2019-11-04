@@ -93,8 +93,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDTO convertToDto(Driver entity) {
-        log.info("Convert Driver id={} entity to DriverDTO", entity.getId());
-
         DriverDTO driverDTO = modelMapper.map(entity, DriverDTO.class);
 
         driverDTO.setWorkedThisMonth(entity.getTasks());
@@ -116,8 +114,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver convertToEntity(DriverDTO dto) {
-        log.info("Convert DriverDTO ({} {}) to Driver entity", dto.getFirstName(), dto.getLastName());
-
         Driver driver = modelMapper.map(dto, Driver.class);
 
         String coords = dto.getCoords();

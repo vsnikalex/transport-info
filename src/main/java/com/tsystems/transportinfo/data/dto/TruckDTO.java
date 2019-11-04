@@ -47,8 +47,5 @@ public class TruckDTO {
         int drivers = (delivery != null && delivery.getDrivers() != null) ? delivery.getDrivers().size() : 0;
 
         this.driversCnt = drivers;
-
-        log.info("Set amount of Drivers = {} for TruckDTO id={}", this.getDriversCnt(), this.getId());
     }
-
 }

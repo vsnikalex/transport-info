@@ -90,13 +90,11 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public CargoDTO convertToDto(Cargo entity) {
-        log.info("Convert Cargo id={} entity to CargoDTO", entity.getId());
         return modelMapper.map(entity, CargoDTO.class);
     }
 
     @Override
     public Cargo convertToEntity(CargoDTO dto) {
-        log.info("Convert CargoDTO ({}) to Cargo entity", dto.getDescription());
         Cargo cargo = modelMapper.map(dto, Cargo.class);
 
         long start = dto.getLocDepotId();

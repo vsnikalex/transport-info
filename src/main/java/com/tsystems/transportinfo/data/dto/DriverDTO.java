@@ -53,8 +53,6 @@ public class DriverDTO {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime monthAgo = now.minus(1, ChronoUnit.MONTHS);
 
-        log.info("Calculate working hours from {} to {} for DriverDTO id={}", monthAgo, now, this.getId());
-
         Stream<Task> lastMonth = tasks.stream().filter(t ->  t.getStart().isBefore(now) &&
                                                             (t.getEnd() == null || t.getEnd().isAfter(monthAgo)));
 
@@ -83,8 +81,6 @@ public class DriverDTO {
         }
 
         this.action = (currentAction == null) ? DriverAction.REST : currentAction;
-
-        log.info("Set action {} for DriverDTO id={}", this.getAction(), this.getId());
     }
 
 }

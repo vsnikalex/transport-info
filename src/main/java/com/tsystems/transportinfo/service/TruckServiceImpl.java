@@ -94,7 +94,6 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     public TruckDTO convertToDto(Truck entity) {
-        log.info("Convert Truck id={} entity to TruckDTO", entity.getId());
         TruckDTO truckDTO = modelMapper.map(entity, TruckDTO.class);
 
         truckDTO.setDriversCnt(entity.getDelivery());
@@ -104,7 +103,6 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     public Truck convertToEntity(TruckDTO dto) {
-        log.info("Convert TruckDTO ({}) to Truck entity", dto.getPlate());
         Truck truck = modelMapper.map(dto, Truck.class);
 
         String coords = dto.getCoords();

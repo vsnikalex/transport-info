@@ -76,14 +76,11 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public Delivery convertToEntity(DeliveryDTO dto) {
-        log.info("Convert DeliveryDTO to Delivery entity");
         return modelMapper.map(dto, Delivery.class);
     }
 
     @Override
     public DeliveryDTO convertToDTO(Delivery entity) {
-        log.info("Convert Delivery entity id={} to DeliveryDTO", entity.getId());
-
         Map<String, DeliveryDTO.CargoOperations> routeMap = new LinkedHashMap<>();
 
         String route = entity.getRoute();

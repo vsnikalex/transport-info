@@ -14,6 +14,7 @@ class DriverApp extends React.Component {
         };
 
         this.selectDriver = this.selectDriver.bind(this);
+        this.updateDriverActivity = this.updateDriverActivity.bind(this);
         this.updateLoadOpStatus = this.updateLoadOpStatus.bind(this);
         this.updateUnloadOpStatus = this.updateUnloadOpStatus.bind(this);
     }
@@ -24,6 +25,12 @@ class DriverApp extends React.Component {
         );
 
         this.setState({selectedDriverId: event.target.value, selectedDriver: driver});
+    }
+
+    updateDriverActivity(activity) {
+        let driver = this.state.selectedDriver;
+        driver.action = activity;
+        this.setState({selectedDriver: driver});
     }
 
     updateLoadOpStatus(coords, id, status) {
@@ -77,7 +84,8 @@ class DriverApp extends React.Component {
         } else {
             activities = <ActivitiesList driverActivity={this.state.selectedDriver.action}
                                          driverId={this.state.selectedDriver.id}
-                                         truckId={this.state.selectedDriver.truckDTO.id} />
+                                         truckId={this.state.selectedDriver.truckDTO.id}
+                                         updateDriverActivity={this.updateDriverActivity} />
         }
 
         return (
@@ -115,10 +123,11 @@ class ActivitiesList extends React.Component {
         let driverActivity = this.props.driverActivity;
         let driverId = this.props.driverId;
         let truckId = this.props.truckId;
+        let updateDriverActivity = this.props.updateDriverActivity;
         const acts = ['DRIVE', 'HELP', 'LOAD', 'UNLOAD'];
         const activities = acts.map(function (act) {
             return <Activity key={act} thisActivity={act} driverActivity={driverActivity}
-                             driverId={driverId} truckId={truckId} />
+                             driverId={driverId} truckId={truckId} updateDriverActivity={updateDriverActivity} />
         });
 
         return (
@@ -146,13 +155,15 @@ class Activity extends React.Component {
         this.startActivity = this.startActivity.bind(this);
     }
 
+    // TODO: checkAndStartActivity for case when this.props.thisActivity !== 'REST"
+    // firstly, stops current task, then starts a new one
     startActivity() {
         let now = Math.round(new Date().getTime() / 1000);
         console.log('start activity at ' + now);
         axios.get('api/task/start/' + this.props.thisActivity + '/' + now + '/' + this.props.driverId + '/' + this.props.truckId)
             .then(response => {
                 console.log('activity started at: ' + response.data);
-
+                this.props.updateDriverActivity(this.props.thisActivity);
             })
             .catch(error => {
                 console.log(error);

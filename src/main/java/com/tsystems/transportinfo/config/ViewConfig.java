@@ -30,15 +30,16 @@ public class ViewConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("driver");
-        registry.addViewController("/admin_truck").setViewName("admin_truck");
-        registry.addViewController("/admin_truck_add").setViewName("admin_truck_add");
-        registry.addViewController("/admin_driver").setViewName("admin_driver");
-        registry.addViewController("/admin_driver_add").setViewName("admin_driver_add");
-        registry.addViewController("/admin_cargo").setViewName("admin_cargo");
-        registry.addViewController("/admin_cargo_add").setViewName("admin_cargo_add");
-        registry.addViewController("/admin_delivery_editor").setViewName("admin_delivery_editor");
-        registry.addViewController("/driver").setViewName("driver");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/admin").setViewName("driver");
+        registry.addViewController("/admin/truck").setViewName("admin_truck");
+        registry.addViewController("/admin/truck_add").setViewName("admin_truck_add");
+        registry.addViewController("/admin/driver").setViewName("admin_driver");
+        registry.addViewController("/admin/driver_add").setViewName("admin_driver_add");
+        registry.addViewController("/admin/cargo").setViewName("admin_cargo");
+        registry.addViewController("/admin/cargo_add").setViewName("admin_cargo_add");
+        registry.addViewController("/admin/delivery_editor").setViewName("admin_delivery_editor");
+        registry.addViewController("/admin/driver_app").setViewName("driver");
     }
 
     @Override

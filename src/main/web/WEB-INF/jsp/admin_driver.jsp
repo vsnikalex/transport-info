@@ -37,7 +37,7 @@
 
             <div class="container-fixed">
                 <div class="tc-example">
-                    <button class="btn btn-default btn-block" onclick="location.href='/admin_driver_add'">
+                    <button class="btn btn-default btn-block" onclick="location.href='/admin/driver_add'">
                         <i class="icon icon-add" aria-hidden="true"></i>
                     </button>
                     <table class="table table-hover">

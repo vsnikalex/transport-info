@@ -6,7 +6,7 @@ var RestDelete = function(id) {
         url:  prefix + '/delete/' + id,
         async: true,
         success: function(response) {
-            window.location = '/admin_driver';
+            window.location = '/admin/driver';
         },
         error: function(e) {
             console.log(e.responseText);
@@ -15,7 +15,7 @@ var RestDelete = function(id) {
 };
 
 var ToUpdatePage = function (id) {
-    location.href='/admin_driver_add?id=' + id;
+    location.href='/admin/driver_add?id=' + id;
 };
 
 var RestGetAll = function() {
@@ -77,7 +77,7 @@ var RestPost = function() {
         async: true,
         success: function(result) {
             alert(result.msg);
-            window.location = '/admin_driver_add';
+            window.location = '/admin/driver_add';
         },
         error: function(e) {
             // TODO: highlight error fields with red
@@ -104,7 +104,7 @@ var RestPut = function(id) {
         async: true,
         success: function(result) {
             alert(result.msg);
-            window.location = '/admin_driver';
+            window.location = '/admin/driver';
         },
         error: function(e) {
             console.log(e.responseText);

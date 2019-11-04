@@ -1,7 +1,6 @@
 package com.tsystems.transportinfo.config.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,23 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.tsystems.transportinfo.config.security")
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private CustomAccessDeniedHandler accessDeniedHandler;
-
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    @Autowired
-    private MySavedRequestAwareAuthenticationSuccessHandler mySuccessHandler;
-
-    private SimpleUrlAuthenticationFailureHandler myFailureHandler = new SimpleUrlAuthenticationFailureHandler();
 
     @Bean
     public PasswordEncoder encoder() {
@@ -46,18 +33,19 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                .and()
                 .authorizeRequests()
-                    .antMatchers("/api/foos").authenticated()
-                    .antMatchers("/api/admin/**").hasRole("ADMIN")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/login*").permitAll()
+                    .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .successHandler(mySuccessHandler)
-                    .failureHandler(myFailureHandler)
+                    .loginPage("/login")
+                    .loginProcessingUrl("/perform_login")
+                    .defaultSuccessUrl("/homepage.html", true)
                     .and()
-                .logout();
+                .logout()
+                    .logoutUrl("/perform_logout")
+                    .deleteCookies("JSESSIONID");
     }
 
 }

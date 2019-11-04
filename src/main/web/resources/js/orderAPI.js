@@ -6,7 +6,7 @@ var RestDelete = function(id) {
         url:  prefix + '/delete/' + id,
         async: true,
         success: function(response) {
-            window.location = '/admin_order';
+            window.location = '/admin/order';
         },
         error: function(jqXHR) {
             alert(jqXHR.status + '\n' + jqXHR.responseText);

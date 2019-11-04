@@ -1,5 +1,5 @@
 var UploadDepots = function () {
-    $.getJSON('/api/depot/all', function (depots) {
+    $.getJSON('api/depot/all', function (depots) {
         $.each(depots, function(i, v) {
             $('#location')
                 .append($("<option></option>")

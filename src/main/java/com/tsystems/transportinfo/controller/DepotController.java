@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/depot")
+@RequestMapping("/admin/api/depot")
 public class DepotController {
 
     @Autowired

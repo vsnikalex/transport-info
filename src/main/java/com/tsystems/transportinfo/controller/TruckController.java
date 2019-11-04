@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/truck")
+@RequestMapping("/admin/api/truck")
 public class TruckController {
 
     @Autowired

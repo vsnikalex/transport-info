@@ -1,4 +1,4 @@
-var prefix = '/api/driver';
+var prefix = 'api/driver';
 
 var RestDelete = function(id) {
     $.ajax({

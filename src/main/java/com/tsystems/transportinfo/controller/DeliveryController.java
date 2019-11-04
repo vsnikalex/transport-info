@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/delivery")
+@RequestMapping("/admin/api/delivery")
 public class DeliveryController {
 
     @Autowired

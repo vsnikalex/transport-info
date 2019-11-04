@@ -47,17 +47,20 @@
                 <div class="col-l-6">
                     <h1 class="underline">Authentication Form</h1>
                     <div class="tc-example">
-                        <fieldset class="form-fieldset">
-                            <div class="form-input-set">
-                                <label for="text7">Login</label>
-                                <input type="text" class="form-input" name="text7" id="text7" >
-                            </div>
-                            <div class="form-input-set">
-                                <label for="text8">Password</label>
-                                <input type="password" class="form-input" name="text8" id="text8" >
-                            </div>
-                            <button type="button" class="btn btn-default btn-block">Log In</button>
-                        </fieldset>
+                        <form name='f' action="perform_login" method='POST'>
+                            <fieldset class="form-fieldset">
+                                <div class="form-input-set">
+                                    <label for="text7">Login</label>
+                                    <input type="text" class="form-input" name="username" id="text7" >
+                                </div>
+                                <div class="form-input-set">
+                                    <label for="text8">Password</label>
+                                    <input type="password" class="form-input" name="password" id="text8" >
+                                </div>
+                                <button name="submit" type="submit" value="submit"
+                                        class="btn btn-default btn-block">Log In</button>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
                 <div class="col-l-3"></div>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/admin/api/task")
 public class TaskController {
 
     @Autowired

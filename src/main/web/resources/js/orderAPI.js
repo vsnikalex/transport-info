@@ -1,4 +1,4 @@
-var prefix = '/api/order';
+var prefix = 'api/order';
 
 var RestDelete = function(id) {
     $.ajax({

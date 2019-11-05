@@ -51,6 +51,7 @@
                     <div class="form-input-set">
                         <label for="location">Location</label>
                         <select name="location" id="location" class="form-select">
+                            <option value="" selected disabled hidden>Choose location</option>
                             <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>

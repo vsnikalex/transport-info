@@ -47,12 +47,14 @@
                     <div class="form-input-set">
                         <label for="location">Location</label>
                         <select name="location" id="location" class="form-select">
+                            <option value="0" selected disabled hidden>Choose location</option>
                             <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>
                     <div class="form-input-set">
                         <label for="destination">Destination</label>
                         <select name="destination" id="destination" class="form-select">
+                            <option value="0" selected disabled hidden>Choose destination</option>
                             <%-- Filled with data from REST API via JS --%>
                         </select>
                     </div>

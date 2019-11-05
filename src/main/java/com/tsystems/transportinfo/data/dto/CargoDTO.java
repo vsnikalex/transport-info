@@ -30,9 +30,11 @@ public class CargoDTO {
     private CargoStatus status;
 
     @NotNull(message = "Start Location must not be null")
+    @Min(value = 1, message = "Start Location must be chosen")
     private long locDepotId;
 
     @NotNull(message = "End Location must not be null")
+    @Min(value = 1, message = "End Location must be chosen")
     private long destDepotId;
 
     private Depot startDepot;

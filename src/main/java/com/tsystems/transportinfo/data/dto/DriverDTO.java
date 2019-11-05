@@ -13,7 +13,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Stream;
@@ -50,7 +52,7 @@ public class DriverDTO {
     private GHGeocodingEntry location;
 
     public void setWorkedThisMonth(List<Task> tasks) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("UTC"));
         LocalDateTime monthAgo = now.minus(1, ChronoUnit.MONTHS);
 
         Stream<Task> lastMonth = tasks.stream().filter(t ->  t.getStart().isBefore(now) &&

@@ -77,15 +77,20 @@ class DriverApp extends React.Component {
 
     render() {
         let activities;
+        let info;
         if (!this.state.selectedDriver.deliveryDTO || typeof this.state.selectedDriver.deliveryDTO === 'undefined') {
             activities = <div className="col-l-4 ">
                             <h2 className="underline">Activities Log</h2>
-                        </div>
+                        </div>;
+            info =      <div className="col-l-4 ">
+                            <h2 className="underline">Add Info</h2>
+                        </div>;
         } else {
             activities = <ActivitiesList driverActivity={this.state.selectedDriver.action}
                                          driverId={this.state.selectedDriver.id}
                                          truckId={this.state.selectedDriver.truckDTO.id}
-                                         updateDriverActivity={this.updateDriverActivity} />
+                                         updateDriverActivity={this.updateDriverActivity} />;
+            info = <Info truckId={this.state.selectedDriver.deliveryDTO.truckID} />;
         }
 
         return (
@@ -100,12 +105,43 @@ class DriverApp extends React.Component {
                         <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
                                updateLoadOpStatus={this.updateLoadOpStatus}
                                updateUnloadOpStatus={this.updateUnloadOpStatus} />
-                        <div className="col-l-4">
-                            <h2 className="underline">Add Info</h2>
-                        </div>
+                        {info}
                         {activities}
                     </div>
                 </div>
+            </div>
+        )
+    }
+}
+
+class Info extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            truck: {}
+        };
+    }
+
+    componentDidMount() {
+        axios.get('api/truck/' + this.props.truckId).then(response => {
+            console.log(response.data);
+            this.setState({truck: response.data});
+        });
+    }
+
+    render() {
+        return (
+            <div className="col-l-4">
+                <h2 className="underline">Add Info</h2>
+                <ul className="content-list">
+                    <li className="media">
+                        <div className="media-body">
+                            <div className="media-heading">Truck</div>
+                            <div className="media-hint">Plate: {this.state.truck.plate}</div>
+                            <div className="media-hint">Capacity: {this.state.truck.capacity}kg</div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         )
     }
@@ -267,7 +303,7 @@ class Driver extends React.Component {
     render() {
         return (
             <option value={this.props.driver.id}>
-                {this.props.driver.firstName} {this.props.driver.lastName}
+                #{this.props.driver.id} {this.props.driver.firstName} {this.props.driver.lastName}
                 ({this.props.driver.location.country})
             </option>
         )

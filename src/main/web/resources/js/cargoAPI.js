@@ -81,7 +81,7 @@ var RestPost = function() {
         },
         error: function(e) {
             // TODO: highlight error fields with red
-            console.log(e.responseText);
+            alert(e.responseText);
         }
     });
 };
@@ -90,8 +90,8 @@ var RestPut = function(id) {
     var JSONObject= {
         'id' : id,
         'description': $("#description").val(),
-        'locCoords': $("#location").val(),
-        'destCoords': $("#destination").val(),
+        'locDepotId': $("#location").val(),
+        'destDepotId': $("#destination").val(),
         'status' : $("#status").val(),
         'weight' : $("#weight").val()
     };
@@ -109,7 +109,7 @@ var RestPut = function(id) {
             window.location = '/admin/cargo';
         },
         error: function(e) {
-            console.log(e.responseText);
+            alert(e.responseText);
         }
     });
 };
@@ -123,8 +123,8 @@ var SetUp = function() {
         $.getJSON(prefix + '/' + urlParams.get('id'), function (cargo) {
             $("#entity_info").text(
                 cargo.description + ": " +
-                cargo.location.country + "\u2192" +
-                cargo.destination.country + " " +
+                cargo.startDepot.location.country + "\u2192" +
+                cargo.endDepot.location.country + " " +
                 cargo.status + " " +
                 cargo.weight + "kg"
             );

@@ -78,7 +78,7 @@ var RestPost = function() {
         },
         error: function(e) {
             // TODO: highlight error fields with red
-            console.log(e.responseText);
+            alert(e.responseText);
         }
     });
 };
@@ -105,7 +105,7 @@ var RestPut = function(id) {
             window.location = '/admin/truck';
         },
         error: function(e) {
-            console.log(e.responseText);
+            alert(e.responseText);
         }
     });
 };

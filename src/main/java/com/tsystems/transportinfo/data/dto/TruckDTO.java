@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Delivery;
+import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @NoArgsConstructor
@@ -40,12 +43,17 @@ public class TruckDTO {
     @Min(value = 0)
     private int driversCnt;
 
+    // TODO: change to DTO / SecuredDTO
+    private List<String> driversInfo;
+
     private GHGeocodingEntry location;
 
     public void setDriversCnt(Delivery delivery) {
-        // TODO: Delivery -> Drivers
-        int drivers = (delivery != null && delivery.getDrivers() != null) ? delivery.getDrivers().size() : 0;
-
-        this.driversCnt = drivers;
+        if (delivery != null && delivery.getDrivers() != null) {
+            this.driversCnt = delivery.getDrivers().size();
+            this.driversInfo = delivery.getDrivers().stream()
+                                                .map(d -> d.getId() + " " + d.getFirstName() + " " + d.getLastName())
+                                                .collect(Collectors.toList());
+        }
     }
 }

@@ -124,12 +124,18 @@ class Info extends React.Component {
 
     componentDidMount() {
         axios.get('api/truck/' + this.props.truckId).then(response => {
-            console.log(response.data);
             this.setState({truck: response.data});
         });
     }
 
     render() {
+        let coworkers = [];
+        let info = this.state.truck.driversInfo;
+        for (let index in info){
+            let driver = info[index];
+            coworkers.push(<div className="media-hint">#{driver}</div>);
+        }
+
         return (
             <div className="col-l-4">
                 <h2 className="underline">Add Info</h2>
@@ -141,11 +147,18 @@ class Info extends React.Component {
                             <div className="media-hint">Capacity: {this.state.truck.capacity}kg</div>
                         </div>
                     </li>
+                    <li className="media">
+                        <div className="media-body">
+                            <div className="media-heading">Drivers</div>
+                            {coworkers}
+                        </div>
+                    </li>
                 </ul>
             </div>
         )
     }
 }
+
 
 class ActivitiesList extends React.Component {
     constructor(props) {

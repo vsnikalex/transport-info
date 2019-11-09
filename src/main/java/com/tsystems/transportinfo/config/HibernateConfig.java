@@ -1,13 +1,11 @@
 package com.tsystems.transportinfo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.googlecode.flyway.core.Flyway;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -44,7 +42,15 @@ public class HibernateConfig {
         return new LocalValidatorFactoryBean();
     }
 
-    @Bean
+    @Bean(initMethod = "migrate")
+    public Flyway flyway() {
+        Flyway flyway = new Flyway();
+        flyway.setLocations("classpath:/db/migration");
+        flyway.setDataSource(dataSource());
+        return flyway;
+    }
+
+    @Bean @DependsOn("flyway")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
@@ -79,8 +85,8 @@ public class HibernateConfig {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto",
-                env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty("hibernate.ddl-auto",
+                env.getProperty("hibernate.ddl-auto"));
         hibernateProperties.setProperty("hibernate.dialect",
                 env.getProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.show_sql",

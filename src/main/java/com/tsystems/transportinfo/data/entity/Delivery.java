@@ -18,10 +18,10 @@ public class Delivery {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "done")
     private boolean done;
 
-    @Column
+    @Column(name = "route")
     private String route;
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)

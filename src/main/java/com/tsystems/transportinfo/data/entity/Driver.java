@@ -20,13 +20,13 @@ public class Driver {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(columnDefinition="VARCHAR(512)")
+    @Column(name = "location", columnDefinition="VARCHAR(512)")
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry location;
 

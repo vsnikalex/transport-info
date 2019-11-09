@@ -18,13 +18,13 @@ public class Cargo {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "weight")
     private int weight;
 
-    @Column
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 

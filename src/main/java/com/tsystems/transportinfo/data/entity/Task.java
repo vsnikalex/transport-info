@@ -21,14 +21,14 @@ public class Task {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "action")
     @Enumerated(EnumType.STRING)
     private DriverAction action;
 
-    @Column
+    @Column(name = "start")
     private LocalDateTime start;
 
-    @Column
+    @Column(name = "end")
     private LocalDateTime end;
 
     @ManyToOne(fetch = FetchType.LAZY)

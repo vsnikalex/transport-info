@@ -10,6 +10,7 @@ import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class TruckServiceImpl implements TruckService {
+
+    @Autowired
+    JmsTemplate jmsTemplate;
 
     private GenericDAO<Truck> dao;
 
@@ -70,6 +74,8 @@ public class TruckServiceImpl implements TruckService {
         log.info("Save Truck");
         Truck truck = convertToEntity(truckDTO);
         dao.create(truck);
+
+        jmsTemplate.convertAndSend("truck-queue", truckDTO.getPlate() + " created");
     }
 
     @Override

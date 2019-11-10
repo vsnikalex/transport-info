@@ -39,6 +39,18 @@
             <version>${spring-security.version}</version>
         </dependency>
 
+        <!-- JMS -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.15.10</version>
+        </dependency>
+
         <!-- Spring and Web -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -135,6 +147,12 @@
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-jackson</artifactId>
             <version>2.6.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>2.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>

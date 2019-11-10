@@ -6,7 +6,7 @@ var RestDelete = function(id) {
         url:  prefix + '/delete/' + id,
         async: true,
         success: function() {
-            window.location = '/admin/cargo';
+            window.location = '/transport/admin/cargo';
         },
         error: function(e) {
             console.log(e.responseText);
@@ -15,7 +15,7 @@ var RestDelete = function(id) {
 };
 
 var ToUpdatePage = function (id) {
-    location.href='/admin/cargo_add?id=' + id;
+    location.href='/transport/admin/cargo_add?id=' + id;
 };
 
 var RestGetAll = function() {
@@ -77,7 +77,7 @@ var RestPost = function() {
         async: true,
         success: function(result) {
             alert(result.msg);
-            window.location = '/admin/cargo_add';
+            window.location = '/transport/admin/cargo_add';
         },
         error: function(e) {
             // TODO: highlight error fields with red
@@ -106,7 +106,7 @@ var RestPut = function(id) {
         async: true,
         success: function(result) {
             alert(result.msg);
-            window.location = '/admin/cargo';
+            window.location = '/transport/admin/cargo';
         },
         error: function(e) {
             alert(e.responseText);

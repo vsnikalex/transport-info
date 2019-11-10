@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tsystems.javaschool.rest;
+package com.tsystems.transportinfo.rest;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,9 +40,9 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.tsystems.javaschool.data.MemberRepository;
-import com.tsystems.javaschool.model.Member;
-import com.tsystems.javaschool.service.MemberRegistration;
+import com.tsystems.transportinfo.data.MemberRepository;
+import com.tsystems.transportinfo.model.Member;
+import com.tsystems.transportinfo.service.MemberRegistration;
 
 /**
  * JAX-RS Example

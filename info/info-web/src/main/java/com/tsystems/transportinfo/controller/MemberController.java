@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tsystems.javaschool.controller;
+package com.tsystems.transportinfo.controller;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -24,8 +24,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.tsystems.javaschool.model.Member;
-import com.tsystems.javaschool.service.MemberRegistration;
+import com.tsystems.transportinfo.model.Member;
+import com.tsystems.transportinfo.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name

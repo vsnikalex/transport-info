@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tsystems.javaschool.test;
+package com.tsystems.transportinfo.test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -24,9 +24,9 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import com.tsystems.javaschool.model.Member;
-import com.tsystems.javaschool.service.MemberRegistration;
-import com.tsystems.javaschool.util.Resources;
+import com.tsystems.transportinfo.model.Member;
+import com.tsystems.transportinfo.service.MemberRegistration;
+import com.tsystems.transportinfo.util.Resources;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;

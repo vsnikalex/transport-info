@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tsystems.javaschool.data;
+package com.tsystems.transportinfo.data;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-import com.tsystems.javaschool.model.Member;
+import com.tsystems.transportinfo.model.Member;
 
 @RequestScoped
 public class MemberListProducer {

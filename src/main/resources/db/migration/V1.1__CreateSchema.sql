@@ -1,6 +1,6 @@
 create table depot
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	location varchar(512) null,
 	type varchar(255) null
@@ -8,7 +8,7 @@ create table depot
 
 create table truck
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	capacity int null,
 	location varchar(512) null,
@@ -20,7 +20,7 @@ create table truck
 
 create table delivery
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	done bit null,
 	route varchar(255) null,
@@ -31,7 +31,7 @@ create table delivery
 
 create table cargo
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	description varchar(255) null,
 	status varchar(255) null,
@@ -49,7 +49,7 @@ create table cargo
 
 create table driver
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	firstName varchar(255) null,
 	lastName varchar(255) null,
@@ -61,7 +61,7 @@ create table driver
 
 create table task
 (
-	id bigint not null
+	id bigint auto_increment not null
 		primary key,
 	action varchar(255) null,
 	end datetime null,
@@ -73,4 +73,3 @@ create table task
 	constraint FKg6l716fshnfuilkb95i8rmxca
 		foreign key (driver_id) references driver (id)
 );
-

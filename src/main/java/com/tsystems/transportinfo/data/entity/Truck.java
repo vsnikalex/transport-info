@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Truck {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique=true)

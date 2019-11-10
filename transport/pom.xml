@@ -262,7 +262,7 @@
     </dependencies>
 
     <build>
-        <finalName>Transport</finalName>
+        <finalName>transport</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -280,7 +280,7 @@
                     <version>3.2.3</version>
                     <configuration>
                         <warSourceDirectory>src/main/web</warSourceDirectory>
-                        <warName>Transport</warName>
+                        <warName>transport</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>

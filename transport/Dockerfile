@@ -1,2 +1,2 @@
 FROM jboss/wildfly
-COPY target/TransportInfo.war /opt/jboss/wildfly/standalone/deployments/
+COPY target/transport.war /opt/jboss/wildfly/standalone/deployments/

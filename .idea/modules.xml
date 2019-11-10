@@ -3,10 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/info/info.iml" filepath="$PROJECT_DIR$/info/info.iml" />
-      <module fileurl="file://$PROJECT_DIR$/info/lection-ejb.iml" filepath="$PROJECT_DIR$/info/lection-ejb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/info/lection-ejb-ear/lection-ejb-ear.iml" filepath="$PROJECT_DIR$/info/lection-ejb-ear/lection-ejb-ear.iml" />
-      <module fileurl="file://$PROJECT_DIR$/info/lection-ejb-ejb/lection-ejb-ejb.iml" filepath="$PROJECT_DIR$/info/lection-ejb-ejb/lection-ejb-ejb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/info/lection-ejb-web/lection-ejb-web.iml" filepath="$PROJECT_DIR$/info/lection-ejb-web/lection-ejb-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/info/info-ear/info-ear.iml" filepath="$PROJECT_DIR$/info/info-ear/info-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/info/info-ejb/info-ejb.iml" filepath="$PROJECT_DIR$/info/info-ejb/info-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/info/info-web/info-web.iml" filepath="$PROJECT_DIR$/info/info-web/info-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/transport/transport.iml" filepath="$PROJECT_DIR$/transport/transport.iml" />
       <module fileurl="file://$PROJECT_DIR$/transport-info.iml" filepath="$PROJECT_DIR$/transport-info.iml" />
     </modules>

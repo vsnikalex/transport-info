@@ -2,7 +2,6 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="ejb" url="file://$PROJECT_DIR$/info/info-ejb" />
-    <file type="ejb" url="file://$PROJECT_DIR$/info/lection-ejb-ejb" />
     <file type="javaeeApplication" url="file://$PROJECT_DIR$/info" />
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
@@ -13,14 +12,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/info/info-ear/pom.xml" />
-        <option value="$PROJECT_DIR$/info/info-ejb/pom.xml" />
         <option value="$PROJECT_DIR$/info/info-web/pom.xml" />
-      </set>
+        <option value="$PROJECT_DIR$/info/info-ejb/pom.xml" />
+        <option value="$PROJECT_DIR$/info/info-ear/pom.xml" />
+        <option value="$PROJECT_DIR$/info/pom.xml" />
+      </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">

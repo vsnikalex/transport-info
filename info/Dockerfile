@@ -1,2 +1,2 @@
 FROM jboss/wildfly
-COPY lection-ejb-ear/target/lection-ejb-ear.ear /opt/jboss/wildfly/standalone/deployments/
+COPY info-ear/target/info-ear.ear /opt/jboss/wildfly/standalone/deployments/

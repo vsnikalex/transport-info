@@ -6,12 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="info" />
+        <module name="lection-ejb-ear" />
+        <module name="lection-ejb-web" />
         <module name="transport" />
+        <module name="lection-ejb-ejb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="info" target="1.5" />
+      <module name="info" target="1.7" />
+      <module name="info-ear" target="1.7" />
+      <module name="info-ejb" target="1.7" />
+      <module name="info-web" target="1.7" />
+      <module name="infoweb" target="1.5" />
+      <module name="lection-ejb" target="1.7" />
+      <module name="lection-ejb-ear" target="1.7" />
+      <module name="lection-ejb-ejb" target="1.7" />
+      <module name="lection-ejb-web" target="1.7" />
       <module name="transport" target="1.8" />
       <module name="transport-info" target="1.5" />
     </bytecodeTargetLevel>

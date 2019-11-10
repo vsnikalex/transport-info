@@ -13,9 +13,6 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/info/target/info-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="archive" name="transport-1.0-SNAPSHOT.war">
-        <element id="artifact" artifact-name="transport:war exploded" />
-      </element>
       <element id="library" level="project" name="Maven: org.jboss.resteasy:jaxrs-api:3.0.12.Final" />
       <element id="library" level="project" name="Maven: org.jboss.spec.javax.faces:jboss-jsf-api_2.2_spec:2.2.14" />
     </root>

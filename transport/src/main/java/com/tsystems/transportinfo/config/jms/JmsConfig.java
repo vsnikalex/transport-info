@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
+import org.springframework.jms.listener.MessageListenerContainer;
 
 @Configuration
 @EnableJms
@@ -13,9 +15,7 @@ public class JmsConfig {
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){
-        ActiveMQConnectionFactory factory =
-                new ActiveMQConnectionFactory("admin","admin","tcp://localhost:61616");
-        return factory;
+        return new ActiveMQConnectionFactory("vm://localhost");
     }
 
     @Bean
@@ -23,12 +23,21 @@ public class JmsConfig {
         return new JmsTemplate(connectionFactory());
     }
 
+//    @Bean
+//    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
+//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+//        factory.setConnectionFactory(connectionFactory());
+//        factory.setConcurrency("1-1");
+//        return factory;
+//    }
+
     @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory());
-        factory.setConcurrency("1-1");
-        return factory;
+    public MessageListenerContainer listenerContainer() {
+        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory());
+        container.setDestinationName("example.queue");
+        container.setMessageListener(new MyJmsListener());
+        return container;
     }
 
 }

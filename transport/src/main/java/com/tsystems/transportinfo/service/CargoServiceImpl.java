@@ -8,8 +8,13 @@ import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +23,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class CargoServiceImpl implements CargoService {
+
+    @Autowired
+    JmsTemplate jmsTemplate;
 
     @Autowired
     private CargoDAO cargoDAO;
@@ -49,6 +57,9 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
+
+        jmsTemplate.send("example.queue", session -> session.createTextMessage("ACHTUNG, ALL CARGO REQUESTED!"));
+
         List<Cargo> cargoes = dao.findAll();
         return cargoes.stream()
                 .map(this::convertToDto)

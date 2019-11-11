@@ -5,7 +5,8 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-public class MyJmsListener implements MessageListener {
+public class TruckListener implements MessageListener {
+
     @Override
     public void onMessage(Message message) {
         if (message instanceof TextMessage) {
@@ -17,4 +18,5 @@ public class MyJmsListener implements MessageListener {
             }
         }
     }
+
 }

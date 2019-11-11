@@ -8,6 +8,7 @@ import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class CargoServiceImpl implements CargoService {
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     JmsTemplate jmsTemplate;
@@ -58,7 +62,7 @@ public class CargoServiceImpl implements CargoService {
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
 
-        jmsTemplate.send("example.queue", session -> session.createTextMessage("ACHTUNG, ALL CARGO REQUESTED!"));
+        jmsTemplate.send(env.getProperty("jms.queue.truck"), session -> session.createTextMessage("ACHTUNG, ALL CARGO REQUESTED!"));
 
         List<Cargo> cargoes = dao.findAll();
         return cargoes.stream()

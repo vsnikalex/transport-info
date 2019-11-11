@@ -16,7 +16,6 @@
     <modules>
         <module>info-ejb</module>
         <module>info-web</module>
-        <module>info-ear</module>
     </modules>
 
     <properties>
@@ -46,7 +45,6 @@
                 <artifactId>lection-ejb-web</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.wildfly.bom</groupId>

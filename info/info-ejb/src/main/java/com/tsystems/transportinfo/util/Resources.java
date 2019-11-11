@@ -38,11 +38,8 @@ import javax.persistence.PersistenceContext;
 public class Resources {
 
     @Produces
-    @PersistenceContext
-    private EntityManager em;
-
-    @Produces
     public Logger produceLog(InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
+
 }

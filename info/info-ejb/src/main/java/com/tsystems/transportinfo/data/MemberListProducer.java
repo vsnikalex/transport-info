@@ -23,15 +23,13 @@ import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tsystems.transportinfo.model.Member;
 
 @RequestScoped
 public class MemberListProducer {
-
-    @Inject
-    private MemberRepository memberRepository;
 
     private List<Member> members;
 
@@ -49,6 +47,16 @@ public class MemberListProducer {
 
     @PostConstruct
     public void retrieveAllMembersOrderedByName() {
-        members = memberRepository.findAllOrderedByName();
+        Member member = new Member();
+        member.setId(1L);
+        member.setName("Vasily");
+        member.setEmail("vsnikalex@gmail.com");
+        member.setPhoneNumber("8921577496");
+
+        List<Member> mockedMembers = new ArrayList<>();
+        mockedMembers.add(member);
+
+        members = mockedMembers;
     }
+
 }

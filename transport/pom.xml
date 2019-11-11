@@ -22,6 +22,22 @@
     </properties>
 
     <dependencies>
+        <!-- Info Module -->
+        <dependency>
+            <groupId>com.t-systems</groupId>
+            <artifactId>info-web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.t-systems</groupId>
+            <artifactId>info-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>

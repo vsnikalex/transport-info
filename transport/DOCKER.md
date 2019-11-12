@@ -62,3 +62,7 @@ docker build -t transportinfo .
 transportinfo
 ``
 
+##### RabbitMQ login:guest pass:guest
+``
+docker run -d --hostname ti-rabbit --name ti-rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_VHOST=transportinfo -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -e RABBITMQ_NODE_PORT=5672 rabbitmq:management
+``

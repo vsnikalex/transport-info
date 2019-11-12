@@ -22,9 +22,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class TruckServiceImpl implements TruckService {
 
-    @Autowired
-    JmsTemplate jmsTemplate;
-
     private GenericDAO<Truck> dao;
 
     @Autowired
@@ -74,8 +71,6 @@ public class TruckServiceImpl implements TruckService {
         log.info("Save Truck");
         Truck truck = convertToEntity(truckDTO);
         dao.create(truck);
-
-        jmsTemplate.convertAndSend("truck-queue", truckDTO.getPlate() + " created");
     }
 
     @Override

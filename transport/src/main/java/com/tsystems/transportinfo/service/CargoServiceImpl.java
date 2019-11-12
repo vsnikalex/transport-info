@@ -1,5 +1,8 @@
 package com.tsystems.transportinfo.service;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.tsystems.transportinfo.config.jms.MqChannels;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
@@ -8,15 +11,11 @@ import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +23,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class CargoServiceImpl implements CargoService {
-
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    JmsTemplate jmsTemplate;
 
     @Autowired
     private CargoDAO cargoDAO;
@@ -62,7 +55,20 @@ public class CargoServiceImpl implements CargoService {
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
 
-        jmsTemplate.send(env.getProperty("jms.queue.truck"), session -> session.createTextMessage("ACHTUNG, ALL CARGO REQUESTED!"));
+        Channel channel = null;
+        try (Connection connection = MqChannels.getConnection()) {
+
+            channel = MqChannels.getChannel(connection);
+
+            LocalDateTime ldt = LocalDateTime.now();
+            String msgbody = "Hello " + ldt.toString();
+
+            channel.basicPublish("myExchange", "myQueue", null, msgbody.getBytes());
+            System.out.println(msgbody);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         List<Cargo> cargoes = dao.findAll();
         return cargoes.stream()

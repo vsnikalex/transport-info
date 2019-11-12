@@ -46,7 +46,7 @@ docker run -d -it --rm -p 8161:8161 -p 61616:61616 --hostname ti-activemq --name
 ``
 docker build -t ti-transport .
 && docker run
--p 8080:8080 -p 127.0.0.1:9990:9990
+-p 3333:8080 -p 127.0.0.1:9990:9990
 --env spring.profiles.active=docker
 --name ti-transport
 -d

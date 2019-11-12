@@ -16,6 +16,7 @@
     <modules>
         <module>info-ejb</module>
         <module>info-web</module>
+        <module>helloworld-activemq</module>
     </modules>
 
     <properties>

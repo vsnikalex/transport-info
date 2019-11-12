@@ -62,7 +62,15 @@ docker build -t transportinfo .
 transportinfo
 ``
 
-##### RabbitMQ login:guest pass:guest
+##### RabbitMQ
 ``
 docker run -d --hostname ti-rabbit --name ti-rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_VHOST=transportinfo -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -e RABBITMQ_NODE_PORT=5672 rabbitmq:management
+``
+##### ActiveMQ
+``
+docker run -d -it --rm -p 8161:8161 -p 61616:61616 --hostname ti-activemq --name ti-activemq -e ARTEMIS_USERNAME=admin -e ARTEMIS_PASSWORD=admin  vromero/activemq-artemis
+``
+
+``
+docker run -p 61616:61616 -p 8161:8161 --hostname ti-activemq --name ti-activemq rmohr/activemq
 ``

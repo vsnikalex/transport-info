@@ -23,7 +23,7 @@ public class MqChannels {
 
     public static ConnectionFactory getFactory()  {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("ti-rabbit");
         factory.setPort(5672);
         factory.setVirtualHost("transportinfo");
         factory.setUsername("admin");

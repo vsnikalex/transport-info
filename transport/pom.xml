@@ -22,11 +22,16 @@
     </properties>
 
     <dependencies>
-        <!-- JMS/MQ -->
+        <!-- JMS -->
         <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-            <version>5.7.3</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.version}</version>
+            </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.15.10</version>
         </dependency>
 
         <!-- Security -->

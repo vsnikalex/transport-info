@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 public class CargoController {
 
     @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
     private CargoService cargoService;
 
     @GetMapping("/all/{depotId}")
@@ -31,6 +35,9 @@ public class CargoController {
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
         log.info("Request all Cargoes");
+
+        jmsTemplate.convertAndSend("TestQueue", "get all cargoes");
+
         return cargoService.getAllCargoes();
     }
 

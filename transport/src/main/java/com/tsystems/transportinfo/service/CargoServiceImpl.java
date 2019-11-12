@@ -1,8 +1,5 @@
 package com.tsystems.transportinfo.service;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.tsystems.transportinfo.config.jms.MqChannels;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
@@ -14,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,22 +49,6 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
-
-        Channel channel = null;
-        try (Connection connection = MqChannels.getConnection()) {
-
-            channel = MqChannels.getChannel(connection);
-
-            LocalDateTime ldt = LocalDateTime.now();
-            String msgbody = "Hello " + ldt.toString();
-
-            channel.basicPublish("myExchange", "myQueue", null, msgbody.getBytes());
-            System.out.println(msgbody);
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
         List<Cargo> cargoes = dao.findAll();
         return cargoes.stream()
                 .map(this::convertToDto)

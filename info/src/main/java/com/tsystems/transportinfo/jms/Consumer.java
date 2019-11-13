@@ -1,4 +1,4 @@
-package jms;
+package com.tsystems.transportinfo.jms;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;

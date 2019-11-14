@@ -53,70 +53,14 @@
       <div class="container-fixed">
          <div class="row">
             <div class="col-l-6 demo-col">
-               <div class="tc-note tc-note-info">
-                  <table class="table">
-                     <thead>
-                     <tr>
-                        <th>Drivers</th>
-                        <th><span class="sr-only">Preis Spalte</span></th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     <tr>
-                        <td>Available</td>
-                        <td class="numeric">23</td>
-                     </tr>
-                     <tr>
-                        <td>Driving</td>
-                        <td class="numeric">19</td>
-                     </tr>
-                     <tr>
-                        <td>Other work</td>
-                        <td class="numeric">10</td>
-                     </tr>
-                     </tbody>
-                     <tfoot>
-                     <tr>
-                        <td colspan="4" class="numeric text-brand text-semibold">
-                           Total: 52
-                        </td>
-                     </tr>
-                     </tfoot>
-                  </table>
-               </div>
+               <ui:insert name="drivers">
+                  [Drivers table will be inserted here]
+               </ui:insert>
             </div>
             <div class="col-l-6 demo-col">
-               <div class="tc-note tc-note-info">
-                  <table class="table">
-                     <thead>
-                     <tr>
-                        <th>Trucks</th>
-                        <th><span class="sr-only">Preis Spalte</span></th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     <tr>
-                        <td>Available</td>
-                        <td class="numeric">23</td>
-                     </tr>
-                     <tr>
-                        <td>In use</td>
-                        <td class="numeric">19</td>
-                     </tr>
-                     <tr>
-                        <td>Defective</td>
-                        <td class="numeric">3</td>
-                     </tr>
-                     </tbody>
-                     <tfoot>
-                     <tr>
-                        <td colspan="4" class="numeric text-brand text-semibold">
-                           Total: 45
-                        </td>
-                     </tr>
-                     </tfoot>
-                  </table>
-               </div>
+               <ui:insert name="trucks">
+                  [Trucks table will be inserted here]
+               </ui:insert>
             </div>
          </div>
          <div class="tc-example">

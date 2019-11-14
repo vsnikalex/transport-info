@@ -10,7 +10,7 @@
    <meta charset="UTF-8; width=device-width; initial-scale=1" />
 </h:head>
 
-<h:body>
+<h:body style="display: flex; flex-direction: column; min-height: 100%;">
    <link rel="stylesheet" type="text/css" href="resources/css/components.min.css"/>
    <link rel="stylesheet" type="text/css" href="resources/css/theme-dark.min.css"/>
    <link rel="stylesheet" type="text/css" href="resources/css/theme-bevel.min.css"/>
@@ -49,7 +49,181 @@
       </nav>
    </header>
 
-   <script src="js/components.min.js"></script>
-   <script src="js/docs.js"></script>
+   <div class="main" style="min-height: calc(100vh - 249px);">
+      <div class="container-fixed">
+         <div class="row">
+            <div class="col-l-6 demo-col">
+               <div class="tc-note tc-note-info">
+                  <table class="table">
+                     <thead>
+                     <tr>
+                        <th>Drivers</th>
+                        <th><span class="sr-only">Preis Spalte</span></th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr>
+                        <td>Available</td>
+                        <td class="numeric">23</td>
+                     </tr>
+                     <tr>
+                        <td>Driving</td>
+                        <td class="numeric">19</td>
+                     </tr>
+                     <tr>
+                        <td>Other work</td>
+                        <td class="numeric">10</td>
+                     </tr>
+                     </tbody>
+                     <tfoot>
+                     <tr>
+                        <td colspan="4" class="numeric text-brand text-semibold">
+                           Total: 52
+                        </td>
+                     </tr>
+                     </tfoot>
+                  </table>
+               </div>
+            </div>
+            <div class="col-l-6 demo-col">
+               <div class="tc-note tc-note-info">
+                  <table class="table">
+                     <thead>
+                     <tr>
+                        <th>Trucks</th>
+                        <th><span class="sr-only">Preis Spalte</span></th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr>
+                        <td>Available</td>
+                        <td class="numeric">23</td>
+                     </tr>
+                     <tr>
+                        <td>In use</td>
+                        <td class="numeric">19</td>
+                     </tr>
+                     <tr>
+                        <td>Defective</td>
+                        <td class="numeric">3</td>
+                     </tr>
+                     </tbody>
+                     <tfoot>
+                     <tr>
+                        <td colspan="4" class="numeric text-brand text-semibold">
+                           Total: 45
+                        </td>
+                     </tr>
+                     </tfoot>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <div class="tc-example">
+            <table class="table">
+               <caption>Deliveries</caption>
+               <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Truck</th>
+                  <th>Cargoes</th>
+                  <th>Drivers</th>
+                  <th>Route</th>
+               </tr>
+               </thead>
+               <tbody>
+               <tr>
+                  <td>12</td>
+                  <td>HL12367</td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#12 IKEA Table</li>
+                        <li>#14 BMW Engine</li>
+                        <li>#17 IKEA Sofa</li>
+                     </ul>
+                  </td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#10 Igor Lesnoy</li>
+                        <li>#5 James Wilson</li>
+                     </ul>
+                  </td>
+                  <td>Berlin &#8594; Rome &#8594; Paris &#8594; Berlin</td>
+               </tr>
+               <tr>
+                  <td>15</td>
+                  <td>TG12378</td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#6 Super Computer</li>
+                        <li>#5 Spare Parts</li>
+                        <li>#27 Tesla Model X</li>
+                     </ul>
+                  </td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#3 Robert Miller</li>
+                        <li>#7 Mikhail Stepanov</li>
+                     </ul>
+                  </td>
+                  <td>London &#8594; Rome &#8594; Moscow &#8594; London</td>
+               </tr>
+               <tr>
+                  <td>36</td>
+                  <td>BV78611</td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#12 IKEA Table</li>
+                        <li>#14 BMW Engine</li>
+                        <li>#17 IKEA Sofa</li>
+                     </ul>
+                  </td>
+                  <td>
+                     <ul style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                        <li>#10 Igor Lesnoy</li>
+                        <li>#5 James Wilson</li>
+                     </ul>
+                  </td>
+                  <td>Berlin &#8594; Rome &#8594; Paris &#8594; Berlin</td>
+               </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <footer class="brand-footer">
+      <div class="container-fixed">
+         <div class="row brand-footer-bar hidden-xl hidden-l hidden-m">
+            <div class="col-l-3 col-m-2 col-s-12">
+               <div class="brand-logo">
+                  <a href="#">
+                     <img src="resources/images/deutsche-telekom-logo.svg" alt="Telekom Logo"/>
+                     <span class="sr-only">Telekom Logo</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="brand-footer-separator hidden-xl hidden-l hidden-m"></div>
+      <div class="container-fixed">
+         <div class="row brand-footer-bar">
+            <div class="col-l-3 col-m-2 hidden-s hidden-xs">
+               <div class="brand-logo">
+                  <a href="#">
+                     <img src="resources/images/deutsche-telekom-logo.svg" alt="Telekom Logo"/>
+                     <span class="sr-only">Telekom Logo</span>
+                  </a>
+               </div>
+            </div>
+            <div class="col-l-9 col-m-12 text-l-right text-m-center text-muted">
+               <div class="brand-footer-bar-text">&#169; 2020 Deutsche Telekom AG | Product Design | Creative Direction</div>
+            </div>
+         </div>
+      </div>
+   </footer>
+
+   <script type="text/javascript" src="resources/js/components.min.js"></script>
+   <script type="text/javascript" src="resources/js/docs.js"></script>
 </h:body>
 </html>

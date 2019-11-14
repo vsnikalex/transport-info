@@ -12,7 +12,6 @@
     <modules>
         <module>transport</module>
         <module>info</module>
-        <module>info</module>
     </modules>
 
 </project>

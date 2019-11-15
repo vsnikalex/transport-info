@@ -21,7 +21,7 @@ let ghRouting;
 window.onload = function() {
     // let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
     let apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
-    let profile = "truck";
+    let profile = "car";
     let host;
 
     ghOptimization = new GraphHopperOptimization({

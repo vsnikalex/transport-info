@@ -37,7 +37,7 @@ public class MessageHandler {
                 req -> req.getEventSink().send(
                         req.getSse().newEventBuilder()
                                 .mediaType(MediaType.APPLICATION_JSON_TYPE)
-                                .id(UUID.randomUUID().toString())
+//                                .id(UUID.randomUUID().toString())
                                 .name("message from cdi")
                                 .data(msg)
                                 .build()

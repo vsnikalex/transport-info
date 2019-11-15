@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition
-   xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://java.sun.com/jsf/facelets"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html"
-   template="/WEB-INF/templates/default.xhtml">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+        template="/WEB-INF/templates/default.xhtml">
    <ui:define name="drivers">
+      <script type="text/javascript" src="resources/js/sse.js"></script>
       <script>
-         const eventSource = new EventSource("http://loalhost:8080/info/rest/cdievents");
+         EventSource = SSE;
 
-         eventSource.onmessage = function(event) {
-            console.log("EVENT");
-         };
+         var source = new SSE("http://localhost:8080/info/rest/cdievents");
+         source.addEventListener('message from cdi', function(e) {
+            // Assuming we receive JSON-encoded data payloads:
+            var payload = JSON.parse(e.data);
+            console.log(payload);
+         });
 
-         eventSource.onerror = function(event) {
-            console.log("ERROR");
-         };
+         source.stream();
       </script>
       <div class="tc-note tc-note-info">
          <table class="table">

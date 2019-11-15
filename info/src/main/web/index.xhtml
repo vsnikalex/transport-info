@@ -6,6 +6,17 @@
    xmlns:h="http://java.sun.com/jsf/html"
    template="/WEB-INF/templates/default.xhtml">
    <ui:define name="drivers">
+      <script>
+         const eventSource = new EventSource("http://loalhost:8080/info/rest/cdievents");
+
+         eventSource.onmessage = function(event) {
+            console.log("EVENT");
+         };
+
+         eventSource.onerror = function(event) {
+            console.log("ERROR");
+         };
+      </script>
       <div class="tc-note tc-note-info">
          <table class="table">
             <thead>

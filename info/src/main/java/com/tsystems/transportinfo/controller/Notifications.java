@@ -1,4 +1,6 @@
-package com.tsystems.transportinfo.jms;
+package com.tsystems.transportinfo.controller;
+
+import com.tsystems.transportinfo.model.Message;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;

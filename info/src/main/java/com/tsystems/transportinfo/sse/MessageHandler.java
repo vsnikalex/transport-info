@@ -1,4 +1,7 @@
-package com.tsystems.transportinfo.jms;
+package com.tsystems.transportinfo.sse;
+
+import com.tsystems.transportinfo.model.Message;
+import com.tsystems.transportinfo.model.SseRequest;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -6,7 +9,6 @@ import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSink;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -16,9 +16,6 @@ public class Consumer implements MessageListener {
 
 	private final static Logger LOGGER = Logger.getLogger(Consumer.class.toString());
 
-	/**
-	 * @see MessageListener#onMessage(Message)
-	 */
 	public void onMessage(Message rcvMessage) {
 		TextMessage msg = null;
 		try {
@@ -33,4 +30,5 @@ public class Consumer implements MessageListener {
 			throw new RuntimeException(e);
 		}
 	}
+
 }

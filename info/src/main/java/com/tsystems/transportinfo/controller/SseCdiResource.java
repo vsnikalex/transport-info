@@ -1,4 +1,7 @@
-package com.tsystems.transportinfo.jms;
+package com.tsystems.transportinfo.controller;
+
+import com.tsystems.transportinfo.model.SseRequest;
+import com.tsystems.transportinfo.sse.MessageHandler;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

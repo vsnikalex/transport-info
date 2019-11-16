@@ -61,7 +61,13 @@
             <version>5.10.0</version>
         </dependency>
 
-        <!--  Validation  -->
+        <!-- Annotation preprocess -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>

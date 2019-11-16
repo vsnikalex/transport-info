@@ -11,11 +11,24 @@
       <script>
          EventSource = SSE;
 
-         var source = new SSE("http://localhost:8080/info/rest/cdievents");
+         const source = new SSE("http://localhost:8080/info/rest/cdievents");
+
          source.addEventListener('drivers stat', function(e) {
-            // Assuming we receive JSON-encoded data payloads:
-            var payload = JSON.parse(e.data);
-            console.log(payload);
+            let ds = JSON.parse(e.data);
+
+            document.getElementById('ds_available').innerHTML = ds.available;
+            document.getElementById('ds_driving').innerHTML = ds.driving;
+            document.getElementById('ds_others').innerHTML = ds.others;
+            document.getElementById('ds_total').innerHTML = ds.total;
+         });
+
+         source.addEventListener('trucks stat', function(e) {
+            let ts = JSON.parse(e.data);
+
+            document.getElementById('ts_available').innerHTML = ts.available;
+            document.getElementById('ts_inUse').innerHTML = ts.inUse;
+            document.getElementById('ts_defective').innerHTML = ts.defective;
+            document.getElementById('ts_total').innerHTML = ts.total;
          });
 
          source.stream();
@@ -31,21 +44,21 @@
             <tbody>
             <tr>
                <td>Available</td>
-               <td class="numeric">23</td>
+               <td id="ds_available" class="numeric"></td>
             </tr>
             <tr>
                <td>Driving</td>
-               <td class="numeric">19</td>
+               <td id="ds_driving" class="numeric"></td>
             </tr>
             <tr>
                <td>Other work</td>
-               <td class="numeric">10</td>
+               <td id="ds_others" class="numeric"></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                <td colspan="4" class="numeric text-brand text-semibold">
-                  Total: 52
+                  Total: <span id="ds_total"></span>
                </td>
             </tr>
             </tfoot>
@@ -64,21 +77,21 @@
             <tbody>
             <tr>
                <td>Available</td>
-               <td class="numeric">23</td>
+               <td id="ts_available" class="numeric"></td>
             </tr>
             <tr>
                <td>In use</td>
-               <td class="numeric">19</td>
+               <td id="ts_inUse" class="numeric"></td>
             </tr>
             <tr>
                <td>Defective</td>
-               <td class="numeric">3</td>
+               <td id="ts_defective" class="numeric"></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                <td colspan="4" class="numeric text-brand text-semibold">
-                  Total: 45
+                  Total: <span id="ts_total"></span>
                </td>
             </tr>
             </tfoot>

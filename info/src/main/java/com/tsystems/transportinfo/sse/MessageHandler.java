@@ -1,8 +1,8 @@
 package com.tsystems.transportinfo.sse;
 
 import com.tsystems.transportinfo.model.DriversStat;
-import com.tsystems.transportinfo.model.Message;
 import com.tsystems.transportinfo.model.SseRequest;
+import com.tsystems.transportinfo.model.TrucksStat;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -36,12 +36,12 @@ public class MessageHandler {
         }
     }
 
-    public void onMessage(@Observes Message msg) {
-        dispatchMessage(msg, "message from cdi");
-    }
-
     public void onMessage(@Observes DriversStat driverStat) {
         dispatchMessage(driverStat, "drivers stat");
+    }
+
+    public void onMessage(@Observes TrucksStat trucksStat) {
+        dispatchMessage(trucksStat, "trucks stat");
     }
 
     private <T> void dispatchMessage(T obj, String name) {

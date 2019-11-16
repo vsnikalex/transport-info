@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/jms")
-public class Producer extends HttpServlet {
+public class JmsTest extends HttpServlet {
      
 	private static final long serialVersionUID = 1L;
 

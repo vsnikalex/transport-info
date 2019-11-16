@@ -14,8 +14,8 @@ import javax.jms.TextMessage;
 import java.util.logging.Logger;
 
 @MessageDriven(name = "TestQueue", activationConfig = {
+		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:jboss/exported/jms/queue/test"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "TestQueue"),
 		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge") })
 public class Consumer implements MessageListener {
 

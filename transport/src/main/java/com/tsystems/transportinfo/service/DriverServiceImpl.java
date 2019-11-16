@@ -12,6 +12,7 @@ import com.tsystems.transportinfo.data.entity.Truck;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class DriverServiceImpl implements DriverService {
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     private GenericDAO<Driver> dao;
 
@@ -58,6 +62,9 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public List<DriverDTO> getAllDrivers() {
         log.info("Request all Drivers from DAO");
+
+        jmsTemplate.convertAndSend("TestQueue", "get all drivers");
+
         List<Driver> drivers = dao.findAll();
         return drivers.stream()
                 .map(this::convertToDto)

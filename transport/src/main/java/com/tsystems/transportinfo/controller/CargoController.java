@@ -21,9 +21,6 @@ import java.util.stream.Collectors;
 public class CargoController {
 
     @Autowired
-    private JmsTemplate jmsTemplate;
-
-    @Autowired
     private CargoService cargoService;
 
     @GetMapping("/all/{depotId}")
@@ -35,9 +32,6 @@ public class CargoController {
     @GetMapping("/all")
     public List<CargoDTO> allCargoes() {
         log.info("Request all Cargoes");
-
-        jmsTemplate.convertAndSend("TestQueue", "get all cargoes");
-
         return cargoService.getAllCargoes();
     }
 

@@ -48,12 +48,28 @@
             <artifactId>jsf-impl</artifactId>
             <version>2.2.20</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>2.0.0-alpha1</version>
+        </dependency>
 
         <!--  JMS  -->
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-jms-client-bom</artifactId>
             <version>18.0.0.Final</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.15.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-features</artifactId>
+            <version>2.10.1</version>
             <type>pom</type>
         </dependency>
 
@@ -65,9 +81,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.5.Final</version>
+            <version>6.0.17.Final</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -94,6 +110,23 @@
                         <warName>info</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jboss.ws.plugins</groupId>
+                    <artifactId>jaxws-tools-maven-plugin</artifactId>
+                    <version>1.2.3.Final</version>
+                    <configuration>
+                        <wsdls>
+                            <wsdl>src/main/web/META-INF/wsdl/HelloWorldService.wsdl</wsdl>
+                        </wsdls>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>wsconsume</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

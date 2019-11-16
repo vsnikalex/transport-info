@@ -19,6 +19,7 @@
         <spring.version>5.2.0.RELEASE</spring.version>
         <hibernate.version>5.4.5.Final</hibernate.version>
         <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
+        <cxf-rt-frontend-jaxws.version>3.3.4</cxf-rt-frontend-jaxws.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,16 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-broker</artifactId>
             <version>5.15.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf-rt-frontend-jaxws.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf-rt-frontend-jaxws.version}</version>
         </dependency>
 
         <!-- Security -->

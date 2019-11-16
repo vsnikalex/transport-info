@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.sse;
 
+import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.Message;
 import com.tsystems.transportinfo.model.SseRequest;
 
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSink;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,17 +37,24 @@ public class MessageHandler {
     }
 
     public void onMessage(@Observes Message msg) {
+        dispatchMessage(msg, "message from cdi");
+    }
+
+    public void onMessage(@Observes DriversStat driverStat) {
+        dispatchMessage(driverStat, "drivers stat");
+    }
+
+    private <T> void dispatchMessage(T obj, String name) {
         requests.values().forEach(
                 req -> req.getEventSink().send(
                         req.getSse().newEventBuilder()
                                 .mediaType(MediaType.APPLICATION_JSON_TYPE)
-//                                .id(UUID.randomUUID().toString())
-                                .name("message from cdi")
-                                .data(msg)
+                                .id(UUID.randomUUID().toString())
+                                .name(name)
+                                .data(obj)
                                 .build()
                 )
         );
-
     }
 
 }

@@ -8,14 +8,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Path("/messages")
-public class Notifications {
+@Path("/ssetest")
+public class SseTest {
 
     @Inject
     private Event<Message> messageEvent;
 
     @GET
-    @Path("/new")
+    @Path("/fire")
     public Response ping() {
         Message message = new Message("TEST SSE CONNECTION");
         messageEvent.fire(message);

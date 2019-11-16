@@ -25,7 +25,6 @@ public class SseCdiResource {
         handler.register(UUID.randomUUID().toString(), new SseRequest(sse, eventSink));
     }
 
-
     @DELETE
     @Path("{uuid}")
     public void deregister(@PathParam("uuid") String uuid) {

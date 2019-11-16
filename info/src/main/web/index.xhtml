@@ -12,7 +12,7 @@
          EventSource = SSE;
 
          var source = new SSE("http://localhost:8080/info/rest/cdievents");
-         source.addEventListener('message from cdi', function(e) {
+         source.addEventListener('drivers stat', function(e) {
             // Assuming we receive JSON-encoded data payloads:
             var payload = JSON.parse(e.data);
             console.log(payload);

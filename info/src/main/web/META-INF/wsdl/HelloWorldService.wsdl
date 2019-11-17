@@ -51,15 +51,15 @@
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="HelloWorldService">
-        <soapjms:jndiConnectionFactoryName>java:jboss/exported/jms/RemoteConnectionFactory</soapjms:jndiConnectionFactoryName>
+        <soapjms:jndiConnectionFactoryName>jms/RemoteConnectionFactory</soapjms:jndiConnectionFactoryName>
         <soapjms:jndiInitialContextFactory>org.jboss.naming.remote.client.InitialContextFactory</soapjms:jndiInitialContextFactory>
-        <soapjms:jndiURL>http-remoting://ti-info:8080</soapjms:jndiURL>
+        <soapjms:jndiURL>http-remoting://127.0.0.1:8080</soapjms:jndiURL>
         <wsdl:port binding="tns:HelloWorldServiceSoapBinding" name="HelloWorldImplPort">
             <soap:address location="jms:queue:testQueue"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:service name="HelloWorldServiceLocal">
-        <soapjms:jndiConnectionFactoryName>java:jboss/exported/jms/RemoteConnectionFactory</soapjms:jndiConnectionFactoryName>
+        <soapjms:jndiConnectionFactoryName>jms/RemoteConnectionFactory</soapjms:jndiConnectionFactoryName>
         <soapjms:jndiInitialContextFactory>org.jboss.naming.remote.client.InitialContextFactory</soapjms:jndiInitialContextFactory>
         <soapjms:jndiURL>http-remoting://127.0.0.1:8080</soapjms:jndiURL>
         <wsdl:port binding="tns:HelloWorldServiceSoapBinding" name="HelloWorldImplPort">

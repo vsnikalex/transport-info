@@ -12,8 +12,8 @@ import javax.jws.WebService;
 public class HelloWorldImpl implements HelloWorld {
 
     @Override
-    public String echo(String input)
-    {
+    public String echo(String input) {
+        System.out.println("received SOAP message: " + input);
         return input;
     }
 

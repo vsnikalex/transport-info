@@ -29,32 +29,29 @@ public class Consumer implements MessageListener {
 
 	public void onMessage(Message rcvMessage) {
 		TextMessage msg = null;
-		try {
-			if (rcvMessage instanceof TextMessage) {
-				msg = (TextMessage) rcvMessage;
-				LOGGER.info("Received Message from queue: " + msg.getText());
 
-				DriversStat driversStat = new DriversStat(
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100)
-				);
-				driversStatEvent.fire(driversStat);
+		if (rcvMessage instanceof TextMessage) {
+			msg = (TextMessage) rcvMessage;
+			LOGGER.info("Received Message from queue");
 
-				TrucksStat trucksStat = new TrucksStat(
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100),
-						(int) (Math.random() * 100)
-				);
-				trucksStatEvent.fire(trucksStat);
-			} else {
-				LOGGER.warning("Message of wrong type: "
-						+ rcvMessage.getClass().getName());
-			}
-		} catch (JMSException e) {
-			throw new RuntimeException(e);
+			DriversStat driversStat = new DriversStat(
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100)
+			);
+			driversStatEvent.fire(driversStat);
+
+			TrucksStat trucksStat = new TrucksStat(
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100),
+					(int) (Math.random() * 100)
+			);
+			trucksStatEvent.fire(trucksStat);
+		} else {
+			LOGGER.warning("Message of wrong type: "
+					+ rcvMessage.getClass().getName());
 		}
 	}
 

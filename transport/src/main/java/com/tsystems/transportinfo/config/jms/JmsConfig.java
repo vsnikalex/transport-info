@@ -13,7 +13,7 @@ public class JmsConfig {
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){
-        return new ActiveMQConnectionFactory("admin","admin","tcp://ti-info:61616");
+        return new ActiveMQConnectionFactory("admin","admin","tcp://ti-activemq:61616");
     }
 
     @Bean

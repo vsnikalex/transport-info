@@ -74,7 +74,21 @@ public class JmsTest extends HttpServlet {
 
             try (JMSContext context = connectionFactory.createContext(userName, password)) {
                 log.info("Sending message...");
-                context.createProducer().send(destination, "HELLO!");
+
+                Message message = context.createTextMessage(
+                        "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.transportinfo.tsystems.com/\">\n" +
+                           "   <soapenv:Header/>\n" +
+                           "   <soapenv:Body>\n" +
+                           "      <soap:echo>\n" +
+                           "         <!--Optional:-->\n" +
+                           "         <arg0>Hello!</arg0>\n" +
+                           "      </soap:echo>\n" +
+                           "   </soapenv:Body>\n" +
+                           "</soapenv:Envelope>");
+                message.setStringProperty("SOAPJMS_contentType", "text/xml");
+                message.setStringProperty("SOAPJMS_requestURI", "http-remoting://127.0.0.1:8080");
+
+                context.createProducer().send(destination, message);
             }
         } catch (NamingException e) {
             log.severe(e.getMessage());

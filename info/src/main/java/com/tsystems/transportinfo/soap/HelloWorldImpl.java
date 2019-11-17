@@ -7,7 +7,7 @@ import javax.jws.WebService;
                 serviceName = "HelloWorldServiceLocal",
                 wsdlLocation = "META-INF/wsdl/HelloWorldService.wsdl",
                 endpointInterface = "com.tsystems.transportinfo.soap.HelloWorld",
-                targetNamespace = "http://org.jboss.ws/jaxws/cxf/jms"
+                targetNamespace = "http://soap.transportinfo.tsystems.com/"
         )
 public class HelloWorldImpl implements HelloWorld {
 

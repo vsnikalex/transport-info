@@ -43,7 +43,18 @@ public class JmsTest extends HttpServlet {
         MessageProducer publisher = session.createProducer(queue);
         connection.start();
 
-        TextMessage message = session.createTextMessage("Hello!");
+        TextMessage message = session.createTextMessage(
+                "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.transportinfo.tsystems.com/\">\n" +
+                    "   <soapenv:Header/>\n" +
+                    "   <soapenv:Body>\n" +
+                    "      <soap:echo>\n" +
+                    "         <arg0>Hello!</arg0>\n" +
+                    "      </soap:echo>\n" +
+                    "   </soapenv:Body>\n" +
+                    "</soapenv:Envelope>");
+        message.setStringProperty("SOAPJMS_contentType", "text/xml");
+        message.setStringProperty("SOAPJMS_requestURI", "tcp://ti-activemq:61616");
+
         publisher.send(message);
     }
 

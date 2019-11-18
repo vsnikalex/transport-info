@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.sse;
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.SseRequest;
 import com.tsystems.transportinfo.model.TrucksStat;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -15,21 +16,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Slf4j
 @ApplicationScoped
 public class MessageHandler {
-
-    @Inject
-    Logger LOG;
 
     private final Map<String, SseRequest> requests = new ConcurrentHashMap<>();
 
     public void register(String uuid, SseRequest request) {
-        LOG.log(Level.INFO, "register request:{0}", uuid);
+        log.info("register request:{}", uuid);
         requests.put(uuid, request);
     }
 
     public void deregister(String uuid) {
-        LOG.log(Level.INFO, "deregister request:{0}", uuid);
+        log.info("deregister request:{}", uuid);
         SseRequest req = requests.remove(uuid);
         try (SseEventSink eventSink = req.getEventSink()) {
             eventSink.close();

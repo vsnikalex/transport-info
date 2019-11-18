@@ -26,7 +26,7 @@ public class SoapJmsTest extends HttpServlet {
     @Resource(lookup = "java:/queue/NotificationsQueue")
     private Queue queue;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
             send();
             PrintWriter out = response.getWriter();
@@ -37,8 +37,7 @@ public class SoapJmsTest extends HttpServlet {
     }
 
     public void send() throws Exception {
-        Connection connection =  null;
-        connection = cf.createConnection();
+        Connection connection = cf.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         MessageProducer publisher = session.createProducer(queue);
         connection.start();

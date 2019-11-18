@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.jms;
 
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.TrucksStat;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
@@ -13,6 +14,7 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import java.util.logging.Logger;
 
+@Slf4j
 @MessageDriven(name = "TestQueue", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "TestQueue"),
@@ -25,14 +27,12 @@ public class Consumer implements MessageListener {
 	@Inject
 	private Event<TrucksStat> trucksStatEvent;
 
-	private final static Logger LOGGER = Logger.getLogger(Consumer.class.toString());
-
 	public void onMessage(Message rcvMessage) {
 		TextMessage msg = null;
 
 		if (rcvMessage instanceof TextMessage) {
 			msg = (TextMessage) rcvMessage;
-			LOGGER.info("Received Message from queue");
+			log.info("Received Message from queue");
 
 			DriversStat driversStat = new DriversStat(
 					(int) (Math.random() * 100),
@@ -50,8 +50,7 @@ public class Consumer implements MessageListener {
 			);
 			trucksStatEvent.fire(trucksStat);
 		} else {
-			LOGGER.warning("Message of wrong type: "
-					+ rcvMessage.getClass().getName());
+			log.warn("Message of wrong type: " + rcvMessage.getClass().getName());
 		}
 	}
 

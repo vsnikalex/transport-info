@@ -2,12 +2,14 @@ package com.tsystems.transportinfo.soap;
 
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.TrucksStat;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Slf4j
 @WebService(
         portName = "NotificationsImplPort",
         serviceName = "NotificationsService",
@@ -17,17 +19,14 @@ import java.util.logging.Logger;
 )
 public class NotificationsImpl implements Notifications {
 
-    @Inject
-    Logger LOG;
-
     @Override
     public void updateDriversStat(DriversStat driversStat) {
-        System.out.println("receive drivers stat, total: " + driversStat.getTotal());
+        log.info("Queue drivers stat, total: {}", driversStat.getTotal());
     }
 
     @Override
     public void updateTrucksStat(TrucksStat trucksStat) {
-        System.out.println("receive trucks stat, total: " + trucksStat.getTotal());
+        log.info("Queue trucks stat, total: {}", trucksStat.getTotal());
     }
 
 }

@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.jws.WebService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Slf4j
 @WebService(

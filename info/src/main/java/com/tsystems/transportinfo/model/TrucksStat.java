@@ -1,18 +1,15 @@
 package com.tsystems.transportinfo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @XmlRootElement(name = "trucksStat")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-public class TrucksStat {
+public class TrucksStat implements Serializable {
 
     private int available;
     private int inUse;

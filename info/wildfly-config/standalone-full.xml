@@ -459,6 +459,9 @@
                             <admin-object class-name="org.apache.activemq.command.ActiveMQQueue" jndi-name="java:/queue/TestQueue" use-java-context="true" pool-name="TestQueue">
                                 <config-property name="PhysicalName">TestQueue</config-property>
                             </admin-object>
+                            <admin-object class-name="org.apache.activemq.command.ActiveMQQueue" jndi-name="java:/queue/NotificationsQueue" use-java-context="true" pool-name="NotificationsQueue">
+                                <config-property name="PhysicalName">NotificationsQueue</config-property>
+                            </admin-object>
                             <admin-object class-name="org.apache.activemq.command.ActiveMQTopic" jndi-name="java:/topic/TestTopic" use-java-context="true" pool-name="TestTopic">
                                 <config-property name="PhysicalName">TestTopic</config-property>
                             </admin-object>

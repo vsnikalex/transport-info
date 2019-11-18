@@ -132,6 +132,7 @@
                     <configuration>
                         <wsdls>
                             <wsdl>src/main/web/META-INF/wsdl/HelloWorldService.wsdl</wsdl>
+                            <wsdl>src/main/web/META-INF/wsdl/NotificationsService.wsdl</wsdl>
                         </wsdls>
                     </configuration>
                     <executions>

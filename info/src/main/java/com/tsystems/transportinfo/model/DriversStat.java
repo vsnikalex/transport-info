@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "driverStat")
+@XmlRootElement(name = "driversStat")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

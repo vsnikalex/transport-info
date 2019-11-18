@@ -52,8 +52,6 @@
     <soapjms:jndiConnectionFactoryName>ConnectionFactory</soapjms:jndiConnectionFactoryName>
     <soapjms:jndiInitialContextFactory>org.apache.activemq.jndi.ActiveMQInitialContextFactory</soapjms:jndiInitialContextFactory>
     <soapjms:jndiURL>tcp://ti-activemq:61616</soapjms:jndiURL>
-    <soapjms:jndiContextParameter name="username" value="admin" />
-    <soapjms:jndiContextParameter name="password" value="admin" />
     <soapjms:deliveryMode>PERSISTENT</soapjms:deliveryMode>
     <soapjms:priority>5</soapjms:priority>
     <soapjms:timeToLive>1000</soapjms:timeToLive>

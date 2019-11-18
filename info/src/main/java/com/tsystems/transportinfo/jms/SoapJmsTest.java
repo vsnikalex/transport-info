@@ -15,15 +15,15 @@ import java.io.PrintWriter;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-@WebServlet("/jms")
-public class JmsTest extends HttpServlet {
+@WebServlet("/soapjms")
+public class SoapJmsTest extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     @Resource(lookup = "java:/ConnectionFactory")
     ConnectionFactory cf;
 
-    @Resource(lookup = "java:/queue/TestQueue")
+    @Resource(lookup = "java:/queue/NotificationsQueue")
     private Queue queue;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,13 +45,19 @@ public class JmsTest extends HttpServlet {
 
         TextMessage message = session.createTextMessage(
                 "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.transportinfo.tsystems.com/\">\n" +
-                    "   <soapenv:Header/>\n" +
-                    "   <soapenv:Body>\n" +
-                    "      <soap:echo>\n" +
-                    "         <arg0>Hello!</arg0>\n" +
-                    "      </soap:echo>\n" +
-                    "   </soapenv:Body>\n" +
-                    "</soapenv:Envelope>");
+                        "   <soapenv:Header/>\n" +
+                        "   <soapenv:Body>\n" +
+                        "      <soap:updateDriversStat>\n" +
+                        "         <!--Optional:-->\n" +
+                        "         <arg0>\n" +
+                        "            <available>30</available>\n" +
+                        "            <driving>60</driving>\n" +
+                        "            <others>10</others>\n" +
+                        "            <total>100</total>\n" +
+                        "         </arg0>\n" +
+                        "      </soap:updateDriversStat>\n" +
+                        "   </soapenv:Body>\n" +
+                        "</soapenv:Envelope>");
         message.setStringProperty("SOAPJMS_contentType", "text/xml");
         message.setStringProperty("SOAPJMS_requestURI", "tcp://ti-activemq:61616");
 

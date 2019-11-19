@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dao.TaskDAO;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
@@ -24,6 +25,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskDAO taskDAO;
 
     @Override
+    @DriverEvent
     public double startTask(DriverAction action, long startTime, Long driverId, Long truckId) {
         log.info("Request TaskDAO to log start of Driver id={} action {} at {} (Unix timestamp) with Truck id={}",
                     driverId, action, startTime, truckId);
@@ -33,6 +35,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @DriverEvent
     public double finishCurrentTask(Long driverId, long endTime) {
         log.info("For Driver id={} log current task finish at {} (Unix timestamp)", driverId, endTime);
         LocalDateTime end = LocalDateTime.ofEpochSecond(endTime, 0, ZoneOffset.UTC);

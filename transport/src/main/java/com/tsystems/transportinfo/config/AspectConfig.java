@@ -8,4 +8,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @ComponentScan({"com.tsystems.transportinfo.aspect"})
 public class AspectConfig {
+
 }

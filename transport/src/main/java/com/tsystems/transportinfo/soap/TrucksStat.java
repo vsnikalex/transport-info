@@ -1,6 +1,9 @@
 
 package com.tsystems.transportinfo.soap;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -35,6 +38,8 @@ import javax.xml.bind.annotation.XmlType;
     "inUse",
     "total"
 })
+@NoArgsConstructor
+@AllArgsConstructor
 public class TrucksStat {
 
     protected int available;

@@ -1,9 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.soap.DriversStat;
-import com.tsystems.transportinfo.soap.Notifications;
-import com.tsystems.transportinfo.soap.NotificationsServiceLocal;
+import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
@@ -15,7 +13,6 @@ import com.tsystems.transportinfo.data.entity.Truck;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,9 +23,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class DriverServiceImpl implements DriverService {
-
-    @Autowired
-    private JmsTemplate jmsTemplate;
 
     private GenericDAO<Driver> dao;
 
@@ -66,11 +60,6 @@ public class DriverServiceImpl implements DriverService {
     public List<DriverDTO> getAllDrivers() {
         log.info("Request all Drivers from DAO");
 
-        // TODO: aspects, remove test messages
-        NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
-        Notifications notifications = notificationsService.getHttpNotificationsImplPort();
-        notifications.updateDriversStat(new DriversStat(60, 30, 10, 100));
-
         List<Driver> drivers = dao.findAll();
         return drivers.stream()
                 .map(this::convertToDto)
@@ -78,6 +67,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @DriverEvent
     public void saveDriver(DriverDTO driverDTO) {
         log.info("Save Driver");
         Driver driver = convertToEntity(driverDTO);
@@ -85,6 +75,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @DriverEvent
     public void updateDriver(DriverDTO driverDTO) {
         log.info("Update Driver id={}", driverDTO.getId());
         Driver driver = convertToEntity(driverDTO);
@@ -99,6 +90,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @DriverEvent
     public void deleteDriver(Long id) {
         log.info("Delete Driver id={}", id);
         dao.deleteById(id);

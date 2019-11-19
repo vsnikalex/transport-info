@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.util.shapes.GHPoint;
+import com.tsystems.transportinfo.aspect.TruckEvent;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
@@ -66,6 +67,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @TruckEvent
     public void saveTruck(TruckDTO truckDTO) {
         log.info("Save Truck");
         Truck truck = convertToEntity(truckDTO);
@@ -73,6 +75,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @TruckEvent
     public void updateTruck(TruckDTO truckDTO) {
         log.info("Update Truck id={}", truckDTO.getId());
         Truck truck = convertToEntity(truckDTO);
@@ -87,9 +90,10 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @TruckEvent
     public void deleteTruck(Long id) {
         log.info("Delete Truck id={}", id);
-        dao.findOne(id);
+        dao.deleteById(id);
     }
 
     @Override

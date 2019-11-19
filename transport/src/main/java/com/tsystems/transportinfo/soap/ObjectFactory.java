@@ -1,5 +1,5 @@
 
-package com.tsystems.transportinfo;
+package com.tsystems.transportinfo.soap;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

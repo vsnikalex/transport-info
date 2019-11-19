@@ -1,5 +1,8 @@
 
-package com.tsystems.transportinfo;
+package com.tsystems.transportinfo.soap;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,18 +10,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for trucksStat complex type.
+ * <p>Java class for driversStat complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="trucksStat">
+ * &lt;complexType name="driversStat">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="available" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="defective" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="inUse" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="driving" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="others" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="total" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -29,17 +32,19 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "trucksStat", propOrder = {
+@XmlType(name = "driversStat", propOrder = {
     "available",
-    "defective",
-    "inUse",
+    "driving",
+    "others",
     "total"
 })
-public class TrucksStat {
+@NoArgsConstructor
+@AllArgsConstructor
+public class DriversStat {
 
     protected int available;
-    protected int defective;
-    protected int inUse;
+    protected int driving;
+    protected int others;
     protected int total;
 
     /**
@@ -59,35 +64,35 @@ public class TrucksStat {
     }
 
     /**
-     * Gets the value of the defective property.
+     * Gets the value of the driving property.
      * 
      */
-    public int getDefective() {
-        return defective;
+    public int getDriving() {
+        return driving;
     }
 
     /**
-     * Sets the value of the defective property.
+     * Sets the value of the driving property.
      * 
      */
-    public void setDefective(int value) {
-        this.defective = value;
+    public void setDriving(int value) {
+        this.driving = value;
     }
 
     /**
-     * Gets the value of the inUse property.
+     * Gets the value of the others property.
      * 
      */
-    public int getInUse() {
-        return inUse;
+    public int getOthers() {
+        return others;
     }
 
     /**
-     * Sets the value of the inUse property.
+     * Sets the value of the others property.
      * 
      */
-    public void setInUse(int value) {
-        this.inUse = value;
+    public void setOthers(int value) {
+        this.others = value;
     }
 
     /**

@@ -1,5 +1,5 @@
 
-package com.tsystems.transportinfo;
+package com.tsystems.transportinfo.soap;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

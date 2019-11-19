@@ -18,22 +18,22 @@ public class Cargo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "weight")
+    @Column(name = "weight", nullable = false)
     private int weight;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
     @ManyToOne
-    @JoinColumn(name="startDepot_id")
+    @JoinColumn(name="startDepot_id", nullable = false)
     private Depot startDepot;
 
     @ManyToOne
-    @JoinColumn(name="endDepot_id")
+    @JoinColumn(name="endDepot_id", nullable = false)
     private Depot endDepot;
 
     @ManyToOne

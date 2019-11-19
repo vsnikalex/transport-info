@@ -21,11 +21,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "action")
+    @Column(name = "action", nullable = false)
     @Enumerated(EnumType.STRING)
     private DriverAction action;
 
-    @Column(name = "start")
+    @Column(name = "start", nullable = false)
     private LocalDateTime start;
 
     @Column(name = "end")

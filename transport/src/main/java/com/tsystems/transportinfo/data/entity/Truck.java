@@ -23,14 +23,14 @@ public class Truck {
     @Column(unique=true)
     private String plate;
 
-    @Column
+    @Column(nullable = false)
     private int capacity;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TruckStatus status;
 
-    @Column(columnDefinition="VARCHAR(512)")
+    @Column(name = "location", columnDefinition="VARCHAR(512)", nullable = false)
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry location;
 

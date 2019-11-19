@@ -18,11 +18,11 @@ public class Depot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "location", columnDefinition="VARCHAR(512)")
+    @Column(name = "location", columnDefinition="VARCHAR(512)", nullable = false)
     @Convert(converter = GeocodingEntryConverter.class)
     private GHGeocodingEntry location;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private DepotType type;
 

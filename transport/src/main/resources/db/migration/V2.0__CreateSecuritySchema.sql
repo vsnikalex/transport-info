@@ -1,15 +1,14 @@
 CREATE TABLE security_role (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  description varchar(100) DEFAULT NULL,
-  role_name varchar(100) DEFAULT NULL
+  description varchar(100) NOT NULL,
+  role_name varchar(100) NOT NULL
 );
 
 CREATE TABLE security_user (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   username varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  first_name varchar(255) NOT NULL,
-  last_name varchar(255) NOT NULL
+  CONSTRAINT UK_USERNAME UNIQUE (username)
 );
 
 CREATE TABLE user_role (
@@ -24,17 +23,17 @@ CREATE TABLE driver (
 	firstName VARCHAR(250) NOT NULL,
 	lastName VARCHAR(250) NOT NULL,
 	location VARCHAR(500) NOT NULL,
-	delivery_id BIGINT NULL,
+	delivery_id BIGINT NULLABLE,
     CONSTRAINT FK_DRIVER_DELIVERY_ID FOREIGN KEY (delivery_id) REFERENCES delivery (id)
 );
 
 create table task (
-	id bigint auto_increment primary key,
-	action varchar(250) not null,
-	start datetime not null,
-	end datetime not null,
-	driver_id bigint not null,
-	truck_id bigint not null,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	action VARCHAR(250) NOT NULL,
+	start DATETIME NOT NULL,
+	end DATETIME NULLABLE,
+	driver_id BIGINT NOT NULL,
+	truck_id BIGINT NOT NULL,
 	constraint FK_TASK_TRUCK_ID foreign key (truck_id) references truck (id),
 	constraint FK_TASK_DRIVER_ID foreign key (driver_id) references driver (id)
 );

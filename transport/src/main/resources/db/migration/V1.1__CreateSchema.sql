@@ -1,75 +1,35 @@
-create table depot
-(
-	id bigint auto_increment not null
-		primary key,
-	location varchar(512) null,
-	type varchar(255) null
+create table depot (
+	id bigint auto_increment primary key,
+	location varchar(500) not null,
+	type varchar(250) not null
 );
 
-create table truck
-(
-	id bigint auto_increment not null
-		primary key,
-	capacity int null,
-	location varchar(512) null,
-	plate varchar(255) null,
-	status varchar(255) null,
-	constraint UK_doo99d174d4km77mhu6y3yyhg
-		unique (plate)
+create table truck (
+	id bigint auto_increment primary key,
+	capacity int not null,
+	location varchar(500) not null,
+	plate varchar(250) not null,
+	status varchar(250) not null,
+	constraint UK_PLATE unique (plate)
 );
 
-create table delivery
-(
-	id bigint auto_increment not null
-		primary key,
-	done bit null,
-	route varchar(255) null,
+create table delivery (
+	id bigint auto_increment primary key,
+	done bit not null,
+	route varchar(250) not null,
 	truck_id bigint not null,
-	constraint FKgyyc1ga8bgchktubl1in9sj3c
-		foreign key (truck_id) references truck (id)
+	constraint FK_DELIVERY_TRUCK_ID foreign key (truck_id) references truck (id)
 );
 
-create table cargo
-(
-	id bigint auto_increment not null
-		primary key,
-	description varchar(255) null,
-	status varchar(255) null,
-	weight int null,
+create table cargo (
+	id bigint auto_increment primary key,
+	description varchar(250) not null,
+	status varchar(250) not null,
+	weight int not null,
+	startDepot_id bigint not null,
+	endDepot_id bigint not null,
 	delivery_id bigint null,
-	endDepot_id bigint null,
-	startDepot_id bigint null,
-	constraint FK1w2b77bjp20yd5j6ea3cehose
-		foreign key (delivery_id) references delivery (id),
-	constraint FK3pth8yk6803ee9lj58fagyoig
-		foreign key (endDepot_id) references depot (id),
-	constraint FK5kmoaa6dqf3tjh70lrmluyltc
-		foreign key (startDepot_id) references depot (id)
-);
-
-create table driver
-(
-	id bigint auto_increment not null
-		primary key,
-	firstName varchar(255) null,
-	lastName varchar(255) null,
-	location varchar(512) null,
-	delivery_id bigint null,
-	constraint FKa3jvp802nxgwo7l3l54sbxsvy
-		foreign key (delivery_id) references delivery (id)
-);
-
-create table task
-(
-	id bigint auto_increment not null
-		primary key,
-	action varchar(255) null,
-	end datetime null,
-	start datetime null,
-	driver_id bigint not null,
-	truck_id bigint null,
-	constraint FKfswuybpu30ladow8241e0o1k1
-		foreign key (truck_id) references truck (id),
-	constraint FKg6l716fshnfuilkb95i8rmxca
-		foreign key (driver_id) references driver (id)
+	constraint FK_CARGO_DELIVERY_ID foreign key (delivery_id) references delivery (id),
+	constraint FK_CARGO_START_DEPOT_ID foreign key (startDepot_id) references depot (id),
+	constraint FK_CARGO_END_DEPOT_ID foreign key (endDepot_id) references depot (id)
 );

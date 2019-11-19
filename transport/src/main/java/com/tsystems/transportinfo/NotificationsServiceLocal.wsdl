@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.transportinfo.tsystems.com/" xmlns:soapjms="http://www.w3.org/2010/soapjms/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="NotificationsService" targetNamespace="http://soap.transportinfo.tsystems.com/">
+  <wsdl:types>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.transportinfo.tsystems.com/" xmlns:soapjms="http://www.w3.org/2010/soapjms/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" elementFormDefault="unqualified" targetNamespace="http://soap.transportinfo.tsystems.com/" version="1.0">
+
+  
+  <xs:element name="driversStat" type="tns:driversStat"/>
+
+  
+  <xs:element name="trucksStat" type="tns:trucksStat"/>
+
+  
+  <xs:element name="updateDriversStat" type="tns:updateDriversStat"/>
+
+  
+  <xs:element name="updateDriversStatResponse" type="tns:updateDriversStatResponse"/>
+
+  
+  <xs:element name="updateTrucksStat" type="tns:updateTrucksStat"/>
+
+  
+  <xs:element name="updateTrucksStatResponse" type="tns:updateTrucksStatResponse"/>
+
+  
+  <xs:complexType name="updateDriversStat">
+    
+    <xs:sequence>
+      
+      <xs:element minOccurs="0" name="arg0" type="tns:driversStat"/>
+    
+    </xs:sequence>
+  
+  </xs:complexType>
+
+  
+  <xs:complexType name="driversStat">
+    
+    <xs:sequence>
+      
+      <xs:element name="available" type="xs:int"/>
+      
+      <xs:element name="driving" type="xs:int"/>
+      
+      <xs:element name="others" type="xs:int"/>
+      
+      <xs:element name="total" type="xs:int"/>
+    
+    </xs:sequence>
+  
+  </xs:complexType>
+
+  
+  <xs:complexType name="updateDriversStatResponse">
+    
+    <xs:sequence/>
+  
+  </xs:complexType>
+
+  
+  <xs:complexType name="updateTrucksStat">
+    
+    <xs:sequence>
+      
+      <xs:element minOccurs="0" name="arg0" type="tns:trucksStat"/>
+    
+    </xs:sequence>
+  
+  </xs:complexType>
+
+  
+  <xs:complexType name="trucksStat">
+    
+    <xs:sequence>
+      
+      <xs:element name="available" type="xs:int"/>
+      
+      <xs:element name="defective" type="xs:int"/>
+      
+      <xs:element name="inUse" type="xs:int"/>
+      
+      <xs:element name="total" type="xs:int"/>
+    
+    </xs:sequence>
+  
+  </xs:complexType>
+
+  
+  <xs:complexType name="updateTrucksStatResponse">
+    
+    <xs:sequence/>
+  
+  </xs:complexType>
+
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateDriversStat">
+    <wsdl:part element="tns:updateDriversStat" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTrucksStatResponse">
+    <wsdl:part element="tns:updateTrucksStatResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTrucksStat">
+    <wsdl:part element="tns:updateTrucksStat" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateDriversStatResponse">
+    <wsdl:part element="tns:updateDriversStatResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Notifications">
+    <wsdl:operation name="updateDriversStat">
+      <wsdl:input message="tns:updateDriversStat" name="updateDriversStat">
+    </wsdl:input>
+      <wsdl:output message="tns:updateDriversStatResponse" name="updateDriversStatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTrucksStat">
+      <wsdl:input message="tns:updateTrucksStat" name="updateTrucksStat">
+    </wsdl:input>
+      <wsdl:output message="tns:updateTrucksStatResponse" name="updateTrucksStatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HttpNotificationsServiceSoapBinding" type="tns:Notifications">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateDriversStat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateDriversStat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateDriversStatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTrucksStat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateTrucksStat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateTrucksStatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NotificationsServiceSoapBinding" type="tns:Notifications">
+    <soap:binding style="document" transport="http://www.w3.org/2010/soapjms/"/>
+    <soapjms:jndiConnectionFactoryName xmlns:soapjms="http://www.w3.org/2010/soapjms/">ConnectionFactory</soapjms:jndiConnectionFactoryName>
+    <soapjms:jndiInitialContextFactory xmlns:soapjms="http://www.w3.org/2010/soapjms/">org.apache.activemq.jndi.ActiveMQInitialContextFactory</soapjms:jndiInitialContextFactory>
+    <soapjms:jndiURL xmlns:soapjms="http://www.w3.org/2010/soapjms/">tcp://ti-activemq:61616</soapjms:jndiURL>
+    <soapjms:deliveryMode xmlns:soapjms="http://www.w3.org/2010/soapjms/">PERSISTENT</soapjms:deliveryMode>
+    <soapjms:priority xmlns:soapjms="http://www.w3.org/2010/soapjms/">5</soapjms:priority>
+    <soapjms:timeToLive xmlns:soapjms="http://www.w3.org/2010/soapjms/">1000</soapjms:timeToLive>
+    <wsdl:operation name="updateDriversStat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateDriversStat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateDriversStatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTrucksStat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateTrucksStat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateTrucksStatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificationsService">
+    <wsdl:port binding="tns:NotificationsServiceSoapBinding" name="NotificationsImplPort">
+      <soap:address location="jms:queue:NotificationsQueue?username=admin&amp;password=admin"/>
+    </wsdl:port>
+    <soapjms:jndiConnectionFactoryName xmlns:soapjms="http://www.w3.org/2010/soapjms/">ConnectionFactory</soapjms:jndiConnectionFactoryName>
+    <soapjms:jndiInitialContextFactory xmlns:soapjms="http://www.w3.org/2010/soapjms/">org.apache.activemq.jndi.ActiveMQInitialContextFactory</soapjms:jndiInitialContextFactory>
+  </wsdl:service>
+  <wsdl:service name="NotificationsServiceLocal">
+    <wsdl:port binding="tns:HttpNotificationsServiceSoapBinding" name="HttpNotificationsImplPort">
+      <soap:address location="http://172.17.0.3:8080/info/NotificationsServiceLocal"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

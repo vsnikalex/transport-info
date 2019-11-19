@@ -1,6 +1,9 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.DriversStat;
+import com.tsystems.transportinfo.Notifications;
+import com.tsystems.transportinfo.NotificationsServiceLocal;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
@@ -63,7 +66,12 @@ public class DriverServiceImpl implements DriverService {
     public List<DriverDTO> getAllDrivers() {
         log.info("Request all Drivers from DAO");
 
+        // TODO: remove test messages
         jmsTemplate.convertAndSend("TestQueue", "get all drivers");
+
+        NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
+        Notifications notifications = notificationsService.getHttpNotificationsImplPort();
+        notifications.updateDriversStat(new DriversStat(60, 30, 10, 100));
 
         List<Driver> drivers = dao.findAll();
         return drivers.stream()

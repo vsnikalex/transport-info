@@ -28,7 +28,7 @@ create table cargo (
 	weight int not null,
 	startDepot_id bigint not null,
 	endDepot_id bigint not null,
-	delivery_id bigint nullable,
+	delivery_id bigint null,
 	constraint FK_CARGO_DELIVERY_ID foreign key (delivery_id) references delivery (id),
 	constraint FK_CARGO_START_DEPOT_ID foreign key (startDepot_id) references depot (id),
 	constraint FK_CARGO_END_DEPOT_ID foreign key (endDepot_id) references depot (id)

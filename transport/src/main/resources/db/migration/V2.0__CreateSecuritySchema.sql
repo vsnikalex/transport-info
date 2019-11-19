@@ -23,7 +23,7 @@ CREATE TABLE driver (
 	firstName VARCHAR(250) NOT NULL,
 	lastName VARCHAR(250) NOT NULL,
 	location VARCHAR(500) NOT NULL,
-	delivery_id BIGINT NULLABLE,
+	delivery_id BIGINT NULL,
     CONSTRAINT FK_DRIVER_DELIVERY_ID FOREIGN KEY (delivery_id) REFERENCES delivery (id)
 );
 
@@ -31,7 +31,7 @@ create table task (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	action VARCHAR(250) NOT NULL,
 	start DATETIME NOT NULL,
-	end DATETIME NULLABLE,
+	end DATETIME NULL,
 	driver_id BIGINT NOT NULL,
 	truck_id BIGINT NOT NULL,
 	constraint FK_TASK_TRUCK_ID foreign key (truck_id) references truck (id),

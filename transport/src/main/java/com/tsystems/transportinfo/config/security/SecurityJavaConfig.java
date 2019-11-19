@@ -1,33 +1,42 @@
 package com.tsystems.transportinfo.config.security;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("com.tsystems.transportinfo.config.security")
+@ComponentScan({"com.tsystems.transportinfo.config",
+                    "com.tsystems.transportinfo.service", "com.tsystems.transportinfo.data.dao"})
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(11));
+
+        return provider;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(encoder().encode("adminPass")).roles("ADMIN")
-                .and()
-                .withUser("user").password(encoder().encode("userPass")).roles("USER");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("admin").password(encoder().encode("adminPass")).roles("ADMIN")
+//                .and()
+//                .withUser("user").password(encoder().encode("userPass")).roles("USER");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

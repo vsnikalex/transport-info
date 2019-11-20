@@ -14,4 +14,6 @@ public interface TaskDAO {
 
     void finishCurrentTask(Long driverId, LocalDateTime end);
 
+    int calculateDrivingDrivers();
+
 }

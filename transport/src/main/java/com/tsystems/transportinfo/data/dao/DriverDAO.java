@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface DriverDAO {
 
+    int calculateDrivers();
+
     List<Driver> findAvailableDrivers(GHGeocodingEntry city);
+
+    int calculateAvailableDrivers();
 
     Driver findDriver(long id);
 

@@ -67,4 +67,12 @@ public class TaskDAOImpl implements TaskDAO {
         }
     }
 
+    @Override
+    public int calculateDrivingDrivers() {
+        Session session = sessionFactory.getCurrentSession();
+        Stream<Task> tasks = session.createQuery("SELECT t FROM Task t", Task.class).stream();
+
+        return (int) tasks.filter(task -> (task.getEnd() == null) && task.getAction().equals(DriverAction.DRIVE))
+                          .count();
+    }
 }

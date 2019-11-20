@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,9 +25,20 @@ public class DriverDAOImpl implements DriverDAO {
     private GraphHopperService graphHopperService;
 
     @Override
-    public List<Driver> findAvailableDrivers(GHGeocodingEntry city) {
+    public int calculateDrivers() {
         Session session = sessionFactory.getCurrentSession();
 
+        CriteriaBuilder qb = session.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = qb.createQuery(Long.class);
+        cq.select(qb.count(cq.from(Driver.class)));
+        long numOfDrivers = session.createQuery(cq).getSingleResult();
+
+        return (int) numOfDrivers;
+    }
+
+    @Override
+    public List<Driver> findAvailableDrivers(GHGeocodingEntry city) {
+        Session session = sessionFactory.getCurrentSession();
         Stream<Driver> drivers = session.createQuery("SELECT d FROM Driver d", Driver.class).stream();
 
         return drivers.filter(d -> {
@@ -34,6 +47,14 @@ public class DriverDAOImpl implements DriverDAO {
 
             return driverInSameCity && driverIsFree;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public int calculateAvailableDrivers() {
+        Session session = sessionFactory.getCurrentSession();
+        Stream<Driver> drivers = session.createQuery("SELECT d FROM Driver d", Driver.class).stream();
+
+        return (int) drivers.filter(d -> d.getDelivery() == null).count();
     }
 
     @Override

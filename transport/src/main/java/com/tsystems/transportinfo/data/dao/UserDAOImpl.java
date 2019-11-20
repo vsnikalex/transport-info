@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dao;
 
 import com.tsystems.transportinfo.data.entity.User;
 import com.tsystems.transportinfo.data.entity.User_;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+@Slf4j
 @Repository
 public class UserDAOImpl implements UserDAO {
 
@@ -29,6 +31,7 @@ public class UserDAOImpl implements UserDAO {
         cq.where(cb.equal(user.get(User_.username), username));
 
         Query<User> query = session.createQuery(cq);
+
         return query.getSingleResult();
     }
 

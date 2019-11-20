@@ -6,6 +6,5 @@ INSERT INTO user
 
 INSERT INTO auth_user_group
 (username, auth_group) VALUES
-('fpmoles', 'USER'),
 ('fpmoles', 'ADMIN'),
 ('jdoe', 'USER');

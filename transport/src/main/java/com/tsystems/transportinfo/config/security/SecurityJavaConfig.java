@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +23,9 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
@@ -36,22 +40,9 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     public GrantedAuthoritiesMapper authoritiesMapper(){
         SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
         authorityMapper.setConvertToUpperCase(true);
-        authorityMapper.setDefaultAuthority("USER");
+        authorityMapper.setDefaultAuthority("GUEST");
         return authorityMapper;
     }
-
-//    @Bean
-//    protected BCryptPasswordEncoder encoder() {
-//        return new BCryptPasswordEncoder(11);
-//    }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password(encoder().encode("adminPass")).roles("ADMIN")
-//                .and()
-//                .withUser("user").password(encoder().encode("userPass")).roles("USER");
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -59,6 +50,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/driver/**").hasRole("USER")
                     .antMatchers("/login*", "/resources/**", "/*.js").permitAll()
                     .antMatchers("/api/**").authenticated()
                     .anyRequest().authenticated()
@@ -66,12 +58,15 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/perform_login")
-                    .defaultSuccessUrl("/admin/delivery_editor", true)
+                    .successHandler(authenticationSuccessHandler)
                     .failureUrl("/login")
                     .and()
                 .logout()
                     .logoutUrl("/perform_logout")
-                    .deleteCookies("JSESSIONID");
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/login");
     }
 
 }

@@ -3,7 +3,7 @@ package com.tsystems.transportinfo.data.dao;
 import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.entity.Truck;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
-import com.tsystems.transportinfo.service.GraphHopperService;
+import com.tsystems.transportinfo.service.GeoService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class TruckDAOImpl implements TruckDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private GeoService geoService;
 
     @Override
     public int calculateTrucks() {
@@ -70,8 +70,8 @@ public class TruckDAOImpl implements TruckDAO {
         Stream<Truck> trucks = session.createQuery("SELECT t FROM Truck t", Truck.class).stream();
 
         return trucks.filter(t -> {
-            GHPoint truckPoint = graphHopperService.pointFromEntry(t.getLocation());
-            double distanceMeters = graphHopperService.distance(
+            GHPoint truckPoint = geoService.pointFromEntry(t.getLocation());
+            double distanceMeters = geoService.distance(
                                                     truckPoint.getLat(), destination.getLat(),
                                                     truckPoint.getLon(), destination.getLon(), 0, 0);
 

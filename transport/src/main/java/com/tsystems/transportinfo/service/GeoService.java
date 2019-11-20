@@ -3,7 +3,7 @@ package com.tsystems.transportinfo.service;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.graphhopper.util.shapes.GHPoint;
 
-public interface GraphHopperService {
+public interface GeoService {
 
     GHPoint pointFromEntry(GHGeocodingEntry entry);
 

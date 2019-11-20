@@ -3,7 +3,7 @@ package com.tsystems.transportinfo.data.dao;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Driver;
-import com.tsystems.transportinfo.service.GraphHopperService;
+import com.tsystems.transportinfo.service.GeoService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class DriverDAOImpl implements DriverDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private GeoService geoService;
 
     @Override
     public int calculateDrivers() {
@@ -42,7 +42,7 @@ public class DriverDAOImpl implements DriverDAO {
         Stream<Driver> drivers = session.createQuery("SELECT d FROM Driver d", Driver.class).stream();
 
         return drivers.filter(d -> {
-            boolean driverInSameCity = graphHopperService.inSameCity(d.getLocation(), city);
+            boolean driverInSameCity = geoService.inSameCity(d.getLocation(), city);
             boolean driverIsFree = (d.getDelivery() == null) || (d.getDelivery().isDone());
 
             return driverInSameCity && driverIsFree;

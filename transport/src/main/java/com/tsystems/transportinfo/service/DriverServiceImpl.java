@@ -39,7 +39,7 @@ public class DriverServiceImpl implements DriverService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private GeoService geoService;
 
     @Autowired
     private TruckService truckService;
@@ -122,7 +122,7 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = modelMapper.map(dto, Driver.class);
 
         String coords = dto.getCoords();
-        driver.setLocation(graphHopperService.coordsToEntry(coords));
+        driver.setLocation(geoService.coordsToEntry(coords));
 
         return driver;
     }

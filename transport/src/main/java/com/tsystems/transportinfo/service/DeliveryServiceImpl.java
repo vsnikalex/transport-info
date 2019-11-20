@@ -41,7 +41,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     private DriverDAO driverDAO;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private GeoService geoService;
 
     @Autowired
     ModelMapper modelMapper;
@@ -89,19 +89,19 @@ public class DeliveryServiceImpl implements DeliveryService {
         Iterator<String> iterator = jsonObject.keys();
         while (iterator.hasNext()) {
             String point = (String) jsonObject.get(iterator.next());
-            String pointNorm = graphHopperService.normalize(point);
+            String pointNorm = geoService.normalize(point);
             routeMap.putIfAbsent(pointNorm, new DeliveryDTO.CargoOperations());
         }
 
         List<Cargo> cargoes = entity.getCargo();
         cargoes.forEach(cargo -> {
             GHGeocodingEntry startEntry = cargo.getStartDepot().getLocation();
-            String startPoint = graphHopperService.pointStringFromEntry(startEntry);
-            String startPointNorm = graphHopperService.normalize(startPoint);
+            String startPoint = geoService.pointStringFromEntry(startEntry);
+            String startPointNorm = geoService.normalize(startPoint);
 
             GHGeocodingEntry endEntry = cargo.getEndDepot().getLocation();
-            String endPoint = graphHopperService.pointStringFromEntry(endEntry);
-            String endPointNorm = graphHopperService.normalize(endPoint);
+            String endPoint = geoService.pointStringFromEntry(endEntry);
+            String endPointNorm = geoService.normalize(endPoint);
 
             CargoDTO cargoDTO = modelMapper.map(cargo, CargoDTO.class);
 

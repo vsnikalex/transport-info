@@ -37,7 +37,7 @@ public class TruckServiceImpl implements TruckService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private GraphHopperService graphHopperService;
+    private GeoService geoService;
 
     @Autowired
     private DepotService depotService;
@@ -49,7 +49,7 @@ public class TruckServiceImpl implements TruckService {
                     "with max travel time = {} (Unix timestamp) from DAO", depotId, maxTravelTime);
 
         Depot depot = depotService.getDepotById(depotId);
-        GHPoint destPoint = graphHopperService.pointFromEntry(depot.getLocation());
+        GHPoint destPoint = geoService.pointFromEntry(depot.getLocation());
 
         List<Truck> trucks = truckDAO.findAvailableTrucks(destPoint , maxTravelTime);
         return trucks.stream()
@@ -110,7 +110,7 @@ public class TruckServiceImpl implements TruckService {
         Truck truck = modelMapper.map(dto, Truck.class);
 
         String coords = dto.getCoords();
-        truck.setLocation(graphHopperService.coordsToEntry(coords));
+        truck.setLocation(geoService.coordsToEntry(coords));
 
         return truck;
     }

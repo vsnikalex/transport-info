@@ -43,7 +43,7 @@ public class DriverDAOImpl implements DriverDAO {
 
         return drivers.filter(d -> {
             boolean driverInSameCity = graphHopperService.inSameCity(d.getLocation(), city);
-            boolean driverIsFree = d.getDelivery() == null;
+            boolean driverIsFree = (d.getDelivery() == null) || (d.getDelivery().isDone());
 
             return driverInSameCity && driverIsFree;
         }).collect(Collectors.toList());
@@ -54,7 +54,9 @@ public class DriverDAOImpl implements DriverDAO {
         Session session = sessionFactory.getCurrentSession();
         Stream<Driver> drivers = session.createQuery("SELECT d FROM Driver d", Driver.class).stream();
 
-        return (int) drivers.filter(d -> d.getDelivery() == null).count();
+        return (int) drivers
+                .filter(d -> (d.getDelivery() == null) || (d.getDelivery().isDone()))
+                .count();
     }
 
     @Override

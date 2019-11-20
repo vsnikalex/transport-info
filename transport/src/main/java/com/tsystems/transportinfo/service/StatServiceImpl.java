@@ -8,7 +8,10 @@ import com.tsystems.transportinfo.soap.TrucksStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class StatServiceImpl implements StatService {
 
     @Autowired
@@ -32,7 +35,12 @@ public class StatServiceImpl implements StatService {
 
     @Override
     public TrucksStat getTrucksStat() {
-        return null;
+        int defectiveTrucks = truckDAO.calculateDefectiveTrucks();
+        int usedTrucks = truckDAO.calculateUsedTrucks();
+        int numberOfTrucks = truckDAO.calculateTrucks();
+        int availableTrucks = numberOfTrucks - usedTrucks - defectiveTrucks;
+
+        return new TrucksStat(availableTrucks, defectiveTrucks, usedTrucks, numberOfTrucks);
     }
 
 }

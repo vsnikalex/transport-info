@@ -44,7 +44,8 @@ public class TruckDAOImpl implements TruckDAO {
         Stream<Truck> trucks = session.createQuery("SELECT t FROM Truck t", Truck.class).stream();
 
         return (int) trucks.filter(truck ->
-                (truck.getDelivery() != null) || !(truck.getDelivery().isDone()))
+                (truck.getDelivery() != null)
+                        && !(truck.getDelivery().isDone()))
                 .count();
     }
 

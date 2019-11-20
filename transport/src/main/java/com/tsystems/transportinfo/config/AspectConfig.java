@@ -6,7 +6,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan({"com.tsystems.transportinfo.aspect"})
+@ComponentScan({"com.tsystems.transportinfo.aspect",
+        "com.tsystems.transportinfo.service", "com.tsystems.transportinfo.data.dao"})
 public class AspectConfig {
 
 }

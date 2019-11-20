@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.aspect;
 
+import com.tsystems.transportinfo.service.StatService;
 import com.tsystems.transportinfo.soap.DriversStat;
 import com.tsystems.transportinfo.soap.Notifications;
 import com.tsystems.transportinfo.soap.NotificationsServiceLocal;
@@ -7,6 +8,7 @@ import com.tsystems.transportinfo.soap.TrucksStat;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -14,14 +16,12 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class SoapAspect {
 
+    @Autowired
+    private StatService statService;
+
     @After("@annotation(DriverEvent)")
     public void sendDriversStat() {
-        DriversStat driversStat = new DriversStat(
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100)
-        );
+        DriversStat driversStat = statService.getDriversStat();
 
         NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
         Notifications notifications =  notificationsService.getHttpNotificationsImplPort();
@@ -32,12 +32,7 @@ public class SoapAspect {
 
     @After("@annotation(TruckEvent)")
     public void sendTrucksStat() {
-        TrucksStat trucksStat = new TrucksStat(
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100),
-                (int) (Math.random() * 100)
-        );
+        TrucksStat trucksStat = statService.getTrucksStat();
 
         NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
         Notifications notifications =  notificationsService.getHttpNotificationsImplPort();

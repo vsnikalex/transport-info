@@ -161,7 +161,7 @@ class Lists extends React.Component{
 
         axios.post('api/delivery/add', DeliveryJSON).then(response => {
             alert('SAVED');
-            window.location = '/admin/delivery_editor';
+            window.location = '/transport/admin/delivery_editor';
         });
     }
 

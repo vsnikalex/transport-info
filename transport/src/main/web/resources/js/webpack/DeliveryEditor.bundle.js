@@ -505,7 +505,7 @@ function (_React$Component2) {
       };
       axios.post('api/delivery/add', DeliveryJSON).then(function (response) {
         alert('SAVED');
-        window.location = '/admin/delivery_editor';
+        window.location = '/transport/admin/delivery_editor';
       });
     }
   }, {

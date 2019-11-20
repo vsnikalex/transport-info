@@ -38,7 +38,7 @@ public class ViewConfig implements WebMvcConfigurer {
         registry.addViewController("/admin/cargo").setViewName("admin_cargo");
         registry.addViewController("/admin/cargo_add").setViewName("admin_cargo_add");
         registry.addViewController("/admin/delivery_editor").setViewName("admin_delivery_editor");
-        registry.addViewController("/admin/driver_app").setViewName("drivers_app");
+        registry.addViewController("/admin/driver_app").setViewName("admin_driver_app");
         registry.addViewController("/driver/driver_app").setViewName("driver_app");
     }
 

@@ -1,22 +1,30 @@
 package com.tsystems.transportinfo.config.security;
 
+import com.tsystems.transportinfo.data.entity.AuthGroup;
 import com.tsystems.transportinfo.data.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @AllArgsConstructor
-public class TransportInfoUserPrincipal implements UserDetails {
+public class TransportUserPrincipal implements UserDetails {
 
     private User user;
+    private List<AuthGroup> authGroups;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
+        if(null == authGroups){
+            return Collections.emptySet();
+        }
+        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
+        authGroups.forEach(group->{
+            grantedAuthorities.add(new SimpleGrantedAuthority(group.getAuthGroup()));
+        });
+        return grantedAuthorities;
     }
 
     @Override

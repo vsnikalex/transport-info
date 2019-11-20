@@ -6,19 +6,19 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="security_role")
+@Table(name="auth_user_group")
 @Getter
 @Setter
-public class Role {
+public class AuthGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="role_name")
-    private String roleName;
+    @Column(name="username")
+    private String username;
 
-    @Column(name="description")
-    private String description;
+    @Column(name="auth_group")
+    private String authGroup;
 
 }

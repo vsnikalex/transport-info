@@ -1,21 +1,15 @@
-CREATE TABLE security_role (
+CREATE TABLE user (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  description varchar(100) NOT NULL,
-  role_name varchar(100) NOT NULL
+  username VARCHAR(128) NOT NULL UNIQUE,
+  password VARCHAR(256) NOT NULL
 );
 
-CREATE TABLE security_user (
+CREATE TABLE auth_user_group (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  username varchar(255) NOT NULL,
-  password varchar(255) NOT NULL,
-  CONSTRAINT UK_USERNAME UNIQUE (username)
-);
-
-CREATE TABLE user_role (
-  user_id BIGINT NOT NULL,
-  role_id BIGINT NOT NULL,
-  CONSTRAINT FK_SECURITY_USER_ID FOREIGN KEY (user_id) REFERENCES security_user (id),
-  CONSTRAINT FK_SECURITY_ROLE_ID FOREIGN KEY (role_id) REFERENCES security_role (id)
+  username VARCHAR(128) NOT NULL,
+  auth_group VARCHAR(128) NOT NULL,
+  CONSTRAINT USER_AUTH_USER_GROUP_FK FOREIGN KEY(username) REFERENCES user(username),
+  UNIQUE (username, auth_group)
 );
 
 CREATE TABLE driver (

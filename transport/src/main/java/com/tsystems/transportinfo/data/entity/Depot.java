@@ -26,4 +26,8 @@ public class Depot {
     @Enumerated(EnumType.STRING)
     private DepotType type;
 
+    public Depot(long id) {
+        this.id = id;
+    }
+
 }

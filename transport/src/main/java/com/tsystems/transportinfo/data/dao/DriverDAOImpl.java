@@ -85,7 +85,7 @@ public class DriverDAOImpl implements DriverDAO {
 
         Query<Driver> query = session.createQuery(cq);
 
-        long id = -1;
+        Long id = -1L;
         try {
             id = query.getSingleResult().getId();
         } catch (NoResultException | NullPointerException e) {

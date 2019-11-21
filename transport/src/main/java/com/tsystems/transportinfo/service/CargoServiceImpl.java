@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional
 public class CargoServiceImpl implements CargoService {
 
     @Autowired
@@ -37,7 +36,18 @@ public class CargoServiceImpl implements CargoService {
     @Autowired
     private DepotService depotService;
 
+    /**
+     * Requests cargoes from {@link CargoDAO}
+     * which are stored in a certain depot,
+     * TODO: which are not marked as deleted.
+     *
+     * Filters off cargoes assigned to a delivery.
+     *
+     * @param id    {@link com.tsystems.transportinfo.data.entity.Depot} id
+     * @return      list of {@link CargoDTO}
+     */
     @Override
+    @Transactional
     public List<CargoDTO> getAvailableByDepotId(Long id) {
         log.info("Request all available Cargoes at Depot id={} from DAO", id);
         List<Cargo> cargoes = cargoDAO.findByDepotId(id);
@@ -47,7 +57,14 @@ public class CargoServiceImpl implements CargoService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Requests cargoes from {@link CargoDAO},
+     * TODO: which are not marked as deleted.
+     *
+     * @return      list of {@link CargoDTO}
+     */
     @Override
+    @Transactional
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
         List<Cargo> cargoes = dao.findAll();
@@ -56,14 +73,32 @@ public class CargoServiceImpl implements CargoService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * TODO: Marks cargoes as deleted.
+     *
+     */
     @Override
+    @Transactional
+    public void deleteCargo(Long id) {
+        log.info("Delete Cargo id={}", id);
+        dao.deleteById(id);
+    }
+
+    @Override
+    @Transactional
     public void saveCargo(CargoDTO cargoDTO) {
         log.info("Save Cargo");
         Cargo cargo = convertToEntity(cargoDTO);
         dao.create(cargo);
     }
 
+    /**
+     * Marked as {@link DeliveryEvent} to trigger
+     * notification send after update.
+     *
+     */
     @Override
+    @Transactional
     @DeliveryEvent
     public void updateCargo(CargoDTO cargoDTO) {
         log.info("Update Cargo id={}", cargoDTO.getId());
@@ -71,13 +106,19 @@ public class CargoServiceImpl implements CargoService {
         dao.update(cargo);
     }
 
+    /**
+     * Used to reflect load/unload operations during delivery.
+     *
+     */
     @Override
+    @Transactional
     public void updateCargoStatus(long id, CargoStatus status) {
         log.info("Change Cargo id={} status to {}", id, status);
         cargoDAO.updateCargoStatus(id, status);
     }
 
     @Override
+    @Transactional
     public CargoDTO getCargo(Long id) {
         log.info("Request Cargo id={} from DAO", id);
         Cargo cargo = dao.findOne(id);
@@ -85,16 +126,15 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public void deleteCargo(Long id) {
-        log.info("Delete Cargo id={}", id);
-        dao.deleteById(id);
-    }
-
-    @Override
     public CargoDTO convertToDto(Cargo entity) {
         return modelMapper.map(entity, CargoDTO.class);
     }
 
+    /**
+     * Requests depot entities from {@link DepotService},
+     * thus checking whether data is not fake.
+     *
+     */
     @Override
     public Cargo convertToEntity(CargoDTO dto) {
         Cargo cargo = modelMapper.map(dto, Cargo.class);

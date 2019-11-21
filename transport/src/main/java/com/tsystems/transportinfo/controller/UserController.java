@@ -15,11 +15,12 @@ public class UserController {
     @Autowired
     private DriverService driverService;
 
-    @GetMapping("/whoami")
+    @GetMapping("/getSession")
     @ResponseBody
-    public long whoami(Authentication authentication) {
+    public long getSession(Authentication authentication) {
         String username = authentication.getName();
 
+        // TODO: save id as session param
         log.info("Request Driver id with username {} from driverService", username);
         return driverService.getIdByUsername(username);
     }

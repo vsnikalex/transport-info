@@ -1,12 +1,14 @@
 package com.tsystems.transportinfo.data.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@NoArgsConstructor
 @Getter
 @Setter
 public class User {
@@ -20,8 +22,5 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @OneToOne(mappedBy = "user")
-    private Driver driver;
 
 }

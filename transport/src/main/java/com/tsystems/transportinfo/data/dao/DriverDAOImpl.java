@@ -3,18 +3,23 @@ package com.tsystems.transportinfo.data.dao;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Driver;
+import com.tsystems.transportinfo.data.entity.Driver_;
 import com.tsystems.transportinfo.service.GeoService;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Repository
 public class DriverDAOImpl implements DriverDAO {
 
@@ -67,7 +72,20 @@ public class DriverDAOImpl implements DriverDAO {
 
     @Override
     public long getIdByUsername(String username) {
-        // TODO: return actual id
+        log.info("Request Driver id with username {} from database", username);
+
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Driver> cq = cb.createQuery(Driver.class);
+
+        Root<Driver> user = cq.from(Driver.class);
+        cq.where(cb.equal(user.get(Driver_.username), username));
+
+        Query<Driver> query = session.createQuery(cq);
+
+        log.info("Found driver id: {}", query.getSingleResult().getId());
+
         return -1;
     }
 

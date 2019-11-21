@@ -20,9 +20,8 @@ public class Driver {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name="username", nullable = false)
-    public User user;
+    @Column(name="username")
+    private String username;
 
     @Column(name = "firstName", nullable = false)
     private String firstName;

@@ -2,6 +2,8 @@ package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.aspect.DeliveryEvent;
+import com.tsystems.transportinfo.aspect.DriverEvent;
+import com.tsystems.transportinfo.aspect.TruckEvent;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
@@ -17,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,6 +54,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     @DeliveryEvent
+    @DriverEvent
+    @TruckEvent
     public void createDelivery(DeliveryDTO deliveryDTO) {
         log.info("Request DAO to save delivery with cargo id={}, driver id={}, truck id={}",
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());
@@ -56,8 +63,10 @@ public class DeliveryServiceImpl implements DeliveryService {
         Truck truck = new Truck(deliveryDTO.getTruckID());
 
         Delivery delivery = new Delivery();
+        delivery.setDone(false);
         delivery.setRoute(deliveryDTO.getRoute());
         delivery.setTruck(truck);
+        delivery.setCreated(LocalDateTime.ofInstant(Instant.now(), ZoneId.of("UTC")));
 
         dao.create(delivery);
 

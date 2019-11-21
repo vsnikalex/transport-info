@@ -18,6 +18,7 @@ create table delivery (
 	done bit not null,
 	route varchar(250) not null,
 	truck_id bigint not null,
+	created DATETIME NOT NULL,
 	constraint FK_DELIVERY_TRUCK_ID foreign key (truck_id) references truck (id)
 );
 

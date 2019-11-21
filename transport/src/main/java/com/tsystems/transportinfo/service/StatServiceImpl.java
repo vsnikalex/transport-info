@@ -3,6 +3,7 @@ package com.tsystems.transportinfo.service;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.TaskDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
+import com.tsystems.transportinfo.soap.DeliveryList;
 import com.tsystems.transportinfo.soap.DriversStat;
 import com.tsystems.transportinfo.soap.TrucksStat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class StatServiceImpl implements StatService {
         int availableTrucks = numberOfTrucks - usedTrucks - defectiveTrucks;
 
         return new TrucksStat(availableTrucks, defectiveTrucks, usedTrucks, numberOfTrucks);
+    }
+
+    @Override
+    public DeliveryList getDeliveryList() {
+        return null;
     }
 
 }

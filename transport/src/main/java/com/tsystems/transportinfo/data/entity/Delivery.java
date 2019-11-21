@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,9 @@ public class Delivery {
 
     @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
     private List<Driver> drivers;
+
+    @Column(name = "created", nullable = false)
+    private LocalDateTime created;
 
     public Delivery(long id) {
         this.id = id;

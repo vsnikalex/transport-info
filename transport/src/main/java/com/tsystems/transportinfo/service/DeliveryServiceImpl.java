@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
@@ -47,6 +48,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     ModelMapper modelMapper;
 
     @Override
+    @DeliveryEvent
     public void createDelivery(DeliveryDTO deliveryDTO) {
         log.info("Request DAO to save delivery with cargo id={}, driver id={}, truck id={}",
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());

@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
@@ -76,6 +77,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     @DriverEvent
+    @DeliveryEvent
     public void updateDriver(DriverDTO driverDTO) {
         log.info("Update Driver id={}", driverDTO.getId());
         Driver driver = convertToEntity(driverDTO);

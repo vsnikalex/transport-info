@@ -6,9 +6,10 @@ import com.tsystems.transportinfo.soap.Notifications;
 import com.tsystems.transportinfo.soap.NotificationsServiceLocal;
 import com.tsystems.transportinfo.soap.TrucksStat;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -19,26 +20,31 @@ public class SoapAspect {
     @Autowired
     private StatService statService;
 
-    @After("@annotation(DriverEvent)")
+    @Bean
+    public Notifications getHttpSoapService() {
+        NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
+        return notificationsService.getHttpNotificationsImplPort();
+    }
+
+    @AfterReturning("@annotation(DriverEvent)")
     public void sendDriversStat() {
         DriversStat driversStat = statService.getDriversStat();
-
-        NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
-        Notifications notifications =  notificationsService.getHttpNotificationsImplPort();
-        notifications.updateDriversStat(driversStat);
-
+        getHttpSoapService().updateDriversStat(driversStat);
         log.info("Driver transaction is successful");
     }
 
-    @After("@annotation(TruckEvent)")
+    @AfterReturning("@annotation(TruckEvent)")
     public void sendTrucksStat() {
         TrucksStat trucksStat = statService.getTrucksStat();
-
-        NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
-        Notifications notifications =  notificationsService.getHttpNotificationsImplPort();
-        notifications.updateTrucksStat(trucksStat);
-
+        getHttpSoapService().updateTrucksStat(trucksStat);
         log.info("Truck transaction is successful");
+    }
+
+    @AfterReturning("@annotation(DeliveryEvent)")
+    public void sendDeliveryList() {
+//        TrucksStat trucksStat = statService.getTrucksStat();
+//        getHttpSoapService().updateTrucksStat(trucksStat);
+        log.info("Delivery transaction is successful");
     }
 
 }

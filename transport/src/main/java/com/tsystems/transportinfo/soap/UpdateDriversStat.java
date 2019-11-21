@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://soap.transportinfo.tsystems.com/}driversStat" minOccurs="0"/>
+ *         &lt;element name="driversStat" type="{http://soap.transportinfo.tsystems.com/}driversStat" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,34 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "updateDriversStat", propOrder = {
-    "arg0"
+    "driversStat"
 })
 public class UpdateDriversStat {
 
-    protected DriversStat arg0;
+    protected DriversStat driversStat;
 
     /**
-     * Gets the value of the arg0 property.
+     * Gets the value of the driversStat property.
      * 
      * @return
      *     possible object is
      *     {@link DriversStat }
      *     
      */
-    public DriversStat getArg0() {
-        return arg0;
+    public DriversStat getDriversStat() {
+        return driversStat;
     }
 
     /**
-     * Sets the value of the arg0 property.
+     * Sets the value of the driversStat property.
      * 
      * @param value
      *     allowed object is
      *     {@link DriversStat }
      *     
      */
-    public void setArg0(DriversStat value) {
-        this.arg0 = value;
+    public void setDriversStat(DriversStat value) {
+        this.driversStat = value;
     }
 
 }

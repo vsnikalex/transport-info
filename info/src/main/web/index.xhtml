@@ -31,6 +31,13 @@
             document.getElementById('ts_total').innerHTML = ts.total;
          });
 
+         source.addEventListener('delivery list', function(e) {
+            let deliveryList = JSON.parse(e.data);
+
+            console.log('Delivery list received: ');
+            deliveryList.deliveries.forEach(delivery => console.log(delivery))
+         });
+
          source.stream();
       </script>
       <div class="tc-note tc-note-info">
@@ -97,5 +104,42 @@
             </tfoot>
          </table>
       </div>
+   </ui:define>
+   <ui:define name="deliveries">
+      <table class="table">
+         <caption>Deliveries</caption>
+         <thead>
+         <tr>
+            <th>#</th>
+            <th>Truck</th>
+            <th>Cargoes</th>
+            <th>Drivers</th>
+            <th>Route</th>
+         </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td id="delivery_id">
+                  12
+               </td>
+               <td id="delivery_truck_plate">
+                  HL12367
+               </td>
+               <td>
+                  <ul id="delivery_cargoes" style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                     <li>#12 IKEA Table</li>
+                  </ul>
+               </td>
+               <td>
+                  <ul id="delivery_drivers" style="margin: 0; padding: 0; list-style-position: inside; list-style-type: none">
+                     <li>#10 Igor Lesnoy</li>
+                  </ul>
+               </td>
+               <td id="delivery_route">
+                  Berlin &#8594; Rome &#8594; Paris &#8594; Berlin
+               </td>
+            </tr>
+         </tbody>
+      </table>
    </ui:define>
 </ui:composition>

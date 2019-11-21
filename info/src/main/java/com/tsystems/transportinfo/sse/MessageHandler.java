@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.sse;
 
+import com.tsystems.transportinfo.model.DeliveryList;
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.SseRequest;
 import com.tsystems.transportinfo.model.TrucksStat;
@@ -38,6 +39,10 @@ public class MessageHandler {
 
     public void onMessage(@Observes TrucksStat trucksStat) {
         dispatchMessage(trucksStat, "trucks stat");
+    }
+
+    public void onMessage(@Observes DeliveryList deliveryList) {
+        dispatchMessage(deliveryList, "delivery list");
     }
 
     private <T> void dispatchMessage(T obj, String name) {

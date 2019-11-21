@@ -25,17 +25,45 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _UpdateDriversStat_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateDriversStat");
+    private final static QName _UpdateDeliveryList_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateDeliveryList");
     private final static QName _UpdateTrucksStatResponse_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateTrucksStatResponse");
     private final static QName _UpdateTrucksStat_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateTrucksStat");
+    private final static QName _DeliveryList_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "deliveryList");
+    private final static QName _Delivery_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "delivery");
     private final static QName _DriversStat_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "driversStat");
     private final static QName _UpdateDriversStatResponse_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateDriversStatResponse");
     private final static QName _TrucksStat_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "trucksStat");
+    private final static QName _UpdateDeliveryListResponse_QNAME = new QName("http://soap.transportinfo.tsystems.com/", "updateDeliveryListResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.tsystems.transportinfo.soap
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link DeliveryList }
+     * 
+     */
+    public DeliveryList createDeliveryList() {
+        return new DeliveryList();
+    }
+
+    /**
+     * Create an instance of {@link Delivery }
+     * 
+     */
+    public Delivery createDelivery() {
+        return new Delivery();
+    }
+
+    /**
+     * Create an instance of {@link UpdateDeliveryList }
+     * 
+     */
+    public UpdateDeliveryList createUpdateDeliveryList() {
+        return new UpdateDeliveryList();
     }
 
     /**
@@ -60,6 +88,14 @@ public class ObjectFactory {
      */
     public UpdateDriversStat createUpdateDriversStat() {
         return new UpdateDriversStat();
+    }
+
+    /**
+     * Create an instance of {@link UpdateDeliveryListResponse }
+     * 
+     */
+    public UpdateDeliveryListResponse createUpdateDeliveryListResponse() {
+        return new UpdateDeliveryListResponse();
     }
 
     /**
@@ -96,6 +132,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateDeliveryList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "updateDeliveryList")
+    public JAXBElement<UpdateDeliveryList> createUpdateDeliveryList(UpdateDeliveryList value) {
+        return new JAXBElement<UpdateDeliveryList>(_UpdateDeliveryList_QNAME, UpdateDeliveryList.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UpdateTrucksStatResponse }{@code >}}
      * 
      */
@@ -111,6 +156,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "updateTrucksStat")
     public JAXBElement<UpdateTrucksStat> createUpdateTrucksStat(UpdateTrucksStat value) {
         return new JAXBElement<UpdateTrucksStat>(_UpdateTrucksStat_QNAME, UpdateTrucksStat.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeliveryList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "deliveryList")
+    public JAXBElement<DeliveryList> createDeliveryList(DeliveryList value) {
+        return new JAXBElement<DeliveryList>(_DeliveryList_QNAME, DeliveryList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Delivery }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "delivery")
+    public JAXBElement<Delivery> createDelivery(Delivery value) {
+        return new JAXBElement<Delivery>(_Delivery_QNAME, Delivery.class, null, value);
     }
 
     /**
@@ -138,6 +201,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "trucksStat")
     public JAXBElement<TrucksStat> createTrucksStat(TrucksStat value) {
         return new JAXBElement<TrucksStat>(_TrucksStat_QNAME, TrucksStat.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateDeliveryListResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.transportinfo.tsystems.com/", name = "updateDeliveryListResponse")
+    public JAXBElement<UpdateDeliveryListResponse> createUpdateDeliveryListResponse(UpdateDeliveryListResponse value) {
+        return new JAXBElement<UpdateDeliveryListResponse>(_UpdateDeliveryListResponse_QNAME, UpdateDeliveryListResponse.class, null, value);
     }
 
 }

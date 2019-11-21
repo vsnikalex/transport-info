@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.service;
 
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
@@ -63,6 +64,7 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
+    @DeliveryEvent
     public void updateCargo(CargoDTO cargoDTO) {
         log.info("Update Cargo id={}", cargoDTO.getId());
         Cargo cargo = convertToEntity(cargoDTO);

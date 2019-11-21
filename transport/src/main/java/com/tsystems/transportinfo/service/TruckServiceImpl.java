@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.util.shapes.GHPoint;
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.aspect.TruckEvent;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
@@ -76,6 +77,7 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     @TruckEvent
+    @DeliveryEvent
     public void updateTruck(TruckDTO truckDTO) {
         log.info("Update Truck id={}", truckDTO.getId());
         Truck truck = convertToEntity(truckDTO);

@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for updateTrucksStat complex type.
+ * <p>Java class for updateDeliveryList complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="updateTrucksStat">
+ * &lt;complexType name="updateDeliveryList">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="trucksStat" type="{http://soap.transportinfo.tsystems.com/}trucksStat" minOccurs="0"/>
+ *         &lt;element name="deliveryList" type="{http://soap.transportinfo.tsystems.com/}deliveryList" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "updateTrucksStat", propOrder = {
-    "trucksStat"
+@XmlType(name = "updateDeliveryList", propOrder = {
+    "deliveryList"
 })
-public class UpdateTrucksStat {
+public class UpdateDeliveryList {
 
-    protected TrucksStat trucksStat;
+    protected DeliveryList deliveryList;
 
     /**
-     * Gets the value of the trucksStat property.
+     * Gets the value of the deliveryList property.
      * 
      * @return
      *     possible object is
-     *     {@link TrucksStat }
+     *     {@link DeliveryList }
      *     
      */
-    public TrucksStat getTrucksStat() {
-        return trucksStat;
+    public DeliveryList getDeliveryList() {
+        return deliveryList;
     }
 
     /**
-     * Sets the value of the trucksStat property.
+     * Sets the value of the deliveryList property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TrucksStat }
+     *     {@link DeliveryList }
      *     
      */
-    public void setTrucksStat(TrucksStat value) {
-        this.trucksStat = value;
+    public void setDeliveryList(DeliveryList value) {
+        this.deliveryList = value;
     }
 
 }

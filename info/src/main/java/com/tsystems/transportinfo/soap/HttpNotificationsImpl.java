@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.soap;
 
+import com.tsystems.transportinfo.model.DeliveryList;
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.TrucksStat;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,7 @@ import javax.jws.WebService;
 @WebService(
         portName = "HttpNotificationsImplPort",
         serviceName = "NotificationsServiceLocal",
-        wsdlLocation = "META-INF/wsdl/NotificationsService.wsdl",
+//        wsdlLocation = "META-INF/wsdl/NotificationsService.wsdl",
         endpointInterface = "com.tsystems.transportinfo.soap.Notifications",
         targetNamespace = "http://soap.transportinfo.tsystems.com/"
 )
@@ -24,6 +25,9 @@ public class HttpNotificationsImpl implements Notifications {
     @Inject
     private Event<TrucksStat> trucksStatEvent;
 
+    @Inject
+    private Event<DeliveryList> deliveryListEvent;
+
     @Override
     public void updateDriversStat(DriversStat driversStat) {
         log.info("HTTP drivers stat, total: {}", driversStat.getTotal());
@@ -34,6 +38,12 @@ public class HttpNotificationsImpl implements Notifications {
     public void updateTrucksStat(TrucksStat trucksStat) {
         log.info("HTTP trucks stat, total: {}", trucksStat.getTotal());
         trucksStatEvent.fire(trucksStat);
+    }
+
+    @Override
+    public void updateDeliveryList(DeliveryList deliveryList) {
+        log.info("HTTP deliveries, total: {}", deliveryList.getDeliveries().size());
+        deliveryListEvent.fire(deliveryList);
     }
 
 }

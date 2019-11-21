@@ -24,24 +24,35 @@ public interface Notifications {
 
     /**
      * 
-     * @param arg0
+     * @param driversStat
      */
     @WebMethod
     @RequestWrapper(localName = "updateDriversStat", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateDriversStat")
     @ResponseWrapper(localName = "updateDriversStatResponse", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateDriversStatResponse")
     public void updateDriversStat(
-        @WebParam(name = "arg0", targetNamespace = "")
-        DriversStat arg0);
+        @WebParam(name = "driversStat", targetNamespace = "")
+        DriversStat driversStat);
 
     /**
      * 
-     * @param arg0
+     * @param deliveryList
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateDeliveryList", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateDeliveryList")
+    @ResponseWrapper(localName = "updateDeliveryListResponse", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateDeliveryListResponse")
+    public void updateDeliveryList(
+        @WebParam(name = "deliveryList", targetNamespace = "")
+        DeliveryList deliveryList);
+
+    /**
+     * 
+     * @param trucksStat
      */
     @WebMethod
     @RequestWrapper(localName = "updateTrucksStat", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateTrucksStat")
     @ResponseWrapper(localName = "updateTrucksStatResponse", targetNamespace = "http://soap.transportinfo.tsystems.com/", className = "com.tsystems.transportinfo.soap.UpdateTrucksStatResponse")
     public void updateTrucksStat(
-        @WebParam(name = "arg0", targetNamespace = "")
-        TrucksStat arg0);
+        @WebParam(name = "trucksStat", targetNamespace = "")
+        TrucksStat trucksStat);
 
 }

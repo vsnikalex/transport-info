@@ -1,11 +1,11 @@
 package com.tsystems.transportinfo.soap;
 
+import com.tsystems.transportinfo.model.DeliveryList;
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.TrucksStat;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 
 @Slf4j
 @WebService(
@@ -15,9 +15,10 @@ import javax.jws.soap.SOAPBinding;
         endpointInterface = "com.tsystems.transportinfo.soap.Notifications",
         targetNamespace = "http://soap.transportinfo.tsystems.com/"
 )
-@SOAPBinding(style=SOAPBinding.Style.DOCUMENT)
-//@Stateless
-//@WebContext(contextRoot = "activemq")
+// NullPointerException solution options:
+// @SOAPBinding(style=SOAPBinding.Style.DOCUMENT)
+// @Stateless
+// @WebContext(contextRoot = "activemq")
 public class NotificationsImpl implements Notifications {
 
 //    @Inject
@@ -29,13 +30,20 @@ public class NotificationsImpl implements Notifications {
     @Override
     public void updateDriversStat(DriversStat driversStat) {
         log.info("Queue drivers stat, total: {}", driversStat.getTotal());
+//        Causes NullPointerException as @Inject doesn't work in SOAP case:
 //        driversStatEvent.fire(driversStat);
     }
 
     @Override
     public void updateTrucksStat(TrucksStat trucksStat) {
         log.info("Queue trucks stat, total: {}", trucksStat.getTotal());
+//        Causes NullPointerException as @Inject doesn't work in SOAP case:
 //        trucksStatEvent.fire(trucksStat);
+    }
+
+    @Override
+    public void updateDeliveryList(DeliveryList deliveryList) {
+//        Not implemented while the bean is not configured properly
     }
 
 }

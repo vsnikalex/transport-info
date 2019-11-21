@@ -112,7 +112,7 @@ public class GeoServiceImpl implements GeoService {
      * Takes coordinates and performs
      * request to the GraphHopper API.
      *
-     * @deprecated          the result is not found quite frequently
+     * @deprecated      the result is not found quite frequently
      *
      * @param coords    coordinates of a place
      * @return          full information about the place

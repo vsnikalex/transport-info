@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.soap;
 
+import com.tsystems.transportinfo.model.DeliveryList;
 import com.tsystems.transportinfo.model.DriversStat;
 import com.tsystems.transportinfo.model.TrucksStat;
 
@@ -15,5 +16,8 @@ public interface Notifications {
 
     @WebMethod
     void updateTrucksStat(@WebParam(name = "trucksStat") TrucksStat trucksStat);
+
+    @WebMethod
+    void updateDeliveryList(@WebParam(name = "deliveryList") DeliveryList deliveryList);
 
 }

@@ -9,10 +9,13 @@ import com.tsystems.transportinfo.soap.DeliveryList;
 import com.tsystems.transportinfo.soap.DriversStat;
 import com.tsystems.transportinfo.soap.TrucksStat;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,24 +69,39 @@ public class StatServiceImpl implements StatService {
                         .map(delivery -> {
                             long id = delivery.getId();
                             String truck = delivery.getTruck().getPlate();
-                            String[] cargoes = delivery.getCargo()
+
+                            List<String> cargoes = delivery.getCargo()
                                     .stream()
                                     .map(cargo ->
                                             String.format("#%d %s", cargo.getId(),
                                                                     cargo.getDescription()))
-                                    .toArray(String[]::new);
-                            String[] drivers = delivery.getDrivers()
+                                    .collect(Collectors.toList());
+
+                            List<String> drivers = delivery.getDrivers()
                                     .stream()
                                     .map(driver ->
                                             String.format("#%d %s %s", driver.getId(),
                                                                        driver.getFirstName(),
                                                                        driver.getLastName()))
-                                    .toArray(String[]::new);
+                                    .collect(Collectors.toList());
+
+                            List<String> routePointsList = new ArrayList<>();
 
                             String routeJson = delivery.getRoute();
+                            JSONObject jsonObject = new JSONObject(routeJson);
+                            Iterator<String> iterator = jsonObject.keys();
+                            while (iterator.hasNext()) {
+                                routePointsList.add((String) jsonObject.get(iterator.next()));
+                            }
 
+                            String routeString = routePointsList
+                                                    .stream()
+                                                    .map(coords -> depotService.getDepotByCoords(coords)
+                                                        .getLocation()
+                                                        .getCity())
+                                                    .collect(Collectors.joining(" &#8594; "));
 
-                            return new Delivery();
+                            return new Delivery(cargoes, drivers, id, routeString, truck);
                         })
                         .collect(Collectors.toList());
 

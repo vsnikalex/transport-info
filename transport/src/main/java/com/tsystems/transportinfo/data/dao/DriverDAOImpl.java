@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -84,9 +85,15 @@ public class DriverDAOImpl implements DriverDAO {
 
         Query<Driver> query = session.createQuery(cq);
 
-        log.info("Found driver id: {}", query.getSingleResult().getId());
+        long id = -1;
+        try {
+            id = query.getSingleResult().getId();
+        } catch (NoResultException | NullPointerException e) {
+            log.error("No driver {} found", username);
+        }
 
-        return -1;
+        log.info("Found driver id: {}", query.getSingleResult().getId());
+        return id;
     }
 
     @Override

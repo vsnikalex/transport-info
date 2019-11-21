@@ -1,10 +1,7 @@
 package com.tsystems.transportinfo.aspect;
 
 import com.tsystems.transportinfo.service.StatService;
-import com.tsystems.transportinfo.soap.DriversStat;
-import com.tsystems.transportinfo.soap.Notifications;
-import com.tsystems.transportinfo.soap.NotificationsServiceLocal;
-import com.tsystems.transportinfo.soap.TrucksStat;
+import com.tsystems.transportinfo.soap.*;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,8 +39,8 @@ public class SoapAspect {
 
     @AfterReturning("@annotation(DeliveryEvent)")
     public void sendDeliveryList() {
-//        TrucksStat trucksStat = statService.getTrucksStat();
-//        getHttpSoapService().updateTrucksStat(trucksStat);
+        DeliveryList deliveryList = statService.getDeliveryList(10);
+        getHttpSoapService().updateDeliveryList(deliveryList);
         log.info("Delivery transaction is successful");
     }
 

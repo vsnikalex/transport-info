@@ -10,6 +10,6 @@ public interface StatService {
 
     TrucksStat getTrucksStat();
 
-    DeliveryList getDeliveryList();
+    DeliveryList getDeliveryList(int limit);
 
 }

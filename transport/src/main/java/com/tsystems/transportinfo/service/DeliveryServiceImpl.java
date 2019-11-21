@@ -52,6 +52,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Autowired
     ModelMapper modelMapper;
 
+    /**
+     * Uses {@link com.tsystems.transportinfo.data.dao.HibernateDAO},
+     * {@link CargoDAO}, {@link DriverDAO} to change relevant
+     * database links to the delivery.
+     *
+     */
     @Override
     @DeliveryEvent
     @DriverEvent
@@ -79,6 +85,10 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
     }
 
+    /**
+     * TODO: Marks delivery as deleted.
+     *
+     */
     @Override
     public void deleteDelivery(Long id) {
         log.info("Request DAO to delete Delivery id={}", id);
@@ -90,6 +100,24 @@ public class DeliveryServiceImpl implements DeliveryService {
         return modelMapper.map(dto, Delivery.class);
     }
 
+    /**
+     * Transforms the list of separate cargo routes
+     *
+     * e.g. cargo #1 : A-B
+     *      cargo #2 : A-C
+     *      cargo #3 : A-D
+     *
+     * into the list of operations at each point:
+     *
+     * A : load cargo #1, #2, #3
+     * B : unload cargo #1
+     * C : unload cargo #2
+     * D : unload cargo #3
+     *
+     * It is convenient to have data in this format
+     * at front-end for further rendering.
+     *
+     */
     @Override
     public DeliveryDTO convertToDTO(Delivery entity) {
         Map<String, DeliveryDTO.CargoOperations> routeMap = new LinkedHashMap<>();

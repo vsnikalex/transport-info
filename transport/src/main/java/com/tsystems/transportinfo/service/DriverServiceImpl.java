@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional
 public class DriverServiceImpl implements DriverService {
 
     private GenericDAO<Driver> dao;
@@ -49,6 +48,7 @@ public class DriverServiceImpl implements DriverService {
     private DeliveryService deliveryService;
 
     @Override
+    @Transactional
     public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
         log.info("Request all available Drivers in {} from DAO", city.getCity());
         List<Driver> drivers = driverDAO.findAvailableDrivers(city);
@@ -58,6 +58,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public List<DriverDTO> getAllDrivers() {
         log.info("Request all Drivers from DAO");
 
@@ -68,6 +69,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     @DriverEvent
     public void saveDriver(DriverDTO driverDTO) {
         log.info("Save Driver");
@@ -76,6 +78,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     @DriverEvent
     @DeliveryEvent
     public void updateDriver(DriverDTO driverDTO) {
@@ -85,6 +88,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public DriverDTO getDriver(Long id) {
         log.info("Request Driver id={} from DAO", id);
         Driver driver = dao.findOne(id);
@@ -92,11 +96,17 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public long getIdByUsername(String username) {
         return driverDAO.getIdByUsername(username);
     }
 
+    /**
+     * TODO: Marks cargoes as deleted.
+     *
+     */
     @Override
+    @Transactional
     @DriverEvent
     public void deleteDriver(Long id) {
         log.info("Delete Driver id={}", id);
@@ -116,7 +126,6 @@ public class DriverServiceImpl implements DriverService {
             TruckDTO truckDTO = truckService.convertToDto(deliveryTruck);
             driverDTO.setTruckDTO(truckDTO);
 
-            // TODO: add co-workers List<SecuredDriverDTO>
             DeliveryDTO deliveryDTO = deliveryService.convertToDTO(driverDelivery);
             driverDTO.setDeliveryDTO(deliveryDTO);
         }

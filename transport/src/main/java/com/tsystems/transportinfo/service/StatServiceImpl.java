@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional
 public class StatServiceImpl implements StatService {
 
     @Autowired
@@ -40,6 +39,7 @@ public class StatServiceImpl implements StatService {
     private DepotService depotService;
 
     @Override
+    @Transactional
     public DriversStat getDriversStat() {
         int availableDrivers = driverDAO.calculateAvailableDrivers();
         int drivingDrivers = taskDAO.calculateDrivingDrivers();
@@ -50,6 +50,7 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
+    @Transactional
     public TrucksStat getTrucksStat() {
         int defectiveTrucks = truckDAO.calculateDefectiveTrucks();
         int usedTrucks = truckDAO.calculateUsedTrucks();
@@ -60,6 +61,7 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
+    @Transactional
     public DeliveryList getDeliveryList(int limit) {
         List<com.tsystems.transportinfo.data.entity.Delivery> deliveryEntities = deliveryDAO.getLastDeliveries(limit);
 

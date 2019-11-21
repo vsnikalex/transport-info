@@ -29,7 +29,6 @@ import java.util.Map;
 
 @Slf4j
 @Service
-@Transactional
 public class DeliveryServiceImpl implements DeliveryService {
 
     private GenericDAO<Delivery> dao;
@@ -59,6 +58,7 @@ public class DeliveryServiceImpl implements DeliveryService {
      *
      */
     @Override
+    @Transactional
     @DeliveryEvent
     @DriverEvent
     @TruckEvent
@@ -90,6 +90,7 @@ public class DeliveryServiceImpl implements DeliveryService {
      *
      */
     @Override
+    @Transactional
     public void deleteDelivery(Long id) {
         log.info("Request DAO to delete Delivery id={}", id);
         dao.deleteById(id);
@@ -116,6 +117,10 @@ public class DeliveryServiceImpl implements DeliveryService {
      *
      * It is convenient to have data in this format
      * at front-end for further rendering.
+     *
+     * Recommendation: rewrite it with the usage of underlying
+     * array with {@link CargoDTO} objects and links on them
+     * to reduce object duplication.
      *
      */
     @Override

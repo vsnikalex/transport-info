@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional
 public class TruckServiceImpl implements TruckService {
 
     private GenericDAO<Truck> dao;
@@ -44,6 +43,7 @@ public class TruckServiceImpl implements TruckService {
     private DepotService depotService;
 
     @Override
+    @Transactional
     @Synchronized
     public List<TruckDTO> getAvailableTrucks(long depotId, long maxTravelTime) {
         log.info("Request all available Trucks at Depot id={} " +
@@ -59,6 +59,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @Transactional
     public List<TruckDTO> getAllTrucks() {
         log.info("Request all Trucks from DAO");
         List<Truck> trucks = dao.findAll();
@@ -68,6 +69,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @Transactional
     @TruckEvent
     public void saveTruck(TruckDTO truckDTO) {
         log.info("Save Truck");
@@ -76,6 +78,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @Transactional
     @TruckEvent
     @DeliveryEvent
     public void updateTruck(TruckDTO truckDTO) {
@@ -85,6 +88,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @Transactional
     public TruckDTO getTruck(Long id) {
         log.info("Request Truck id={} from DAO", id);
         Truck truck = dao.findOne(id);
@@ -92,6 +96,7 @@ public class TruckServiceImpl implements TruckService {
     }
 
     @Override
+    @Transactional
     @TruckEvent
     public void deleteTruck(Long id) {
         log.info("Delete Truck id={}", id);

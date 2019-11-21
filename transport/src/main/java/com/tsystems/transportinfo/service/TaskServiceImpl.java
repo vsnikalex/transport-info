@@ -18,13 +18,13 @@ import java.util.stream.Stream;
 
 @Slf4j
 @Service
-@Transactional
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskDAO taskDAO;
 
     @Override
+    @Transactional
     @DriverEvent
     public double startTask(DriverAction action, long startTime, Long driverId, Long truckId) {
         log.info("Request TaskDAO to log start of Driver id={} action {} at {} (Unix timestamp) with Truck id={}",
@@ -35,6 +35,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     @DriverEvent
     public double finishCurrentTask(Long driverId, long endTime) {
         log.info("For Driver id={} log current task finish at {} (Unix timestamp)", driverId, endTime);
@@ -44,6 +45,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public double getFutureWorkedHours(Long driverId, long date) {
         log.info("Request Driver id={} tasks no date = {} (Unix timestamp)", driverId, date);
         List<Task> driverTasks = taskDAO.findTasksByDriverId(driverId);

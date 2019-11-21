@@ -14,7 +14,6 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Transactional
 public class DepotServiceImpl implements DepotService {
 
     private GenericDAO<Depot> dao;
@@ -29,6 +28,7 @@ public class DepotServiceImpl implements DepotService {
     private DepotDAO depotDAO;
 
     @Override
+    @Transactional
     @Synchronized
     public List<Depot> getAllDepots() {
         log.info("Request DepotDAO to find all Depots");
@@ -36,12 +36,14 @@ public class DepotServiceImpl implements DepotService {
     }
 
     @Override
+    @Transactional
     public Depot getDepotById(Long id) {
         log.info("Request DepotDAO to find Depot id={}", id);
         return dao.findOne(id);
     }
 
     @Override
+    @Transactional
     public Depot getDepotByCoords(String coords) {
         log.info("Request DepotDAO to find Depot with coordinates = {}", coords);
         return depotDAO.findDepotByCoords(GHPoint.fromString(coords));

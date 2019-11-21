@@ -14,11 +14,13 @@ CREATE TABLE auth_user_group (
 
 CREATE TABLE driver (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(128) NOT NULL UNIQUE,
 	firstName VARCHAR(250) NOT NULL,
 	lastName VARCHAR(250) NOT NULL,
 	location VARCHAR(500) NOT NULL,
 	delivery_id BIGINT NULL,
-    CONSTRAINT FK_DRIVER_DELIVERY_ID FOREIGN KEY (delivery_id) REFERENCES delivery (id)
+    CONSTRAINT FK_DRIVER_DELIVERY_ID FOREIGN KEY (delivery_id) REFERENCES delivery (id),
+    CONSTRAINT FK_DRIVER_USERNAME FOREIGN KEY (username) REFERENCES user (username)
 );
 
 create table task (

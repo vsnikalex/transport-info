@@ -92,6 +92,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public long getIdByUsername(String username) {
+        return driverDAO.getIdByUsername(username);
+    }
+
+    @Override
     @DriverEvent
     public void deleteDriver(Long id) {
         log.info("Delete Driver id={}", id);

@@ -15,6 +15,8 @@ public interface DriverDAO {
 
     Driver findDriver(long id);
 
+    long getIdByUsername(String username);
+
     void updateDriver(Driver driver);
 
     void assignToDelivery(long driverId, long deliveryID);

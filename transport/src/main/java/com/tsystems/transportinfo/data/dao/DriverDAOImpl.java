@@ -66,6 +66,12 @@ public class DriverDAOImpl implements DriverDAO {
     }
 
     @Override
+    public long getIdByUsername(String username) {
+        // TODO: return actual id
+        return -1;
+    }
+
+    @Override
     public void updateDriver(Driver driver) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.update(driver);

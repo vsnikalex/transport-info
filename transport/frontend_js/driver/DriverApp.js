@@ -70,9 +70,14 @@ class DriverApp extends React.Component {
     }
 
     componentDidMount() {
+        /* TODO: load driver info if there is a driver with username from /whoami
+                 else - load all drivers
+        */
+
         axios.get('api/driver/all').then(response => {
             this.setState({drivers: response.data});
         });
+
     }
 
     render() {
@@ -95,11 +100,16 @@ class DriverApp extends React.Component {
 
         return (
             <div className="container-fixed demo-grid">
+
+                /* TODO: show nothing if there is a driver with username from /whoami
+                         else - load driver list
+                */
                 <div className="row">
                     <DriverList drivers={this.state.drivers}
                                 selectedDriverId={this.state.selectedDriverId}
                                 selectDriver={this.selectDriver} />
                 </div>
+
                 <div className="tc-example">
                     <div className="row">
                         <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
@@ -158,7 +168,6 @@ class Info extends React.Component {
         )
     }
 }
-
 
 class ActivitiesList extends React.Component {
     constructor(props) {

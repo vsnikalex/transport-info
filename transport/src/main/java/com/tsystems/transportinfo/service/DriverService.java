@@ -18,6 +18,8 @@ public interface DriverService {
 
     DriverDTO getDriver(Long id);
 
+    long getIdByUsername(String username);
+
     void deleteDriver(Long id);
 
     DriverDTO convertToDto(Driver entity);

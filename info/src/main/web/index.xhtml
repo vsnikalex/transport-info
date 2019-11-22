@@ -32,12 +32,22 @@
          });
 
          source.addEventListener('delivery list', function(e) {
-            let deliveryList = JSON.parse(e.data);
-            $('#delivery_data').empty();
-
             console.log('Delivery list received: ');
+            let deliveryList = JSON.parse(e.data);
+
+            $("#delivery_data").empty();
+
             deliveryList.deliveries.forEach(delivery => {
                console.log(delivery);
+
+               var tableRef = document.getElementById('delivery_table').getElementsByTagName('tbody')[0];
+               var newRow   = tableRef.insertRow();
+
+               newRow.insertCell(0).innerHTML = delivery.id;
+               newRow.insertCell(1).innerHTML = delivery.truck;
+               newRow.insertCell(2).innerHTML = 'CARGOES';
+               newRow.insertCell(3).innerHTML = 'TRUCKS';
+               newRow.insertCell(4).innerHTML = delivery.route;
             });
          });
 
@@ -109,7 +119,7 @@
       </div>
    </ui:define>
    <ui:define name="deliveries">
-      <table class="table">
+      <table id="delivery_table" class="table">
          <caption>Deliveries</caption>
          <thead>
          <tr>

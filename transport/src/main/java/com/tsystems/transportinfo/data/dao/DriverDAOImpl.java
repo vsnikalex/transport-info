@@ -92,7 +92,7 @@ public class DriverDAOImpl implements DriverDAO {
             log.error("No driver {} found", username);
         }
 
-        log.info("Found driver id: {}", query.getSingleResult().getId());
+        log.info("Found driver id: {}", id);
         return id;
     }
 

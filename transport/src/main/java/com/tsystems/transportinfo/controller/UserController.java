@@ -15,12 +15,21 @@ public class UserController {
     @Autowired
     private DriverService driverService;
 
-    @GetMapping("/getSession")
+    /**
+     * Can cause problems with authorization if there are users
+     * apart from admin and driver.
+     *
+     * @param authentication    which is created by Spring
+     *                          Security after authentication
+     *
+     * @return                  driver's id or -1 if user who
+     *                          requests his id is not a driver
+     *
+     */
+    @GetMapping("/getMyDriverId")
     @ResponseBody
-    public long getSession(Authentication authentication) {
+    public long getMyDriverId(Authentication authentication) {
         String username = authentication.getName();
-
-        // TODO: save id as session param
         log.info("Request Driver id with username {} from driverService", username);
         return driverService.getIdByUsername(username);
     }

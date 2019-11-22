@@ -221,13 +221,23 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      /* TODO: load driver info if there is a driver with username from /whoami
+      /* TODO: load driver info if there is a driver with username from /getMyDriverId
                else - load all drivers
       */
-      axios.get('api/driver/all').then(function (response) {
-        _this2.setState({
-          drivers: response.data
-        });
+      axios.get('/transport/getMyDriverId').then(function (response) {
+        console.log(response.data);
+
+        if (response.data !== -1) {
+          _this2.setState({
+            selectedDriverId: response.data
+          });
+        } else {
+          axios.get('api/driver/all').then(function (response) {
+            _this2.setState({
+              drivers: response.data
+            });
+          });
+        }
       });
     }
   }, {
@@ -261,7 +271,7 @@ function (_React$Component) {
 
       return React.createElement("div", {
         className: "container-fixed demo-grid"
-      }, "/* TODO: show nothing if there is a driver with username from /whoami else - load driver list */", React.createElement("div", {
+      }, "/* TODO: show nothing if there is a driver with username from /getMyDriverId else - load driver list */", React.createElement("div", {
         className: "row"
       }, React.createElement(DriverList, {
         drivers: this.state.drivers,

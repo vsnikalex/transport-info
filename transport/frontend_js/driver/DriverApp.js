@@ -70,12 +70,20 @@ class DriverApp extends React.Component {
     }
 
     componentDidMount() {
-        /* TODO: load driver info if there is a driver with username from /whoami
+        /* TODO: load driver info if there is a driver with username from /getMyDriverId
                  else - load all drivers
         */
 
-        axios.get('api/driver/all').then(response => {
-            this.setState({drivers: response.data});
+        axios.get('/transport/getMyDriverId').then(response => {
+            console.log(response.data);
+
+            if (response.data !== -1) {
+                this.setState({selectedDriverId: response.data});
+            } else {
+                axios.get('api/driver/all').then(response => {
+                    this.setState({drivers: response.data});
+                });
+            }
         });
 
     }
@@ -101,7 +109,7 @@ class DriverApp extends React.Component {
         return (
             <div className="container-fixed demo-grid">
 
-                /* TODO: show nothing if there is a driver with username from /whoami
+                /* TODO: show nothing if there is a driver with username from /getMyDriverId
                          else - load driver list
                 */
                 <div className="row">

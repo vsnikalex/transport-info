@@ -1,17 +1,16 @@
 package com.tsystems.transportinfo.data.entity;
 
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cargo")
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Builder
 public class Cargo {
 
     @Id

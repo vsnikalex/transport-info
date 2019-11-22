@@ -2,17 +2,14 @@ package com.tsystems.transportinfo.data.dto;
 
 import com.tsystems.transportinfo.data.entity.Depot;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 public class CargoDTO {
 
     private Long id;
@@ -31,22 +28,13 @@ public class CargoDTO {
 
     @NotNull(message = "Start Location must not be null")
     @Min(value = 1, message = "Start Location must be chosen")
-    private long locDepotId;
+    private long startDepotId;
 
     @NotNull(message = "End Location must not be null")
     @Min(value = 1, message = "End Location must be chosen")
-    private long destDepotId;
+    private long endDepotId;
 
     private Depot startDepot;
     private Depot endDepot;
-
-    // For validation test
-    CargoDTO(String description, int weight, CargoStatus status, long locDepotId, long destDepotId) {
-        this.description = description;
-        this.weight = weight;
-        this.status = status;
-        this.locDepotId = locDepotId;
-        this.destDepotId = destDepotId;
-    }
 
 }

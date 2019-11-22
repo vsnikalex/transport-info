@@ -138,9 +138,9 @@ public class CargoServiceImpl implements CargoService {
     public Cargo convertToEntity(CargoDTO dto) {
         Cargo cargo = modelMapper.map(dto, Cargo.class);
 
-        long start = dto.getLocDepotId();
+        long start = dto.getStartDepotId();
         cargo.setStartDepot(depotService.getDepotById(start));
-        long end = dto.getDestDepotId();
+        long end = dto.getEndDepotId();
         cargo.setEndDepot(depotService.getDepotById(end));
 
         return cargo;

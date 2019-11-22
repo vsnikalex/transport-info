@@ -3,10 +3,7 @@ package com.tsystems.transportinfo.data.dto;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.Min;
@@ -17,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 public class TruckDTO {
 
     private Long id;

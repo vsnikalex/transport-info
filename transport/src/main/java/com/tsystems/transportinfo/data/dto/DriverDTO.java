@@ -3,10 +3,7 @@ package com.tsystems.transportinfo.data.dto;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.Min;
@@ -21,10 +18,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Slf4j
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 public class DriverDTO {
 
     private Long id;

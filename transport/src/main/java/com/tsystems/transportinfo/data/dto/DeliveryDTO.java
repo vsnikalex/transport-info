@@ -1,18 +1,15 @@
 package com.tsystems.transportinfo.data.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 public class DeliveryDTO {
 
     @Getter

@@ -46,16 +46,20 @@ public class MessageHandler {
     }
 
     private <T> void dispatchMessage(T obj, String name) {
-        requests.values().forEach(
-                req -> req.getEventSink().send(
-                        req.getSse().newEventBuilder()
-                                .mediaType(MediaType.APPLICATION_JSON_TYPE)
-                                .id(UUID.randomUUID().toString())
-                                .name(name)
-                                .data(obj)
-                                .build()
-                )
-        );
+        try {
+            requests.values().forEach(
+                    req -> req.getEventSink().send(
+                            req.getSse().newEventBuilder()
+                                    .mediaType(MediaType.APPLICATION_JSON_TYPE)
+                                    .id(UUID.randomUUID().toString())
+                                    .name(name)
+                                    .data(obj)
+                                    .build()
+                    )
+            );
+        } catch (IllegalStateException e) {
+            log.error("SseEventSink is closed");
+        }
     }
 
 }

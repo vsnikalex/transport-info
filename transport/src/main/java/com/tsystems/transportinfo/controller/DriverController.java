@@ -3,9 +3,9 @@ package com.tsystems.transportinfo.controller;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Depot;
-import com.tsystems.transportinfo.service.DepotService;
-import com.tsystems.transportinfo.service.DriverService;
-import com.tsystems.transportinfo.service.TruckService;
+import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
+import com.tsystems.transportinfo.data.entity.enums.DriverAction;
+import com.tsystems.transportinfo.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +24,12 @@ public class DriverController {
     @Autowired
     private TruckService truckService;
 
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private CargoService cargoService;
+
     @GetMapping("/mydata/{id}")
     public DriverDTO getDriver(@PathVariable long id) {
         log.info("Request Driver id={}", id);
@@ -40,6 +46,30 @@ public class DriverController {
     public TruckDTO getTruckInfo(@PathVariable long id) {
         log.info("Request Truck id={}", id);
         return truckService.getTruck(id);
+    }
+
+    @GetMapping("/task/start/{action}/{time}/{driverId}/{truckId}")
+    public double startTask(
+            @PathVariable DriverAction action, @PathVariable long time,
+            @PathVariable long driverId, @PathVariable long truckId) {
+
+        log.info("For Driver id={} log task {} start, using Truck={} at {} (Unix timestamp)", driverId, action, truckId, time);
+        return taskService.startTask(action, time, driverId, truckId);
+    }
+
+    @GetMapping("/task/finish/{driverId}/{time}")
+    public double finishTask(
+            @PathVariable long driverId, @PathVariable long time) {
+
+        log.info("For Driver id={} log current task finish at {} (Unix timestamp)", driverId, time);
+        return taskService.finishCurrentTask(driverId, time);
+    }
+
+    @PutMapping("/cargo/update/status/{id}/{status}")
+    public void updateCargoStatus(
+            @PathVariable long id, @PathVariable CargoStatus status) {
+        log.info("Change Cargo status with id={} to {}", id, status);
+        cargoService.updateCargoStatus(id, status);
     }
 
 }

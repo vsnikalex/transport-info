@@ -1,6 +1,6 @@
 INSERT INTO driver
 (id, username, firstName, lastName, location, delivery_id) VALUES
-(1, 'Test', 'Test', 'Testovich', '{"point":{"lat":48.7525249,"lng":18.1450552},"name":"Sklad","country":"Slovakia","city":"District of Bánovce nad Bebravou","state":"Region of Trenčín","postcode":"91324","extent":[],"osm_id":2663395264,"osm_type":"N","osm_key":"place","osm_value":"locality"}', null),
+(1, 'Test', 'Test', 'Testovich', '{"point":{"lat":48.7525249,"lng":18.1450552},"name":"Sklad","country":"Slovakia","city":"Bánovce","state":"Region of Trenčín","postcode":"91324","extent":[],"osm_id":2663395264,"osm_type":"N","osm_key":"place","osm_value":"locality"}', null),
 (2, 'Johan', 'Johan', 'Bregovich', '{"point":{"lat":49.7280077,"lng":13.3438826},"name":"Kosmas","country":"Czech Republic","city":"Plzeň","state":"Southwest","street":"Podnikatelská","postcode":"31800","extent":[],"osm_id":5294055985,"osm_type":"N","osm_key":"shop","osm_value":"books"}', null),
 (3, 'Robert', 'Robert', 'Miller', '{"point":{"lat":49.7280077,"lng":13.3438826},"name":"Kosmas","country":"Czech Republic","city":"Plzeň","state":"Southwest","street":"Podnikatelská","postcode":"31800","extent":[],"osm_id":5294055985,"osm_type":"N","osm_key":"shop","osm_value":"books"}', null),
 (4, 'Richard', 'Richard', 'Davis', '{"point":{"lat":47.7983318,"lng":13.047477},"name":"Residenzplatz","country":"Austria","city":"Salzburg","state":"Salzburg","street":"Residenzplatz","postcode":"5020","extent":[],"osm_id":5808348925,"osm_type":"N","osm_key":"place","osm_value":"house"}', null),

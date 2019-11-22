@@ -1,7 +1,7 @@
 INSERT INTO truck
 (id, capacity, location, plate, status)
 VALUES
-(1, 1000, '{"point":{"lat":48.7625,"lng":18.1061},"name":"Sklad","country":"Slovakia","city":"District of Bánovce nad Bebravou","state":"Region of Trenčín","postcode":"91324","extent":[],"osm_id":2663395264,"osm_type":"N","osm_key":"place","osm_value":"locality"}', 'SL08923', 'OK'),
+(1, 1000, '{"point":{"lat":48.7625,"lng":18.1061},"name":"Sklad","country":"Slovakia","city":"Bánovce","state":"Region of Trenčín","postcode":"91324","extent":[],"osm_id":2663395264,"osm_type":"N","osm_key":"place","osm_value":"locality"}', 'SL08923', 'OK'),
 (5, 1000, '{"point":{"lat":49.7280077,"lng":13.3438826},"name":"Kosmas","country":"Czech Republic","city":"Plzeň","state":"Southwest","street":"Podnikatelská","postcode":"31800","extent":[],"osm_id":5294055985,"osm_type":"N","osm_key":"shop","osm_value":"books"}', 'CZ12345', 'OK'),
 (9, 2000, '{"point":{"lat":47.7983318,"lng":13.047477},"name":"Residenzplatz","country":"Austria","city":"Salzburg","state":"Salzburg","street":"Residenzplatz","postcode":"5020","extent":[],"osm_id":5808348925,"osm_type":"N","osm_key":"place","osm_value":"house"}', 'AU12345', 'OK'),
 (10, 1000, '{"point":{"lat":47.7162135,"lng":13.1801681},"name":"Gasthof Krispler Wirt","country":"Austria","city":"Krispl","state":"Salzburg","postcode":"5425","extent":[],"osm_id":114275682,"osm_type":"N","osm_key":"amenity","osm_value":"restaurant"}', 'AU23456', 'OK'),

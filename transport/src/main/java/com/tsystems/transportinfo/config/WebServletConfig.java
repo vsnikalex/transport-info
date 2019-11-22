@@ -13,7 +13,8 @@ public class WebServletConfig implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext ctx) {
         AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();
-        webCtx.register(ViewConfig.class, HibernateConfig.class, JmsConfig.class, AspectConfig.class);
+        webCtx.register(ViewConfig.class, HibernateConfig.class,
+                            JmsConfig.class, AspectConfig.class);
         webCtx.setServletContext(ctx);
 
         ServletRegistration.Dynamic servlet = ctx.addServlet("dispatcher", new DispatcherServlet(webCtx));

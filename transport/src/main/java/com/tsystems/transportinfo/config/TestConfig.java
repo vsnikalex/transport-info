@@ -1,7 +1,6 @@
 package com.tsystems.transportinfo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.googlecode.flyway.core.Flyway;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,11 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:/application-${spring.profiles.active}.properties")
+@PropertySource("classpath:/application-test.properties")
 @EnableTransactionManagement
 @ComponentScan({"com.tsystems.transportinfo.data",
         "com.tsystems.transportinfo.service"})
-public class HibernateConfig {
+public class TestConfig {
 
     @Autowired
     private Environment env;
@@ -41,15 +40,7 @@ public class HibernateConfig {
         return new LocalValidatorFactoryBean();
     }
 
-    @Bean(initMethod = "migrate")
-    public Flyway flyway() {
-        Flyway flyway = new Flyway();
-        flyway.setLocations("classpath:/db/migration");
-        flyway.setDataSource(dataSource());
-        return flyway;
-    }
-
-    @Bean @DependsOn("flyway")
+    @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());

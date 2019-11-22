@@ -32,21 +32,38 @@
          });
 
          source.addEventListener('delivery list', function(e) {
-            console.log('Delivery list received: ');
             let deliveryList = JSON.parse(e.data);
 
             $("#delivery_data").empty();
 
             deliveryList.deliveries.forEach(delivery => {
-               console.log(delivery);
-
                var tableRef = document.getElementById('delivery_table').getElementsByTagName('tbody')[0];
                var newRow   = tableRef.insertRow();
 
                newRow.insertCell(0).innerHTML = delivery.id;
+
                newRow.insertCell(1).innerHTML = delivery.truck;
-               newRow.insertCell(2).innerHTML = 'CARGOES';
-               newRow.insertCell(3).innerHTML = 'TRUCKS';
+
+               let cargoCell = newRow.insertCell(2);
+               let ulCargoes = document.createElement("ul");
+               ulCargoes.style.cssText = "margin: 0; padding: 0; list-style-position: inside; list-style-type: none";
+               delivery.cargoes.forEach(cargo => {
+                  let li = document.createElement("li");
+                  li.innerHTML = cargo;
+                  ulCargoes.appendChild(li);
+               });
+               cargoCell.appendChild(ulCargoes);
+
+               let driverCell = newRow.insertCell(3);
+               let ulDrivers = document.createElement("ul");
+               ulDrivers.style.cssText = "margin: 0; padding: 0; list-style-position: inside; list-style-type: none";
+               delivery.drivers.forEach(driver => {
+                  let li = document.createElement("li");
+                  li.innerHTML = driver;
+                  ulDrivers.appendChild(li);
+               });
+               driverCell.appendChild(ulDrivers);
+
                newRow.insertCell(4).innerHTML = delivery.route;
             });
          });
@@ -54,7 +71,7 @@
          source.stream();
       </script>
       <div class="tc-note tc-note-info">
-         <table class="table">
+         <table class="table table-small">
             <thead>
             <tr>
                <th>Drivers</th>
@@ -87,7 +104,7 @@
    </ui:define>
    <ui:define name="trucks">
       <div class="tc-note tc-note-info">
-         <table class="table">
+         <table class="table table-small">
             <thead>
             <tr>
                <th>Trucks</th>
@@ -119,7 +136,7 @@
       </div>
    </ui:define>
    <ui:define name="deliveries">
-      <table id="delivery_table" class="table">
+      <table id="delivery_table" class="table table-hover">
          <caption>Deliveries</caption>
          <thead>
          <tr>

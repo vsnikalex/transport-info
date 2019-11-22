@@ -250,7 +250,8 @@ class Activity extends React.Component {
     checkThenStartActivity() {
         if (this.props.thisActivity !== 'REST') {
             this.props.finishCurrentActivity();
-            this.startActivity();
+
+            setTimeout(this.startActivity, 400);
         } else {
             this.startActivity();
         }
@@ -490,11 +491,11 @@ class Load extends React.Component {
                 break;
             case 'SHIPPED':
                 button = <button className="btn btn-default btn-small" disabled={true}>shipped</button>;
-                style = {backgroundColor: "#00aa00"};
+                style = {backgroundColor: "rgba(0,166,0,0.51)"};
                 break;
             case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#00aa00"};
+                style = {backgroundColor: "rgba(0,166,0,0.51)"};
                 break;
         }
 
@@ -544,7 +545,7 @@ class Unload extends React.Component {
                 break;
             case 'DELIVERED':
                 button = <button className="btn btn-default btn-small" disabled={true}>delivered</button>;
-                style = {backgroundColor: "#00aa00"};
+                style = {backgroundColor: "rgba(0,166,0,0.5)"};
                 break;
         }
 

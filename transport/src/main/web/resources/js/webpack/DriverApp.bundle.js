@@ -472,7 +472,7 @@ function (_React$Component4) {
     value: function checkThenStartActivity() {
       if (this.props.thisActivity !== 'REST') {
         this.props.finishCurrentActivity();
-        this.startActivity();
+        setTimeout(this.startActivity, 400);
       } else {
         this.startActivity();
       }
@@ -833,7 +833,7 @@ function (_React$Component9) {
             disabled: true
           }, "shipped");
           style = {
-            backgroundColor: "#00aa00"
+            backgroundColor: "rgba(0,166,0,0.51)"
           };
           break;
 
@@ -843,7 +843,7 @@ function (_React$Component9) {
             disabled: true
           }, "delivered");
           style = {
-            backgroundColor: "#00aa00"
+            backgroundColor: "rgba(0,166,0,0.51)"
           };
           break;
       }
@@ -921,7 +921,7 @@ function (_React$Component10) {
             disabled: true
           }, "delivered");
           style = {
-            backgroundColor: "#00aa00"
+            backgroundColor: "rgba(0,166,0,0.5)"
           };
           break;
       }

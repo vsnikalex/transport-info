@@ -39,7 +39,6 @@ public class TruckDTO {
     @Min(value = 0)
     private int driversCnt;
 
-    // TODO: change to DTO / SecuredDTO
     private List<String> driversInfo;
 
     private GHGeocodingEntry location;

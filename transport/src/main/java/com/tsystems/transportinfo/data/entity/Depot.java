@@ -3,17 +3,16 @@ package com.tsystems.transportinfo.data.entity;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import com.tsystems.transportinfo.data.entity.enums.DepotType;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "depot")
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Builder
 public class Depot {
 
     @Id

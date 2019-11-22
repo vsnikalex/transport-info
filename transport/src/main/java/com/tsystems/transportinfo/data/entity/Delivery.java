@@ -1,8 +1,6 @@
 package com.tsystems.transportinfo.data.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,9 +8,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "delivery")
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Builder
 public class Delivery {
 
     @Id

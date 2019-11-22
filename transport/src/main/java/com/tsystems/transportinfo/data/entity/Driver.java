@@ -2,18 +2,17 @@ package com.tsystems.transportinfo.data.entity;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "driver")
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Builder
 public class Driver {
 
     @Id

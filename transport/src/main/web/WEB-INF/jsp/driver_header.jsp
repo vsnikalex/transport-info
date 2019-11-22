@@ -15,7 +15,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fixed">
             <div class="navbar-expanded">
-                <div class="navbar-portalname">Manager Page</div>
+                <div class="navbar-portalname">Driver Page</div>
                 <div class="brandnavhead" data-spy="brandnav" data-target="#DocsMenu">
                     <button type="button" class="btn btn-clean navbar-btn brandnav-control-up" data-close="brandnav" data-target="#DocsMenu">
                         <span class="sr-only">Back</span>
@@ -26,15 +26,6 @@
                         <span class="icon icon-cancel"></span>
                     </button>
                     <label class="navbar-header-label brandnav-label">Home</label>
-                </div>
-                <div class="brandnav brandnav-lvl-1" id="DocsMenu">
-                    <ul class="nav">
-                        <li class=""><a href="<c:url value="/admin/truck"/>">Trucks</a></li>
-                        <li class=""><a href="<c:url value="/admin/driver"/>">Drivers</a></li>
-                        <li class=""><a href="<c:url value="/admin/cargo"/>">Cargoes</a></li>
-                        <li class=""><a href="<c:url value="/admin/delivery_editor"/>">Deliveries</a></li>
-                        <li class=""><a href="<c:url value="/admin/driver_app"/>">Routes</a></li>
-                    </ul>
                 </div>
 
             </div>

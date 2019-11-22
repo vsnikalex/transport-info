@@ -22,15 +22,8 @@
 
     </head>
     <body>
-        <jsp:include page="header.jsp" />
+        <jsp:include page="driver_header.jsp" />
         <div class="main" style="min-height: calc(100vh - 249px);">
-            <div class="breadcrumbbar">
-                <div class="container-fixed">
-                    <ol class="breadcrumb breadcrumb-small">
-                        <li>DriverPage</li>
-                    </ol>
-                </div>
-            </div>
             <div class="container-fixed">
                 <div class="main">
                     <div id="driver_app"></div>

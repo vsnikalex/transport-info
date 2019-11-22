@@ -137,7 +137,8 @@ function (_React$Component) {
     _this.state = {
       drivers: [],
       selectedDriverId: 0,
-      selectedDriver: {}
+      selectedDriver: {},
+      userIsDriver: false
     };
     _this.selectDriver = _this.selectDriver.bind(_assertThisInitialized(_this));
     _this.updateDriverActivity = _this.updateDriverActivity.bind(_assertThisInitialized(_this));
@@ -221,15 +222,14 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      /* TODO: load driver info if there is a driver with username from /getMyDriverId
-               else - load all drivers
-      */
-      axios.get('/transport/getMyDriverId').then(function (response) {
-        console.log(response.data);
-
-        if (response.data !== -1) {
-          _this2.setState({
-            selectedDriverId: response.data
+      axios.get('/transport/getMyDriverId').then(function (id) {
+        if (id.data !== -1) {
+          axios.get('/transport/driver/api/mydata/' + id.data).then(function (driver) {
+            _this2.setState({
+              selectedDriver: driver.data,
+              selectedDriverId: id.data,
+              userIsDriver: true
+            });
           });
         } else {
           axios.get('api/driver/all').then(function (response) {
@@ -269,15 +269,23 @@ function (_React$Component) {
         });
       }
 
+      var driverList;
+
+      if (this.state.userIsDriver) {
+        driverList = null;
+      } else {
+        driverList = React.createElement("div", {
+          className: "row"
+        }, React.createElement(DriverList, {
+          drivers: this.state.drivers,
+          selectedDriverId: this.state.selectedDriverId,
+          selectDriver: this.selectDriver
+        }));
+      }
+
       return React.createElement("div", {
         className: "container-fixed demo-grid"
-      }, "/* TODO: show nothing if there is a driver with username from /getMyDriverId else - load driver list */", React.createElement("div", {
-        className: "row"
-      }, React.createElement(DriverList, {
-        drivers: this.state.drivers,
-        selectedDriverId: this.state.selectedDriverId,
-        selectDriver: this.selectDriver
-      })), React.createElement("div", {
+      }, driverList, React.createElement("div", {
         className: "tc-example"
       }, React.createElement("div", {
         className: "row"

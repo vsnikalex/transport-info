@@ -10,7 +10,8 @@ class DriverApp extends React.Component {
         this.state = {
             drivers: [],
             selectedDriverId: 0,
-            selectedDriver: {}
+            selectedDriver: {},
+            userIsDriver: false
         };
 
         this.selectDriver = this.selectDriver.bind(this);
@@ -70,22 +71,19 @@ class DriverApp extends React.Component {
     }
 
     componentDidMount() {
-        /* TODO: load driver info if there is a driver with username from /getMyDriverId
-                 else - load all drivers
-        */
-
-        axios.get('/transport/getMyDriverId').then(response => {
-            console.log(response.data);
-
-            if (response.data !== -1) {
-                this.setState({selectedDriverId: response.data});
+        axios.get('/transport/getMyDriverId').then(id => {
+            if (id.data !== -1) {
+                axios.get('/transport/driver/api/mydata/' + id.data).then(driver => {
+                    this.setState({selectedDriver: driver.data,
+                                   selectedDriverId: id.data,
+                                   userIsDriver: true});
+                });
             } else {
                 axios.get('api/driver/all').then(response => {
                     this.setState({drivers: response.data});
                 });
             }
         });
-
     }
 
     render() {
@@ -106,17 +104,21 @@ class DriverApp extends React.Component {
             info = <Info truckId={this.state.selectedDriver.deliveryDTO.truckID} />;
         }
 
+        let driverList;
+        if (this.state.userIsDriver) {
+            driverList =    null;
+        } else {
+            driverList =    <div className="row">
+                                <DriverList drivers={this.state.drivers}
+                                            selectedDriverId={this.state.selectedDriverId}
+                                            selectDriver={this.selectDriver} />
+                            </div>;
+        }
+
         return (
             <div className="container-fixed demo-grid">
 
-                /* TODO: show nothing if there is a driver with username from /getMyDriverId
-                         else - load driver list
-                */
-                <div className="row">
-                    <DriverList drivers={this.state.drivers}
-                                selectedDriverId={this.state.selectedDriverId}
-                                selectDriver={this.selectDriver} />
-                </div>
+                {driverList}
 
                 <div className="tc-example">
                     <div className="row">

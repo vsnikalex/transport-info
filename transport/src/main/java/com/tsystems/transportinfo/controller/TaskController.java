@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
 import com.tsystems.transportinfo.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class TaskController {
     }
 
     @GetMapping("/start/{action}/{time}/{driverId}/{truckId}")
+    @DriverEvent
     public double startTask(
             @PathVariable DriverAction action, @PathVariable long time,
             @PathVariable long driverId, @PathVariable long truckId) {
@@ -35,6 +37,7 @@ public class TaskController {
     }
 
     @GetMapping("/finish/{driverId}/{time}")
+    @DriverEvent
     public double finishTask(
             @PathVariable long driverId, @PathVariable long time) {
 

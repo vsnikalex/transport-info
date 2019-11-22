@@ -99,7 +99,6 @@ public class CargoServiceImpl implements CargoService {
      */
     @Override
     @Transactional
-    @DeliveryEvent
     public void updateCargo(CargoDTO cargoDTO) {
         log.info("Update Cargo id={}", cargoDTO.getId());
         Cargo cargo = convertToEntity(cargoDTO);

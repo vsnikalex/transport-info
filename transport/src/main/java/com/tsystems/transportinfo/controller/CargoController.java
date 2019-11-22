@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import com.tsystems.transportinfo.service.CargoService;
@@ -7,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,6 +67,7 @@ public class CargoController {
     }
 
     @PutMapping("/update")
+    @DeliveryEvent
     public ResponseEntity<String> updateCargo(
             @RequestBody @Valid CargoDTO cargoDTO, Errors errors) {
 

@@ -1,6 +1,8 @@
 package com.tsystems.transportinfo.controller;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
+import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,12 +43,14 @@ public class AdminDriverController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @DriverEvent
     public void deleteDriver(@PathVariable long id) {
         log.info("Delete Driver id={}", id);
         driverService.deleteDriver(id);
     }
 
     @PostMapping("/add")
+    @DriverEvent
     public ResponseEntity<String> saveDriver(
             @RequestBody @Valid DriverDTO driverDTO, Errors errors) {
 
@@ -66,6 +70,8 @@ public class AdminDriverController {
     }
 
     @PutMapping("/update")
+    @DeliveryEvent
+    @DriverEvent
     public ResponseEntity<String> updateDriver(
             @RequestBody @Valid DriverDTO driverDTO, Errors errors) {
 

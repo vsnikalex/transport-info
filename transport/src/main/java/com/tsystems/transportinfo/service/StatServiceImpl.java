@@ -8,6 +8,7 @@ import com.tsystems.transportinfo.soap.Delivery;
 import com.tsystems.transportinfo.soap.DeliveryList;
 import com.tsystems.transportinfo.soap.DriversStat;
 import com.tsystems.transportinfo.soap.TrucksStat;
+import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class StatServiceImpl implements StatService {
 
     @Override
     @Transactional
+    @Synchronized
     public DriversStat getDriversStat() {
         int availableDrivers = driverDAO.calculateAvailableDrivers();
         int drivingDrivers = taskDAO.calculateDrivingDrivers();
@@ -51,6 +53,7 @@ public class StatServiceImpl implements StatService {
 
     @Override
     @Transactional
+    @Synchronized
     public TrucksStat getTrucksStat() {
         int defectiveTrucks = truckDAO.calculateDefectiveTrucks();
         int usedTrucks = truckDAO.calculateUsedTrucks();
@@ -62,6 +65,7 @@ public class StatServiceImpl implements StatService {
 
     @Override
     @Transactional
+    @Synchronized
     public DeliveryList getDeliveryList(int limit) {
         List<com.tsystems.transportinfo.data.entity.Delivery> deliveryEntities = deliveryDAO.getLastDeliveries(limit);
         log.info("Received {} deliveries", deliveryEntities.size());

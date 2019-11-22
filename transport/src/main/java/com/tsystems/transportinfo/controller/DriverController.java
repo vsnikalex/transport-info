@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Depot;
@@ -49,6 +50,7 @@ public class DriverController {
     }
 
     @GetMapping("/task/start/{action}/{time}/{driverId}/{truckId}")
+    @DriverEvent
     public double startTask(
             @PathVariable DriverAction action, @PathVariable long time,
             @PathVariable long driverId, @PathVariable long truckId) {
@@ -58,6 +60,7 @@ public class DriverController {
     }
 
     @GetMapping("/task/finish/{driverId}/{time}")
+    @DriverEvent
     public double finishTask(
             @PathVariable long driverId, @PathVariable long time) {
 

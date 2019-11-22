@@ -1,8 +1,6 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.aspect.DeliveryEvent;
-import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
@@ -70,7 +68,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     @Transactional
-    @DriverEvent
     public void saveDriver(DriverDTO driverDTO) {
         log.info("Save Driver");
         Driver driver = convertToEntity(driverDTO);
@@ -79,8 +76,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     @Transactional
-    @DriverEvent
-    @DeliveryEvent
     public void updateDriver(DriverDTO driverDTO) {
         log.info("Update Driver id={}", driverDTO.getId());
         Driver driver = convertToEntity(driverDTO);
@@ -107,7 +102,6 @@ public class DriverServiceImpl implements DriverService {
      */
     @Override
     @Transactional
-    @DriverEvent
     public void deleteDriver(Long id) {
         log.info("Delete Driver id={}", id);
         dao.deleteById(id);

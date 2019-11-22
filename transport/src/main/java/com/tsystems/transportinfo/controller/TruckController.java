@@ -1,5 +1,7 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
+import com.tsystems.transportinfo.aspect.TruckEvent;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.service.TruckService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,12 +42,14 @@ public class TruckController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @TruckEvent
     public void deleteTruck(@PathVariable long id) {
         log.info("Delete Truck id={}", id);
         truckService.deleteTruck(id);
     }
 
     @PostMapping("/add")
+    @TruckEvent
     public ResponseEntity<String> saveCargo(
             @RequestBody @Valid TruckDTO truckDTO, Errors errors) {
 
@@ -65,6 +69,8 @@ public class TruckController {
     }
 
     @PutMapping("/update")
+    @DeliveryEvent
+    @TruckEvent
     public ResponseEntity<String> updateCargo(
             @RequestBody @Valid TruckDTO truckDTO, Errors errors) {
 

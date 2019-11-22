@@ -1,7 +1,6 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.aspect.DriverEvent;
 import com.tsystems.transportinfo.aspect.TruckEvent;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
@@ -59,7 +58,6 @@ public class DeliveryServiceImpl implements DeliveryService {
      */
     @Override
     @Transactional
-    @DeliveryEvent
     @DriverEvent
     @TruckEvent
     public void createDelivery(DeliveryDTO deliveryDTO) {

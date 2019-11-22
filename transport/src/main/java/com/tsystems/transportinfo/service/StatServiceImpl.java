@@ -64,6 +64,7 @@ public class StatServiceImpl implements StatService {
     @Transactional
     public DeliveryList getDeliveryList(int limit) {
         List<com.tsystems.transportinfo.data.entity.Delivery> deliveryEntities = deliveryDAO.getLastDeliveries(limit);
+        log.info("Received {} deliveries", deliveryEntities.size());
 
         List<Delivery> soapDeliveryList =
                         deliveryEntities

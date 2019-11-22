@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.aspect.DeliveryEvent;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.service.DeliveryService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ public class DeliveryController {
     private DeliveryService deliveryService;
 
     @PostMapping("/add")
+    @DeliveryEvent
     public void saveDelivery(@RequestBody DeliveryDTO deliveryDTO) {
         log.info("Save delivery with cargo id={}, driver id={}, truck id={}",
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());

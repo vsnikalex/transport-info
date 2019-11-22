@@ -33,9 +33,12 @@
 
          source.addEventListener('delivery list', function(e) {
             let deliveryList = JSON.parse(e.data);
+            $('#delivery_data').empty();
 
             console.log('Delivery list received: ');
-            deliveryList.deliveries.forEach(delivery => console.log(delivery))
+            deliveryList.deliveries.forEach(delivery => {
+               console.log(delivery);
+            });
          });
 
          source.stream();
@@ -117,7 +120,7 @@
             <th>Route</th>
          </tr>
          </thead>
-         <tbody>
+         <tbody id="delivery_data">
             <tr>
                <td id="delivery_id">
                   12

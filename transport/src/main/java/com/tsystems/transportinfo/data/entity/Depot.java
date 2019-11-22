@@ -4,12 +4,14 @@ import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.converters.GeocodingEntryConverter;
 import com.tsystems.transportinfo.data.entity.enums.DepotType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "depot")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Depot {

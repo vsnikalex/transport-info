@@ -1,7 +1,6 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.test.TestConfig;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
@@ -10,21 +9,16 @@ import com.tsystems.transportinfo.data.entity.Truck;
 import com.tsystems.transportinfo.data.entity.enums.TruckStatus;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestConfig.class})
 public class TruckServiceImplUnitTests {
 
     @Mock

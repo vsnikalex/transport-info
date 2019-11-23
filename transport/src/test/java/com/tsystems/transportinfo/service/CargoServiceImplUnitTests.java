@@ -1,6 +1,5 @@
 package com.tsystems.transportinfo.service;
 
-import com.tsystems.transportinfo.test.TestConfig;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
@@ -10,22 +9,17 @@ import com.tsystems.transportinfo.data.entity.Depot;
 import com.tsystems.transportinfo.data.entity.enums.CargoStatus;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
-import static junit.framework.TestCase.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestConfig.class})
 public class CargoServiceImplUnitTests {
 
     @Mock

@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.controller;
 
+import com.tsystems.transportinfo.jms.JmsService;
 import com.tsystems.transportinfo.model.SseRequest;
 import com.tsystems.transportinfo.sse.MessageHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +20,18 @@ import java.util.UUID;
 public class SseCdiResource {
 
     @Inject
-    MessageHandler handler;
+    private MessageHandler handler;
+
+    @Inject
+    private JmsService jmsService;
 
     @GET
     @Produces(MediaType.SERVER_SENT_EVENTS)
     public void eventStreamCdi(@Context Sse sse, @Context SseEventSink eventSink) {
+        log.info("Sending ready-to-listen notification...");
+        // TODO: Send message to Queue
+        jmsService.sendReadyMessage();
+
         log.info("Register new SSE listener...");
         handler.register(UUID.randomUUID().toString(), new SseRequest(sse, eventSink));
     }

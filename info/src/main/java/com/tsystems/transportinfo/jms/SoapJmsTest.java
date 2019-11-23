@@ -2,13 +2,12 @@ package com.tsystems.transportinfo.jms;
 
 import javax.annotation.Resource;
 import javax.jms.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
-@WebServlet("/soapjms")
+//@WebServlet("/soapjms")
 public class SoapJmsTest extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

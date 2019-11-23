@@ -10,13 +10,14 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.sse.SseEventSink;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @ApplicationScoped
-public class MessageHandler {
+public class MessageHandler implements Serializable {
 
     private final Map<String, SseRequest> requests = new ConcurrentHashMap<>();
 
@@ -46,20 +47,20 @@ public class MessageHandler {
     }
 
     private <T> void dispatchMessage(T obj, String name) {
-        try {
-            requests.values().forEach(
-                    req -> req.getEventSink().send(
-                            req.getSse().newEventBuilder()
-                                    .mediaType(MediaType.APPLICATION_JSON_TYPE)
-                                    .id(UUID.randomUUID().toString())
-                                    .name(name)
-                                    .data(obj)
-                                    .build()
-                    )
-            );
-        } catch (IllegalStateException e) {
-            log.error("SseEventSink is closed");
-        }
+        requests.values().forEach(req -> {
+            try {
+                req.getEventSink().send(
+                        req.getSse().newEventBuilder()
+                                .mediaType(MediaType.APPLICATION_JSON_TYPE)
+                                .id(UUID.randomUUID().toString())
+                                .name(name)
+                                .data(obj)
+                                .build()
+                );
+            } catch (IllegalStateException e) {
+                log.error("Closed SseEventSink is not removed from map");
+            }
+        });
     }
 
 }

@@ -127,7 +127,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         Iterator<String> iterator = jsonObject.keys();
         while (iterator.hasNext()) {
             String point = (String) jsonObject.get(iterator.next());
-            String pointNorm = geoService.normalize(point);
+            String pointNorm = geoService.format(point);
             routeMap.putIfAbsent(pointNorm, new DeliveryDTO.CargoOperations());
         }
 
@@ -135,11 +135,11 @@ public class DeliveryServiceImpl implements DeliveryService {
         cargoes.forEach(cargo -> {
             GHGeocodingEntry startEntry = cargo.getStartDepot().getLocation();
             String startPoint = geoService.pointStringFromEntry(startEntry);
-            String startPointNorm = geoService.normalize(startPoint);
+            String startPointNorm = geoService.format(startPoint);
 
             GHGeocodingEntry endEntry = cargo.getEndDepot().getLocation();
             String endPoint = geoService.pointStringFromEntry(endEntry);
-            String endPointNorm = geoService.normalize(endPoint);
+            String endPointNorm = geoService.format(endPoint);
 
             CargoDTO cargoDTO = modelMapper.map(cargo, CargoDTO.class);
 

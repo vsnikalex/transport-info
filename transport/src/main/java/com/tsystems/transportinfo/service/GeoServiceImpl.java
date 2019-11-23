@@ -52,13 +52,13 @@ public class GeoServiceImpl implements GeoService {
      *
      * This method takes coordinates with different accuracy
      * and slices off digits after the fifths one.
-     * Right format is "12.3456789,12.3456789", no checks provided!
+     * Right format is "12.3456789,12.3456789", no format checks provided!
      *
      * @param point coordinates of a place
      * @return      normalized coordinates
      */
     @Override
-    public String normalize(String point) {
+    public String format(String point) {
         String[] coords = point.split(",");
         coords[0] = coords[0].substring(0, coords[0].indexOf(".") + 6);
         coords[1] = coords[1].substring(0, coords[1].indexOf(".") + 6);

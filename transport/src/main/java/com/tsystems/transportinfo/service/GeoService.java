@@ -9,7 +9,7 @@ public interface GeoService {
 
     String pointStringFromEntry(GHGeocodingEntry entry);
 
-    String normalize(String point);
+    String format(String point);
 
     GHGeocodingEntry coordsToEntry(String coords);
 

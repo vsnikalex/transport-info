@@ -18,6 +18,7 @@ public class JmsService {
        log.info("Received message from ModuleInteractionQueue: {}", message);
        if ("READY".equals(message)) {
 //           triggerUpdates();
+           log.info("Send updates to Info");
            soapAspect.sendDeliveryList();
            soapAspect.sendDriversStat();
            soapAspect.sendTrucksStat();

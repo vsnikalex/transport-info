@@ -1,6 +1,6 @@
 package com.tsystems.transportinfo.service;
 
-import com.tsystems.transportinfo.config.TestConfig;
+import com.tsystems.transportinfo.test.TestConfig;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;

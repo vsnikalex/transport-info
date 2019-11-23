@@ -1,7 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
-import com.tsystems.transportinfo.config.TestConfig;
+import com.tsystems.transportinfo.test.TestConfig;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;

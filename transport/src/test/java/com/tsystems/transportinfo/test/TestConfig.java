@@ -1,23 +1,21 @@
-package com.tsystems.transportinfo.config;
+package com.tsystems.transportinfo.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:/application-test.properties")
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @ComponentScan({"com.tsystems.transportinfo.data",
         "com.tsystems.transportinfo.service"})
 public class TestConfig {
@@ -43,7 +41,7 @@ public class TestConfig {
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
+//        sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
                 "com.tsystems.transportinfo.data.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
@@ -51,27 +49,27 @@ public class TestConfig {
         return sessionFactory;
     }
 
-    @Bean
-    public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(
-                env.getProperty("database.driver"));
-        dataSource.setUrl(
-                env.getProperty("database.url"));
-        dataSource.setUsername(
-                env.getProperty("database.user"));
-        dataSource.setPassword(
-                env.getProperty("database.pwd"));
-        return dataSource;
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        BasicDataSource dataSource = new BasicDataSource();
+//        dataSource.setDriverClassName(
+//                env.getProperty("database.driver"));
+//        dataSource.setUrl(
+//                env.getProperty("database.url"));
+//        dataSource.setUsername(
+//                env.getProperty("database.user"));
+//        dataSource.setPassword(
+//                env.getProperty("database.pwd"));
+//        return dataSource;
+//    }
 
-    @Bean
-    public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager
-                = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory().getObject());
-        return transactionManager;
-    }
+//    @Bean
+//    public PlatformTransactionManager hibernateTransactionManager() {
+//        HibernateTransactionManager transactionManager
+//                = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(sessionFactory().getObject());
+//        return transactionManager;
+//    }
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();

@@ -3,11 +3,15 @@ package com.tsystems.transportinfo.data.dto;
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.Duration;
 import java.time.Instant;
@@ -25,6 +29,16 @@ import java.util.stream.Stream;
 public class DriverDTO {
 
     private Long id;
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Only letters and numbers allowed for username")
+    @NotEmpty(message = "Username must not be empty")
+    @Size(max = 10, message = "Username is too long")
+    private String username;
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Only letters and numbers allowed for password")
+    @NotEmpty(message = "Password must not be empty")
+    @Size(max = 10, message = "Password is too long")
+    private String password;
 
     @NotEmpty(message = "First Name must not be empty")
     @Size(max = 10, message = "Fist Name is too long")

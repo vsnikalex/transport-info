@@ -9,6 +9,7 @@ import com.tsystems.transportinfo.data.dto.TruckDTO;
 import com.tsystems.transportinfo.data.entity.Delivery;
 import com.tsystems.transportinfo.data.entity.Driver;
 import com.tsystems.transportinfo.data.entity.Truck;
+import com.tsystems.transportinfo.data.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,9 @@ public class DriverServiceImpl implements DriverService {
     @Autowired
     private DeliveryService deliveryService;
 
+    @Autowired
+    private TransportUserDetailsService transportUserDetailsService;
+
     @Override
     @Transactional
     public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
@@ -70,6 +74,10 @@ public class DriverServiceImpl implements DriverService {
     @Transactional
     public void saveDriver(DriverDTO driverDTO) {
         log.info("Save Driver");
+
+        User user = modelMapper.map(driverDTO, User.class);
+        transportUserDetailsService.saveUser(user);
+
         Driver driver = convertToEntity(driverDTO);
         dao.create(driver);
     }

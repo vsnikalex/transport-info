@@ -33,4 +33,10 @@ public class AuthGroupDAOImpl implements AuthGroupDAO {
         return query.getResultList();
     }
 
+    @Override
+    public void grantAuthority(String username, String role) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(new AuthGroup(username, role));
+    }
+
 }

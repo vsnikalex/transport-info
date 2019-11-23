@@ -8,4 +8,6 @@ public interface AuthGroupDAO {
 
     List<AuthGroup> findByUsername(String username);
 
+    void grantAuthority(String username, String role);
+
 }

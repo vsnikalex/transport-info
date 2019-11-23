@@ -30,7 +30,7 @@
         <div class="breadcrumbbar">
             <div class="container-fixed">
                 <ol class="breadcrumb breadcrumb-small">
-                    <li>Admin Page</li>
+                    <li>Manager Page</li>
                     <li class="active">Trucks</li>
                 </ol>
             </div>

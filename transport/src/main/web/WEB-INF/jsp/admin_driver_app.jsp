@@ -27,7 +27,8 @@
             <div class="breadcrumbbar">
                 <div class="container-fixed">
                     <ol class="breadcrumb breadcrumb-small">
-                        <li>Routes</li>
+                        <li>Manager Page</li>
+                        <li class="active">Routes</li>
                     </ol>
                 </div>
             </div>

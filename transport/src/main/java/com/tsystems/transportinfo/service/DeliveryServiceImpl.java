@@ -60,13 +60,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         log.info("Request DAO to save delivery with cargo id={}, driver id={}, truck id={}",
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());
 
-        Truck truck = new Truck(deliveryDTO.getTruckID());
-
-        Delivery delivery = new Delivery();
-        delivery.setDone(false);
-        delivery.setRoute(deliveryDTO.getRoute());
-        delivery.setTruck(truck);
-        delivery.setCreated(LocalDateTime.ofInstant(Instant.now(), ZoneId.of("UTC")));
+        Delivery delivery = Delivery.builder()
+                .done(false)
+                .route(deliveryDTO.getRoute())
+                .truck(new Truck(deliveryDTO.getTruckID()))
+                .created(LocalDateTime.ofInstant(Instant.now(), ZoneId.of("UTC")))
+                .build();
 
         dao.create(delivery);
 
@@ -98,16 +97,18 @@ public class DeliveryServiceImpl implements DeliveryService {
     /**
      * Transforms the list of separate cargo routes
      *
-     * e.g. cargo #1 : A-B
-     *      cargo #2 : A-C
-     *      cargo #3 : A-D
+     * e.g. cargo A : 1-2
+     *      cargo B : 2-3
+     *      cargo C : 1-4
+     *      cargo D : 1-4
      *
      * into the list of operations at each point:
      *
-     * A : load cargo #1, #2, #3
-     * B : unload cargo #1
-     * C : unload cargo #2
-     * D : unload cargo #3
+     * 1 : load cargo   A C D
+     * 2 : unload cargo A
+     *     load cargo   B
+     * 3 : unload cargo B
+     * 4 : unload cargo C D
      *
      * It is convenient to have data in this format
      * at front-end for further rendering.
@@ -143,8 +144,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 
             CargoDTO cargoDTO = modelMapper.map(cargo, CargoDTO.class);
 
-            routeMap.get(startPointNorm).addLoadOp(cargoDTO);
-            routeMap.get(endPointNorm).addUnloadOp(cargoDTO);
+            routeMap.get(startPointNorm).addLoadOps(cargoDTO);
+            routeMap.get(endPointNorm).addUnloadOps(cargoDTO);
         });
 
         DeliveryDTO deliveryDTO = modelMapper.map(entity, DeliveryDTO.class);

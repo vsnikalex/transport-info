@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.data.dto;
 
 import lombok.*;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +24,12 @@ public class DeliveryDTO {
             this.unloadOps = new LinkedList<>();
         }
 
-        public void addLoadOp(CargoDTO cargoDTO) {
-            loadOps.add(cargoDTO);
+        public void addLoadOps(CargoDTO... cargoDTOs) {
+            loadOps.addAll(Arrays.asList(cargoDTOs));
         }
 
-        public void addUnloadOp(CargoDTO cargoDTO){
-            unloadOps.add(cargoDTO);
+        public void addUnloadOps(CargoDTO... cargoDTOs){
+            loadOps.addAll(Arrays.asList(cargoDTOs));
         }
     }
 

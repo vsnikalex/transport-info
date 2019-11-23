@@ -47,10 +47,10 @@ public class MessageHandler implements Serializable {
     }
 
     private <T> void dispatchMessage(T obj, String name) {
-        requests.values().forEach(req -> {
+        requests.forEach((uuid, request) -> {
             try {
-                req.getEventSink().send(
-                        req.getSse().newEventBuilder()
+                request.getEventSink().send(
+                        request.getSse().newEventBuilder()
                                 .mediaType(MediaType.APPLICATION_JSON_TYPE)
                                 .id(UUID.randomUUID().toString())
                                 .name(name)
@@ -58,7 +58,8 @@ public class MessageHandler implements Serializable {
                                 .build()
                 );
             } catch (IllegalStateException e) {
-                log.error("Closed SseEventSink is not removed from map");
+                log.info("Remove unclosed SseEventSink from map");
+                requests.remove(uuid);
             }
         });
     }

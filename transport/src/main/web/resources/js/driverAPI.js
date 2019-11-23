@@ -91,6 +91,7 @@ var RestPost = function() {
 var RestPut = function(id) {
     var JSONObject= {
         'id' : id,
+        'username': $("#username").val(),
         'firstName': $("#first_name").val(),
         'lastName': $("#last_name").val(),
         'coords': $("#location").val()
@@ -127,6 +128,10 @@ var SetUp = function() {
             );
             $("#first_name").val(driver.firstName);
             $("#last_name").val(driver.lastName);
+
+            $("#username").val(driver.username);
+            $("#username-field").hide();
+            $("#password-field").hide();
 
             $("#save_button").on('click', function () {
                 RestPut(driver.id);

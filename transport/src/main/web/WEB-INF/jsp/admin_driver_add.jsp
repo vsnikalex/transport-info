@@ -40,11 +40,11 @@
             <h1 class="underline" id="entity_info">Driver</h1>
             <div class="tc-example">
                 <fieldset class="form-fieldset">
-                    <div class="form-input-set">
+                    <div id="username-field" class="form-input-set">
                         <label for="username">Username</label>
                         <input type="text" class="form-input" name="username" id="username" placeholder="Username">
                     </div>
-                    <div class="form-input-set">
+                    <div id="password-field" class="form-input-set">
                         <label for="password">Password</label>
                         <input type="password" class="form-input" name="password" id="password" placeholder="User Password">
                     </div>

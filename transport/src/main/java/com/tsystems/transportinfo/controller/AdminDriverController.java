@@ -75,14 +75,14 @@ public class AdminDriverController {
     public ResponseEntity<String> updateDriver(
             @RequestBody @Valid DriverDTO driverDTO, Errors errors) {
 
-        if (errors.hasErrors()) {
-            String msg = errors.getAllErrors().stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .collect(Collectors.joining(","));
-
-            log.info("DTO is not valid");
-            return ResponseEntity.badRequest().body(msg);
-        }
+//        if (errors.hasErrors()) {
+//            String msg = errors.getAllErrors().stream()
+//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+//                    .collect(Collectors.joining(","));
+//
+//            log.info("DTO is not valid");
+//            return ResponseEntity.badRequest().body(msg);
+//        }
 
         log.info("DTO is valid");
         driverService.updateDriver(driverDTO);

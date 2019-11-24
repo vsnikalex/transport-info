@@ -291,6 +291,7 @@ function (_React$Component) {
         className: "row"
       }, React.createElement(Route, {
         deliveryDTO: this.state.selectedDriver.deliveryDTO,
+        userIsDriver: this.state.userIsDriver,
         updateLoadOpStatus: this.updateLoadOpStatus,
         updateUnloadOpStatus: this.updateUnloadOpStatus
       }), info, activities)));
@@ -630,8 +631,10 @@ function (_React$Component7) {
     value: function finishDelivery() {
       axios.put('api/delivery/finish/' + this.props.deliveryDTO.id).then(function (response) {
         if (response.data === true) {
-          document.getElementById('doneButton').style.background = '#00A600';
+          document.getElementById('doneButton').style.background = 'rgba(0,166,0,0.81)';
           document.getElementById('doneButton').onclick = null;
+        } else {
+          alert('THERE ARE CARGOES TO DELIVER');
         }
       });
     }
@@ -660,26 +663,28 @@ function (_React$Component7) {
         }));
       }
 
-      var finishDeliveryButton;
+      var finishDeliveryButton = null;
 
-      if (this.props.deliveryDTO.done === true) {
-        finishDeliveryButton = React.createElement("div", {
-          className: "col-l-6"
-        }, React.createElement("button", {
-          id: "doneButton",
-          className: "pager pager-block",
-          style: {
-            backgroundColor: "rgba(0,166,0,0.51)"
-          }
-        }, "DONE"));
-      } else {
-        finishDeliveryButton = React.createElement("div", {
-          className: "col-l-6"
-        }, React.createElement("button", {
-          id: "doneButton",
-          className: "pager pager-block",
-          onClick: this.finishDelivery
-        }, "DONE"));
+      if (!this.props.userIsDriver) {
+        if (this.props.deliveryDTO.done === true) {
+          finishDeliveryButton = React.createElement("div", {
+            className: "col-l-6"
+          }, React.createElement("button", {
+            id: "doneButton",
+            className: "pager pager-block",
+            style: {
+              backgroundColor: "rgba(0,166,0,0.8)"
+            }
+          }, "DONE"));
+        } else {
+          finishDeliveryButton = React.createElement("div", {
+            className: "col-l-6"
+          }, React.createElement("button", {
+            id: "doneButton",
+            className: "pager pager-block",
+            onClick: this.finishDelivery
+          }, "DONE"));
+        }
       }
 
       return React.createElement("div", {

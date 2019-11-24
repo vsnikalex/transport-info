@@ -123,6 +123,7 @@ class DriverApp extends React.Component {
                 <div className="tc-example">
                     <div className="row">
                         <Route deliveryDTO={this.state.selectedDriver.deliveryDTO}
+                               userIsDriver={this.state.userIsDriver}
                                updateLoadOpStatus={this.updateLoadOpStatus}
                                updateUnloadOpStatus={this.updateUnloadOpStatus} />
                         {info}
@@ -381,17 +382,23 @@ class Route extends React.Component {
                                updateUnloadOpStatus={this.props.updateUnloadOpStatus} />);
         }
 
-        let finishDeliveryButton;
-        if (this.props.deliveryDTO.done === true) {
-            finishDeliveryButton = <div className="col-l-6">
-                                       <button id="doneButton" className="pager pager-block"
-                                               style={{backgroundColor: "rgba(0,166,0,0.8)"}} >DONE</button>
-                                   </div>
-        } else {
-            finishDeliveryButton = <div className="col-l-6">
-                                        <button id="doneButton" className="pager pager-block"
-                                                onClick={this.finishDelivery}>DONE</button>
-                                    </div>
+        let finishDeliveryButton = null;
+        if (!this.props.userIsDriver) {
+            if (this.props.deliveryDTO.done === true) {
+                finishDeliveryButton =
+                <div className="col-l-6">
+                    <button id="doneButton" className="pager pager-block"
+                            style={{backgroundColor: "rgba(0,166,0,0.8)"}}>DONE
+                    </button>
+                </div>
+            } else {
+                finishDeliveryButton =
+                <div className="col-l-6">
+                    <button id="doneButton" className="pager pager-block"
+                            onClick={this.finishDelivery}>DONE
+                    </button>
+                </div>
+            }
         }
 
         return (

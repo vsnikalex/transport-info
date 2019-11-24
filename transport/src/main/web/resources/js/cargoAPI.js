@@ -57,8 +57,8 @@ var RestGetAll = function() {
 var RestPost = function() {
     var JSONObject= {
         'description': $("#description").val(),
-        'locDepotId': $("#location").val(),
-        'destDepotId': $("#destination").val(),
+        'startDepotId': $("#location").val(),
+        'endDepotId': $("#destination").val(),
         'status' : $("#status").val(),
         'weight' : $("#weight").val()
     };
@@ -85,8 +85,8 @@ var RestPut = function(id) {
     var JSONObject= {
         'id' : id,
         'description': $("#description").val(),
-        'locDepotId': $("#location").val(),
-        'destDepotId': $("#destination").val(),
+        'startDepotId': $("#location").val(),
+        'endDepotId': $("#destination").val(),
         'status' : $("#status").val(),
         'weight' : $("#weight").val()
     };

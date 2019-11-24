@@ -10,6 +10,7 @@ var UploadDepots = function () {
                 .append($("<option></option>")
                     .attr("value", v.id)
                     .text(v.location.country + '(' + v.type + ')'));
+
         });
     });
 };

@@ -13,7 +13,6 @@ import javax.jws.WebService;
 @WebService(
         portName = "HttpNotificationsImplPort",
         serviceName = "NotificationsServiceLocal",
-        wsdlLocation = "META-INF/wsdl/NotificationsService.wsdl",
         endpointInterface = "com.tsystems.transportinfo.soap.Notifications",
         targetNamespace = "http://soap.transportinfo.tsystems.com/"
 )

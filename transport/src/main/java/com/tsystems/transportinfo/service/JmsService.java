@@ -17,19 +17,11 @@ public class JmsService {
     public void readInfoMessage(String message) {
        log.info("Received message from ModuleInteractionQueue: {}", message);
        if ("READY".equals(message)) {
-//           triggerUpdates();
            log.info("Send updates to Info");
            soapAspect.sendDeliveryList();
            soapAspect.sendDriversStat();
            soapAspect.sendTrucksStat();
        }
     }
-
-//    @DeliveryEvent
-//    @DriverEvent
-//    @TruckEvent
-//    public void triggerUpdates() {
-//        log.info("Send updates to Info");
-//    }
 
 }

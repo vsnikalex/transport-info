@@ -35,15 +35,27 @@ public class MessageHandler implements Serializable {
     }
 
     public void onMessage(@Observes DriversStat driverStat) {
-        dispatchMessage(driverStat, "drivers stat");
+        try {
+            dispatchMessage(driverStat, "drivers stat");
+        } catch (NullPointerException e) {
+            log.info("DriversStat is empty");
+        }
     }
 
     public void onMessage(@Observes TrucksStat trucksStat) {
-        dispatchMessage(trucksStat, "trucks stat");
+        try {
+            dispatchMessage(trucksStat, "trucks stat");
+        } catch (NullPointerException e) {
+            log.info("TrucksStat is empty");
+        }
     }
 
     public void onMessage(@Observes DeliveryList deliveryList) {
-        dispatchMessage(deliveryList, "delivery list");
+        try {
+            dispatchMessage(deliveryList, "delivery list");
+        } catch (NullPointerException e) {
+            log.info("DeliveryList is empty");
+        }
     }
 
     private <T> void dispatchMessage(T obj, String name) {

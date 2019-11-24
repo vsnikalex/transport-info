@@ -38,8 +38,7 @@ public class CargoServiceImpl implements CargoService {
 
     /**
      * Requests cargoes from {@link CargoDAO}
-     * which are stored in a certain depot,
-     * TODO: which are not marked as deleted.
+     * which are stored in a certain depot.
      *
      * Filters off cargoes assigned to a delivery.
      *
@@ -58,8 +57,7 @@ public class CargoServiceImpl implements CargoService {
     }
 
     /**
-     * Requests cargoes from {@link CargoDAO},
-     * TODO: which are not marked as deleted.
+     * Requests cargoes from {@link CargoDAO}.
      *
      * @return      list of {@link CargoDTO}
      */
@@ -73,10 +71,6 @@ public class CargoServiceImpl implements CargoService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * TODO: Marks cargoes as deleted.
-     *
-     */
     @Override
     @Transactional
     public void deleteCargo(Long id) {

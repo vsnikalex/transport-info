@@ -29,7 +29,6 @@ public class SseCdiResource {
     @Produces(MediaType.SERVER_SENT_EVENTS)
     public void eventStreamCdi(@Context Sse sse, @Context SseEventSink eventSink) {
         log.info("Sending ready-to-listen notification...");
-        // TODO: Send message to Queue
         jmsService.sendReadyMessage();
 
         log.info("Register new SSE listener...");

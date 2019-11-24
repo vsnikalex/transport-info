@@ -77,7 +77,6 @@ var RestPost = function() {
             window.location = '/transport/admin/truck_add';
         },
         error: function(e) {
-            // TODO: highlight error fields with red
             alert(e.responseText);
         }
     });

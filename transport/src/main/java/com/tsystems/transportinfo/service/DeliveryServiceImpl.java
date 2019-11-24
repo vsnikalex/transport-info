@@ -82,10 +82,6 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
     }
 
-    /**
-     * TODO: Marks delivery as deleted.
-     *
-     */
     @Override
     @Transactional
     public void deleteDelivery(Long id) {

@@ -86,7 +86,6 @@ var RestPost = function() {
             window.location = '/transport/admin/driver_add';
         },
         error: function(e) {
-            // TODO: highlight error fields with red
             alert(e.responseText);
         }
     });

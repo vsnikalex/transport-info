@@ -24,4 +24,10 @@ public class DeliveryDAOImpl implements DeliveryDAO {
                 .list();
     }
 
+    @Override
+    public void finishDelivery(long id) {
+        Session session = sessionFactory.getCurrentSession();
+
+    }
+
 }

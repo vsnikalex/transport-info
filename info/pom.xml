@@ -109,24 +109,24 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.jboss.ws.plugins</groupId>
-                    <artifactId>jaxws-tools-maven-plugin</artifactId>
-                    <version>1.2.3.Final</version>
-                    <configuration>
-                        <wsdls>
-                            <wsdl>src/main/web/META-INF/wsdl/HelloWorldService.wsdl</wsdl>
-                            <wsdl>src/main/web/META-INF/wsdl/NotificationsService.wsdl</wsdl>
-                        </wsdls>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>wsconsume</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+                <!--  Required when adding Queue to SOAP WebService  -->
+<!--                <plugin>-->
+<!--                    <groupId>org.jboss.ws.plugins</groupId>-->
+<!--                    <artifactId>jaxws-tools-maven-plugin</artifactId>-->
+<!--                    <version>1.2.3.Final</version>-->
+<!--                    <configuration>-->
+<!--                        <wsdls>-->
+<!--                            <wsdl>src/main/web/META-INF/wsdl/NotificationsService.wsdl</wsdl>-->
+<!--                        </wsdls>-->
+<!--                    </configuration>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <goals>-->
+<!--                                <goal>wsconsume</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
             </plugins>
         </pluginManagement>
     </build>

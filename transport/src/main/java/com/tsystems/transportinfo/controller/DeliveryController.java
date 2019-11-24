@@ -33,4 +33,13 @@ public class DeliveryController {
         deliveryService.deleteDelivery(id);
     }
 
+    @PutMapping("/finish/{id}")
+    @DeliveryEvent
+    @DriverEvent
+    @TruckEvent
+    public void finishDelivery(@PathVariable long id) {
+        log.info("Finish delivery with id={}", id);
+        deliveryService.finishDelivery(id);
+    }
+
 }

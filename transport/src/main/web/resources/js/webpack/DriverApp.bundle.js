@@ -615,13 +615,25 @@ var Route =
 function (_React$Component7) {
   _inherits(Route, _React$Component7);
 
-  function Route() {
+  function Route(props) {
+    var _this9;
+
     _classCallCheck(this, Route);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Route).apply(this, arguments));
+    _this9 = _possibleConstructorReturn(this, _getPrototypeOf(Route).call(this, props));
+    _this9.finishDelivery = _this9.finishDelivery.bind(_assertThisInitialized(_this9));
+    return _this9;
   }
 
   _createClass(Route, [{
+    key: "finishDelivery",
+    value: function finishDelivery() {
+      console.log('finish delivery id =', this.props.deliveryDTO.id);
+      axios.put('api/delivery/finish/' + this.props.deliveryDTO.id).then(function (response) {
+        document.getElementById('doneButton').style.background = 'green';
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.props.deliveryDTO || typeof this.props.deliveryDTO === 'undefined') {
@@ -650,7 +662,17 @@ function (_React$Component7) {
         className: "col-l-4 "
       }, React.createElement("h2", {
         className: "underline"
-      }, "Delivery #", this.props.deliveryDTO.id), React.createElement("div", {
+      }, React.createElement("div", {
+        className: "row"
+      }, React.createElement("div", {
+        className: "col-l-6"
+      }, React.createElement("button", {
+        id: "doneButton",
+        className: "pager pager-block",
+        onClick: this.finishDelivery
+      }, "DONE")), React.createElement("div", {
+        className: "col-l-6"
+      }, "Delivery #", this.props.deliveryDTO.id))), React.createElement("div", {
         className: "content-list"
       }, points));
     }
@@ -665,17 +687,17 @@ function (_React$Component8) {
   _inherits(Point, _React$Component8);
 
   function Point(props) {
-    var _this9;
+    var _this10;
 
     _classCallCheck(this, Point);
 
-    _this9 = _possibleConstructorReturn(this, _getPrototypeOf(Point).call(this, props));
-    _this9.state = {
+    _this10 = _possibleConstructorReturn(this, _getPrototypeOf(Point).call(this, props));
+    _this10.state = {
       depot: {}
     };
-    _this9.updateLoadOpStatus = _this9.updateLoadOpStatus.bind(_assertThisInitialized(_this9));
-    _this9.updateUnloadOpStatus = _this9.updateUnloadOpStatus.bind(_assertThisInitialized(_this9));
-    return _this9;
+    _this10.updateLoadOpStatus = _this10.updateLoadOpStatus.bind(_assertThisInitialized(_this10));
+    _this10.updateUnloadOpStatus = _this10.updateUnloadOpStatus.bind(_assertThisInitialized(_this10));
+    return _this10;
   }
 
   _createClass(Point, [{
@@ -691,10 +713,10 @@ function (_React$Component8) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this10 = this;
+      var _this11 = this;
 
       axios.get('api/depot/' + this.props.coords + '/').then(function (response) {
-        _this10.setState({
+        _this11.setState({
           depot: response.data
         });
       });
@@ -702,7 +724,7 @@ function (_React$Component8) {
   }, {
     key: "render",
     value: function render() {
-      var _this11 = this;
+      var _this12 = this;
 
       if (!this.state.depot.location || typeof this.state.depot.location === 'undefined') {
         return null;
@@ -717,7 +739,7 @@ function (_React$Component8) {
         return React.createElement(Load, {
           key: load.id,
           load: load,
-          updateLoadOpStatus: _this11.updateLoadOpStatus
+          updateLoadOpStatus: _this12.updateLoadOpStatus
         });
       });
       var loadBadge;
@@ -747,7 +769,7 @@ function (_React$Component8) {
         return React.createElement(Unload, {
           key: unload.id,
           unload: unload,
-          updateUnloadOpStatus: _this11.updateUnloadOpStatus
+          updateUnloadOpStatus: _this12.updateUnloadOpStatus
         });
       });
       var unloadBadge;
@@ -792,22 +814,22 @@ function (_React$Component9) {
   _inherits(Load, _React$Component9);
 
   function Load(props) {
-    var _this12;
+    var _this13;
 
     _classCallCheck(this, Load);
 
-    _this12 = _possibleConstructorReturn(this, _getPrototypeOf(Load).call(this, props));
-    _this12.ship = _this12.ship.bind(_assertThisInitialized(_this12));
-    return _this12;
+    _this13 = _possibleConstructorReturn(this, _getPrototypeOf(Load).call(this, props));
+    _this13.ship = _this13.ship.bind(_assertThisInitialized(_this13));
+    return _this13;
   }
 
   _createClass(Load, [{
     key: "ship",
     value: function ship() {
-      var _this13 = this;
+      var _this14 = this;
 
       axios.put('api/cargo/update/status/' + this.props.load.id + '/SHIPPED').then(function (response) {
-        _this13.props.updateLoadOpStatus(_this13.props.load.id, 'SHIPPED');
+        _this14.props.updateLoadOpStatus(_this14.props.load.id, 'SHIPPED');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -870,22 +892,22 @@ function (_React$Component10) {
   _inherits(Unload, _React$Component10);
 
   function Unload(props) {
-    var _this14;
+    var _this15;
 
     _classCallCheck(this, Unload);
 
-    _this14 = _possibleConstructorReturn(this, _getPrototypeOf(Unload).call(this, props));
-    _this14.deliver = _this14.deliver.bind(_assertThisInitialized(_this14));
-    return _this14;
+    _this15 = _possibleConstructorReturn(this, _getPrototypeOf(Unload).call(this, props));
+    _this15.deliver = _this15.deliver.bind(_assertThisInitialized(_this15));
+    return _this15;
   }
 
   _createClass(Unload, [{
     key: "deliver",
     value: function deliver() {
-      var _this15 = this;
+      var _this16 = this;
 
       axios.put('api/cargo/update/status/' + this.props.unload.id + '/DELIVERED').then(function (response) {
-        _this15.props.updateUnloadOpStatus(_this15.props.unload.id, 'DELIVERED');
+        _this16.props.updateUnloadOpStatus(_this16.props.unload.id, 'DELIVERED');
       })["catch"](function (error) {
         console.log(error);
       });

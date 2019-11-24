@@ -344,6 +344,21 @@ class Driver extends React.Component {
 }
 
 class Route extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.finishDelivery = this.finishDelivery.bind(this);
+    }
+
+    finishDelivery() {
+        console.log('finish delivery id =', this.props.deliveryDTO.id);
+
+        axios.put('api/delivery/finish/' + this.props.deliveryDTO.id)
+            .then(response => {
+                document.getElementById('doneButton').style.background = 'green';
+            })
+    }
+
     render() {
         if (!this.props.deliveryDTO || typeof this.props.deliveryDTO === 'undefined') {
             return (
@@ -365,7 +380,14 @@ class Route extends React.Component {
 
         return (
             <div className="col-l-4 ">
-                <h2 className="underline">Delivery #{this.props.deliveryDTO.id}</h2>
+                <h2 className="underline">
+                    <div className="row">
+                        <div className="col-l-6">
+                            <button id="doneButton" className="pager pager-block" onClick={this.finishDelivery}>DONE</button>
+                        </div>
+                        <div className="col-l-6">Delivery #{this.props.deliveryDTO.id}</div>
+                    </div>
+                </h2>
                 <div className="content-list">
                     {points}
                 </div>

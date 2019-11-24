@@ -6,6 +6,7 @@ create table depot (
 
 create table truck (
 	id bigint auto_increment primary key,
+    deleted bit not null default false,
 	capacity int not null,
 	location varchar(500) not null,
 	plate varchar(250) not null,

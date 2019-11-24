@@ -42,10 +42,6 @@ var RestGetAll = function() {
                                 "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Update\" " +
                                 "onclick='ToUpdatePage(" + id + ")'>" +
                                 "&#9998;</button>" +
-
-                                "<button type=\"button\" class=\"btn btn-default btn-small\" title=\"Delete\" " +
-                                "onclick='RestDelete(" + id + ")'>" +
-                                "&#10006;</button>" +
                             "</div>" +
                         "</td>" +
                     "</tr>"

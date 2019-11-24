@@ -14,6 +14,7 @@ var RestDelete = function(id) {
         },
         error: function(e) {
             console.log(e.responseText);
+            alert('REQUEST PROCESSING ERROR');
         }
     });
 };
@@ -59,7 +60,8 @@ var RestGetAll = function() {
             }
         },
         error: function(e) {
-             console.log(e.responseText);
+            console.log(e.responseText);
+            alert('REQUEST PROCESSING ERROR');
         }
     });
 };
@@ -86,7 +88,8 @@ var RestPost = function() {
             window.location = '/transport/admin/driver_add';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
+            alert('REQUEST PROCESSING ERROR');
         }
     });
 };
@@ -113,7 +116,8 @@ var RestPut = function(id) {
             window.location = '/transport/admin/driver';
         },
         error: function(e) {
-            alert(e.responseText);
+            console.log(e.responseText);
+            alert('REQUEST PROCESSING ERROR');
         }
     });
 };

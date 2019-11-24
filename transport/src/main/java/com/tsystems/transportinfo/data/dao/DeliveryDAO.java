@@ -8,7 +8,7 @@ public interface DeliveryDAO {
 
     List<Delivery> getLastDeliveries(int limit);
 
-    void finishDelivery(long id);
+    boolean finishDelivery(long id);
 
     Delivery findDelivery(long id);
 

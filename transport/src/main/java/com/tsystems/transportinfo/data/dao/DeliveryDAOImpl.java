@@ -39,7 +39,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public void finishDelivery(long id) {
+    public boolean finishDelivery(long id) {
         Delivery delivery = findDelivery(id);
 
         Cargo undeliveredCargo =
@@ -51,6 +51,9 @@ public class DeliveryDAOImpl implements DeliveryDAO {
         if (undeliveredCargo == null) {
             delivery.setDone(true);
             updateDelivery(delivery);
+            return true;
+        } else {
+            return false;
         }
     }
 

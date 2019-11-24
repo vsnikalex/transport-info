@@ -37,9 +37,9 @@ public class DeliveryController {
     @DeliveryEvent
     @DriverEvent
     @TruckEvent
-    public void finishDelivery(@PathVariable long id) {
+    public boolean finishDelivery(@PathVariable long id) {
         log.info("Finish delivery with id={}", id);
-        deliveryService.finishDelivery(id);
+        return deliveryService.finishDelivery(id);
     }
 
 }

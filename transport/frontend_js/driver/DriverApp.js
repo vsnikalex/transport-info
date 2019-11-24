@@ -351,11 +351,14 @@ class Route extends React.Component {
     }
 
     finishDelivery() {
-        console.log('finish delivery id =', this.props.deliveryDTO.id);
-
         axios.put('api/delivery/finish/' + this.props.deliveryDTO.id)
             .then(response => {
-                document.getElementById('doneButton').style.background = 'green';
+                if (response.data === true) {
+                    document.getElementById('doneButton').style.background = 'rgba(0,166,0,0.81)';
+                    document.getElementById('doneButton').onclick = null;
+                } else {
+                    alert('THERE ARE CARGOES TO DELIVER');
+                }
             })
     }
 
@@ -378,13 +381,24 @@ class Route extends React.Component {
                                updateUnloadOpStatus={this.props.updateUnloadOpStatus} />);
         }
 
+        let finishDeliveryButton;
+        if (this.props.deliveryDTO.done === true) {
+            finishDeliveryButton = <div className="col-l-6">
+                                       <button id="doneButton" className="pager pager-block"
+                                               style={{backgroundColor: "rgba(0,166,0,0.8)"}} >DONE</button>
+                                   </div>
+        } else {
+            finishDeliveryButton = <div className="col-l-6">
+                                        <button id="doneButton" className="pager pager-block"
+                                                onClick={this.finishDelivery}>DONE</button>
+                                    </div>
+        }
+
         return (
             <div className="col-l-4 ">
                 <h2 className="underline">
                     <div className="row">
-                        <div className="col-l-6">
-                            <button id="doneButton" className="pager pager-block" onClick={this.finishDelivery}>DONE</button>
-                        </div>
+                        {finishDeliveryButton}
                         <div className="col-l-6">Delivery #{this.props.deliveryDTO.id}</div>
                     </div>
                 </h2>

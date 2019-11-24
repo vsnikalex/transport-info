@@ -628,9 +628,11 @@ function (_React$Component7) {
   _createClass(Route, [{
     key: "finishDelivery",
     value: function finishDelivery() {
-      console.log('finish delivery id =', this.props.deliveryDTO.id);
       axios.put('api/delivery/finish/' + this.props.deliveryDTO.id).then(function (response) {
-        document.getElementById('doneButton').style.background = 'green';
+        if (response.data === true) {
+          document.getElementById('doneButton').style.background = '#00A600';
+          document.getElementById('doneButton').onclick = null;
+        }
       });
     }
   }, {
@@ -658,19 +660,35 @@ function (_React$Component7) {
         }));
       }
 
+      var finishDeliveryButton;
+
+      if (this.props.deliveryDTO.done === true) {
+        finishDeliveryButton = React.createElement("div", {
+          className: "col-l-6"
+        }, React.createElement("button", {
+          id: "doneButton",
+          className: "pager pager-block",
+          style: {
+            backgroundColor: "rgba(0,166,0,0.51)"
+          }
+        }, "DONE"));
+      } else {
+        finishDeliveryButton = React.createElement("div", {
+          className: "col-l-6"
+        }, React.createElement("button", {
+          id: "doneButton",
+          className: "pager pager-block",
+          onClick: this.finishDelivery
+        }, "DONE"));
+      }
+
       return React.createElement("div", {
         className: "col-l-4 "
       }, React.createElement("h2", {
         className: "underline"
       }, React.createElement("div", {
         className: "row"
-      }, React.createElement("div", {
-        className: "col-l-6"
-      }, React.createElement("button", {
-        id: "doneButton",
-        className: "pager pager-block",
-        onClick: this.finishDelivery
-      }, "DONE")), React.createElement("div", {
+      }, finishDeliveryButton, React.createElement("div", {
         className: "col-l-6"
       }, "Delivery #", this.props.deliveryDTO.id))), React.createElement("div", {
         className: "content-list"

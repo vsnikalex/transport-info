@@ -98,12 +98,13 @@ public class DeliveryServiceImpl implements DeliveryService {
      * undelivered cargoes and marks delivery as done
      * if it is true, or does nothing.
      *
+     * @return false if delivery remained unchanged
      */
     @Override
     @Transactional
-    public void finishDelivery(Long id) {
+    public boolean finishDelivery(Long id) {
         log.info("Request DAO to finish Delivery id={}", id);
-        deliveryDAO.finishDelivery(id);
+        return deliveryDAO.finishDelivery(id);
     }
 
     @Override

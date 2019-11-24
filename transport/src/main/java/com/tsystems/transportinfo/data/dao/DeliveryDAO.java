@@ -10,4 +10,8 @@ public interface DeliveryDAO {
 
     void finishDelivery(long id);
 
+    Delivery findDelivery(long id);
+
+    void updateDelivery(Delivery delivery);
+
 }

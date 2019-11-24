@@ -2,6 +2,7 @@ package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
 import com.tsystems.transportinfo.data.dao.CargoDAO;
+import com.tsystems.transportinfo.data.dao.DeliveryDAO;
 import com.tsystems.transportinfo.data.dao.DriverDAO;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.CargoDTO;
@@ -35,6 +36,9 @@ public class DeliveryServiceImpl implements DeliveryService {
         dao = daoToSet;
         dao.setClazz(Delivery.class);
     }
+
+    @Autowired
+    private DeliveryDAO deliveryDAO;
 
     @Autowired
     private CargoDAO cargoDAO;
@@ -87,6 +91,19 @@ public class DeliveryServiceImpl implements DeliveryService {
     public void deleteDelivery(Long id) {
         log.info("Request DAO to delete Delivery id={}", id);
         dao.deleteById(id);
+    }
+
+    /**
+     * Underlying DAO checks that there is no
+     * undelivered cargoes and marks delivery as done
+     * if it is true, or does nothing.
+     *
+     */
+    @Override
+    @Transactional
+    public void finishDelivery(Long id) {
+        log.info("Request DAO to finish Delivery id={}", id);
+        deliveryDAO.finishDelivery(id);
     }
 
     @Override

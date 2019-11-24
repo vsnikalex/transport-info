@@ -13,4 +13,6 @@ public interface DeliveryService {
 
     DeliveryDTO convertToDTO(Delivery entity);
 
+    void finishDelivery(Long id);
+
 }

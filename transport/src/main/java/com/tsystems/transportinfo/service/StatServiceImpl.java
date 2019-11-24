@@ -75,6 +75,7 @@ public class StatServiceImpl implements StatService {
                         .stream()
                         .map(delivery -> {
                             long id = delivery.getId();
+                            boolean done = delivery.isDone();
                             String truck = delivery.getTruck().getPlate();
 
                             List<String> cargoes = delivery.getCargo()
@@ -108,7 +109,7 @@ public class StatServiceImpl implements StatService {
                                                         .getCity())
                                                     .collect(Collectors.joining(" &#8594; "));
 
-                            return new Delivery(cargoes, drivers, id, routeString, truck);
+                            return new Delivery(cargoes, done, drivers, id, routeString, truck);
                         })
                         .collect(Collectors.toList());
 

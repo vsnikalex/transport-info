@@ -23,6 +23,7 @@ import java.util.List;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="cargoes" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="done" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="drivers" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="route" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -38,6 +39,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "delivery", propOrder = {
     "cargoes",
+    "done",
     "drivers",
     "id",
     "route",
@@ -49,6 +51,7 @@ public class Delivery {
 
     @XmlElement(nillable = true)
     protected List<String> cargoes;
+    protected boolean done;
     @XmlElement(nillable = true)
     protected List<String> drivers;
     protected long id;
@@ -82,6 +85,22 @@ public class Delivery {
             cargoes = new ArrayList<String>();
         }
         return this.cargoes;
+    }
+
+    /**
+     * Gets the value of the done property.
+     * 
+     */
+    public boolean isDone() {
+        return done;
+    }
+
+    /**
+     * Sets the value of the done property.
+     * 
+     */
+    public void setDone(boolean value) {
+        this.done = value;
     }
 
     /**

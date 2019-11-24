@@ -40,6 +40,10 @@
                var tableRef = document.getElementById('delivery_table').getElementsByTagName('tbody')[0];
                var newRow   = tableRef.insertRow();
 
+               if (delivery.done) {
+                  newRow.style.background = 'rgba(0,166,0,0.51)';
+               }
+
                newRow.insertCell(0).innerHTML = delivery.id;
 
                newRow.insertCell(1).innerHTML = delivery.truck;

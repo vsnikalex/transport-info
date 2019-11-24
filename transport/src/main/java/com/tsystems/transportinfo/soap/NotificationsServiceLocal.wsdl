@@ -56,6 +56,7 @@
   <xs:complexType name="delivery">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="cargoes" nillable="true" type="xs:string"/>
+      <xs:element name="done" type="xs:boolean"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="drivers" nillable="true" type="xs:string"/>
       <xs:element name="id" type="xs:long"/>
       <xs:element minOccurs="0" name="route" type="xs:string"/>

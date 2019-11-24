@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Delivery {
 
     private long id;
+    private boolean done;
     private String truck;
     private String[] cargoes;
     private String[] drivers;

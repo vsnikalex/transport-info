@@ -29,7 +29,7 @@ public class DeliveryDTO {
         }
 
         public void addUnloadOps(CargoDTO... cargoDTOs){
-            loadOps.addAll(Arrays.asList(cargoDTOs));
+            unloadOps.addAll(Arrays.asList(cargoDTOs));
         }
     }
 

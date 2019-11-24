@@ -13,7 +13,7 @@ import javax.jws.WebService;
 @WebService(
         portName = "HttpNotificationsImplPort",
         serviceName = "NotificationsServiceLocal",
-//        wsdlLocation = "META-INF/wsdl/NotificationsService.wsdl",
+        wsdlLocation = "META-INF/wsdl/NotificationsService.wsdl",
         endpointInterface = "com.tsystems.transportinfo.soap.Notifications",
         targetNamespace = "http://soap.transportinfo.tsystems.com/"
 )
@@ -30,20 +30,32 @@ public class HttpNotificationsImpl implements Notifications {
 
     @Override
     public void updateDriversStat(DriversStat driversStat) {
-        log.info("HTTP drivers stat, total: {}", driversStat.getTotal());
-        driversStatEvent.fire(driversStat);
+        try {
+            log.info("HTTP drivers stat, total: {}", driversStat.getTotal());
+            driversStatEvent.fire(driversStat);
+        } catch (NullPointerException e) {
+            log.info("DriversStat is empty");
+        }
     }
 
     @Override
     public void updateTrucksStat(TrucksStat trucksStat) {
-        log.info("HTTP trucks stat, total: {}", trucksStat.getTotal());
-        trucksStatEvent.fire(trucksStat);
+        try {
+            log.info("HTTP trucks stat, total: {}", trucksStat.getTotal());
+            trucksStatEvent.fire(trucksStat);
+        } catch (NullPointerException e) {
+            log.info("TrucksStat is empty");
+        }
     }
 
     @Override
     public void updateDeliveryList(DeliveryList deliveryList) {
-        log.info("HTTP deliveries, total: {}", deliveryList.getDeliveries().size());
-        deliveryListEvent.fire(deliveryList);
+        try {
+            log.info("HTTP deliveries, total: {}", deliveryList.getDeliveries().size());
+            deliveryListEvent.fire(deliveryList);
+        } catch (NullPointerException e) {
+            log.info("DeliveryList is empty");
+        }
     }
 
 }

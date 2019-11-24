@@ -39,8 +39,13 @@ public class SoapAspect {
     @After("@annotation(DeliveryEvent)")
     public void sendDeliveryList() {
         DeliveryList deliveryList = statService.getDeliveryList(10);
-        notifications.updateDeliveryList(deliveryList);
-        log.info("Delivery transaction is successful");
+
+        if (null != deliveryList) {
+            notifications.updateDeliveryList(deliveryList);
+            log.info("Delivery transaction is successful");
+        } else {
+            log.info("No deliveries to send");
+        }
     }
 
 }

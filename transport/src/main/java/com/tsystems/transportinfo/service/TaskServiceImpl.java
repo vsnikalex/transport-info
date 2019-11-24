@@ -44,7 +44,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public double getFutureWorkedHours(Long driverId, long date) {
-        log.info("Request Driver id={} tasks no date = {} (Unix timestamp)", driverId, date);
+        log.info("Request Driver id={} tasks for date = {} (Unix timestamp)", driverId, date);
         List<Task> driverTasks = taskDAO.findTasksByDriverId(driverId);
 
         return calculateWorkHours(driverTasks, date);

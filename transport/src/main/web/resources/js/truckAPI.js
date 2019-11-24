@@ -6,7 +6,11 @@ var RestDelete = function(id) {
         url:  prefix + '/delete/' + id,
         async: true,
         success: function(response) {
-            window.location = '/transport/admin/truck';
+            if (response === true) {
+                window.location = '/transport/admin/truck';
+            } else {
+                alert('TRYING TO DELETE TRUCK ASSIGNED TO DELIVERY');
+            }
         },
         error: function(e) {
             console.log(e.responseText);

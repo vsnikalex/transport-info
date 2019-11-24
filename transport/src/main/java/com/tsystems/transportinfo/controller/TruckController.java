@@ -43,9 +43,9 @@ public class TruckController {
 
     @DeleteMapping("/delete/{id}")
     @TruckEvent
-    public void deleteTruck(@PathVariable long id) {
-        log.info("Delete Truck id={}", id);
-        truckService.deleteTruck(id);
+    public boolean deleteTruck(@PathVariable long id) {
+        log.info("Attempt to Delete Truck id={}", id);
+        return truckService.deleteTruck(id);
     }
 
     @PostMapping("/add")

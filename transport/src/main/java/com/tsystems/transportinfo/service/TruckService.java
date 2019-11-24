@@ -17,7 +17,7 @@ public interface TruckService {
 
     TruckDTO getTruck(Long id);
 
-    void deleteTruck(Long id);
+    boolean deleteTruck(Long id);
 
     TruckDTO convertToDto(Truck entity);
 

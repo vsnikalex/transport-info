@@ -92,9 +92,9 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     @Transactional
-    public void deleteTruck(Long id) {
+    public boolean deleteTruck(Long id) {
         log.info("Delete Truck id={}", id);
-        dao.deleteById(id);
+        return truckDAO.deleteTruck(id);
     }
 
     @Override

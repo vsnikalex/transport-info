@@ -15,4 +15,8 @@ public interface TruckDAO {
 
     List<Truck> findAvailableTrucks(GHPoint destination, long maxTravelTime);
 
+    Truck findTruck(long id);
+
+    boolean deleteTruck(long id);
+
 }

@@ -21,4 +21,6 @@ public interface DriverDAO {
 
     void assignToDelivery(long driverId, long deliveryID);
 
+    boolean deleteDriver(long id);
+
 }

@@ -105,14 +105,15 @@ public class DriverServiceImpl implements DriverService {
     }
 
     /**
-     * TODO: Marks cargoes as deleted.
+     * Underlying dao method returns false
+     * if encounters business constraints or no Driver found.
      *
      */
     @Override
     @Transactional
-    public void deleteDriver(Long id) {
-        log.info("Delete Driver id={}", id);
-        dao.deleteById(id);
+    public boolean deleteDriver(Long id) {
+        log.info("Attempt to Delete Driver id={}", id);
+        return driverDAO.deleteDriver(id);
     }
 
     @Override

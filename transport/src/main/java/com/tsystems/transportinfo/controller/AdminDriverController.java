@@ -44,9 +44,9 @@ public class AdminDriverController {
 
     @DeleteMapping("/delete/{id}")
     @DriverEvent
-    public void deleteDriver(@PathVariable long id) {
-        log.info("Delete Driver id={}", id);
-        driverService.deleteDriver(id);
+    public boolean deleteDriver(@PathVariable long id) {
+        log.info("Attempt to Delete Driver id={}", id);
+        return driverService.deleteDriver(id);
     }
 
     @PostMapping("/add")

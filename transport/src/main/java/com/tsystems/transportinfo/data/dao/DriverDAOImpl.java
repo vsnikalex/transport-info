@@ -110,4 +110,22 @@ public class DriverDAOImpl implements DriverDAO {
         updateDriver(driver);
     }
 
+    @Override
+    public boolean deleteDriver(long id) {
+        Driver driver = findDriver(id);
+        if (driver == null) { return false; }
+
+        Delivery driversDelivery = driver.getDelivery();
+
+        if (driversDelivery == null || driversDelivery.getDrivers().size() != 1) {
+            Session currentSession = sessionFactory.getCurrentSession();
+            currentSession.delete(driver);
+            return true;
+        } else {
+            log.info("Attempt to delete last Driver id={} on Delivery id={}",
+                    driver.getId(), driversDelivery.getId());
+            return false;
+        }
+    }
+
 }

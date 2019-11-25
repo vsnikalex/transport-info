@@ -12,8 +12,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - '3306:3306'
-    expose:
-      - '3306'
   message-queue:
     image: vromero/activemq-artemis
     hostname: ti-activemq
@@ -24,9 +22,6 @@ services:
     ports:
       - '8161:8161'
       - '61616:61616'
-    expose:
-      - '8161'
-      - '61616'
   info:
     build: info/
     hostname: ti-info
@@ -35,3 +30,18 @@ services:
       - message-queue
     ports:
       - '8080:8080'
+  transport:
+    build: transport/
+    hostname: ti-transport
+    container_name: ti-transport
+    depends_on:
+      - database
+      - message-queue
+    environment:
+      spring.profiles.active: 'docker'
+      dbserver: 'ti-mysql'
+      dbport: '3306'
+      dbuser: 'admin'
+      dbpassword: 'admin'
+    ports:
+      - '3333:8080'

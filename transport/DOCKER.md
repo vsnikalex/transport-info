@@ -24,7 +24,7 @@ mysql>  show databases;  use transportinfo;  show tables;  quit
 ```
 docker stop ti-mysql
 ```
-##### (ReStart) ti-mysql container
+##### (Re)Start ti-mysql container
 ```
 docker start ti-mysql
 ```

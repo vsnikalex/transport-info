@@ -27,3 +27,11 @@ services:
     expose:
       - '8161'
       - '61616'
+  info:
+    build: info/
+    hostname: ti-info
+    container_name: ti-info
+    depends_on:
+      - message-queue
+    ports:
+      - '8080:8080'

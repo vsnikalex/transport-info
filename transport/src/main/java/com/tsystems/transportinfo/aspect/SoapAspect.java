@@ -1,10 +1,7 @@
 package com.tsystems.transportinfo.aspect;
 
 import com.tsystems.transportinfo.service.StatService;
-import com.tsystems.transportinfo.soap.DeliveryList;
-import com.tsystems.transportinfo.soap.DriversStat;
-import com.tsystems.transportinfo.soap.Notifications;
-import com.tsystems.transportinfo.soap.TrucksStat;
+import com.tsystems.transportinfo.soap.*;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,32 +16,46 @@ public class SoapAspect {
     @Autowired
     private StatService statService;
 
-    @Autowired
-    private Notifications notifications;
-
     @After("@annotation(DriverEvent)")
     public void sendDriversStat() {
-        DriversStat driversStat = statService.getDriversStat();
-       notifications.updateDriversStat(driversStat);
-        log.info("Driver transaction is successful");
+        Notifications notifications = getNotificationService();
+
+        if (null != notifications) {
+            DriversStat driversStat = statService.getDriversStat();
+            notifications.updateDriversStat(driversStat);
+            log.info("DriversStat sent");
+        }
     }
 
     @After("@annotation(TruckEvent)")
     public void sendTrucksStat() {
-        TrucksStat trucksStat = statService.getTrucksStat();
-        notifications.updateTrucksStat(trucksStat);
-        log.info("Truck transaction is successful");
+        Notifications notifications = getNotificationService();
+
+        if (null != notifications) {
+            TrucksStat trucksStat = statService.getTrucksStat();
+            notifications.updateTrucksStat(trucksStat);
+            log.info("TrucksStat sent");
+        }
     }
 
     @After("@annotation(DeliveryEvent)")
     public void sendDeliveryList() {
-        DeliveryList deliveryList = statService.getDeliveryList(10);
+        Notifications notifications = getNotificationService();
 
-        if (null != deliveryList) {
+        if (null != notifications) {
+            DeliveryList deliveryList = statService.getDeliveryList(10);
             notifications.updateDeliveryList(deliveryList);
-            log.info("Delivery transaction is successful");
-        } else {
-            log.info("No deliveries to send");
+            log.info("DeliveryList sent");
+        }
+    }
+
+    private Notifications getNotificationService() {
+        try {
+            NotificationsServiceLocal notificationsService = new NotificationsServiceLocal();
+            return notificationsService.getHttpNotificationsImplPort();
+        } catch (Exception e) {
+            log.info("SOAP service is not available");
+            return null;
         }
     }
 

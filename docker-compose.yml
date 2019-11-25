@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  database:
+    image: mysql
+    hostname: ti-mysql
+    container_name: ti-mysql
+    environment:
+      MYSQL_DATABASE: 'transportinfo'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+  message-queue:
+    image: vromero/activemq-artemis
+    hostname: ti-activemq
+    container_name: ti-activemq
+    environment:
+      ARTEMIS_USERNAME: 'admin'
+      ARTEMIS_PASSWORD: 'admin'
+    ports:
+      - '8161:8161'
+      - '61616:61616'
+    expose:
+      - '8161'
+      - '61616'

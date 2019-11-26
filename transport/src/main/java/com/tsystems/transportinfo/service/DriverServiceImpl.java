@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DeliveryService deliveryService;
+
+    @Autowired
+    private TaskService taskService;
 
     @Autowired
     private TransportUserDetailsService transportUserDetailsService;
@@ -120,7 +124,9 @@ public class DriverServiceImpl implements DriverService {
     public DriverDTO convertToDto(Driver entity) {
         DriverDTO driverDTO = modelMapper.map(entity, DriverDTO.class);
 
-        driverDTO.setWorkedThisMonth(entity.getTasks());
+        double workedThisMonth = taskService.calculateWorkHours(entity.getTasks(), Instant.now().getEpochSecond());
+
+        driverDTO.setWorkedThisMonth(workedThisMonth);
         driverDTO.setStatus(entity.getTasks());
 
         Delivery driverDelivery = entity.getDelivery();

@@ -50,7 +50,7 @@ public class TaskServiceImpl implements TaskService {
         return calculateWorkHours(driverTasks, date);
     }
 
-    private double calculateWorkHours(List<Task> tasks, long date) {
+    public double calculateWorkHours(List<Task> tasks, long date) {
         LocalDateTime endOfMonth = LocalDateTime.ofEpochSecond(date, 0, ZoneOffset.UTC);
         LocalDateTime monthBeforeIt = endOfMonth.minus(1, ChronoUnit.MONTHS);
 

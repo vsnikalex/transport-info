@@ -47,7 +47,10 @@ public class TaskServiceImpl implements TaskService {
         log.info("Request Driver id={} tasks for date = {} (Unix timestamp)", driverId, date);
         List<Task> driverTasks = taskDAO.findTasksByDriverId(driverId);
 
-        return calculateWorkHours(driverTasks, date);
+        double workHours = calculateWorkHours(driverTasks, date);;
+        log.info("Calculated {} working hours", workHours);
+
+        return workHours;
     }
 
     public double calculateWorkHours(List<Task> tasks, long date) {

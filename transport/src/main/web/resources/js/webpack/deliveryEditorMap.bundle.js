@@ -126,8 +126,8 @@ var truckRoutingLayer = L.geoJSON().addTo(map);
 var ghRouting;
 
 window.onload = function () {
-  // let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
-  var apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
+  var apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00"; // let apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
+
   var profile = "car";
   var host;
   ghOptimization = new GraphHopperOptimization({

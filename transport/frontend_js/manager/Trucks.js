@@ -17,15 +17,15 @@ class Trucks extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: Customize max travel hours, which is 3 in milliseconds (10 800 000) by default
-        axios.get('api/truck/all/' + this.props.depotId + '/' + 10800000).then(response => {
+        // TODO: Customize max travel hours, which is 2 in milliseconds (7 200 000) by default
+        axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
             this.setState({trucks: response.data});
         });
     }
 
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
-            axios.get('api/truck/all/' + this.props.depotId + '/' + 43200000).then(response => {
+            axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
                 this.setState({trucks: response.data, orderWeight: 0, travelTime: 0});
             });
         } else if (this.props.orderWeight !== oldProps.orderWeight || this.props.travelTime !== oldProps.travelTime) {

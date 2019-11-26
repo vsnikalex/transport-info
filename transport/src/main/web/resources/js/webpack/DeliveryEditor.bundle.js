@@ -967,8 +967,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // TODO: Customize max travel hours, which is 3 in milliseconds (10 800 000) by default
-      axios.get('api/truck/all/' + this.props.depotId + '/' + 10800000).then(function (response) {
+      // TODO: Customize max travel hours, which is 2 in milliseconds (7 200 000) by default
+      axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(function (response) {
         _this2.setState({
           trucks: response.data
         });
@@ -980,7 +980,7 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.props.depotId !== oldProps.depotId) {
-        axios.get('api/truck/all/' + this.props.depotId + '/' + 43200000).then(function (response) {
+        axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(function (response) {
           _this3.setState({
             trucks: response.data,
             orderWeight: 0,
@@ -1190,8 +1190,8 @@ var truckRoutingLayer = L.geoJSON().addTo(map);
 var ghRouting;
 
 window.onload = function () {
-  // let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
-  var apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
+  var apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00"; // let apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
+
   var profile = "car";
   var host;
   ghOptimization = new GraphHopperOptimization({

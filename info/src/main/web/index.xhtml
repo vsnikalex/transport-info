@@ -11,7 +11,7 @@
       <script>
          EventSource = SSE;
 
-         const source = new SSE("http://localhost:8080/info/rest/cdievents");
+         const source = new SSE("/info/rest/cdievents");
 
          source.addEventListener('drivers stat', function(e) {
             let ds = JSON.parse(e.data);

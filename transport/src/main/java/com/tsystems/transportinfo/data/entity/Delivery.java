@@ -18,6 +18,9 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "estWorkHours", nullable = false)
+    private Long estWorkHours;
+
     @Column(name = "done", nullable = false)
     private boolean done;
 

@@ -42,6 +42,7 @@ class Lists extends React.Component{
             orderWeight: 0,
             activities: {},
             travelTime: 0,
+            workHours: 0,
 
             selectedTruckId: 0,
             selectedTruckCapacity: 0,
@@ -112,8 +113,8 @@ class Lists extends React.Component{
         });
     }
 
-    selectTruck(truck) {
-        this.setState({selectedTruckId: truck.id, selectedTruckCapacity: truck.capacity});
+    selectTruck(truck, workHours) {
+        this.setState({selectedTruckId: truck.id, selectedTruckCapacity: truck.capacity, workHours: workHours});
     }
 
     addDriver(driver) {
@@ -156,7 +157,8 @@ class Lists extends React.Component{
             'cargoIDs': Array.from(this.state.selectedCargoes),
             'truckID': this.state.selectedTruckId,
             'driverIDs': Array.from(this.state.selectedDrivers),
-            'route': JSON.stringify(route)
+            'route': JSON.stringify(route),
+            'estWorkHours' : this.state.workHours
         };
 
         axios.post('api/delivery/add', DeliveryJSON).then(response => {

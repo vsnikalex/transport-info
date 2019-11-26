@@ -17,15 +17,15 @@ class Trucks extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: Customize max travel hours, which is 2 in milliseconds (7200000) by default
-        axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
+        // TODO: Customize max travel hours, which is 3 in milliseconds (10 800 000) by default
+        axios.get('api/truck/all/' + this.props.depotId + '/' + 10800000).then(response => {
             this.setState({trucks: response.data});
         });
     }
 
     componentDidUpdate(oldProps) {
         if (this.props.depotId !== oldProps.depotId) {
-            axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(response => {
+            axios.get('api/truck/all/' + this.props.depotId + '/' + 43200000).then(response => {
                 this.setState({trucks: response.data, orderWeight: 0, travelTime: 0});
             });
         } else if (this.props.orderWeight !== oldProps.orderWeight || this.props.travelTime !== oldProps.travelTime) {
@@ -54,7 +54,7 @@ class TruckList extends React.Component{
             truckTransferTime: 0
         };
 
-        this.selectTruck = this.selectTruck.bind(this);
+        this.calculateRouteAndSelectTruck = this.calculateRouteAndSelectTruck.bind(this);
     }
 
     componentDidUpdate(oldProps) {
@@ -63,22 +63,24 @@ class TruckList extends React.Component{
         }
     }
 
-    selectTruck(newTruck) {
+    calculateRouteAndSelectTruck(newTruck) {
         clearTrucks();
         markTruck(newTruck);
         calculateTruckRoute().then(time => {
-            this.props.selectTruck(newTruck);
+            this.props.selectTruck(newTruck, parseFloat(this.props.travelTime) + parseFloat(time));
             this.setState({selectedTruck: newTruck, truckTransferTime: time})
         });
     }
 
     render() {
         const trucks = this.props.trucks.map(truck =>
-            <Truck key={truck.id} truck={truck} orderWeight={this.props.orderWeight} selectTruck={this.selectTruck}/>
+            <Truck key={truck.id} truck={truck}
+                   orderWeight={this.props.orderWeight}
+                   calculateRouteAndSelectTruck={this.calculateRouteAndSelectTruck} />
         );
 
-        let drivers;
         let wh = parseFloat(this.state.truckTransferTime) + parseFloat(this.props.travelTime);
+        let drivers;
         if (this.state.selectedTruck.location) {
             drivers = <Drivers city={this.state.selectedTruck.location} workHours={wh}
                                deselectAllDrivers={this.props.deselectAllDrivers}
@@ -111,7 +113,7 @@ class Truck extends React.Component{
     }
 
     handleChecked() {
-        this.props.selectTruck(this.props.truck);
+        this.props.calculateRouteAndSelectTruck(this.props.truck);
     }
 
     render() {

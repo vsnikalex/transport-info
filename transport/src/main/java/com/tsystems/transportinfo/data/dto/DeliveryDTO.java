@@ -35,6 +35,8 @@ public class DeliveryDTO {
 
     private Long id;
 
+    private Long estWorkHours;
+
     private boolean done;
 
     private long[] cargoIDs;

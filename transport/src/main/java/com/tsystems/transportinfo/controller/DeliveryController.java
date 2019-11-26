@@ -24,6 +24,9 @@ public class DeliveryController {
     public void saveDelivery(@RequestBody DeliveryDTO deliveryDTO) {
         log.info("Save delivery with cargo id={}, driver id={}, truck id={}",
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());
+
+        log.info("Estimated work hours: {}", deliveryDTO.getEstWorkHours());
+
         deliveryService.createDelivery(deliveryDTO);
     }
 

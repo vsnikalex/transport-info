@@ -65,6 +65,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                 deliveryDTO.getCargoIDs(), deliveryDTO.getDriverIDs(), deliveryDTO.getTruckID());
 
         Delivery delivery = Delivery.builder()
+                .estWorkHours(deliveryDTO.getEstWorkHours())
                 .done(false)
                 .route(deliveryDTO.getRoute())
                 .truck(new Truck(deliveryDTO.getTruckID()))

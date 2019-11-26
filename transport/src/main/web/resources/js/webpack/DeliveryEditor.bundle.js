@@ -376,6 +376,7 @@ function (_React$Component2) {
       orderWeight: 0,
       activities: {},
       travelTime: 0,
+      workHours: 0,
       selectedTruckId: 0,
       selectedTruckCapacity: 0,
       selectedDrivers: new Set()
@@ -446,10 +447,11 @@ function (_React$Component2) {
     }
   }, {
     key: "selectTruck",
-    value: function selectTruck(truck) {
+    value: function selectTruck(truck, workHours) {
       this.setState({
         selectedTruckId: truck.id,
-        selectedTruckCapacity: truck.capacity
+        selectedTruckCapacity: truck.capacity,
+        workHours: workHours
       });
     }
   }, {
@@ -501,7 +503,8 @@ function (_React$Component2) {
         'cargoIDs': Array.from(this.state.selectedCargoes),
         'truckID': this.state.selectedTruckId,
         'driverIDs': Array.from(this.state.selectedDrivers),
-        'route': JSON.stringify(route)
+        'route': JSON.stringify(route),
+        'estWorkHours': this.state.workHours
       };
       axios.post('api/delivery/add', DeliveryJSON).then(function (response) {
         alert('SAVED');
@@ -964,8 +967,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // TODO: Customize max travel hours, which is 2 in milliseconds (7200000) by default
-      axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(function (response) {
+      // TODO: Customize max travel hours, which is 3 in milliseconds (10 800 000) by default
+      axios.get('api/truck/all/' + this.props.depotId + '/' + 10800000).then(function (response) {
         _this2.setState({
           trucks: response.data
         });
@@ -977,7 +980,7 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.props.depotId !== oldProps.depotId) {
-        axios.get('api/truck/all/' + this.props.depotId + '/' + 7200000).then(function (response) {
+        axios.get('api/truck/all/' + this.props.depotId + '/' + 43200000).then(function (response) {
           _this3.setState({
             trucks: response.data,
             orderWeight: 0,
@@ -1026,7 +1029,7 @@ function (_React$Component2) {
       selectedTruck: {},
       truckTransferTime: 0
     };
-    _this4.selectTruck = _this4.selectTruck.bind(_assertThisInitialized(_this4));
+    _this4.calculateRouteAndSelectTruck = _this4.calculateRouteAndSelectTruck.bind(_assertThisInitialized(_this4));
     return _this4;
   }
 
@@ -1040,14 +1043,14 @@ function (_React$Component2) {
       }
     }
   }, {
-    key: "selectTruck",
-    value: function selectTruck(newTruck) {
+    key: "calculateRouteAndSelectTruck",
+    value: function calculateRouteAndSelectTruck(newTruck) {
       var _this5 = this;
 
       Object(_deliveryEditorMap__WEBPACK_IMPORTED_MODULE_0__["clearTrucks"])();
       Object(_deliveryEditorMap__WEBPACK_IMPORTED_MODULE_0__["markTruck"])(newTruck);
       Object(_deliveryEditorMap__WEBPACK_IMPORTED_MODULE_0__["calculateTruckRoute"])().then(function (time) {
-        _this5.props.selectTruck(newTruck);
+        _this5.props.selectTruck(newTruck, parseFloat(_this5.props.travelTime) + parseFloat(time));
 
         _this5.setState({
           selectedTruck: newTruck,
@@ -1065,11 +1068,11 @@ function (_React$Component2) {
           key: truck.id,
           truck: truck,
           orderWeight: _this6.props.orderWeight,
-          selectTruck: _this6.selectTruck
+          calculateRouteAndSelectTruck: _this6.calculateRouteAndSelectTruck
         });
       });
-      var drivers;
       var wh = parseFloat(this.state.truckTransferTime) + parseFloat(this.props.travelTime);
+      var drivers;
 
       if (this.state.selectedTruck.location) {
         drivers = React.createElement(_Drivers__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1114,7 +1117,7 @@ function (_React$Component3) {
   _createClass(Truck, [{
     key: "handleChecked",
     value: function handleChecked() {
-      this.props.selectTruck(this.props.truck);
+      this.props.calculateRouteAndSelectTruck(this.props.truck);
     }
   }, {
     key: "render",

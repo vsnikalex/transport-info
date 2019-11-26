@@ -16,6 +16,7 @@ create table truck (
 
 create table delivery (
 	id bigint auto_increment primary key,
+    estWorkHours numeric(10,5),
 	done bit not null,
 	route varchar(250) not null,
 	truck_id bigint not null,

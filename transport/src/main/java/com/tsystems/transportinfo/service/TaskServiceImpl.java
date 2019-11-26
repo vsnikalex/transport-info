@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.tsystems.transportinfo.data.dao.TaskDAO;
+import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.entity.Task;
 import com.tsystems.transportinfo.data.entity.enums.DriverAction;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskDAO taskDAO;
+
+    @Autowired
+    private DriverService driverService;
 
     @Override
     @Transactional
@@ -49,6 +53,13 @@ public class TaskServiceImpl implements TaskService {
 
         double workHours = calculateWorkHours(driverTasks, date);;
         log.info("Calculated {} working hours", workHours);
+
+        // USED IN DEMONSTRATION PURPOSES
+        DriverDTO driverDTO = driverService.getDriver(driverId);
+        if (null != driverDTO.getDeliveryDTO() && driverDTO.getDeliveryDTO().isDone()) {
+            workHours += driverDTO.getDeliveryDTO().getEstWorkHours();
+        }
+        // MUST BE DELETED
 
         return workHours;
     }

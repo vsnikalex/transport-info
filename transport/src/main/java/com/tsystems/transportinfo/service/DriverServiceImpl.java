@@ -126,6 +126,12 @@ public class DriverServiceImpl implements DriverService {
 
         double workedThisMonth = taskService.calculateWorkHours(entity.getTasks(), Instant.now().getEpochSecond());
 
+        // USED IN DEMONSTRATION PURPOSES
+        if (null != entity.getDelivery() && entity.getDelivery().isDone()) {
+            workedThisMonth += entity.getDelivery().getEstWorkHours();
+        }
+        // MUST BE DELETED
+
         driverDTO.setWorkedThisMonth(workedThisMonth);
         driverDTO.setStatus(entity.getTasks());
 

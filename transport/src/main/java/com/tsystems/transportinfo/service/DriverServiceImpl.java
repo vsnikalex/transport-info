@@ -6,10 +6,7 @@ import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dto.DeliveryDTO;
 import com.tsystems.transportinfo.data.dto.DriverDTO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
-import com.tsystems.transportinfo.data.entity.Delivery;
-import com.tsystems.transportinfo.data.entity.Driver;
-import com.tsystems.transportinfo.data.entity.Truck;
-import com.tsystems.transportinfo.data.entity.User;
+import com.tsystems.transportinfo.data.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +46,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private DepotService depotService;
 
     @Autowired
     private TransportUserDetailsService transportUserDetailsService;
@@ -153,7 +153,8 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = modelMapper.map(dto, Driver.class);
 
         String coords = dto.getCoords();
-        driver.setLocation(geoService.coordsToEntry(coords));
+        Depot depot = depotService.getDepotByCoords(coords);
+        driver.setLocation(depot.getLocation());
 
         return driver;
     }

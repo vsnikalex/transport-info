@@ -111,7 +111,8 @@ public class TruckServiceImpl implements TruckService {
         Truck truck = modelMapper.map(dto, Truck.class);
 
         String coords = dto.getCoords();
-        truck.setLocation(geoService.coordsToEntry(coords));
+        Depot depot = depotService.getDepotByCoords(coords);
+        truck.setLocation(depot.getLocation());
 
         return truck;
     }

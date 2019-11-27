@@ -1,7 +1,7 @@
 const React = require('react');
 const axios = require('axios');
 
-import {calculateTruckRoute, clearTrucks, markTruck, optimizeDeliveryRoute} from './deliveryEditorMap';
+import {calculateTruckRoute, clearTrucks, markTruck} from './deliveryEditorMap';
 
 import Drivers from "./Drivers";
 

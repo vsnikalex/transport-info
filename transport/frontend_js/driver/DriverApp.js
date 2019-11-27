@@ -21,8 +21,8 @@ class DriverApp extends React.Component {
     }
 
     selectDriver(event) {
-        const driver = this.state.drivers.find(driver =>
-            driver.id == event.target.value
+        const driver = this.state.drivers.find(d =>
+            d.id == event.target.value
         );
 
         this.setState({selectedDriverId: event.target.value, selectedDriver: driver});
@@ -42,10 +42,10 @@ class DriverApp extends React.Component {
         let index = loadOps.findIndex(cargo => cargo.id == id);
         loadOps[index].status = status;
 
-        for (let coords in operations){
-            let i = operations[coords].unloadOps.findIndex(cargo => cargo.id == id);
+        for (let coord in operations){
+            let i = operations[coord].unloadOps.findIndex(cargo => cargo.id == id);
             if (i !== -1) {
-                operations[coords].unloadOps[i].status = status;
+                operations[coord].unloadOps[i].status = status;
             }
         }
 
@@ -56,10 +56,10 @@ class DriverApp extends React.Component {
         let driver = this.state.selectedDriver;
         let operations = driver.deliveryDTO.routeWithCargoOperations;
 
-        for (let coords in operations){
-            let i = operations[coords].loadOps.findIndex(cargo => cargo.id == id);
+        for (let coord in operations){
+            let i = operations[coord].loadOps.findIndex(cargo => cargo.id == id);
             if (i !== -1) {
-                operations[coords].loadOps[i].status = status;
+                operations[coord].loadOps[i].status = status;
             }
         }
 

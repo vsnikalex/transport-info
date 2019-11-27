@@ -20,6 +20,9 @@
         <hibernate.version>5.4.5.Final</hibernate.version>
         <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
         <cxf-rt-frontend-jaxws.version>3.3.4</cxf-rt-frontend-jaxws.version>
+<!--        <sonar.sources>-->
+<!--            frontend_js-->
+<!--        </sonar.sources>-->
     </properties>
 
     <dependencies>
@@ -264,11 +267,11 @@
         <finalName>transport</finalName>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.7.0.1746</version>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.sonarsource.scanner.maven</groupId>-->
+<!--                    <artifactId>sonar-maven-plugin</artifactId>-->
+<!--                    <version>3.7.0.1746</version>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>

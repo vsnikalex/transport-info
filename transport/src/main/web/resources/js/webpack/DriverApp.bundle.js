@@ -150,8 +150,8 @@ function (_React$Component) {
   _createClass(DriverApp, [{
     key: "selectDriver",
     value: function selectDriver(event) {
-      var driver = this.state.drivers.find(function (driver) {
-        return driver.id == event.target.value;
+      var driver = this.state.drivers.find(function (d) {
+        return d.id == event.target.value;
       });
       this.setState({
         selectedDriverId: event.target.value,
@@ -178,13 +178,13 @@ function (_React$Component) {
       });
       loadOps[index].status = status;
 
-      for (var _coords in operations) {
-        var i = operations[_coords].unloadOps.findIndex(function (cargo) {
+      for (var coord in operations) {
+        var i = operations[coord].unloadOps.findIndex(function (cargo) {
           return cargo.id == id;
         });
 
         if (i !== -1) {
-          operations[_coords].unloadOps[i].status = status;
+          operations[coord].unloadOps[i].status = status;
         }
       }
 
@@ -198,13 +198,13 @@ function (_React$Component) {
       var driver = this.state.selectedDriver;
       var operations = driver.deliveryDTO.routeWithCargoOperations;
 
-      for (var _coords2 in operations) {
-        var i = operations[_coords2].loadOps.findIndex(function (cargo) {
+      for (var coord in operations) {
+        var i = operations[coord].loadOps.findIndex(function (cargo) {
           return cargo.id == id;
         });
 
         if (i !== -1) {
-          operations[_coords2].loadOps[i].status = status;
+          operations[coord].loadOps[i].status = status;
         }
       }
 

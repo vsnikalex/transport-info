@@ -60,8 +60,8 @@ public class GeoServiceImpl implements GeoService {
     @Override
     public String format(String point) {
         String[] coords = point.split(",");
-        coords[0] = coords[0].substring(0, coords[0].indexOf(".") + 6);
-        coords[1] = coords[1].substring(0, coords[1].indexOf(".") + 6);
+        coords[0] = coords[0].substring(0, coords[0].indexOf('.') + 6);
+        coords[1] = coords[1].substring(0, coords[1].indexOf('.') + 6);
         return coords[0] + "," + coords[1];
     }
 

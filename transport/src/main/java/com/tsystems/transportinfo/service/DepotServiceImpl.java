@@ -16,6 +16,9 @@ import java.util.List;
 @Service
 public class DepotServiceImpl implements DepotService {
 
+    @Autowired
+    private DepotDAO depotDAO;
+
     private GenericDAO<Depot> dao;
 
     @Autowired
@@ -23,9 +26,6 @@ public class DepotServiceImpl implements DepotService {
         dao = daoToSet;
         dao.setClazz(Depot.class);
     }
-
-    @Autowired
-    private DepotDAO depotDAO;
 
     @Override
     @Transactional

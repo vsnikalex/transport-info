@@ -63,6 +63,7 @@
                             <th>Weight</th>
                             <th>Status</th>
                             <th>Location</th>
+                            <th>Destination</th>
                             <th></th>
                         </tr>
                     </thead>

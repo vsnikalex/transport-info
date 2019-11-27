@@ -4,7 +4,6 @@ const axios = require('axios');
 import {calculateTruckRoute, clearTrucks, markTruck} from './deliveryEditorMap';
 
 import Drivers from "./Drivers";
-import LinearProgress from '@material-ui/core/Button';
 
 class Trucks extends React.Component {
 
@@ -48,8 +47,8 @@ class Trucks extends React.Component {
 }
 
 class TruckList extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             selectedTruck: {},
             truckTransferTime: 0
@@ -107,8 +106,8 @@ class TruckList extends React.Component{
 }
 
 class Truck extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.handleChecked = this.handleChecked.bind(this);
     }

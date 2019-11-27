@@ -37,7 +37,7 @@ var RestGetAll = function() {
                         "<td>" + result[i].plate           +   "</td>" +
                         "<td>" + result[i].capacity  +   "</td>" +
                         "<td>" + result[i].status       +   "</td>" +
-                        "<td>" + result[i].location.country       +   "</td>" +
+                        "<td>" + result[i].location.country       + ": " + result[i].location.city       +  "</td>" +
                         "<td>" + result[i].driversCnt     +   "</td>" +
 
                         "<td>" +

@@ -54,8 +54,8 @@ class CargoList extends React.Component{
 }
 
 class Cargo extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             isChecked: false
         };
@@ -88,7 +88,7 @@ class Cargo extends React.Component{
                         <label>
                             <input type="checkbox" onChange={this.handleChecked}
                                    name="cb0" value="0" className="form-checkbox"/>
-                            {this.props.cargo.description}
+                            {this.props.cargo.description} &rarr; {this.props.cargo.endDepot.location.city}
                         </label>
                     </div>
                     <div className="media-hint">{this.props.cargo.weight}kg {this.props.cargo.status}</div>

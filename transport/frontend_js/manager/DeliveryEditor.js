@@ -235,7 +235,7 @@ class Lists extends React.Component{
 class Depot extends React.Component{
     render() {
         return (
-            <option value={this.props.depot.id}>{this.props.depot.location.country} ({this.props.depot.type})</option>
+            <option value={this.props.depot.id}>{this.props.depot.location.country}: {this.props.depot.location.city} ({this.props.depot.type})</option>
         )
     }
 }

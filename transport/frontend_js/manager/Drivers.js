@@ -60,8 +60,8 @@ class DriverList extends React.Component{
 }
 
 class Driver extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             isChecked: false,
             willBeWorkedWithoutDelivery: 0

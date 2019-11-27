@@ -41,7 +41,7 @@ var RestGetAll = function() {
                         "<td>" + result[i].lastName       +   "</td>" +
                         "<td>" + result[i].workedThisMonth       +   "</td>" +
                         "<td>" + result[i].action     +   "</td>" +
-                        "<td>" + result[i].location.country     +   "</td>" +
+                        "<td>" + result[i].location.country     + ": " + result[i].location.city +  "</td>" +
                         ((result[i].truckDTO === null) ? "<td>not assigned</td>" : "<td>" + result[i].truckDTO.plate + "</td>") +
 
                         "<td>" +

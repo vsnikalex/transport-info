@@ -36,7 +36,8 @@ var RestGetAll = function() {
                         "<td>" + result[i].description + "</td>" +
                         "<td>" + result[i].weight + "</td>" +
                         "<td>" + result[i].status + "</td>" +
-                        "<td>" + result[i].startDepot.location.country + "</td>" +
+                        "<td>" + result[i].startDepot.location.country + ": " + result[i].startDepot.location.city + "</td>" +
+                        "<td>" + result[i].endDepot.location.country + ": " + result[i].endDepot.location.city + "</td>" +
 
                         "<td>" +
                             "<div class=\"btn-sectioned\">" +

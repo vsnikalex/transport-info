@@ -4,6 +4,7 @@ const axios = require('axios');
 import {calculateTruckRoute, clearTrucks, markTruck} from './deliveryEditorMap';
 
 import Drivers from "./Drivers";
+import LinearProgress from '@material-ui/core/Button';
 
 class Trucks extends React.Component {
 
@@ -119,6 +120,7 @@ class Truck extends React.Component{
     render() {
         const weightRatio = this.props.orderWeight / this.props.truck.capacity;
         let overweight = weightRatio > 1;
+        let percentage = Math.round(weightRatio*100);
 
         return (
             <li className="media">
@@ -127,7 +129,7 @@ class Truck extends React.Component{
                         <label>
                             <input type="radio" disabled={overweight} onChange={this.handleChecked}
                                    name="rb" value="rb1" className="form-radio"/>
-                            {this.props.truck.plate} Loaded: {weightRatio}
+                            {this.props.truck.plate} Loaded: {percentage}%
                         </label>
                     </div>
                     <div className="media-hint">

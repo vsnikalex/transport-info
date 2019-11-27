@@ -153,7 +153,7 @@ class Driver extends React.Component{
                         </label>
                     </div>
                     <div className="media-hint">
-                        {this.props.driver.location.city} Future Work: {this.state.willBeWorkedAfterDelivery}
+                        {this.props.driver.location.city} Future Work: {Math.round(this.state.willBeWorkedAfterDelivery)}h
                     </div>
                 </div>
             </li>

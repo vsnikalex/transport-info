@@ -1,5 +1,6 @@
 package com.tsystems.transportinfo.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.flyway.core.Flyway;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -33,7 +34,9 @@ public class HibernateConfig {
 
     @Bean
     public ObjectMapper objectMapper() {
-        return new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return objectMapper;
     }
 
     @Bean

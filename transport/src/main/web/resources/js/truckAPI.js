@@ -83,8 +83,8 @@ var RestPost = function() {
             window.location = '/transport/admin/truck_add';
         },
         error: function(e) {
-            console.log(e.responseText);
-            alert('REQUEST PROCESSING ERROR');
+            // Validation message:
+            alert(e.responseText);
         }
     });
 };
@@ -111,8 +111,8 @@ var RestPut = function(id) {
             window.location = '/transport/admin/truck';
         },
         error: function(e) {
-            console.log(e.responseText);
-            alert('REQUEST PROCESSING ERROR');
+            // Validation message:
+            alert(e.responseText);
         }
     });
 };

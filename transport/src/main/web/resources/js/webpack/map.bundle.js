@@ -137,7 +137,7 @@ function loadAllDepotsToMap(leaflet_map) {
           break;
       }
 
-      L.circleMarker(latLng, markerOptions).bindPopup(loc.country + ' ' + depot.type).addTo(leaflet_map);
+      L.circleMarker(latLng, markerOptions).bindPopup(loc.country + ':' + loc.city + ' "' + loc.name + '" ' + ' ' + depot.type).addTo(leaflet_map);
     });
   })["catch"](function (err) {
     console.log(err);

@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +46,7 @@ public class CargoServiceImpl implements CargoService {
      * @return      list of {@link CargoDTO}
      */
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CargoDTO> getAvailableByDepotId(Long id) {
         log.info("Request all available Cargoes at Depot id={} from DAO", id);
         List<Cargo> cargoes = cargoDAO.findByDepotId(id);
@@ -62,7 +62,7 @@ public class CargoServiceImpl implements CargoService {
      * @return      list of {@link CargoDTO}
      */
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CargoDTO> getAllCargoes() {
         log.info("Request all Cargoes from DAO");
         List<Cargo> cargoes = dao.findAll();

@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +54,7 @@ public class DriverServiceImpl implements DriverService {
     private TransportUserDetailsService transportUserDetailsService;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DriverDTO> getAvailableDrivers(GHGeocodingEntry city) {
         log.info("Request all available Drivers in {} from DAO", city.getCity());
         List<Driver> drivers = driverDAO.findAvailableDrivers(city);
@@ -64,7 +64,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DriverDTO> getAllDrivers() {
         log.info("Request all Drivers from DAO");
 

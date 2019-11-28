@@ -73,7 +73,7 @@ function fillRoute(activities) {
                 document.getElementById("est_route").innerHTML = route;
             }
         });
-    }, 50));
+    }, 100));
 }
 
 function clearInfoTable() {

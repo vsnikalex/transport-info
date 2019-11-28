@@ -1,6 +1,7 @@
 package com.tsystems.transportinfo.service;
 
 import com.graphhopper.api.model.GHGeocodingEntry;
+import com.graphhopper.util.shapes.GHPoint;
 import com.tsystems.transportinfo.data.dao.GenericDAO;
 import com.tsystems.transportinfo.data.dao.TruckDAO;
 import com.tsystems.transportinfo.data.dto.TruckDTO;
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
@@ -87,8 +89,10 @@ public class TruckServiceImplUnitTests {
 
         when(modelMapper.map(truckDTO, Truck.class)).thenReturn(truckEntity);
 
-        truckService.saveTruck(truckDTO);
+        TruckServiceImpl truckService1 = Mockito.spy(truckService);
+        Mockito.doReturn(truckEntity).when(truckService1).convertToEntity(truckDTO);
 
+        truckService1.saveTruck(truckDTO);
         verify(genericDAO, times(1)).create(truckEntity);
     }
 
@@ -99,8 +103,10 @@ public class TruckServiceImplUnitTests {
 
         when(modelMapper.map(truckDTO, Truck.class)).thenReturn(truckEntity);
 
-        truckService.updateTruck(truckDTO);
+        TruckServiceImpl truckService1 = Mockito.spy(truckService);
+        Mockito.doReturn(truckEntity).when(truckService1).convertToEntity(truckDTO);
 
+        truckService1.updateTruck(truckDTO);
         verify(genericDAO, times(1)).update(truckEntity);
     }
 

@@ -131,7 +131,7 @@ var SetUp = function() {
         $.getJSON(prefix + '/' + urlParams.get('id'), function (driver) {
             $("#entity_info").text(
                 driver.firstName + " " + driver.lastName + ": " +
-                driver.location.country
+                driver.location.country + ", " + driver.location.city
             );
             $("#first_name").val(driver.firstName);
             $("#last_name").val(driver.lastName);

@@ -128,7 +128,7 @@ var SetUp = function() {
                 truck.plate + ": " +
                 truck.capacity + "kg " +
                 truck.status + " " +
-                truck.location.country
+                truck.location.country + ", " + truck.location.city
             );
             $("#plate").val(truck.plate);
             $("#capacity").val(truck.capacity);

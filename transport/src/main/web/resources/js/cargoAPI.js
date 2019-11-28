@@ -123,8 +123,8 @@ var SetUp = function() {
         $.getJSON(prefix + '/' + urlParams.get('id'), function (cargo) {
             $("#entity_info").text(
                 cargo.description + ": " +
-                cargo.startDepot.location.country + "\u2192" +
-                cargo.endDepot.location.country + " " +
+                cargo.startDepot.location.country + ":" + cargo.startDepot.location.city + "\u2192" +
+                cargo.endDepot.location.country + ":" + cargo.endDepot.location.city + " " +
                 cargo.status + " " +
                 cargo.weight + "kg"
             );

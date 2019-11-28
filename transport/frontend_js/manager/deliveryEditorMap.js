@@ -63,7 +63,7 @@ function fillTruckInfo(estDist, estTime) {
 function fillRoute(activities) {
     let n = activities.length;
     let route = '';
-    activities.forEach(a => {
+    activities.forEach(a => setTimeout(() => {
         let coords = a.address.lat + ',' + a.address.lon;
 
         axios.get('api/depot/' + coords + '/').then(depot => {
@@ -73,7 +73,7 @@ function fillRoute(activities) {
                 document.getElementById("est_route").innerHTML = route;
             }
         });
-    });
+    }, 50));
 }
 
 function clearInfoTable() {

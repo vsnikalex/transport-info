@@ -10,6 +10,6 @@ VALUES
 (14, 1000, '{"point":{"lat":48.750986,"lng":17.828829},"name":"Kpt. Nálepku","country":"Slovakia","city":"Nové Mesto nad Váhom","state":"Region of Trenčín","street":"Kpt. Nálepku","postcode":"915 01","extent":[],"osm_id":2989631357,"osm_type":"N","osm_key":"place","osm_value":"house"}', 'SL12345', 'OK'),
 (15, 1000, '{"point":{"lat":48.750986,"lng":17.828829},"name":"Kpt. Nálepku","country":"Slovakia","city":"Nové Mesto nad Váhom","state":"Region of Trenčín","street":"Kpt. Nálepku","postcode":"915 01","extent":[],"osm_id":2989631357,"osm_type":"N","osm_key":"place","osm_value":"house"}', 'SL03456', 'DEFECTIVE'),
 (16, 2000, '{"point":{"lat":48.750986,"lng":17.828829},"name":"Kpt. Nálepku","country":"Slovakia","city":"Nové Mesto nad Váhom","state":"Region of Trenčín","street":"Kpt. Nálepku","postcode":"915 01","extent":[],"osm_id":2989631357,"osm_type":"N","osm_key":"place","osm_value":"house"}', 'SL56789', 'OK'),
-(17, 2000, '{"point":{"lat":59.73145,"lng":30.43403},"name":"Geofarm","country":"Russia","city":"Pushkin","state":"Len. Oblast","extent":[]}', 'RU12345', 'OK'),
+(17, 1000, '{"point":{"lat":59.73145,"lng":30.43403},"name":"Geofarm","country":"Russia","city":"Pushkin","state":"Len. Oblast","extent":[]}', 'RU12345', 'OK'),
 (18, 10000, '{"point":{"lat":59.75209,"lng":30.56287},"name":"Parking lot","country":"Russia","city":"Kolpino","state":"Len. Oblast","extent":[]}', 'RU76589', 'OK'),
-(19, 1000, '{"point":{"lat":59.86156,"lng":30.98223},"name":"MC-Bauchemie","country":"Russia","city":"Kirovsk","state":"Len. Oblast","extent":[]}', 'RU12344', 'OK');
+(19, 3500, '{"point":{"lat":59.86156,"lng":30.98223},"name":"MC-Bauchemie","country":"Russia","city":"Kirovsk","state":"Len. Oblast","extent":[]}', 'RU12344', 'OK');

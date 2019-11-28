@@ -126,8 +126,8 @@ var truckRoutingLayer = L.geoJSON().addTo(map);
 var ghRouting;
 
 window.onload = function () {
-  var apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00"; // let apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
-
+  // let apiKey = "9dcf0a7e-ee94-4b91-8966-ca7b35411a00";
+  var apiKey = "7ea230d6-d492-48bb-9ce0-06afb6c59ed3";
   var profile = "car";
   var host;
   ghOptimization = new GraphHopperOptimization({
@@ -169,14 +169,16 @@ function fillRoute(activities) {
   var n = activities.length;
   var route = '';
   activities.forEach(function (a) {
-    var coords = a.address.lat + ',' + a.address.lon;
-    axios.get('api/depot/' + coords + '/').then(function (depot) {
-      route += (n === activities.length ? '' : ' &rarr; ') + depot.data.location.city;
+    return setTimeout(function () {
+      var coords = a.address.lat + ',' + a.address.lon;
+      axios.get('api/depot/' + coords + '/').then(function (depot) {
+        route += (n === activities.length ? '' : ' &rarr; ') + depot.data.location.city;
 
-      if (--n === 0) {
-        document.getElementById("est_route").innerHTML = route;
-      }
-    });
+        if (--n === 0) {
+          document.getElementById("est_route").innerHTML = route;
+        }
+      });
+    }, 100);
   });
 }
 
